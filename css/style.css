@@ -1,0 +1,44 @@
+body{
+	margin:0;
+	padding:10px 0 0 0;
+	font-size:12px;
+	font-family: Arial;
+	color:#000000;
+	background-color:#999999;
+	}
+
+p{
+
+font-size:12px;
+font-family: Arial;
+}
+p.padding
+{
+padding-top:10px;
+padding-bottom:10px;
+padding-right:10px;
+padding-left:10px;
+}
+label{
+font-size:12px;
+font-family: Arial;
+}
+hr{
+border-bottom-style:dashed;
+}
+#hrr{
+padding-top:10px;
+padding-bottom:10px;
+padding-right:10px;
+padding-left:10px;
+}
+
+#bdrtable{
+border:1px solid #bebebe;
+border-collapse:collapse;
+border-color:#bebebe;
+	 
+}
+#padtab{
+padding:5px 5px 5px 5px;
+}

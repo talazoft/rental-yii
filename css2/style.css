@@ -1,0 +1,341 @@
+body {
+    background-color: #f6f6f6;
+    font-family: helvetica,arial;
+    font-size: 12px;
+    color: #555555;
+    /*-webkit-user-select:none;
+    -moz-user-select:none;*/
+    position:relative;
+	margin:0 auto;
+}
+p{
+	margin:10px;
+	padding:5px;
+}
+input[type="text"], input[type="password"],input[type="date"], textarea {
+
+	background-color:#f6f6f6;
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom:1px solid #aaa;
+	-webkit-border-radius: 0px;
+}
+.container {
+	background-color: #f6f6f6;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0px;
+	margin-top: 5px;
+	width:1024px;
+}
+
+.container a img:hover{
+    cursor: pointer;
+}
+
+.container .left .showing2{
+    display:none;
+}
+
+span.required{
+    color: red;
+}
+
+.top{
+	width:100%; height:66px; border-bottom:solid 1px #f8f8f8; background-color:#e9e9e9; box-shadow:0px 2px 6px rgba(0,0,0,0.45); 
+}
+.top div.date{
+	float: right;
+	margin: 0 25% 0 0;
+	margin-top: 2%;
+	margin-right: 10%;
+}
+.top div.logo{
+	background: url("../img/logo.jpg") no-repeat scroll 0 0 transparent;
+	height: 49px;
+	margin-left: 10%;
+	margin-top: 10px;
+	position: absolute;
+	width: 229px;
+}
+.top div.title{
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 40%;
+	margin-top: 22px;
+	position: absolute;
+}
+.left{
+	width: 140px;
+	padding: 0 10px 10px;
+	float:left;
+}
+.left div.downsearch{
+	border-bottom: 1px dashed #CCCCCC;
+	float: left;
+	padding-bottom: 10px;
+	width: 100%;
+}
+.left div.downsearch div.download{
+	width: 70px;
+	height: 50px;
+	float:left;
+	/*background: url("../img/button.png") no-repeat scroll 0 0 transparent;*/
+}
+.left div.downsearch div.downloadmodal{
+	background: url("../img/download.png") no-repeat scroll 0 0 transparent;
+	display: none;
+	height: 146px;
+	left: 455px;
+	position: absolute;
+	top: 113px;
+	width: 272px;
+	z-index: 999;
+}
+.left div.downsearch div.searchmodal{
+	background: url("../img/search.png") no-repeat scroll 0 0 transparent;
+	display: none;
+	height: 146px;
+	left: 455px;
+	position: absolute;
+	top: 113px;
+	width: 272px;
+	z-index: 999;
+}
+.left div.downsearch div.search{
+	width: 70px;
+	height: 50px;
+	float:left;
+	background: url("../img/button.png") no-repeat scroll -70px 0 transparent;
+}
+.left div.showing2{
+	float: left;
+	margin: 5px 0 0;
+	width: 100%;
+}
+.left div.showing{
+	float: left;
+	margin: 5px 0 0;
+	width: 100%;
+}
+.left div.showing div.all{
+	background: url("../img/button.png") no-repeat scroll 0 -70px transparent;
+	height: 40px;
+	width: 100%;
+        cursor: pointer;
+}
+.left div.showing div.collapse{
+	background: url("../img/button3.png") no-repeat scroll 0 0 transparent;
+	height: 40px;
+	width: 100%;
+        cursor: pointer;
+}
+.left div.showing div.prev{
+	background: url("../img/button.png") no-repeat scroll 0 -110px transparent;
+	height: 50px;
+	width: 70px;
+	float:left;
+        cursor: pointer;
+}
+.left div.showing div.next{
+	background: url("../img/button.png") no-repeat scroll -70px -110px transparent;
+	float: left;
+	height: 50px;
+	width: 70px;
+        cursor: pointer;
+}
+.right{
+background: url("../img/leftbrdr.png") repeat-y scroll 0 0 transparent;
+float: left;
+margin: 0 0 20px;
+min-height: 200px;
+width: 823px;
+}
+.right div.step{
+	background: url("../img/step.png") no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 38px;
+	margin: 5px 0 0px -1px;
+	width: 100%;
+}
+.right div.stepakhir{
+	background: url("../img/step-akhir.png") no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 62px;
+	margin: 5px 0 5px -1px;
+	width: 100%;
+}
+.right div.stepakhir input[type="text"]{
+	background-color: #FFFFFF;
+	width: 315px;
+}
+.right div.stepakhir input[type="submit"]{
+	background: url("../img/med_blnk_button2.png") no-repeat scroll 0 0 transparent;
+	border: medium none;
+	height: 39px;
+	padding-bottom: 4px;
+	width: 173px;
+}
+.right div.stepakhir div.titlestep{
+	color: #666666;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px 0 0 30px;
+	min-width: 100px;
+}
+.right div.step div.titlestep{
+	color: #6ca813;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px 0 0 30px;
+	min-width: 100px;
+}
+.right div.step div.show{
+	background: url("../img/show.png") no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 25px;
+	margin: 8px;
+	width: 70px;
+        cursor: pointer;
+}
+.right div.step div.hide{
+	background: url("../img/hide.png") no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 25px;
+	margin: 8px;
+	width: 70px;
+        cursor: pointer;
+}
+.right div.step_content{
+	border-bottom: 1px solid #BEBEBE;
+	border-left: 1px solid #BEBEBE;
+	border-right: 1px solid #BEBEBE;
+	float: left;
+	margin: 0 0 0 22px;
+	width: 798px;
+	display:none;
+}
+.right div.step_content img{
+	margin:10px;
+}
+.right div.step_content table{
+	margin:0 0 10px 0;
+}
+.clear{
+	clear:both;
+}
+.star{
+	background: url("../img/star.png") no-repeat scroll 0 0 transparent;
+	width:10px;
+	height:10px;
+	float:left;
+}
+hr.dashed{
+	border:1px dashed #ccc;
+}
+				.right div.step_content table tr{
+					height:30px;
+				}
+				.right div.step_content table tr td textarea{
+					background-color: #FFFFFF;
+					border: 1px solid #AAAAAA;
+					height: 100px;
+					width: 200px;
+				}
+				.right div.step_content table tr td input[type="text"],.right div.step_content table tr td select{
+					width:200px;
+				}
+				.right div.step_content table tr td input[type="text"].phoneReg{
+					width:70px;
+				}
+				.right div.step_content table tr td input[type="text"].phoneNum{
+					width:110px;
+				}
+				.right div.step_content table.codetype tr th{
+					padding:5px;
+					background-color: #ddd;
+					border-color:#999;
+				}
+				.right div.step_content table.codetype{
+					border-collapse:collapse;
+					border-color:#999;
+					margin:10px;
+				}
+				.right div.step_content table.codetype tr td{
+					padding: 5px;
+					border-color:#999;
+				}
+				.right div.step_content table.codetype tr th span{
+					float: left;
+					margin: 0 5px 0 0;
+				}
+				.right div.step_content table tr td.col_1{
+					width: 160px;
+					padding-left:10px;
+				}
+				.right div.step_content table tr td{
+					
+				}
+				.right div.step_content table.questionnaire1 td.questionnairetdleft{
+					border-right:1px dashed #aaa;
+					border-bottom:1px dashed #aaa;
+				}
+				.right div.step_content table.questionnaire1{
+					padding-left:10px;
+				}
+				.right div.step_content table.questionnaire1 td.questionnairetdright{
+					border-bottom:1px dashed #aaa;					
+				}
+				.right div.step_content table.questionnaire tr{
+					height:15px;
+				}
+				.right div.step_content table tr td.col_2{
+					
+				}
+				.right div.step_content table tr td.col_3{
+					width: 200px;
+				}
+				.right div.step_content table tr td.col_4{
+					width: 25px;
+				}
+				.right div.step_content table tr td.col_5{
+					width: 150px;
+				}
+				.right div.step_content table tr td.col_6{
+					
+				}
+				.right div.step_content table tr td.col_7{
+					width: 200px;	
+				}
+				.right div.step_content table tr td.col_8{
+					
+				}
+				
+				
+.overlay{
+	background-color: #777777;
+	display: none;
+	height: 2000px;
+	opacity: 0.8;
+	position: absolute;
+	width: 100%;
+	z-index: 999;
+}
+.overlay img{
+	left: 40%;
+	position: absolute;
+	top: 10%;
+}
+div.button_wor{
+	width:100%;
+	margin-left:26%;
+}
+div.button_wor input[type="submit"]{
+	background: url("../img/med_blnk_button2.png") no-repeat scroll 0 0 transparent;
+	border: medium none;
+	height: 39px;
+	width: 173px;
+}
