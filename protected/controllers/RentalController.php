@@ -19,7 +19,7 @@ class RentalController extends Controller
                           //'applicantModel'  => $applicantModel,
                     ));*/
             
-            echo "It Works!";
+            echo "It Works bro!";
 	}
  
         /*public function actionStep1tosession(){
