@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Rental-Yii',
+	'name'=>'Vamproperty Rental Application',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -56,12 +56,13 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=sstig_rizkadw',
+			'connectionString' => 'mysql:host=localhost;dbname=sstig_contact_us_arjintas',
 			'emulatePrepare' => true,
-			'username' => 'sstig_rizkadw',
-			'password' => 'rd123456',
+			'username' => 'sstig_contact',
+			'password' => 'VamProject2012',
 			'charset' => 'utf8',
                         'enableParamLogging' => true,
+                        'tablePrefix' => 'rd_'
 		),
 		
 		'errorHandler'=>array(

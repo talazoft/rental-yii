@@ -1,14 +1,12 @@
-<?php 
-$form=$this->beginWidget('UActiveForm', array(
-    'id'=>'step1-form',
-    'enableAjaxValidation'=>true,
-    'stateful'=>true,
-    'clientOptions'=>array(
-        'validateOnSubmit'=>true,
-    ),
-    'htmlOptions'=>array('enctype' => 'multipart/form-data'),
-)); 
-?>
+<script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="<?php echo Yii::app()->baseUrl; ?>/js/auto-numeric.js" type="text/javascript"></script>
+<script>
+    $(function(){
+        $(".phone").mask("(999) 999-9999");
+        $(".ssn").mask("999-99-9999");
+        $(".currency").autoNumeric();
+    });
+</script>
 <div class="step_1 step">
     <div class="titlestep">Rental Information</div>
     <div class="show" id="1"></div>
@@ -21,12 +19,23 @@ $form=$this->beginWidget('UActiveForm', array(
             <p align="justify" class="padding"> It is understood that this Application is not a Rental Agreement/Lease and that Applicant has no rights to said property until a written or oral Rental Agreement/Lease is duly executed after the approval of this Application. Applicant is aware of and agrees to all the covenants and conditions in the proposed Rental Agreement/Lease and agrees to timely execute said Rental Agreement/Lease after notification of the acceptance of this Application and Offer. Time is of the essence. </p>
         </div>
         <hr class="dashed"/>
+        <?php 
+        $form=$this->beginWidget('UActiveForm', array(
+            'id'=>'step1-form',
+            'enableAjaxValidation'=>true,
+            'stateful'=>true,
+            'clientOptions'=>array(
+                'validateOnSubmit'=>true,
+            ),
+            'htmlOptions'=>array('enctype' => 'multipart/form-data'),
+        )); 
+        ?>
         <div id="hrr">
             <table class="codetype"  width="100%" border=0 cellpadding="0" cellspacing="0" >
                 <tr>
                     <td width="50%" valign="top">  
                         <label class="required" for="MsRentalInformation_applicant">
-                            How many applicant(s)
+                            How many <?php echo Yii::app()->session['selection'] == "Commercial" ? "companies" : "applicant(s)"; ?>
                         </label>
                         <?php 
 
@@ -34,7 +43,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                 $data[$i] = $i;
                             }
 
-                            echo $form->dropdownList($rentalModel, 'applicant', $data, 
+                            echo $form->dropdownList($model, 'num_of_applicant', $data, 
                                     array(
                                         'empty'=>'Choose one', 
                                         'style'=>'width:50%',
@@ -42,7 +51,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                             'type'=>"POST",
                                             'update'=>"#ai",
                                             'url'=>CController::createUrl('rental/applicantchanged'), //url to call.
-                                            'data'=>array('selected_id' => 'js:this.value'),
+                                            'data'=>array('num_of_applicant' => 'js:this.value'),
                                         ),
                                     )
                                 );
@@ -50,8 +59,8 @@ $form=$this->beginWidget('UActiveForm', array(
                         <img src="<?php echo Yii::app()->baseurl; ?>/images/star.png"/>
 
                         <?php 
-                            echo $form->hiddenField($rentalModel, 'passwordri',array('id'=>'txtpassword', 'value'=>$random_pass));
-                            echo $form->hiddenField($rentalModel, 'usernameri',array('id'=>'txtuser2', 'value'=>$random_user));
+                            //echo $form->hiddenField($model, 'passwordri',array('id'=>'txtpassword', 'value'=>$random_pass));
+                            //echo $form->hiddenField($model, 'usernameri',array('id'=>'txtuser2', 'value'=>$random_user));
                         ?>
 
                     </td>
@@ -71,21 +80,25 @@ $form=$this->beginWidget('UActiveForm', array(
         <hr class="dashed"/>
         <div id="msgbox" style="color:red">
             <?php 
-                echo $form->error($rentalModel,'applicant');
-                echo $form->error($rentalModel,'company');
-                echo $form->error($rentalModel,'address');
-                echo $form->error($rentalModel,'city');
-                echo $form->error($rentalModel,'anticipated_date');
-                echo $form->error($rentalModel,'deposit');
-                echo $form->error($rentalModel,'selection1');
-                echo $form->error($rentalModel,'selection2');
-                echo $form->error($rentalModel,'unit');
-                echo $form->error($rentalModel,'state');
-                echo $form->error($rentalModel,'zipcode');
-                echo $form->error($rentalModel,'monthlyrent');
-                echo $form->error($rentalModel,'referedlead');
-                echo $form->error($rentalModel,'advertisementvenue');
-                echo $form->errorSummary($rentalModel); 
+                echo $form->error($model,'num_of_applicant');
+                echo $form->error($model,'selection');
+                echo $form->error($model,'sub_selection');
+                echo $form->error($model,'address');
+                echo $form->error($model,'city');
+                echo $form->error($model,'anticipated_date');
+                echo $form->error($model,'save_deposit');
+                echo $form->error($model,'unit');
+                echo $form->error($model,'state');
+                echo $form->error($model,'zipcode');
+                echo $form->error($model,'monthly_rent');
+                echo $form->error($model,'refered_lead');
+                echo $form->error($model,'venue');
+                echo $form->error($model,'agent_name');
+                echo $form->error($model,'agent_phone');
+                echo $form->error($model,'tenant_name');
+                echo $form->error($model,'is_existing_tenant');
+                echo $form->error($model,'other_val');
+//                echo $form->errorSummary($model);
             ?>
         </div>
 
@@ -94,20 +107,11 @@ $form=$this->beginWidget('UActiveForm', array(
                 <td  valign="top" width="50%">
                     <table width="100%">
                         <tr>
-                            <td><label>Company</label></td>
-                            <td>:</td>
-                            <td>
-                                <?php 
-                                    echo $form->dropdownList($rentalModel, 'company', CHtml::listData(MsCompany::model()->findAll(), 'idcompany', 'namecompany'), array('empty'=>'Choose One'));
-                                ?><img src="images/star.png" />                  
-                            </td>
-                        </tr>
-                        <tr>
                             <td><label>Located at (address)</label></td>
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'address', array('size'=>10, 'style'=>'width:75%')); 
+                                    echo $form->textField($model, 'address', array('size'=>10, 'style'=>'width:75%')); 
                                 ?>
                                 <img src="images/star.png" />                  
                             </td>
@@ -117,7 +121,7 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'city', array('size'=>12, 'style'=>'width:75%')); 
+                                    echo $form->textField($model, 'city', array('size'=>12, 'style'=>'width:75%')); 
                                 ?>
                                 <img src="images/star.png" />                  
                             </td>
@@ -129,7 +133,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                 <?php 
                                     Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
                                         $this->widget('CJuiDateTimePicker',array(
-                                            'model'=>$rentalModel, //Model object
+                                            'model'=>$model, //Model object
                                             'attribute'=>'anticipated_date', //attribute name
                                             'mode'=>'date', //use "time","date" or "datetime" (default)
                                             'options'=>array(
@@ -155,7 +159,7 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'deposit', array('id'=>'deposit', 'style'=>'width:75%', 'onblur'=>'js:this.value=formatCurrency(this.value)')); 
+                                    echo $form->textField($model, 'save_deposit', array('id'=>'deposit', 'style'=>'width:75%', 'class'=>'currency')); 
                                 ?>                 
                             </td>
                         </tr>
@@ -172,27 +176,16 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td valign="top" colspan="3">
                                 <table border="0" width="100%">
                                     <tr>
-                                        <td valign="bottom">Selection
+                                        <td valign="bottom" colspan="2">
+                                            Selection
+                                        </td>
+                                        <td>
                                             <?php 
-                                                $buildingCriteria = new CDbCriteria;
-                                                $buildingCriteria->select = 'distinct namebuilding as namebuilding';
-                                                $buildingCriteria->order = 'namebuilding';
-                                                $dataList = CHtml::listData(MsBuilding::model()->findAll($buildingCriteria), 'namebuilding', 'namebuilding');
-                                                echo $form->dropdownList($rentalModel, 'selection1', $dataList, array('empty'=>'Choose One', 'style'=>'width:70%'));
-                                            ?> 
+                                                echo $form->textField($model, 'selection', array('style'=> 'width:133px '));
+                                                echo $form->textField($model, 'selection', array('style'=> 'width:127px; margin-left:9px'));
+                                            ?>
+                                            <img src="images/star.png" />
                                         </td>
-                                        <td valign="bottom">
-                                            <div id="selection11">
-                                                <?php 
-                                                    $buildingCriteria2 = new CDbCriteria;
-                                                    $buildingCriteria2->select = 'idbuilding, type';
-                                                    $buildingCriteria2->condition = "namebuilding = 'Apartment'";
-                                                    $dataList2 = CHtml::listData(MsBuilding::model()->findAll($buildingCriteria2), 'idbuilding', 'type');
-                                                    echo $form->dropdownList($rentalModel, 'selection2', $dataList2, array('empty'=>'Choose One', 'style'=>'width:100%'));
-                                                ?>
-                                            </div> 
-                                        </td>
-                                        <td valign="bottom"><img src="images/star.png" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -202,7 +195,7 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'unit', array('width'=>'80%', 'style'=>'width:221px'));
+                                    echo $form->textField($model, 'unit', array('width'=>'80%', 'style'=>'width:221px'));
                                 ?>             
                             </td>
                         </tr>
@@ -213,12 +206,12 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'state', array('width'=>'31%', 'size'=>7, 'style'=>'width:33%'));
+                                    echo $form->textField($model, 'state', array('width'=>'31%', 'size'=>7, 'style'=>'width:33%'));
                                 ?>
                                 <label>Zip Code</label>
                                 :
                                 <?php 
-                                    echo $form->textField($rentalModel, 'zipcode', array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px'));
+                                    echo $form->textField($model, 'zipcode', array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px'));
                                 ?>
                                 <img src="images/star.png" />               
                             </td>
@@ -228,7 +221,7 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->textField($rentalModel, 'monthlyrent', array('id'=>'monthlyrent', 'onblur'=>'js:this.value=formatCurrency(this.value)', 'style'=>'width:221px'));
+                                    echo $form->textField($model, 'monthly_rent', array('style'=>'width:221px', 'class'=>'currency'));
                                 ?>               
                             </td>
                         </tr>
@@ -237,8 +230,13 @@ $form=$this->beginWidget('UActiveForm', array(
                             <td>:</td>
                             <td>
                                 <?php 
-                                    echo $form->dropdownList($rentalModel, 'referedlead',
-                                                CHtml::listData(MsReference::model()->findAll(), 'idreference', 'reference'),
+                                    $ref_data = array("Sign On Property" => "Sign On Property",
+                                                    "Advertisement"=>"Advertisement",
+                                                    "Agents"=>"Agents",
+                                                    "Tenant"=>"Tenant",
+                                                    "Other"=>"Other");
+                                    echo $form->dropdownList($model, 'refered_lead',
+                                                $ref_data,
                                                 array('empty'=>'Choose One', 'style'=>'width:80%')
                                             );
                                 ?><img src="images/star.png" />                 
@@ -255,7 +253,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                         <td width="2%">:</td>
                                         <td width="63%">
                                             <?php 
-                                                echo $form->textField($rentalModel, 'advertisementvenue', array('style'=>'width:75%px'));
+                                                echo $form->textField($model, 'venue', array('style'=>'width:75%px'));
                                             ?>
                                         </td>
                                         </tr>
@@ -268,7 +266,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                             <td width="2%">:</td>
                                             <td width="63%">
                                                 <?php 
-                                                    echo $form->textField($rentalModel, 'agentname', array('style'=>'width:75%px'));
+                                                    echo $form->textField($model, 'agent_name', array('style'=>'width:75%px'));
                                                 ?>
                                             </td>
                                         </tr>
@@ -277,9 +275,8 @@ $form=$this->beginWidget('UActiveForm', array(
                                             <td>:</td>
                                             <td>
                                                 <?php 
-                                                    echo $form->textField($rentalModel, 'agentphone1', array('maxlength'=>13, 'size'=>27, 'onkeypress'=>'js:return isNumberKey(event)', 'onkeydown'=>'js:backspacerDOWN(this,event)', 'onkeyup'=>'js:backspacerUP(this,event)', 'style'=>'width:75%'));
+                                                    echo $form->textField($model, 'agent_phone', array('maxlength'=>13, 'size'=>27, 'class'=>'phone'));
                                                 ?>
-                                                &nbsp; <input type="hidden"  name="pref2" id="pref2" maxlength="3" size="3">	<input type="hidden"  name="pref3" id="pref3" maxlength="4" size="4">
                                             </td>
                                         </tr>
                                     </table>
@@ -291,7 +288,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                             <td width="2%">:</td>
                                             <td width="63%">
                                                 <?php 
-                                                    echo $form->textField($rentalModel, 'agentname', array('style'=>'width:75%px'));
+                                                    echo $form->textField($model, 'tenant_name', array('style'=>'width:75%px'));
                                                 ?>
                                             </td>
                                         </tr>
@@ -300,7 +297,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                             <td>:</td>
                                             <td>
                                                 <?php 
-                                                    echo $form->dropdownList($rentalModel, 'tenantexisting', array('Yes'=>'Yes', 'No'=>'No'))
+                                                    echo $form->dropdownList($model, 'is_existing_tenant', array('1'=>'Yes', '0'=>'No'))
                                                 ?>
                                             </td>
                                         </tr>
@@ -313,7 +310,7 @@ $form=$this->beginWidget('UActiveForm', array(
                                             <td width="2%">:</td>
                                             <td width="63%">
                                                 <?php 
-                                                    echo $form->textField($rentalModel, 'other', array('style'=>'width:75%px'));
+                                                    echo $form->textField($model, 'other_val', array('style'=>'width:75%px'));
                                                 ?>
                                             </td>
                                         </tr>
@@ -326,6 +323,6 @@ $form=$this->beginWidget('UActiveForm', array(
                 <br>
             </tr>
         </table>
+        <?php $this->endWidget(); ?>
     </div>
 </div>
-<?php $this->endWidget(); ?>

@@ -19,8 +19,22 @@ class RentalController extends Controller
                           //'applicantModel'  => $applicantModel,
                     ));*/
             
-            echo "It Works bro!";
+            $model = new ApplicationInformation;
+            $this->render("index", array('model' => $model));
 	}
+        
+        public function actionApplicantchanged(){
+            if($_POST['num_of_applicant']){
+                $cnt = $_POST['num_of_applicant'];
+                
+                if($cnt > 0){
+                    for($i = 1; $i<=$cnt;$i++){
+                        $applicantModel = new ApplicantInfo();
+                        echo $this->renderPartial('_step2_form', array('cnt' => $i, 'model'=>$applicantModel), true);
+                    }
+                }
+            }
+        }
  
         /*public function actionStep1tosession(){
             $value = 0;
