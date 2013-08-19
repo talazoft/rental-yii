@@ -5,13 +5,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 
-        <link href="<?php echo Yii::app()->baseUrl; ?>/css2/style.css" rel="stylesheet">
+        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/style.css" rel="stylesheet" />
+        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" />
+        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
 
-        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-        <!--<script src="<?php echo Yii::app()->baseUrl; ?>/js2/jquery.cookie.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-1.10.2.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-ui-1.9.0.custom.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/auto-numeric.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/facescroll.js"></script> 
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/excanvas.compiled.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.signature.min.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/base64.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/canvas2image.js"></script>	
+
+        <?php /*<script src="<?php echo Yii::app()->baseUrl; ?>/js2/jquery.cookie.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/js2/wo.js" type="text/javascript"></script> 
         <script src="<?php echo Yii::app()->baseUrl; ?>/scripts/history.js" type="text/javascript"></script>
-        <script src="<?php echo Yii::app()->baseUrl; ?>/scripts/setting.js" type="text/javascript"></script>-->
+        <script src="<?php echo Yii::app()->baseUrl; ?>/scripts/setting.js" type="text/javascript"></script>*/ ?>
         <?php /*
         <style type="text/css">
             <!--
@@ -68,24 +80,24 @@
                 height: auto;
                 margin: 0 auto;
             }
-        </style> */?>
-        <script>          
-            function formatCurrency(num) {
-                num = num.toString().replace(/\$|\,/g,'');
-                if(isNaN(num))
-                    num = "0";
-                sign = (num == (num = Math.abs(num)));
-                num = Math.floor(num*100+0.50000000001);
-                cents = num%100;
-                num = Math.floor(num/100).toString();
-                if(cents<10)
-                    cents = "0" + cents;
-                for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-                    num = num.substring(0,num.length-(4*i+3))+','+
-                num.substring(num.length-(4*i+3));
-                return (((sign)?'':'-') + '' + num + '.' + cents);
-            }
-
+        </style> 
+        <script>                
+//            function formatCurrency(num) {
+//                num = num.toString().replace(/\$|\,/g,'');
+//                if(isNaN(num))
+//                    num = "0";
+//                sign = (num == (num = Math.abs(num)));
+//                num = Math.floor(num*100+0.50000000001);
+//                cents = num%100;
+//                num = Math.floor(num/100).toString();
+//                if(cents<10)
+//                    cents = "0" + cents;
+//                for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+//                    num = num.substring(0,num.length-(4*i+3))+','+
+//                num.substring(num.length-(4*i+3));
+//                return (((sign)?'':'-') + '' + num + '.' + cents);
+//            }
+            
 //            $(document).ready(function(){
 //                $('#garteng1').hide();
 //                $('#garteng2').hide();
@@ -248,7 +260,7 @@
 //        /*$("a#in").click(function(event){
 //                        $("div#box2").fadeIn("slow");
 //                });
-//    */
+//    
 //                    $("#ri").click(function(event){
 //                        $("div#box2").hide("slow");
 //                        $("div#box3").hide("slow");
@@ -294,14 +306,14 @@
 //                /*$("a#slide").click(function(event){
 //                                $("div#box2").slideDown("slow");
 //                });
-//        */
-//        /*$("#btndownload").click(function(event){
+//        
+//        $("#btndownload").click(function(event){
 //                        alert('asem');
-//                });*/
+//                });
 //
 //
 //            });
-        </script>
+        </script> */ ?> 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -321,10 +333,17 @@
 	<div class="left">
             <?php $this->renderPartial('//layouts/leftpane'); ?>
 	</div>
-        <div class="right">
-            <?php echo $content; ?>
-            <div class="clear"></div>
+        <div class="right-container">
+            <div class="right">
+                <?php echo $content; ?>
+                <div class="clear"></div>
+            </div>
         </div>
+        <script>
+            $(function(){
+                $(".right-container").alternateScroll();
+            });
+        </script>
     </div>
 </body>
 </html>

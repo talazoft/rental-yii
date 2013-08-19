@@ -14,7 +14,8 @@ p{
 }
 input[type="text"], input[type="password"],input[type="date"], textarea {
 
-	background-color:#f6f6f6;
+	/*background-color:#f6f6f6;*/
+        background-color: white;
 	border-top:none;
 	border-left:none;
 	border-right:none;
@@ -145,12 +146,22 @@ span.required{
 	width: 70px;
         cursor: pointer;
 }
+
+.right-container {
+    bottom: 0;
+    left: 328px;
+    overflow: auto;
+    position: fixed;
+    top: 73px;
+    width: 840px;
+}
+
 .right{
-background: url("../img/leftbrdr.png") repeat-y scroll 0 0 transparent;
-float: left;
-margin: 0 0 20px;
-min-height: 200px;
-width: 823px;
+    background: url("../img/leftbrdr.png") repeat-y scroll 0 0 transparent;
+    float: left;
+    margin: 0 0 20px;
+    min-height: 200px;
+    width: 823px;
 }
 .right div.step{
 	background: url("../img/step.png") no-repeat scroll 0 0 transparent;
@@ -217,6 +228,7 @@ width: 823px;
 	margin: 0 0 0 22px;
 	width: 798px;
 	display:none;
+        background-color: white;
 }
 .right div.step_content img{
 	margin:10px;
@@ -247,6 +259,7 @@ hr.dashed{
 				}
 				.right div.step_content table tr td input[type="text"],.right div.step_content table tr td select{
 					width:200px;
+                                        background-color: white;
 				}
 				.right div.step_content table tr td input[type="text"].phoneReg{
 					width:70px;

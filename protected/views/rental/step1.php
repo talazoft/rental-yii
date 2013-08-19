@@ -1,12 +1,3 @@
-<script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.maskedinput.min.js" type="text/javascript"></script>
-<script src="<?php echo Yii::app()->baseUrl; ?>/js/auto-numeric.js" type="text/javascript"></script>
-<script>
-    $(function(){
-        $(".phone").mask("(999) 999-9999");
-        $(".ssn").mask("999-99-9999");
-        $(".currency").autoNumeric();
-    });
-</script>
 <div class="step_1 step">
     <div class="titlestep">Rental Information</div>
     <div class="show" id="1"></div>
@@ -49,14 +40,24 @@
                                         'style'=>'width:50%',
                                         'ajax'=>array(
                                             'type'=>"POST",
-                                            'update'=>"#ai",
                                             'url'=>CController::createUrl('rental/applicantchanged'), //url to call.
                                             'data'=>array('num_of_applicant' => 'js:this.value'),
+                                            'success'=>'js:function(data){
+                                                var dt = jQuery.parseJSON(data);
+                                                $("#ai").html(dt.step2);
+                                                $("#rh").html(dt.step3);
+                                                $("#eii").html(dt.step4);
+                                                $("#pr").html(dt.step5);
+                                                $("#bi").html(dt.step6);
+                                                $("#cf").html(dt.step7);
+                                                $("#agreements").html(dt.step8);
+                                             }'
                                         ),
                                     )
                                 );
                         ?> 
-                        <img src="<?php echo Yii::app()->baseurl; ?>/images/star.png"/>
+                        
+                        <?php echo CHtml::image('images/star.png', 'required'); ?>
 
                         <?php 
                             //echo $form->hiddenField($model, 'passwordri',array('id'=>'txtpassword', 'value'=>$random_pass));
@@ -113,7 +114,7 @@
                                 <?php 
                                     echo $form->textField($model, 'address', array('size'=>10, 'style'=>'width:75%')); 
                                 ?>
-                                <img src="images/star.png" />                  
+                                <?php echo CHtml::image('images/star.png', 'required'); ?>            
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +124,7 @@
                                 <?php 
                                     echo $form->textField($model, 'city', array('size'=>12, 'style'=>'width:75%')); 
                                 ?>
-                                <img src="images/star.png" />                  
+                                <?php echo CHtml::image('images/star.png', 'required'); ?>              
                             </td>
                         </tr>
                         <tr>
@@ -151,7 +152,7 @@
                                         )
                                     );
                                 ?>
-                                <img src="images/star.png" />
+                                <?php echo CHtml::image('images/star.png', 'required'); ?>
                             </td>
                         </tr>
                         <tr>
@@ -184,7 +185,7 @@
                                                 echo $form->textField($model, 'selection', array('style'=> 'width:133px '));
                                                 echo $form->textField($model, 'selection', array('style'=> 'width:127px; margin-left:9px'));
                                             ?>
-                                            <img src="images/star.png" />
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                 </table>
@@ -213,7 +214,7 @@
                                 <?php 
                                     echo $form->textField($model, 'zipcode', array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px'));
                                 ?>
-                                <img src="images/star.png" />               
+                                <?php echo CHtml::image('images/star.png', 'required'); ?>              
                             </td>
                         </tr>
                         <tr>
@@ -239,7 +240,8 @@
                                                 $ref_data,
                                                 array('empty'=>'Choose One', 'style'=>'width:80%')
                                             );
-                                ?><img src="images/star.png" />                 
+                                ?>
+                                <?php echo CHtml::image('images/star.png', 'required'); ?>
                             </td>
                         </tr>
                         <tr>

@@ -4,6 +4,14 @@ class RentalController extends Controller
 {
         public $layout = "//layouts/rental-main";
         
+        public function init(){
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
+            Yii::app()->clientScript->registerScript('jsglobal','        
+                $(".phone").mask("(999) 999-9999");
+                $(".ssn").mask("999-99-9999");
+                $(".currency").autoNumeric();');
+        }
 	public function actionIndex(){  
             
             /*$rentalModel = new MsRentalInformation();
@@ -24,14 +32,33 @@ class RentalController extends Controller
 	}
         
         public function actionApplicantchanged(){
+                        
             if($_POST['num_of_applicant']){
                 $cnt = $_POST['num_of_applicant'];
                 
                 if($cnt > 0){
+                    
+                    $u = 0;
                     for($i = 1; $i<=$cnt;$i++){
                         $applicantModel = new ApplicantInfo();
-                        echo $this->renderPartial('_step2_form', array('cnt' => $i, 'model'=>$applicantModel), true);
+                        $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'model'=>$applicantModel), true, true);
+                        
+                        $residentalModel = new ResidentalHistory();
+                        $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'model'=>$residentalModel), true, true);
+                        
+                        $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i), true);
+                        
+                        $response['step5'][] = $this->renderPartial('_step5_form', array('cnt' => $i), true);
+                        
+                        $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i), true);
+                        
+                        $u++;
                     }
+                    
+                    $total_fee = 30*$u;
+                    $response['step7'] = $this->renderPartial('_step7_form', array('total_fee' => $total_fee), true);
+                    $response['step8'] = $this->renderPartial('_step8_form', '', true);
+                    echo CJSON::encode($response);
                 }
             }
         }

@@ -1,5 +1,3 @@
-<script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.maskedinput.min.js" type="text/javascript"></script>
-<script src="<?php echo Yii::app()->baseUrl; ?>/js/auto-numeric.js" type="text/javascript"></script>
 <script>
     $(function(){
         $(".phone").mask("(999) 999-9999");
@@ -7,6 +5,7 @@
         $(".currency").autoNumeric();
     });
 </script>
+
 <form class="step2-form" method="POST" id="applicant<?php echo isset($cnt) ? "-".$cnt:"" ?>">
     <table width="100%" border="0">
         <tbody>
@@ -28,7 +27,7 @@
                     <?php 
                         echo CHtml::textField("firstname$cnt", "", array('style'=>'width:75%', 'id'=>"firstname$cnt", 'required'=>'required')); 
                     ?>
-                    <img src="images/star.png">
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
 
@@ -50,7 +49,8 @@
                     <?php 
                         echo CHtml::textField("lastname$cnt", "", array('style'=>'width:75%', 'id'=>"lastname$cnt")); 
                     ?> 
-                    <img src="images/star.png"></td>
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                </td>
                 <td>&nbsp;</td>
                 <td>
                     <label>Date of Birth</label>
@@ -58,9 +58,17 @@
                 <td>:</td>
                 <td>
                     <?php 
-                        echo CHtml::textField("birthday$cnt", "", array('style'=>'width:75%', 'id'=>"birthday$cnt", 'class'=>'hasDatepicker'));
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => "birthday$cnt",
+                            'value' => Yii::app()->session["birthday$cnt"],
+                            'htmlOptions' => array(
+                                'size' => '10',         // textField size
+                                'maxlength' => '10',    // textField maxlength
+                            ),
+                        ));
+                        //echo CHtml::textField("birthday$cnt", "", array('style'=>'width:75%', 'id'=>"birthday$cnt", 'class'=>'hasDatepicker'));
                     ?>
-                    <img src="images/star.png">
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -71,7 +79,8 @@
                     <?php 
                         echo CHtml::textField("ssn$cnt", "", array('style'=>'width:75%', 'id'=>"ssn$cnt", 'class'=>'ssn'));
                     ?>
-                    <img src="images/star.png"></td>
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                </td>
                 <td>&nbsp;</td>
                 <td>
                     <label>
@@ -88,7 +97,7 @@
                     <?php 
                         echo CHtml::textField("idnum$cnt", "", array('style'=>'width:75%', 'id'=>"idnum$cnt"));
                     ?>
-                    <img src="images/star.png">
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -101,7 +110,7 @@
                     <?php 
                         echo CHtml::textField("email$cnt", "", array('style'=>'width:75%', 'id'=>"email$cnt"));
                     ?>
-                    <img src="images/star.png">
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
                 <td><label>Verify Email</label></td>
@@ -110,7 +119,7 @@
                     <?php 
                         echo CHtml::textField("verifyemail$cnt", "", array('style'=>'width:75%', 'id'=>"verifyemail$cnt"));
                     ?>
-                    <img src="images/star.png"> 
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -121,7 +130,7 @@
                     <?php 
                         echo CHtml::textField("cellphone$cnt", "", array('style'=>'width:75%', 'id'=>"cellphone$cnt", 'class'=>'phone'));
                     ?>
-                    <img src="images/star.png">
+                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
                 </td>
                 <td>&nbsp;</td>
             </tr>
