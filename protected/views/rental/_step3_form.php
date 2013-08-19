@@ -37,7 +37,7 @@
                     <?php 
                         echo CHtml::textField("address$cnt", "", array('style'=>'width:75%', 'id'=>"address$cnt", 'required'=>'required')); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>				
 
                 <td><label>Unit</label></td>
@@ -56,7 +56,7 @@
                     <?php 
                         echo CHtml::textField("city$cnt", "", array('style'=>'width:75%', 'id'=>"city$cnt")); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>	
 
                 <td><label>State</label></td>
@@ -65,7 +65,7 @@
                     <?php 
                         echo CHtml::textField("state$cnt", "", array('style'=>'width:100px', 'id'=>"state$cnt"))." Zip Code : ".CHtml::textField("zip$cnt", "", array('style'=>'width:94px', 'id'=>"zip$cnt", 'maxlength'=>"5", 'size'=>"5")); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
             </tr>
             <tr>
@@ -96,7 +96,7 @@
                         echo CHtml::dropDownList("month$cnt", Yii::app()->session["month$cnt"], $months, array('style'=>"width:41%"))
                                 ." / ".CHtml::dropDownList("year$cnt", Yii::app()->session["year$cnt"], $years, array('style'=>"width:30%"));
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
                 <td><label>Rent $</label><input type="hidden" value="0" name="counterrh1" id="counterrh1"></td>
                 <td>:</td>
@@ -104,7 +104,7 @@
                     <?php 
                         echo CHtml::textField("rent$cnt", "", array('style'=>'width:75%', 'id'=>"rent$cnt", 'class'=>'currency')); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
             </tr>
             <tr>
@@ -114,7 +114,7 @@
                 <?php 
                     echo CHtml::dropDownList("agent_landlord_type$cnt", Yii::app()->session["agent_landlord_type$cnt"], array("Lanlord"=>"Lanlord", "Agent"=>"Agent"),array('style'=>'width:75%'));
                 ?>
-                <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                <?php echo CHtml::image('images/star.png', 'required'); ?>
             </td>
             <td colspan="4">
                 <label>Reason For Leaving</label>
@@ -127,13 +127,13 @@
                     <?php 
                         echo CHtml::textField("agent_landlord_name$cnt", "", array('style'=>'width:75%', 'id'=>"agent_landlord_name$cnt")); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
                 <td valign="top" rowspan="2" colspan="4">
                     <?php 
                         echo CHtml::textArea("leave_reason$cnt", "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt", 'rows'=>"2", 'cols'=>"46")); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
             </tr>
 
@@ -144,7 +144,7 @@
                     <?php 
                         echo CHtml::textField("agent_landlord_phone$cnt", "", array('style'=>'width:75%', 'id'=>"agent_landlord_phone$cnt", 'class'=>'phone')); 
                     ?>
-                    <?php echo CHtml::image('images'.DIRECTORY_SEPARATOR.'star.png', 'required'); ?>
+                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
             </tr>
         </tbody>

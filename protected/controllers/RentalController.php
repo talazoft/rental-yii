@@ -2,15 +2,23 @@
 
 class RentalController extends Controller
 {
-        public $layout = "//layouts/rental-main";
-        
-        public function init(){
+      public function init(){
+            $this->layout = "//layouts/rental-main";
+            
+            /*Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-1.10.2.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-ui-1.9.0.custom.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.ui.touch-punch.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/facescroll.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/excanvas.compiled.js');	
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.signature.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/base64.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/canvas2image.js');         
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
-            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js'); 
             Yii::app()->clientScript->registerScript('jsglobal','        
                 $(".phone").mask("(999) 999-9999");
                 $(".ssn").mask("999-99-9999");
-                $(".currency").autoNumeric();');
+                $(".currency").autoNumeric();');  */
         }
 	public function actionIndex(){  
             
@@ -40,11 +48,9 @@ class RentalController extends Controller
                     
                     $u = 0;
                     for($i = 1; $i<=$cnt;$i++){
-                        $applicantModel = new ApplicantInfo();
-                        $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'model'=>$applicantModel), true, true);
+                        $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i), true, true);
                         
-                        $residentalModel = new ResidentalHistory();
-                        $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'model'=>$residentalModel), true, true);
+                        $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
                         
                         $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i), true);
                         
@@ -63,31 +69,35 @@ class RentalController extends Controller
             }
         }
  
-        /*public function actionStep1tosession(){
-            $value = 0;
-            $model = new MsRentalInformation();
-            if(isset($_POST['MsRentalInformation'])){
-                $model->attributes = $_POST['MsRentalInformation'];
-                if($model->validate()){
-                    Yii::app()->session['step1'] = $model;
-                    $value = 1;
-                }         
+        public function actionStep1tosession(){
+            if(isset($_POST['ApplicationInformation'])){
+                Yii::app()->session['step1'] = $_POST['ApplicationInformation'];
             }
-            
-            echo $value;
         }
         
-        public function actionApplicantchanged(){
-            if(isset($_POST['selected_id'])){
-                $count = $_POST['selected_id'];
-                if($count > 0){
-                    for($i = 1; $i<=$count;$i++){
-                        $applicantModel = new MsApplicationInformation();   
-                        echo $this->renderPartial('_step2_form', array("applicantModel"=>$applicantModel, 'count'=>$i), true);
-                    }
+        public function actionShowstep2(){
+            if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+                $cnt = Yii::app()->session['step1']['num_of_applicant'];
+                for($i = 1; $i<=$cnt;$i++){
+                    echo $this->renderPartial('_step2_form', array('cnt' => $i), true, true);
                 }
             }
-        }*/
+        }
+        
+        public function actionStep2tosession(){
+            if(isset($_POST['ApplicantInfo'])){
+                Yii::app()->session['step2'] = $_POST['ApplicantInfo'];
+            }
+        }
+        
+        public function actionShowstep3(){
+            if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+                $cnt = Yii::app()->session['step1']['num_of_applicant'];
+                for($i = 1; $i<=$cnt;$i++){
+                    echo $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
+                }
+            }
+        }
         
         protected function performAjaxValidation($model)
         {

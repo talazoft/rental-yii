@@ -84,6 +84,9 @@ return array(
 				*/
 			),
 		),
+                'session' => array (
+                        'autoStart' => true,
+                ),
 	),
 
 	// application-level parameters that can be accessed

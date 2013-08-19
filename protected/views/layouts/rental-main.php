@@ -8,18 +8,25 @@
         <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/style.css" rel="stylesheet" />
         <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" />
         <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
-
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-1.10.2.min.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-ui-1.9.0.custom.min.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/auto-numeric.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/facescroll.js"></script> 
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/excanvas.compiled.js"></script>	
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.signature.min.js"></script>	
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/base64.js"></script>	
-        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/canvas2image.js"></script>	
-
+        
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.10.2.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui-1.9.0.custom.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/auto-numeric.js" ></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script> 
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.compiled.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.signature.min.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/base64.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/canvas2image.js"></script>
+        <script>
+            $(function(){
+                $(".right-container").alternateScroll();
+                $(".phone").mask("(999) 999-9999");
+                $(".ssn").mask("999-99-9999");
+                $(".currency").autoNumeric();
+            });
+        </script>
         <?php /*<script src="<?php echo Yii::app()->baseUrl; ?>/js2/jquery.cookie.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/js2/wo.js" type="text/javascript"></script> 
         <script src="<?php echo Yii::app()->baseUrl; ?>/scripts/history.js" type="text/javascript"></script>
