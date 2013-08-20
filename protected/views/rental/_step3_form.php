@@ -1,167 +1,85 @@
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/auto-numeric.js" ></script>
 <script>
     $(function(){
         $(".phone").mask("(999) 999-9999");
         $(".currency").autoNumeric();
+        
+        var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"]+1 : 2 ?>;
+        $("#plusri<?php echo $cnt; ?>").click(function(){
+            var resnewrowurl = "<?php echo Yii::app()->createUrl('/rental/resnewrow'); ?>";
+            $.post(resnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:rescnt}, function(response){
+                $("#restbl-body<?php echo $cnt; ?>").append(response);
+            });
+
+            $("#rescnt2<?php echo $cnt; ?>").val(rescnt);
+            
+            rescnt++;
+            
+            if(rescnt > 2){
+                $("#minusri<?php echo $cnt; ?>").show();
+            }
+        });
+        
+        $("#minusri<?php echo $cnt; ?>").click(function(){
+        
+            $("#restbl-body<?php echo $cnt; ?> tr.restblrow:last").remove();
+
+            rescnt--;
+            
+            $("#rescnt2<?php echo $cnt; ?>").val(rescnt);
+            
+            if(rescnt == 2){
+                $(this).hide();
+            }
+
+            return false;
+        });
+        
+        if(rescnt == 2){
+            $("#minusri<?php echo $cnt; ?>").hide();
+        }
     });
 </script>
-
 <form class="step3-form" id="resident-<?php echo isset($cnt) ? $cnt : "" ?>" method="POST">
+    <table id="restbl<?php echo $cnt; ?>">
+        <tbody id="restbl-body<?php echo $cnt; ?>">
+        <?php 
+        if(!isset(Yii::app()->session['step3']["rescnt2$cnt"])){
+            echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
+        } else {
+            if(Yii::app()->session['step3']["rescnt2$cnt"] > 1){
+                $t = Yii::app()->session['step3']["rescnt2$cnt"];
+                for($i=0;$i<=$t;$i++){
+                    echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                }
+            } else {
+                echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
+            }
+        }
+        ?>
+        </tbody>
+    </table>
     <table width="100%" border="0">
         <tbody>
             <tr>
-                <td valign="top" colspan="8">
-                    <div style="color:red" id="msgboxrh<?php echo isset($cnt) ? $cnt : "" ?>">    
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8">
-
-                    <table border="0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div id="firstnamerh<?php echo isset($cnt) ? $cnt : "" ?>">
-                                        <b>Residential History of</b>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td width="17%"><label>Current Address</label></td>
-                <td>:</td>
-                <td width="32%">
-                    <?php 
-                        echo CHtml::textField("address$cnt", "", array('style'=>'width:75%', 'id'=>"address$cnt", 'required'=>'required')); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>				
-
-                <td><label>Unit</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("unit$cnt", "", array('style'=>'width:75%', 'id'=>"unit$cnt")); 
+                <td align="center" colspan="8"> 
+                    <a name="plusri<?php echo $cnt; ?>" id="plusri<?php echo $cnt; ?>">
+                        <img border="0" src="images/plus.png"> 
+                    </a> 
+                    <a name="minusri<?php echo $cnt; ?>" id="minusri<?php echo $cnt; ?>">
+                        <img src="images/minus.png">
+                    </a>
+                    <?php
+                        echo CHtml::hiddenField("rescnt2$cnt", Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"] : "", array('id'=>"rescnt2$cnt"));
                     ?>
                 </td>
             </tr>
-
             <tr>
-                <td><label>City</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("city$cnt", "", array('style'=>'width:75%', 'id'=>"city$cnt")); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>	
-
-                <td><label>State</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("state$cnt", "", array('style'=>'width:100px', 'id'=>"state$cnt"))." Zip Code : ".CHtml::textField("zip$cnt", "", array('style'=>'width:94px', 'id'=>"zip$cnt", 'maxlength'=>"5", 'size'=>"5")); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Month / Year Moved In</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        $months = array(
-                            "January" => "January",
-                            "February" => "February",
-                            "March" => "March",
-                            "April" => "April",
-                            "May" => "May",
-                            "June" => "June",
-                            "July" => "July",
-                            "August" => "August",
-                            "September" => "September",
-                            "October" => "October",
-                            "November" => "November",
-                            "December" => "December"
-                        );
-                        
-                        $years = array();
-                        for($i = date('Y'); $i >= date('Y')-10; $i--){
-                            $years[$i] = $i;
-                        }
-                        
-                        echo CHtml::dropDownList("month$cnt", Yii::app()->session["month$cnt"], $months, array('style'=>"width:41%"))
-                                ." / ".CHtml::dropDownList("year$cnt", Yii::app()->session["year$cnt"], $years, array('style'=>"width:30%"));
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>
-                <td><label>Rent $</label><input type="hidden" value="0" name="counterrh1" id="counterrh1"></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("rent$cnt", "", array('style'=>'width:75%', 'id'=>"rent$cnt", 'class'=>'currency')); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>
-            </tr>
-            <tr>
-            <td><label>Lanlord / Agent </label></td>
-            <td>:</td>
-            <td>
-                <?php 
-                    echo CHtml::dropDownList("agent_landlord_type$cnt", Yii::app()->session["agent_landlord_type$cnt"], array("Lanlord"=>"Lanlord", "Agent"=>"Agent"),array('style'=>'width:75%'));
-                ?>
-                <?php echo CHtml::image('images/star.png', 'required'); ?>
-            </td>
-            <td colspan="4">
-                <label>Reason For Leaving</label>
-            </td>
-            </tr>
-            <tr>
-                <td><label>Name</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("agent_landlord_name$cnt", "", array('style'=>'width:75%', 'id'=>"agent_landlord_name$cnt")); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>
-                <td valign="top" rowspan="2" colspan="4">
-                    <?php 
-                        echo CHtml::textArea("leave_reason$cnt", "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt", 'rows'=>"2", 'cols'=>"46")); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
-                </td>
-            </tr>
-
-            <tr>
-                <td><label>Phone</label></td>
-                <td>:</td>
-                <td>
-                    <?php 
-                        echo CHtml::textField("agent_landlord_phone$cnt", "", array('style'=>'width:75%', 'id'=>"agent_landlord_phone$cnt", 'class'=>'phone')); 
-                    ?>
-                    <?php echo CHtml::image('images/star.png', 'required'); ?>
+                <td align="center" colspan="8"> 
+                    <hr class="dashed">
                 </td>
             </tr>
         </tbody>
-        <tr>
-            <td align="center" colspan="8"> 
-                <a name="plusrh1" id="plusrh1">
-                    <img border="0" src="images/plus.png"> 
-                </a> 
-                <a name="minusrh1" id="minusrh1">
-                    <img src="images/minus.png">
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="8"> 
-                <hr class="dashed">
-            </td>
-        </tr>
     </table>
 </form>

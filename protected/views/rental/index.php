@@ -53,13 +53,14 @@ $(document).ready(function () {
                     //$(".step_content_"+step).slideToggle(350);
                 //}
             });
-        } //else if(step == 4){
-//            //$.post("<?php echo Yii::app()->createUrl('/rental/step4tosession') ?>", $("#step3-form").serialize(), function(response){
-//                //if(response === 1){
-//                    $(".step_content_"+step).slideToggle(350);
-//                //}
-//            //});
-//        }
+        } else if(step == 4){
+            $.post("<?php echo Yii::app()->createUrl('/rental/step3tosession') ?>", $(".step3-form").serialize(), function(response){
+                $("#eii").load("<?php echo Yii::app()->createUrl('/rental/showstep4') ?>")
+                //if(response === 1){
+                    //$(".step_content_"+step).slideToggle(350);
+                //}
+            });
+        }
 
         $(".step_content_"+step).slideToggle(350);
                 

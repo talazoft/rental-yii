@@ -49,12 +49,13 @@ class RentalController extends Controller
                     $u = 0;
                     for($i = 1; $i<=$cnt;$i++){
                         $step2_cnt2 = 1;
+                        $step3_cnt2 = 1;
                         //if(isset(Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i])){
                         //    $step2_cnt2 = Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i];
                         //}
                         $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => $step2_cnt2), true, true);
                         
-                        $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
+                        $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'cnt2' => $step3_cnt2), true, true);
                         
                         $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i), true);
                         
@@ -100,13 +101,25 @@ class RentalController extends Controller
             if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
                 $cnt = Yii::app()->session['step1']['num_of_applicant'];
                 for($i = 1; $i<=$cnt;$i++){
-                    echo $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
+                    echo $this->renderPartial('_step3_form', array('cnt' => $i, 'cnt2' => 1), true, true);
                 }
             }
         }
         
         public function actionStep3tosession(){
-            
+            if(isset($_POST)){
+                unset(Yii::app()->session['step3']);
+                Yii::app()->session['step3'] = $_POST;
+            }
+        }
+        
+        public function actionShowstep4(){
+            if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+                $cnt = Yii::app()->session['step1']['num_of_applicant'];
+                for($i = 1; $i<=$cnt;$i++){
+                    echo $this->renderPartial('_step4_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+                }
+            }
         }
         
         public function actionDepnewrow(){
@@ -119,6 +132,13 @@ class RentalController extends Controller
         public function actionVehnewrow(){
             if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
                 $newrow = $this->renderPartial("_vehicle_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+                echo $newrow;
+            }
+        }
+        
+        public function actionResnewrow(){           
+            if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+                $newrow = $this->renderPartial("_residental_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
                 echo $newrow;
             }
         }
