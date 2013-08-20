@@ -12,10 +12,10 @@ class RentalController extends Controller
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/excanvas.compiled.js');	
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.signature.min.js');
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/base64.js');
-            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/canvas2image.js');         
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/canvas2image.js');*/         
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
             Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js'); 
-            Yii::app()->clientScript->registerScript('jsglobal','        
+            /*Yii::app()->clientScript->registerScript('jsglobal','        
                 $(".phone").mask("(999) 999-9999");
                 $(".ssn").mask("999-99-9999");
                 $(".currency").autoNumeric();');  */
@@ -48,7 +48,11 @@ class RentalController extends Controller
                     
                     $u = 0;
                     for($i = 1; $i<=$cnt;$i++){
-                        $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i), true, true);
+                        $step2_cnt2 = 1;
+                        //if(isset(Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i])){
+                        //    $step2_cnt2 = Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i];
+                        //}
+                        $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => $step2_cnt2), true, true);
                         
                         $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
                         
@@ -71,6 +75,7 @@ class RentalController extends Controller
  
         public function actionStep1tosession(){
             if(isset($_POST['ApplicationInformation'])){
+                unset(Yii::app()->session['step1']);
                 Yii::app()->session['step1'] = $_POST['ApplicationInformation'];
             }
         }
@@ -79,14 +84,15 @@ class RentalController extends Controller
             if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
                 $cnt = Yii::app()->session['step1']['num_of_applicant'];
                 for($i = 1; $i<=$cnt;$i++){
-                    echo $this->renderPartial('_step2_form', array('cnt' => $i), true, true);
+                    echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
                 }
             }
         }
         
         public function actionStep2tosession(){
-            if(isset($_POST['ApplicantInfo'])){
-                Yii::app()->session['step2'] = $_POST['ApplicantInfo'];
+            if(isset($_POST['ApplicantInfo']) && isset($_POST['DependantInfo']) && isset($_POST['VehicleInfo'])){
+                unset(Yii::app()->session['step2']);
+                Yii::app()->session['step2'] = $_POST;
             }
         }
         
@@ -96,6 +102,24 @@ class RentalController extends Controller
                 for($i = 1; $i<=$cnt;$i++){
                     echo $this->renderPartial('_step3_form', array('cnt' => $i), true, true);
                 }
+            }
+        }
+        
+        public function actionStep3tosession(){
+            
+        }
+        
+        public function actionDepnewrow(){
+            if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+                $newrow = $this->renderPartial("_dependant_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+                echo $newrow;
+            }
+        }
+        
+        public function actionVehnewrow(){
+            if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+                $newrow = $this->renderPartial("_vehicle_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+                echo $newrow;
             }
         }
         

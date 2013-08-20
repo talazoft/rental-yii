@@ -150,6 +150,16 @@
         </tbody>
         <tr>
             <td align="center" colspan="8"> 
+                <a name="plusrh1" id="plusrh1">
+                    <img border="0" src="images/plus.png"> 
+                </a> 
+                <a name="minusrh1" id="minusrh1">
+                    <img src="images/minus.png">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="8"> 
                 <hr class="dashed">
             </td>
         </tr>

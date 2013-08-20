@@ -43,12 +43,12 @@ $(document).ready(function () {
         } else if(step == 2){  
             $.post("<?php echo Yii::app()->createUrl('/rental/step1tosession') ?>", $("#step1-form").serialize(), function(response){
                 $("#ai").load("<?php echo Yii::app()->createUrl('/rental/showstep2') ?>");
-                $(".step_content_"+step).slideToggle(350);
+                //$(".step_content_"+step).slideToggle(350);
             });
         } else if(step == 3){
             $.post("<?php echo Yii::app()->createUrl('/rental/step2tosession') ?>", $(".step2-form").serialize(), function(response){
                 $("#rh").load("<?php echo Yii::app()->createUrl('/rental/showstep3') ?>");
-                $(".step_content_"+step).slideToggle(350);
+                //$(".step_content_"+step).slideToggle(350);
                 //if(response === 1){
                     //$(".step_content_"+step).slideToggle(350);
                 //}
@@ -60,6 +60,8 @@ $(document).ready(function () {
 //                //}
 //            //});
 //        }
+
+        $(".step_content_"+step).slideToggle(350);
                 
         if($(this).attr('class')=='hide'){
             $(this).attr('class','show');	
