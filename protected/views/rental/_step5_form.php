@@ -1,4 +1,11 @@
-<form class="step5-form" method="post" name="personalref-1" id="personalref-1"> 
+<script>
+    /*$(function(){
+        $(".phone").mask("(999) 999-9999");
+        $(".ssn").mask("999-99-9999");
+        $(".currency").autoNumeric();   
+    });*/
+</script>
+<form class="step5-form" method="post" name="personalref-<?php echo $cnt ?>" id="personalref-<?php echo $cnt ?>"> 
     <table width="100%" border="0">
         <tbody>
             <tr>
@@ -6,8 +13,10 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><input type="hidden" value="jQnb" id="idformpr1" name="idformpr1">
-                                    <b> <div id="firstnamepr1">Personal Reference</div><input type="hidden" value="0" id="counterpr1" name="counterpr1"></b> 
+                                <td>
+                                    <b>
+                                        <div id="firstnamepr1">Personal Reference</div>
+                                    </b> 
                                 </td>
                             </tr>
                         </tbody>
@@ -23,20 +32,25 @@
                                 <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Relationship</th>
                                 <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Address</th>
                                 <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Phone</th>
-                                <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Emergency</th>
                             </tr>
-                            <tr>
-                                <td align="center" height="36" style="width:20%"><input type="text" style="width:70%" value="" id="namepr1" name="namepr1"></td>
-                                <td align="center" style="width:20%"><input type="text" style="width:70%" value="" id="relathionshippr1" name="relathionshippr1"></td>
-                                <td align="center" style="border-right-color:#dddddd"><input type="text" style="width:70%" value="" id="addresspr1" name="addresspr1"></td>
-                                <td align="center" style="width:20%"><input type="text" onkeyup="javascript:backspacerUP(this,event);" onkeydown="javascript:backspacerDOWN(this,event);" onkeypress="return isNumberKey(event)" value="" name="phonepr11" id="phonepr11" size="3" maxlength="13" style="width:90%"><input type="hidden" name="phonepr21" id="phonepr21" size="3" maxlength="3"><input type="hidden" name="phonepr31" id="phonepr31" size="3" maxlength="3"></td>
-                                <td align="center" style="border-right-color:#dddddd">
-                                    <select style="width:50%" id="emergencypr1" name="emergencypr1">
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <?php 
+                                if(!isset(Yii::app()->session['step5']["prcnt2$cnt"])){
+                                    for($i=0;$i<=3;$i++){
+                                        echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                    }
+                                } else {
+                                    if(Yii::app()->session['step5']["prcnt2$cnt"] > 3){
+                                        $t = Yii::app()->session['step5']["prcnt2$cnt"];
+                                        for($i=0;$i<=$t;$i++){
+                                            echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                        }
+                                    } else {
+                                        for($i=0;$i<=3;$i++){
+                                            echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                        }
+                                    }
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </td>
@@ -49,7 +63,17 @@
 <table width="100%">
     <tbody>
         <tr>
-            <td align="center" colspan="5"> <a name="pluspr2" id="pluspr2"><img border="0" src="images/plus.png"> </a> <a name="minuspr2" id="minuspr2"><img src="images/minus.png"></a></td>
+            <td align="center" colspan="5"> 
+                <a name="pluspr<?php echo $cnt; ?>" id="pluspr<?php echo $cnt; ?>">
+                    <img border="0" src="images/plus.png"> 
+                </a> 
+                <a name="minuspr<?php echo $cnt; ?>" id="minuspr<?php echo $cnt; ?>">
+                    <img src="images/minus.png">
+                </a>
+                <?php 
+                    echo CHtml::hiddenField("prcnt2$cnt", isset(Yii::app()->session['step4']["prcnt2$cnt"]) ? Yii::app()->session['step4']["prcnt2$cnt"] : "", array('id'=>"prcnt2$cnt"));
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="center" colspan="8"> 

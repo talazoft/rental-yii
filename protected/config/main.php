@@ -49,6 +49,27 @@ return array(
                             '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',*/
 			),
 		),
+                'clientScript'=>array(
+                    'packages'=>array(
+                        'jquery'=>array(
+                            'baseUrl'=>'/js/',
+                            'js'=>array('jquery-1.10.2.min.js'),
+                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                        ),
+                        'jquery.ui'=>array(
+                            'baseUrl'=>'/js/',
+                            'js'=>array('jquery-ui-1.9.0.custom.min.js'),
+                            'depends'=>array('jquery'),
+                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                        ),
+                        'masked-input'=>array(
+                            'baseUrl'=>'/js/',
+                            'js'=>array('jquery.maskedinput.min.js'),
+                            'depends'=>array('jquery'),
+                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                        )
+                    ),
+                ),
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',

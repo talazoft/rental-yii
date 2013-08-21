@@ -9,13 +9,17 @@
         <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" />
         <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
         
+        <?php /*
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.10.2.min.js" ></script>
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui-1.9.0.custom.min.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/auto-numeric.js" ></script>
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
-        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script> 
-        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.compiled.js"></script>	
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $(".right-container").alternateScroll();
+            });
+        </script>
+        <?php /*<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.compiled.js"></script>	
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.signature.min.js"></script>	
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/base64.js"></script>	
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/canvas2image.js"></script>
@@ -26,7 +30,7 @@
                 $(".ssn").mask("999-99-9999");
                 $(".currency").autoNumeric();
             });
-        </script>
+        </script> */ ?>
         <?php /*<script src="<?php echo Yii::app()->baseUrl; ?>/js2/jquery.cookie.js" type="text/javascript"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/js2/wo.js" type="text/javascript"></script> 
         <script src="<?php echo Yii::app()->baseUrl; ?>/scripts/history.js" type="text/javascript"></script>
@@ -337,20 +341,7 @@
             </div>
     </div>
     <div class="container">
-	<div class="left">
-            <?php $this->renderPartial('//layouts/leftpane'); ?>
-	</div>
-        <div class="right-container">
-            <div class="right">
-                <?php echo $content; ?>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <script>
-            $(function(){
-                $(".right-container").alternateScroll();
-            });
-        </script>
+        <?php echo $content; ?>
     </div>
 </body>
 </html>

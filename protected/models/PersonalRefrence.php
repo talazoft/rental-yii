@@ -9,6 +9,7 @@
  * @property string $relation
  * @property string $phone
  * @property integer $rd_applicant_info_id
+ * @property string $address
  *
  * The followings are the available model relations:
  * @property ApplicantInfo $rdApplicantInfo
@@ -43,12 +44,12 @@ class PersonalRefrence extends CActiveRecord
 		return array(
 			array('rd_applicant_info_id', 'required'),
 			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>100),
+			array('name, address', 'length', 'max'=>100),
 			array('relation', 'length', 'max'=>50),
 			array('phone', 'length', 'max'=>25),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, relation, phone, rd_applicant_info_id', 'safe', 'on'=>'search'),
+			array('id, name, relation, phone, rd_applicant_info_id, address', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,6 +76,7 @@ class PersonalRefrence extends CActiveRecord
 			'relation' => 'Relation',
 			'phone' => 'Phone',
 			'rd_applicant_info_id' => 'Rd Applicant Info',
+			'address' => 'Address',
 		);
 	}
 
@@ -94,6 +96,7 @@ class PersonalRefrence extends CActiveRecord
 		$criteria->compare('relation',$this->relation,true);
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('rd_applicant_info_id',$this->rd_applicant_info_id);
+		$criteria->compare('address',$this->address,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,9 +1,8 @@
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/auto-numeric.js" ></script>
 <script>
     $(function(){
-        $(".phone").mask("(999) 999-9999");
+        /*$(".phone").mask("(999) 999-9999");
         $(".currency").autoNumeric();
+        $(".zip").mask("99999");*/
         
         var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"]+1 : 2 ?>;
         $("#plusri<?php echo $cnt; ?>").click(function(){

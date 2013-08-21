@@ -110,7 +110,6 @@
                                                 'changeYear' => 'true',
                                                 'dateFormat'=>'yy/mm/dd',
                                                 'timeFormat' => 'hh:mm:ss',
-                                                'yearRange' => "-50:-18",
                                                 'mode'=>'date',
                                             ), // jquery plugin options
                                             'language' => '',
@@ -181,7 +180,7 @@
                                     <label>Zip Code</label>
                                     :
                                     <?php 
-                                        echo CHtml::textField("ApplicationInformation[zipcode]", Yii::app()->session['step1']['zipcode'], array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px'));
+                                        echo CHtml::textField("ApplicationInformation[zipcode]", Yii::app()->session['step1']['zipcode'], array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px', 'class'=>'zip'));
                                     ?>
                                     <?php echo CHtml::image('images/star.png', 'required'); ?>              
                                 </td>

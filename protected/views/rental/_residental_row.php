@@ -29,7 +29,7 @@
                     <td>:</td>
                     <td width="32%">
                         <?php 
-                            echo CHtml::textField("address$cnt$cnt2", Yii::app()->session['step3']["address$cnt$cnt2"] ? Yii::app()->session['step3']["address$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"address$cntcnt2", 'required'=>'required')); 
+                            echo CHtml::textField("address$cnt$cnt2", isset(Yii::app()->session['step3']["address$cnt$cnt2"]) ? Yii::app()->session['step3']["address$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"address$cnt$cnt2", 'required'=>'required')); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>				
@@ -38,7 +38,7 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("unit$cntcnt2", Yii::app()->session['step3']["unit$cntcnt2"] ? Yii::app()->session['step3']["unit$cntcnt2"] : "", array('style'=>'width:75%', 'id'=>"address$cntcnt2")); 
+                            echo CHtml::textField("unit$cnt$cnt2", isset(Yii::app()->session['step3']["unit$cnt$cnt2"]) ? Yii::app()->session['step3']["unit$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"address$cnt$cnt2")); 
                         ?>
                     </td>
                 </tr>
@@ -48,7 +48,7 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("city$cnt$cnt2", Yii::app()->session['step3']["city$cnt$cnt2"] ? Yii::app()->session['step3']["city$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"city$cnt$cnt2")); 
+                            echo CHtml::textField("city$cnt$cnt2", isset(Yii::app()->session['step3']["city$cnt$cnt2"]) ? Yii::app()->session['step3']["city$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"city$cnt$cnt2")); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>	
@@ -57,7 +57,7 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("state$cnt$cnt2", Yii::app()->session['step3']["state$cnt$cnt2"] ? Yii::app()->session['step3']["state$cnt$cnt2"] : "", array('style'=>'width:84px', 'id'=>"state$cnt$cnt2"))." Zip Code : ".CHtml::textField("zip$cnt$cnt2", Yii::app()->session['step3']["zip$cnt$cnt2"] ? Yii::app()->session['step3']["zip$cnt$cnt2"] : "", array('style'=>'width:94px', 'id'=>"zip$cnt$cnt2", 'maxlength'=>"5", 'size'=>"5")); 
+                            echo CHtml::textField("state$cnt$cnt2", isset(Yii::app()->session['step3']["state$cnt$cnt2"]) ? Yii::app()->session['step3']["state$cnt$cnt2"] : "", array('style'=>'width:84px', 'id'=>"state$cnt$cnt2"))." Zip Code : ".CHtml::textField("zip$cnt$cnt2", Yii::app()->session['step3']["zip$cnt$cnt2"] ? Yii::app()->session['step3']["zip$cnt$cnt2"] : "", array('style'=>'width:94px', 'id'=>"zip$cnt$cnt2", 'maxlength'=>"5", 'size'=>"5", 'class'=>'zip')); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
@@ -87,8 +87,8 @@
                                 $years[$i] = $i;
                             }
 
-                            echo CHtml::dropDownList("month$cnt", Yii::app()->session['step3']["month$cnt$cnt2"] ? Yii::app()->session['step3']["month$cnt$cnt2"] : "", $months, array('style'=>"width:41%"))
-                                    ." / ".CHtml::dropDownList("year$cnt", Yii::app()->session['step3']["year$cnt$cnt2"] ? Yii::app()->session['step3']["year$cnt$cnt2"] : "", $years, array('style'=>"width:30%"));
+                            echo CHtml::dropDownList("month$cnt$cnt2", isset(Yii::app()->session['step3']["month$cnt$cnt2"]) ? Yii::app()->session['step3']["month$cnt$cnt2"] : "", $months, array('style'=>"width:41%"))
+                                    ." / ".CHtml::dropDownList("year$cnt$cnt2", isset(Yii::app()->session['step3']["year$cnt$cnt2"]) ? Yii::app()->session['step3']["year$cnt$cnt2"] : "", $years, array('style'=>"width:30%"));
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
@@ -96,7 +96,7 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("rent$cnt$cnt2", Yii::app()->session['step3']["rent$cnt$cnt2"] ? Yii::app()->session['step3']["rent$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"rent$cnt$cnt2", 'class'=>'currency')); 
+                            echo CHtml::textField("rent$cnt$cnt2", isset(Yii::app()->session['step3']["rent$cnt$cnt2"]) ? Yii::app()->session['step3']["rent$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"rent$cnt$cnt2", 'class'=>'currency')); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
@@ -106,7 +106,7 @@
                 <td>:</td>
                 <td>
                     <?php 
-                        echo CHtml::dropDownList("agent_landlord_type$cnt$cnt2", Yii::app()->session['step3']["agent_landlord_type$cnt$cnt2"] ? Yii::app()->session['step3']["agent_landlord_type$cnt$cnt2"] : "", array("Lanlord"=>"Lanlord", "Agent"=>"Agent"),array('style'=>'width:75%'));
+                        echo CHtml::dropDownList("agent_landlord_type$cnt$cnt2", isset(Yii::app()->session['step3']["agent_landlord_type$cnt$cnt2"]) ? Yii::app()->session['step3']["agent_landlord_type$cnt$cnt2"] : "", array("Lanlord"=>"Lanlord", "Agent"=>"Agent"),array('style'=>'width:75%'));
                     ?>
                     <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
@@ -119,13 +119,13 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("agent_landlord_name$cnt$cnt2", Yii::app()->session['step3']["agent_landlord_name$cnt$cnt2"] ? Yii::app()->session['step3']["agent_landlord_name$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"agent_landlord_name$cnt$cnt2")); 
+                            echo CHtml::textField("agent_landlord_name$cnt$cnt2", isset(Yii::app()->session['step3']["agent_landlord_name$cnt$cnt2"]) ? Yii::app()->session['step3']["agent_landlord_name$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"agent_landlord_name$cnt$cnt2")); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
                     <td valign="top" rowspan="2" colspan="4">
                         <?php 
-                            echo CHtml::textArea("leave_reason$cnt$cnt2", Yii::app()->session['step3']["leave_reason$cnt$cnt2"] ? Yii::app()->session['step3']["leave_reason$cnt$cnt2"] : "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt$cnt2", 'rows'=>"2", 'cols'=>"46")); 
+                            echo CHtml::textArea("leave_reason$cnt$cnt2", isset(Yii::app()->session['step3']["leave_reason$cnt$cnt2"]) ? Yii::app()->session['step3']["leave_reason$cnt$cnt2"] : "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt$cnt2", 'rows'=>"2", 'cols'=>"46")); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
@@ -136,7 +136,7 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("agent_landlord_phone$cnt", "", array('style'=>'width:75%', 'id'=>"agent_landlord_phone$cnt", 'class'=>'phone')); 
+                            echo CHtml::textField("agent_landlord_phone$cnt$cnt2", isset(Yii::app()->session['step3']["agent_landlord_phone$cnt$cnt2"]) ? Yii::app()->session['step3']["agent_landlord_phone$cnt$cnt2"] : "", array('style'=>'width:75%', 'id'=>"agent_landlord_phone$cnt", 'class'=>'phone')); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>

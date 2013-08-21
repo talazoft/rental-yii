@@ -329,6 +329,7 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_personal_refrence` (
   `relation` VARCHAR(50) NULL ,
   `phone` VARCHAR(25) NULL ,
   `rd_applicant_info_id` INT NOT NULL ,
+  `address` VARCHAR(100) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_rd_personal_refrence_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
   CONSTRAINT `fk_rd_personal_refrence_rd_applicant_info1`

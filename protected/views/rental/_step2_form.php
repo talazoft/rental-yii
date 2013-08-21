@@ -1,10 +1,8 @@
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js" ></script>
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/auto-numeric.js" ></script>
 <script>
     $(function(){
         $(".phone").mask("(999) 999-9999");
         $(".ssn").mask("999-99-9999");
-        $(".currency").autoNumeric();   
+        $(".currency").autoNumeric();
         
         $("#<?php echo "ApplicantInfo_has_pet$cnt"; ?>").change(function(){
             var isChecked = this.checked;
