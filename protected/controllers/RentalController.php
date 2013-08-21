@@ -56,22 +56,22 @@ class RentalController extends Controller
         
         $model = new ApplicationInformation;
         
-        $cs = Yii::app()->getClientScript();
-        $cs->registerCoreScript('jquery');
-        $cs->registerCoreScript('maskedinput');
-        Yii::app()->clientScript->registerScript('scroll', '
-            $(".right-container").alternateScroll();
-            $(".phone").mask("(999) 999-9999");
-            $(".currency").autoNumeric();
-            $(".zip").mask("99999");
-            $(".ssn").mask("999-99-9999");
-        ', CClientScript::POS_READY);
-        $this->render("index", array('model' => $model), false, true);
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery'=>false,
+            'jquery.ui'=>false,
+        ); 
+        
+        $this->render("index", array('model' => $model));
     }
     
 
     public function actionApplicantchanged(){
 
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+        ); 
+        
         if($_POST['num_of_applicant']){
             $cnt = $_POST['num_of_applicant'];
 
@@ -82,13 +82,13 @@ class RentalController extends Controller
                     //if(isset(Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i])){
                     //    $step2_cnt2 = Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i];
                     //}
-                    $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true);
+                    $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
-                    $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'cnt2' => 1), true);
+                    $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
-                    $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i, 'cnt2' => 1), true);
+                    $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
-                    $response['step5'][] = $this->renderPartial('_step5_form', array('cnt' => $i, 'cnt2' => 1), true);
+                    $response['step5'][] = $this->renderPartial('_step5_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
                     $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i), true);
 
@@ -114,7 +114,7 @@ class RentalController extends Controller
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
-                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true);
             }
         }
     }

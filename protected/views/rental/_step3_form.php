@@ -1,10 +1,10 @@
 <script>
     $(function(){
-        /*$(".phone").mask("(999) 999-9999");
+        $(".phone").mask("(999) 999-9999");
         $(".currency").autoNumeric();
-        $(".zip").mask("99999");*/
+        $(".zip").mask("99999");
         
-        var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"]+1 : 2 ?>;
+        var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"] : 2 ?>;
         $("#plusri<?php echo $cnt; ?>").click(function(){
             var resnewrowurl = "<?php echo Yii::app()->createUrl('/rental/resnewrow'); ?>";
             $.post(resnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:rescnt}, function(response){
@@ -49,7 +49,7 @@
         } else {
             if(Yii::app()->session['step3']["rescnt2$cnt"] > 1){
                 $t = Yii::app()->session['step3']["rescnt2$cnt"];
-                for($i=0;$i<=$t;$i++){
+                for($i=1;$i<=$t;$i++){
                     echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                 }
             } else {

@@ -1,9 +1,42 @@
 <script>
-    /*$(function(){
+    $(function(){
         $(".phone").mask("(999) 999-9999");
-        $(".ssn").mask("999-99-9999");
-        $(".currency").autoNumeric();   
-    });*/
+        $(".currency").autoNumeric();  
+        
+        var prcnt2 = <?php echo isset(Yii::app()->session['step5']["prcnt2$cnt"]) ? Yii::app()->session['step5']["prcnt2$cnt"] : 4 ?>;
+        $("#pluspr<?php echo $cnt; ?>").click(function(){
+            var prnewrowurl = "<?php echo Yii::app()->createUrl('/rental/prnewrow'); ?>";
+            $.post(prnewrowurl, $(".step5-form").serialize(), function(response){
+                $("#prtbl<?php echo $cnt; ?> tbody:last").append(response);
+            });
+            
+            $("#prcnt2<?php echo $cnt; ?>").val(prcnt2);
+            
+            prcnt2++;
+            
+            if(prcnt2 > 4){
+                $("#minuspr<?php echo $cnt; ?>").show();
+            }
+        });
+        
+        $("#minuspr<?php echo $cnt; ?>").click(function(){
+            $("#prtbl<?php echo $cnt; ?> tr:last").remove();
+            
+            prcnt2--;
+            
+            $("#prcnt2<?php echo $cnt; ?>").val(prcnt2);
+            
+            if(prcnt2 == 2){
+                $(this).hide();
+            }
+
+            return false;
+        });
+        
+        if(prcnt2 == 4){
+            $("#minuspr<?php echo $cnt; ?>").hide();
+        }
+    });
 </script>
 <form class="step5-form" method="post" name="personalref-<?php echo $cnt ?>" id="personalref-<?php echo $cnt ?>"> 
     <table width="100%" border="0">
@@ -25,7 +58,7 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    <table width="100%" border="1" style="border-collapse:collapse; border-color:#bebebe">
+                    <table id="prtbl<?php echo $cnt; ?>" width="100%" border="1" style="border-collapse:collapse; border-color:#bebebe">
                         <tbody>
                             <tr>
                                 <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Name</th>
@@ -35,18 +68,18 @@
                             </tr>
                             <?php 
                                 if(!isset(Yii::app()->session['step5']["prcnt2$cnt"])){
-                                    for($i=0;$i<=3;$i++){
-                                        echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                    for($i=1;$i<=3;$i++){
+                                        echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                                     }
                                 } else {
                                     if(Yii::app()->session['step5']["prcnt2$cnt"] > 3){
                                         $t = Yii::app()->session['step5']["prcnt2$cnt"];
-                                        for($i=0;$i<=$t;$i++){
-                                            echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                        for($i=1;$i<=$t;$i++){
+                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                                         }
                                     } else {
-                                        for($i=0;$i<=3;$i++){
-                                            echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                        for($i=1;$i<=3;$i++){
+                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                                         }
                                     }
                                 }

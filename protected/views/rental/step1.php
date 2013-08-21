@@ -1,3 +1,42 @@
+<script>
+    $(function(){
+        $("#ApplicationInformation_refered_lead").change(function(){
+            var sel = $("#ApplicationInformation_refered_lead option:selected").val();
+            
+            if(sel == "Sign On Property"){
+                $("#vreference2").hide();
+                $("#vreference3").hide();
+                $("#vreference4").hide();
+                $("#vreference5").hide();
+            } else if(sel == "Advertisement"){
+                $("#vreference2").show();
+                $("#vreference3").hide();
+                $("#vreference4").hide();
+                $("#vreference5").hide();
+            } else if(sel == "Agents"){
+                $("#vreference2").hide();
+                $("#vreference3").show();
+                $("#vreference4").hide();
+                $("#vreference5").hide();
+            } else if(sel == "Tenant"){
+                $("#vreference2").hide();
+                $("#vreference3").hide();
+                $("#vreference4").show();
+                $("#vreference5").hide();
+            } else if(sel == "Other"){
+                $("#vreference2").hide();
+                $("#vreference3").hide();
+                $("#vreference4").hide();
+                $("#vreference5").show();
+            } else {
+                $("#vreference2").hide();
+                $("#vreference3").hide();
+                $("#vreference4").hide();
+                $("#vreference5").hide();
+            }
+        });
+    });
+</script>
 <div class="step_1 step">
     <div class="titlestep">Rental Information</div>
     <div class="show" id="1"></div>
@@ -29,6 +68,7 @@
                                         array(
                                             'empty'=>'Choose one', 
                                             'style'=>'width:50%',
+                                            'required'=>'required',
                                             'ajax'=>array(
                                                 'type'=>"POST",
                                                 'url'=>CController::createUrl('rental/applicantchanged'), //url to call.
@@ -82,7 +122,7 @@
                                 <td>:</td>
                                 <td>
                                     <?php               
-                                        echo CHtml::textField("ApplicationInformation[address]", Yii::app()->session['step1']['address'], array('size'=>10, 'style'=>'width:75%'));
+                                        echo CHtml::textField("ApplicationInformation[address]", Yii::app()->session['step1']['address'], array('size'=>10, 'style'=>'width:75%', 'required'=>'required'));
                                     ?>
                                     <?php echo CHtml::image('images/star.png', 'required'); ?>            
                                 </td>
@@ -92,7 +132,7 @@
                                 <td>:</td>
                                 <td>
                                     <?php 
-                                        echo CHtml::textField("ApplicationInformation[city]", Yii::app()->session['step1']['city'], array('size'=>12, 'style'=>'width:75%'));
+                                        echo CHtml::textField("ApplicationInformation[city]", Yii::app()->session['step1']['city'], array('size'=>12, 'style'=>'width:75%', 'required'=>'required'));
                                     ?>
                                     <?php echo CHtml::image('images/star.png', 'required'); ?>              
                                 </td>
@@ -115,7 +155,8 @@
                                             'language' => '',
                                             'htmlOptions' => array(
                                                 'style'=>'width:75%',
-                                                'value'=>''
+                                                'value'=>'',
+                                                'required'=>'required'
                                             ),
                                         ));
 
@@ -150,8 +191,8 @@
                                             </td>
                                             <td>
                                                 <?php 
-                                                    echo CHtml::textField("ApplicationInformation[selection]", Yii::app()->session['step1']['selection'], array('style'=>'width:133px'));
-                                                    echo CHtml::textField("ApplicationInformation[sub_selection]", Yii::app()->session['step1']['sub_selection'], array('style'=>'width:127px; margin-left:9px'));
+                                                    echo CHtml::textField("ApplicationInformation[selection]", Yii::app()->session['step1']['selection'], array('style'=>'width:133px', 'required'=>'required'));
+                                                    echo CHtml::textField("ApplicationInformation[sub_selection]", Yii::app()->session['step1']['sub_selection'], array('style'=>'width:127px; margin-left:9px', 'required'=>'required'));
                                                 ?>
                                                 <?php echo CHtml::image('images/star.png', 'required'); ?>
                                             </td>
@@ -175,12 +216,12 @@
                                 <td>:</td>
                                 <td>
                                     <?php 
-                                        echo CHtml::textField("ApplicationInformation[state]", Yii::app()->session['step1']['state'], array('width'=>'31%', 'size'=>7, 'style'=>'width:33%'));
+                                        echo CHtml::textField("ApplicationInformation[state]", Yii::app()->session['step1']['state'], array('width'=>'31%', 'size'=>7, 'style'=>'width:33%', 'required'=>'required'));
                                     ?>
                                     <label>Zip Code</label>
                                     :
                                     <?php 
-                                        echo CHtml::textField("ApplicationInformation[zipcode]", Yii::app()->session['step1']['zipcode'], array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px', 'class'=>'zip'));
+                                        echo CHtml::textField("ApplicationInformation[zipcode]", Yii::app()->session['step1']['zipcode'], array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px', 'class'=>'zip', 'required'=>'required'));
                                     ?>
                                     <?php echo CHtml::image('images/star.png', 'required'); ?>              
                                 </td>
@@ -205,7 +246,7 @@
                                                         "Tenant"=>"Tenant",
                                                         "Other"=>"Other");
                                         
-                                        echo CHtml::dropdownList("ApplicationInformation[refered_lead]", Yii::app()->session['step1']['refered_lead'], $ref_data, array('empty'=>'Choose One', 'style'=>'width:80%'));
+                                        echo CHtml::dropdownList("ApplicationInformation[refered_lead]", Yii::app()->session['step1']['refered_lead'], $ref_data, array('empty'=>'Choose One', 'style'=>'width:80%', 'id' => 'ApplicationInformation_refered_lead','required'=>'required'));
                                     ?>
                                     <?php echo CHtml::image('images/star.png', 'required'); ?>
                                 </td>
@@ -214,7 +255,7 @@
                                 <td colspan=3>
                                     <div id="vreference1">
                                     </div>
-                                    <div id="vreference2">
+                                    <div id="vreference2" style="display: none">
                                         <table width="100%">
                                             <tr>
                                             <td width="35%">Venue</td>
@@ -227,7 +268,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="vreference3">
+                                    <div id="vreference3" style="display: none">
                                         <table width="100%">
                                             <tr>
                                                 <td width="35%">Name</td>
@@ -249,7 +290,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="vreference4">
+                                    <div id="vreference4" style="display: none">
                                         <table width="100%">
                                             <tr>
                                                 <td width="35%">Name</td>
@@ -271,7 +312,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="vreference5">
+                                    <div id="vreference5" style="display: none">
                                         <table width="100%">
                                             <tr>
                                                 <td width="35%">Name</td>

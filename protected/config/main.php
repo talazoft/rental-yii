@@ -51,21 +51,19 @@ return array(
 		),
                 'clientScript'=>array(
                     'packages'=>array(
-                        'jquery'=>array(
-                            'baseUrl'=>'/js/',
-                            'js'=>array('jquery-1.10.2.min.js'),
-                            'coreScriptPosition'=>CClientScript::POS_HEAD
-                        ),
-                        'jquery.ui'=>array(
-                            'baseUrl'=>'/js/',
-                            'js'=>array('jquery-ui-1.9.0.custom.min.js'),
-                            'depends'=>array('jquery'),
+                        'facescroll'=>array(
+                            'baseUrl'=>'js/',
+                            'js'=>array('facescroll.js'),
                             'coreScriptPosition'=>CClientScript::POS_HEAD
                         ),
                         'masked-input'=>array(
-                            'baseUrl'=>'/js/',
+                            'baseUrl'=>'js/',
                             'js'=>array('jquery.maskedinput.min.js'),
-                            'depends'=>array('jquery'),
+                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                        ),
+                        'auto-numeric'=>array(
+                            'baseUrl'=>'js/',
+                            'js'=>array('auto-numeric.js'),
                             'coreScriptPosition'=>CClientScript::POS_HEAD
                         )
                     ),

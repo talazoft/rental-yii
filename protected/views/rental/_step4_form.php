@@ -1,7 +1,7 @@
 <script>
     $(function(){
-        /*$(".phone").mask("(999) 999-9999");
-        $(".currency").autoNumeric();*/
+        $(".phone").mask("(999) 999-9999");
+        $(".currency").autoNumeric();
         
         $("#employment_type<?php echo $cnt ?>").change(function(){
             var type = $("#employment_type<?php echo $cnt ?> option:selected").val();
@@ -26,7 +26,7 @@
         var eiinewrowurl = "<?php echo Yii::app()->createUrl('/rental/eiinewrow'); ?>";
         
         /* action for selfemployment */
-        var eiicntself = <?php echo isset(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"]+1 : 2 ?>;
+        var eiicntself = <?php echo isset(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"] : 2 ?>;
         $("#pluseiiself<?php echo $cnt; ?>").click(function(){
             var type = $("#employment_type<?php echo $cnt ?> option:selected").val();
             $.post(eiinewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:eiicntself, type:type}, function(response){
@@ -159,7 +159,7 @@
                                     } else {
                                         if(Yii::app()->session['step4']["eiiempl$cnt"] > 1){
                                             $t = Yii::app()->session['step4']["eiiempl$cnt"];
-                                            for($i=0;$i<=$t;$i++){
+                                            for($i=1;$i<=$t;$i++){
                                                 echo $this->renderPartial("_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                                             }
                                         } else {
@@ -188,7 +188,7 @@
                                     } else {
                                         if(Yii::app()->session['step4']["eiiself$cnt"] > 1){
                                             $t = Yii::app()->session['step4']["eiiself$cnt"];
-                                            for($i=0;$i<=$t;$i++){
+                                            for($i=1;$i<=$t;$i++){
                                                 echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                                             }
                                         } else {

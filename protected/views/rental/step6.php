@@ -4,6 +4,5 @@
 </div>
 <div class="step_content_6 step_content">
     <div id="bi">
-        
     </div>
 </div>

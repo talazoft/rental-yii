@@ -17,7 +17,7 @@ $data['model'] = $model;
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/canvas2image.js"></script>-->
 
 <script type="text/javascript">
-$(function () { 
+/*$(function () { 
         
     $(".step_content_1").slideToggle(350);
     $(".step_1 div.show").attr('class', 'hide')
@@ -63,7 +63,7 @@ $(function () {
         }
 
     });
-});
+});*/
 </script>
 <?php 
 $this->renderPartial('step1', $data);
