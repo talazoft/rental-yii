@@ -1,8 +1,11 @@
 <div class="step_6 step">
-    <div class="titlestep">Background Information</div>
+    <div class="titlestep">Credit and Financial Information</div>
     <div id="6" class="show"></div>
 </div>
 <div class="step_content_6 step_content">
-    <div id="bi">
+    <div id="cfi">
+        <?php 
+            $this->renderPartial("_step6_form", array('cnt'=>1, 'cnt2'=>1));
+        ?>
     </div>
 </div>

@@ -4,9 +4,9 @@
         $(".currency").autoNumeric();  
         
         var prcnt2 = <?php echo isset(Yii::app()->session['step5']["prcnt2$cnt"]) ? Yii::app()->session['step5']["prcnt2$cnt"] : 4 ?>;
-        $("#pluspr<?php echo $cnt; ?>").click(function(){
+        $("#pluspr<?php echo $cnt; ?>").unbind("click").click(function(event){
             var prnewrowurl = "<?php echo Yii::app()->createUrl('/rental/prnewrow'); ?>";
-            $.post(prnewrowurl, $(".step5-form").serialize(), function(response){
+            $.post(prnewrowurl, {cnt:<?php echo $cnt; ?>, cnt2:prcnt2}, function(response){
                 $("#prtbl<?php echo $cnt; ?> tbody:last").append(response);
             });
             
@@ -17,9 +17,13 @@
             if(prcnt2 > 4){
                 $("#minuspr<?php echo $cnt; ?>").show();
             }
+            
+            event.stopPropagation();
+            
+            return false;
         });
         
-        $("#minuspr<?php echo $cnt; ?>").click(function(){
+        $("#minuspr<?php echo $cnt; ?>").unbind("click").click(function(event){
             $("#prtbl<?php echo $cnt; ?> tr:last").remove();
             
             prcnt2--;
@@ -29,6 +33,8 @@
             if(prcnt2 == 2){
                 $(this).hide();
             }
+            
+            event.stopPropagation();
 
             return false;
         });

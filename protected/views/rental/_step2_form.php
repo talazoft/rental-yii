@@ -15,7 +15,7 @@
         });
         
         var depcnt = <?php echo isset(Yii::app()->session['step2']['DependantInfo']["depcnt2$cnt"]) ? Yii::app()->session['step2']['DependantInfo']["depcnt2$cnt"] : 2 ?>;
-        $("#plusrhdep<?php echo $cnt ?>").click(function(){           
+        $("#plusrhdep<?php echo $cnt ?>").unbind("click").click(function(){           
             var depnewrowurl = "<?php echo Yii::app()->createUrl('/rental/depnewrow') ?>";
             $.post(depnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:depcnt}, function(response){
                 $("#deptbl<?php echo $cnt ?> tbody:last").append(response);
@@ -30,7 +30,7 @@
             }
         });
         
-        $("#minusrhdep<?php echo $cnt; ?>").click(function(){
+        $("#minusrhdep<?php echo $cnt; ?>").unbind("click").click(function(){
             $("#deptbl<?php echo $cnt ?> tr:last").remove();
 
             depcnt--;
@@ -49,7 +49,7 @@
         
         
         var vehcnt = <?php echo isset(Yii::app()->session['step2']['VehicleInfo']["vehcnt2$cnt"]) ? Yii::app()->session['step2']['VehicleInfo']["vehcnt2$cnt"]+1 : 2 ?>;
-        $("#plusrhveh<?php echo $cnt; ?>").click(function(){
+        $("#plusrhveh<?php echo $cnt; ?>").unbind("click").click(function(event){
             var vehnewrow = "<?php echo Yii::app()->createUrl('/rental/vehnewrow') ?>";
             
             $.post(vehnewrow, {cnt: <?php echo $cnt; ?>, cnt2:vehcnt}, function(response){
@@ -62,9 +62,13 @@
             if(vehcnt > 2){
                 $("#minusrhveh<?php echo $cnt; ?>").show();
             }
+            
+            event.stopPropagation();
+            
+            return false;
         });
         
-        $("#minusrhveh<?php echo $cnt; ?>").click(function(){
+        $("#minusrhveh<?php echo $cnt; ?>").unbind("click").click(function(event){
             $("#vehtbl<?php echo $cnt; ?> tr:last").remove();
 
             vehcnt--;
@@ -74,21 +78,39 @@
             if(vehcnt == 2){
                 $(this).hide();
             }
+            
+            event.stopPropagation();
+            
             return false;
         });
         
         if(vehcnt == 2){
             $("#minusrhveh<?php echo $cnt; ?>").hide();
         }
+        
+        $("#chk-applicant-<?php echo $cnt ?>").unbind('change').change(function(){
+            if($("#chk-applicant-<?php echo $cnt ?>").is(":checked")){
+                
+            }
+        });
     });
 </script>
 <form class="step2-form" method="POST" id="applicant<?php echo isset($cnt) ? "-".$cnt:"" ?>">
     <table width="100%" border="0">
         <tbody>
+            <!-- <tr>
+                <td valign="top" colspan="8">
+                    <div style="color:red" id="msgboxai1">   
+                    </div>
+                </td>
+            </tr> --> 
             <tr>
                 <td valign="top" colspan="8">
-                    <div style="color:red" id="msgboxai1">    
-                    </div>
+                    <?php
+                        if($cnt>1){
+                            echo CHtml::checkbox("chk-applicant-$cnt", "")." Skip this to continue";
+                        }
+                    ?>  
                 </td>
             </tr>
             <tr>

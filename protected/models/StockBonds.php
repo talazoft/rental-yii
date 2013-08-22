@@ -11,10 +11,10 @@
  * @property string $title_name
  * @property string $quantity
  * @property string $value
- * @property integer $rd_finance_info_id
+ * @property integer $rd_applicant_info_id
  *
  * The followings are the available model relations:
- * @property FinanceInfo $rdFinanceInfo
+ * @property ApplicantInfo $rdApplicantInfo
  */
 class StockBonds extends CActiveRecord
 {
@@ -44,12 +44,12 @@ class StockBonds extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('rd_finance_info_id', 'required'),
-			array('rd_finance_info_id', 'numerical', 'integerOnly'=>true),
+			array('rd_applicant_info_id', 'required'),
+			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
 			array('stock_bonds, where_quote, market_cost, title_name, quantity, value', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, stock_bonds, where_quote, market_cost, title_name, quantity, value, rd_finance_info_id', 'safe', 'on'=>'search'),
+			array('id, stock_bonds, where_quote, market_cost, title_name, quantity, value, rd_applicant_info_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +61,7 @@ class StockBonds extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'rdFinanceInfo' => array(self::BELONGS_TO, 'FinanceInfo', 'rd_finance_info_id'),
+			'rdApplicantInfo' => array(self::BELONGS_TO, 'ApplicantInfo', 'rd_applicant_info_id'),
 		);
 	}
 
@@ -78,7 +78,7 @@ class StockBonds extends CActiveRecord
 			'title_name' => 'Title Name',
 			'quantity' => 'Quantity',
 			'value' => 'Value',
-			'rd_finance_info_id' => 'Rd Finance Info',
+			'rd_applicant_info_id' => 'Rd Applicant Info',
 		);
 	}
 
@@ -100,7 +100,7 @@ class StockBonds extends CActiveRecord
 		$criteria->compare('title_name',$this->title_name,true);
 		$criteria->compare('quantity',$this->quantity,true);
 		$criteria->compare('value',$this->value,true);
-		$criteria->compare('rd_finance_info_id',$this->rd_finance_info_id);
+		$criteria->compare('rd_applicant_info_id',$this->rd_applicant_info_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -74,4 +74,5 @@ $this->renderPartial('step5');
 $this->renderPartial('step6');
 $this->renderPartial('step7');
 $this->renderPartial('step8');
+$this->renderPartial('finalstep');
 ?>

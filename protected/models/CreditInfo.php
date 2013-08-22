@@ -10,11 +10,6 @@
  * @property string $phone_no
  * @property string $account_type
  * @property string $approx_balance
- * @property string $credit_ref
- * @property string $credit_ref_address
- * @property string $credit_ref_phone
- * @property string $credit_ref_account
- * @property string $credit_ref_amount
  * @property integer $rd_applicant_info_id
  *
  * The followings are the available model relations:
@@ -50,13 +45,12 @@ class CreditInfo extends CActiveRecord
 		return array(
 			array('rd_applicant_info_id', 'required'),
 			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
-			array('bank_name, branch, credit_ref_address', 'length', 'max'=>100),
+			array('bank_name, branch', 'length', 'max'=>100),
 			array('phone_no, approx_balance', 'length', 'max'=>45),
 			array('account_type', 'length', 'max'=>35),
-			array('credit_ref, credit_ref_phone, credit_ref_account, credit_ref_amount', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, bank_name, branch, phone_no, account_type, approx_balance, credit_ref, credit_ref_address, credit_ref_phone, credit_ref_account, credit_ref_amount, rd_applicant_info_id', 'safe', 'on'=>'search'),
+			array('id, bank_name, branch, phone_no, account_type, approx_balance, rd_applicant_info_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,11 +78,6 @@ class CreditInfo extends CActiveRecord
 			'phone_no' => 'Phone No',
 			'account_type' => 'Account Type',
 			'approx_balance' => 'Approx Balance',
-			'credit_ref' => 'Credit Ref',
-			'credit_ref_address' => 'Credit Ref Address',
-			'credit_ref_phone' => 'Credit Ref Phone',
-			'credit_ref_account' => 'Credit Ref Account',
-			'credit_ref_amount' => 'Credit Ref Amount',
 			'rd_applicant_info_id' => 'Rd Applicant Info',
 		);
 	}
@@ -110,11 +99,6 @@ class CreditInfo extends CActiveRecord
 		$criteria->compare('phone_no',$this->phone_no,true);
 		$criteria->compare('account_type',$this->account_type,true);
 		$criteria->compare('approx_balance',$this->approx_balance,true);
-		$criteria->compare('credit_ref',$this->credit_ref,true);
-		$criteria->compare('credit_ref_address',$this->credit_ref_address,true);
-		$criteria->compare('credit_ref_phone',$this->credit_ref_phone,true);
-		$criteria->compare('credit_ref_account',$this->credit_ref_account,true);
-		$criteria->compare('credit_ref_amount',$this->credit_ref_amount,true);
 		$criteria->compare('rd_applicant_info_id',$this->rd_applicant_info_id);
 
 		return new CActiveDataProvider($this, array(

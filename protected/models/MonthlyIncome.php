@@ -10,10 +10,10 @@
  * @property string $rental
  * @property string $bussiness_income
  * @property string $other
- * @property integer $rd_finance_info_id
+ * @property integer $rd_applicant_info_id
  *
  * The followings are the available model relations:
- * @property FinanceInfo $rdFinanceInfo
+ * @property ApplicantInfo $rdApplicantInfo
  */
 class MonthlyIncome extends CActiveRecord
 {
@@ -43,12 +43,12 @@ class MonthlyIncome extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('rd_finance_info_id', 'required'),
-			array('rd_finance_info_id', 'numerical', 'integerOnly'=>true),
+			array('rd_applicant_info_id', 'required'),
+			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
 			array('salary_or_wage, devidends, rental, bussiness_income, other', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, salary_or_wage, devidends, rental, bussiness_income, other, rd_finance_info_id', 'safe', 'on'=>'search'),
+			array('id, salary_or_wage, devidends, rental, bussiness_income, other, rd_applicant_info_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class MonthlyIncome extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'rdFinanceInfo' => array(self::BELONGS_TO, 'FinanceInfo', 'rd_finance_info_id'),
+			'rdApplicantInfo' => array(self::BELONGS_TO, 'ApplicantInfo', 'rd_applicant_info_id'),
 		);
 	}
 
@@ -76,7 +76,7 @@ class MonthlyIncome extends CActiveRecord
 			'rental' => 'Rental',
 			'bussiness_income' => 'Bussiness Income',
 			'other' => 'Other',
-			'rd_finance_info_id' => 'Rd Finance Info',
+			'rd_applicant_info_id' => 'Rd Applicant Info',
 		);
 	}
 
@@ -97,7 +97,7 @@ class MonthlyIncome extends CActiveRecord
 		$criteria->compare('rental',$this->rental,true);
 		$criteria->compare('bussiness_income',$this->bussiness_income,true);
 		$criteria->compare('other',$this->other,true);
-		$criteria->compare('rd_finance_info_id',$this->rd_finance_info_id);
+		$criteria->compare('rd_applicant_info_id',$this->rd_applicant_info_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

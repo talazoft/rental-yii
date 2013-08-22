@@ -26,8 +26,8 @@
         var eiinewrowurl = "<?php echo Yii::app()->createUrl('/rental/eiinewrow'); ?>";
         
         /* action for selfemployment */
-        var eiicntself = <?php echo isset(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"] : 2 ?>;
-        $("#pluseiiself<?php echo $cnt; ?>").click(function(){
+        var eiicntself = <?php echo isset(Yii::app()->session['step4']["eiiself$cnt"]) && !empty(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"] : 2 ?>;
+        $("#pluseiiself<?php echo $cnt; ?>").unbind("click").click(function(event){
             var type = $("#employment_type<?php echo $cnt ?> option:selected").val();
             $.post(eiinewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:eiicntself, type:type}, function(response){
                 $("#tbl-selfemployed<?php echo $cnt; ?> tbody:last").append(response);
@@ -40,9 +40,13 @@
             if(eiicntself > 2){
                 $("#minuseiiself<?php echo $cnt; ?>").show();  
             }
+            
+            event.stopPropagation();
+            
+            return false;
         });
         
-        $("#minuseiiself<?php echo $cnt; ?>").click(function(){
+        $("#minuseiiself<?php echo $cnt; ?>").unbind("click").click(function(event){
             $("#tbl-selfemployed<?php echo $cnt; ?> tr:last").remove();
             
             $("#eiiself<?php echo $cnt; ?>").val(eiicntempl);
@@ -52,6 +56,8 @@
              if(eiicntself == 2){
                 $(this).hide();
             }
+            
+            event.stopPropagation();
             
             return false;
         });
@@ -63,7 +69,7 @@
         
         
         /* action for fulltime and parttime (employment) */
-        var eiicntempl = <?php echo isset(Yii::app()->session['step4']["eiiempl$cnt"]) ? Yii::app()->session['step4']["eiiempl$cnt"]+1 : 2 ?>;
+        var eiicntempl = <?php echo isset(Yii::app()->session['step4']["eiiempl$cnt"]) && !empty(Yii::app()->session['step4']["eiiempl$cnt"]) ? Yii::app()->session['step4']["eiiempl$cnt"]+1 : 2 ?>;
         $("#pluseiiempl<?php echo $cnt; ?>").click(function(){
             var type = $("#employment_type<?php echo $cnt ?> option:selected").val();
             $.post(eiinewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:eiicntempl, type:type}, function(response){

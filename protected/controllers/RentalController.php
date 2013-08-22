@@ -90,14 +90,14 @@ class RentalController extends Controller
 
                     $response['step5'][] = $this->renderPartial('_step5_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
-                    $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i), true);
+                    //$response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i), true);
 
                     $u++;
                 }
 
-                $total_fee = 30*$u;
-                $response['step7'] = $this->renderPartial('_step7_form', array('total_fee' => $total_fee), true);
-                $response['step8'] = $this->renderPartial('_step8_form', '', true);
+                //$total_fee = 30*$u;
+                //$response['step7'] = $this->renderPartial('_step7_form', array('total_fee' => $total_fee), true);
+                //$response['step8'] = $this->renderPartial('_step8_form', '', true);
                 echo CJSON::encode($response);
             }
         }
@@ -143,6 +143,7 @@ class RentalController extends Controller
     }
 
     public function actionShowstep4(){
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -156,6 +157,8 @@ class RentalController extends Controller
             unset(Yii::app()->session['step4']);
             Yii::app()->session['step4'] = $_POST;
         }
+        
+        print_r(Yii::app()->session['step4']);
     }
 
     public function actionShowstep5(){
@@ -163,6 +166,38 @@ class RentalController extends Controller
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
                 echo $this->renderPartial('_step5_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+            }
+        }
+    }
+    
+    public function actionStep5tosession(){
+        if(isset($_POST)){
+            unset(Yii::app()->session['step5']);
+            Yii::app()->session['step5'] = $_POST;
+        }
+    }
+    
+    public function actionShowstep6(){
+        if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+            $cnt = Yii::app()->session['step1']['num_of_applicant'];
+            for($i = 1; $i<=$cnt;$i++){
+                echo $this->renderPartial('_step6_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+            }
+        }
+    }
+    
+    public function actionStep6tosession(){
+        if(isset($_POST)){
+            unset(Yii::app()->session['step6']);
+            Yii::app()->session['step6'] = $_POST;
+        }
+    }
+    
+    public function actionShowStep7(){
+        if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+            $cnt = Yii::app()->session['step1']['num_of_applicant'];
+            for($i = 1; $i<=$cnt;$i++){
+                echo $this->renderPartial('_step7_form', array('cnt' => $i, 'cnt2' => 1), true, true);
             }
         }
     }
@@ -191,11 +226,39 @@ class RentalController extends Controller
     public function actionEiinewrow(){
         if(isset($_POST['cnt']) && isset($_POST['cnt2']) && isset($_POST['type'])){
             if($_POST['type'] == "fulltime" || $_POST['type'] == "parttime"){
-                $newrow = $this->renderPartial("_employed_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+                $newrow = $this->renderPartial("_employed_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             } else if($_POST['type'] == "selfemployed"){
-                $newrow = $this->renderPartial("_self_employed_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+                $newrow = $this->renderPartial("_self_employed_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             }
 
+            echo $newrow;
+        }
+    }
+    
+    public function actionPrnewrow(){
+        if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+            $newrow = $this->renderPartial("_personal_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            echo $newrow;
+        }
+    }
+    
+    public function actionCrinewrow(){
+        if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+            $newrow = $this->renderPartial("_credit_info_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            echo $newrow;
+        }
+    }
+    
+    public function actionCrfnewrow(){
+        if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+            $newrow = $this->renderPartial("_credit_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            echo $newrow;
+        }
+    }
+    
+    public function actionStocknewrow(){
+        if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
+            $newrow = $this->renderPartial("_stock_bonds_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
             echo $newrow;
         }
     }

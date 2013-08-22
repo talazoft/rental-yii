@@ -5,7 +5,7 @@
         $(".zip").mask("99999");
         
         var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"] : 2 ?>;
-        $("#plusri<?php echo $cnt; ?>").click(function(){
+        $("#plusri<?php echo $cnt; ?>").unbind("click").click(function(event){
             var resnewrowurl = "<?php echo Yii::app()->createUrl('/rental/resnewrow'); ?>";
             $.post(resnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:rescnt}, function(response){
                 $("#restbl-body<?php echo $cnt; ?>").append(response);
@@ -18,9 +18,13 @@
             if(rescnt > 2){
                 $("#minusri<?php echo $cnt; ?>").show();
             }
+            
+            event.stopPropagation();
+            
+            return false;
         });
         
-        $("#minusri<?php echo $cnt; ?>").click(function(){
+        $("#minusri<?php echo $cnt; ?>").unbind("click").click(function(event){
         
             $("#restbl-body<?php echo $cnt; ?> tr.restblrow:last").remove();
 
@@ -31,6 +35,8 @@
             if(rescnt == 2){
                 $(this).hide();
             }
+            
+            event.stopPropagation();
 
             return false;
         });

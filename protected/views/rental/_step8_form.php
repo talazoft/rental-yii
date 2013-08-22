@@ -1,36 +1,270 @@
-<p class="padding" align="justify">Applicant represents all information on this Application to be true and accurate and understands that owner / manager will rely upon said information when accepting this Application whether an independent investigation has been performed or not. Applicant hereby authorizes owner/manager and his/her/its employees and agents to verify said information and make independent investigations in person, by mail, phone, fax, or otherwise, to determine Applicant's rental, credit, financial and character standing. Applicant hereby releases owner/manager, his/her/its employees and agents, Vantage Asset Management, Ltd., its employees and agents and any and all other firms or persons investigating or supplying information, from any liability whatsoever concerning the release and/or use of said information and further, will hold them all harmless from any suit or reprisal whatsoever. All holders, public and private, of any such information are hereby authorized to release, without limitation, any and all such information they have concerning Applicant and in so doing, will be acting on Applicant's behalf at Applicant's request and will be held blameless and without any liability whatsoever. A copy or other reproduction of this Authorization shall be as effective as the original. </p>
-<p class="padding" align="justify">I / we, the undersigned, authorize Vantage Asset Management. Ltd., Landlord and its agents to obtain an investigative consumer credit report including but not limited to credit history, OFAC search, landlord/tenant court record search, criminal record search and registered sex offender search. I authorize the release of information from previous or current landlords, employers, and bank representatives. This investigation is for resident screening purposes only, and is strictly confidential. This report contains information compiled from sources believed to be reliable, but the accuracy of which cannot be guaranteed. I hereby hold Vantage Asset Management. Ltd., Landlord and its agents free and harmless of any liability for any damages arising out of any improper use of this information. Important information about your rights under the Fair Credit reporting Act: </p>
-<ul style="left:auto" type="disc">
-    <li>
-        You have a right to request disclosure of the nature and scope of the investigation.
-    </li>
-    <li>
-        You must be told if information in your file has been used against you.
-    </li>
-    <li>
-        You have a right to know what is in your file, and this disclosure may be free.
-    </li>
-    <li>
-        You have the right to ask for a credit score (there may be a fee for this service).
-    </li>
-    <li>
-        You have the right to dispute incomplete or inaccurate information. Consumer reporting agencies must correct inaccurate, incomplete, or unverifiable information.
-    </li>         
-</ul>
-<div style="float:left; margin-left:32px">
-    <input id="cekagree" name="cekagree" type="checkbox"> I agree to the Terms of Use
-</div>
-<div style="" id="divbutton">
-    <div id="saveform2"></div>
-    <div id="btnshowhtml"></div>
-</div>
-<div id="showhtml" style="display:none">
-</div>
-<div class="kbw-signature" id="signature" style="">
-    <canvas id="signed" width="167" height="50">Your browser doesn't support signing</canvas>
-</div>
-<div id="signature-label" style="">Primary applicant sign
-    <img src="images/star.png">
-</div>
-<a href="#" id="reset-signature" style="">Click here to reset</a>
-<input name="signJson" id="signJson" type="hidden">
+<table width="100%" border="0">
+    <tbody>
+        <tr>
+            <td colspan="2">
+            A Credit check fee $ 30.00 (per person) to process this Application is required. Money will be given by Applicant to the owner/manager when this Application is turned in processing.			  </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Total Credit Check Fee :&gt;&gt; Pay with
+                <select style="width:25%" name="selection3" id="selection3">
+                    <option value="">Select </option>
+                    <option value="cash">Paypal</option>
+                    <option value="credit">Credit</option>
+                </select>
+                </h3> 
+            </td>
+            <td align="right">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="cash"><!-- <script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script> -->
+                    <script src="scripts/jquery.popupWindow.js" type="text/javascript"></script>
+
+                    <table width="100%" border="0">
+                        <tbody>
+                            <tr>
+                                <td align="right">
+                                    <a onclick="openCenteredWindow('index.php/credit_check_fee/cash_pdf')">
+                                        <img src="images/print_payment.png">
+                                    </a>
+                                    <script type="text/javascript"> 
+                                        var myWindow;
+                                        function openCenteredWindow(k) {
+                                            var a = document.x.firstname1.value;
+                                            var b = document.x.middle1.value;
+                                            var c = document.x.lastname1.value;
+                                            var sel = document.x.selection3.value;
+                                            var kali = document.x.applic.value;
+                                            var width = 800;
+                                            var height = 400;
+                                            var left = parseInt((screen.availWidth/2) - (width/2));
+                                            var top = parseInt((screen.availHeight/2) - (height/2));
+                                            var windowFeatures = "width=" + width + ",height=" + height + 
+                                            ",status,resizable,left=" + left + ",top=" + top + 
+                                            ",screenX=" + left + ",screenY=" + top;
+                                            myWindow = window.open(k + "?a=" + a  + "&amp;b=" + b + "&amp;c=" + c + "&amp;sel=" + sel +"&amp;kali="+kali, "subWind", windowFeatures);
+                                        }
+                                    </script> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="100%" border="1" bgcolor="#FFFFFF" style="border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td align="center" colspan="3">PAYMENT RECEIPT</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="15%">______________</td>
+                                                <td width="55%"></td>
+                                                <td width="30%">Date: <?php echo date("M d, Y"); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>______________</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>______________</td>
+                                                <td></td>
+                                                <td>Number</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Receive Form</td>
+                                                <td>fdf23</td>
+                                                <td>
+                                                    <?php echo $total_fee; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><?php echo Utils::convert_number_to_words($total_fee); ?></td>
+                                                <td>Dollars</td>
+                                            </tr>
+                                            <tr>
+                                                <td>For</td>
+                                                <td>Rental Application</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Account Balance</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>This Payment</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>New Balance</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Received Balanced</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table width="0" border="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="cekpay" id="cekpay"><strong>I agree to pay the credit check fee </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="credit">
+                    <table width="100%" border="1" bgcolor="#FFFFFF" style="border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td width="19%">Order Information</td>
+                                                <td width="67%"></td>
+                                                <td width="14%">*Required Field</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description</td>
+                                                <td></td>
+                                                <td>Invoice Number</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Payment Information</td>
+                                                <td></td>
+                                                <td><h3>Total : $ 30</h3></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td align="center"><img src="images/visa_master.png"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td align="center">
+                                                    <table width="0" border="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Card Number</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" name="cardnumbercc" id="cardnumbercc" maxlength="30">* (Enter number without spaces or dashes)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Expiration Date</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" name="expirationdatecc" id="expirationdatecc" maxlength="12">*(mmyy)</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">Billing Information <br><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="3">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Customer ID</td>
+                                                                <td>:</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>First Name</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" name="firstnamecc" maxlength="50" id="firstnamecc"> &nbsp; Last Name : <input type="text" name="lastnamecc" id="lastnamecc" maxlength="50"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Company</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" name="companycc" id="companycc" maxlength="50" style="width:100%"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Address</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" style="width:100%" name="addresscc" id="addresscc"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>City</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" style="width:100%" name="citycc" id="citycc" maxlength="50"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>State/Province</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" name="statecc" id="statecc" maxlength="50">&nbsp; Zip/Postal Code : <input type="text" name="zipcc" id="zipcc" maxlength="30"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Country</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" style="width:100%" name="countrycc" maxlength="50" id="countrycc"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Email</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" style="width:100%" name="emailcc" maxlength="50" id="emailcc"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Phone</td>
+                                                                <td>:</td>
+                                                                <td><input type="text" style="width:100%" name="phonecc" maxlength="50" id="phonecc"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><!--Shipping Information--></td>
+                                                <td></td>
+                                                <td>Total</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><!--<input type="checkbox" id="cekcc" name="cekcc" />Copy Billing Information to Shipping Information--></td>
+                                                <td><!--Total--></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="3">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="3"><input type="button" value="Submit" name="btncc" id="btncc"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

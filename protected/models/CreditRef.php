@@ -1,24 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "{{finance_info}}".
+ * This is the model class for table "{{credit_ref}}".
  *
- * The followings are the available columns in table '{{finance_info}}':
+ * The followings are the available columns in table '{{credit_ref}}':
  * @property integer $id
+ * @property string $credit_ref
+ * @property string $address
+ * @property string $phone
+ * @property string $account
+ * @property string $amount
  * @property integer $rd_applicant_info_id
  *
  * The followings are the available model relations:
- * @property Expenditures[] $expenditures
  * @property ApplicantInfo $rdApplicantInfo
- * @property MonthlyIncome[] $monthlyIncomes
- * @property StockBonds[] $stockBonds
  */
-class FinanceInfo extends CActiveRecord
+class CreditRef extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return FinanceInfo the static model class
+	 * @return CreditRef the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +32,7 @@ class FinanceInfo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{finance_info}}';
+		return '{{credit_ref}}';
 	}
 
 	/**
@@ -43,9 +45,10 @@ class FinanceInfo extends CActiveRecord
 		return array(
 			array('rd_applicant_info_id', 'required'),
 			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
+			array('credit_ref, address, phone, account, amount', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, rd_applicant_info_id', 'safe', 'on'=>'search'),
+			array('id, credit_ref, address, phone, account, amount, rd_applicant_info_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +60,7 @@ class FinanceInfo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'expenditures' => array(self::HAS_MANY, 'Expenditures', 'rd_finance_info_id'),
 			'rdApplicantInfo' => array(self::BELONGS_TO, 'ApplicantInfo', 'rd_applicant_info_id'),
-			'monthlyIncomes' => array(self::HAS_MANY, 'MonthlyIncome', 'rd_finance_info_id'),
-			'stockBonds' => array(self::HAS_MANY, 'StockBonds', 'rd_finance_info_id'),
 		);
 	}
 
@@ -71,6 +71,11 @@ class FinanceInfo extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'credit_ref' => 'Credit Ref',
+			'address' => 'Address',
+			'phone' => 'Phone',
+			'account' => 'Account',
+			'amount' => 'Amount',
 			'rd_applicant_info_id' => 'Rd Applicant Info',
 		);
 	}
@@ -87,6 +92,11 @@ class FinanceInfo extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('credit_ref',$this->credit_ref,true);
+		$criteria->compare('address',$this->address,true);
+		$criteria->compare('phone',$this->phone,true);
+		$criteria->compare('account',$this->account,true);
+		$criteria->compare('amount',$this->amount,true);
 		$criteria->compare('rd_applicant_info_id',$this->rd_applicant_info_id);
 
 		return new CActiveDataProvider($this, array(

@@ -23,12 +23,15 @@
  * The followings are the available model relations:
  * @property ApplicationInformation $rdApplicationInformation
  * @property CreditInfo[] $creditInfos
+ * @property CreditRef[] $creditRefs
  * @property DependantInfo[] $dependantInfos
  * @property EmploymentInfo[] $employmentInfos
- * @property FinanceInfo[] $financeInfos
+ * @property Expenditures[] $expenditures
  * @property GeneralInfo[] $generalInfos
+ * @property MonthlyIncome[] $monthlyIncomes
  * @property PersonalRefrence[] $personalRefrences
  * @property ResidentalHistory[] $residentalHistories
+ * @property StockBonds[] $stockBonds
  * @property VehicleInfo[] $vehicleInfos
  */
 class ApplicantInfo extends CActiveRecord
@@ -81,12 +84,15 @@ class ApplicantInfo extends CActiveRecord
 		return array(
 			'rdApplicationInformation' => array(self::BELONGS_TO, 'ApplicationInformation', 'rd_application_information_id'),
 			'creditInfos' => array(self::HAS_MANY, 'CreditInfo', 'rd_applicant_info_id'),
+			'creditRefs' => array(self::HAS_MANY, 'CreditRef', 'rd_applicant_info_id'),
 			'dependantInfos' => array(self::HAS_MANY, 'DependantInfo', 'rd_applicant_info_id'),
 			'employmentInfos' => array(self::HAS_MANY, 'EmploymentInfo', 'rd_applicant_info_id'),
-			'financeInfos' => array(self::HAS_MANY, 'FinanceInfo', 'rd_applicant_info_id'),
+			'expenditures' => array(self::HAS_MANY, 'Expenditures', 'rd_applicant_info_id'),
 			'generalInfos' => array(self::HAS_MANY, 'GeneralInfo', 'rd_applicant_info_id'),
+			'monthlyIncomes' => array(self::HAS_MANY, 'MonthlyIncome', 'rd_applicant_info_id'),
 			'personalRefrences' => array(self::HAS_MANY, 'PersonalRefrence', 'rd_applicant_info_id'),
 			'residentalHistories' => array(self::HAS_MANY, 'ResidentalHistory', 'rd_applicant_info_id'),
+			'stockBonds' => array(self::HAS_MANY, 'StockBonds', 'rd_applicant_info_id'),
 			'vehicleInfos' => array(self::HAS_MANY, 'VehicleInfo', 'rd_applicant_info_id'),
 		);
 	}

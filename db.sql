@@ -145,33 +145,10 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_credit_info` (
   `phone_no` VARCHAR(45) NULL ,
   `account_type` VARCHAR(35) NULL ,
   `approx_balance` VARCHAR(45) NULL ,
-  `credit_ref` VARCHAR(50) NULL ,
-  `credit_ref_address` VARCHAR(100) NULL ,
-  `credit_ref_phone` VARCHAR(50) NULL ,
-  `credit_ref_account` VARCHAR(50) NULL ,
-  `credit_ref_amount` VARCHAR(50) NULL ,
   `rd_applicant_info_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_rd_credit_info_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
   CONSTRAINT `fk_rd_credit_info_rd_applicant_info1`
-    FOREIGN KEY (`rd_applicant_info_id` )
-    REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `sstig_contact_us_arjintas`.`rd_finance_info`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sstig_contact_us_arjintas`.`rd_finance_info` ;
-
-CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_finance_info` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `rd_applicant_info_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_rd_finance_info_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
-  CONSTRAINT `fk_rd_finance_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
     ON DELETE NO ACTION
@@ -191,12 +168,12 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_monthly_income` (
   `rental` VARCHAR(45) NULL ,
   `bussiness_income` VARCHAR(45) NULL ,
   `other` VARCHAR(45) NULL ,
-  `rd_finance_info_id` INT NOT NULL ,
+  `rd_applicant_info_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_rd_monthly_income_rd_finance_info1_idx` (`rd_finance_info_id` ASC) ,
-  CONSTRAINT `fk_rd_monthly_income_rd_finance_info1`
-    FOREIGN KEY (`rd_finance_info_id` )
-    REFERENCES `sstig_contact_us_arjintas`.`rd_finance_info` (`id` )
+  INDEX `fk_rd_monthly_income_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
+  CONSTRAINT `fk_rd_monthly_income_rd_applicant_info1`
+    FOREIGN KEY (`rd_applicant_info_id` )
+    REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -215,12 +192,12 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_expenditures` (
   `payment_contract` VARCHAR(45) NULL ,
   `living_expenses` VARCHAR(45) NULL ,
   `other` VARCHAR(45) NULL ,
-  `rd_finance_info_id` INT NOT NULL ,
+  `rd_applicant_info_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_rd_expenditures_rd_finance_info1_idx` (`rd_finance_info_id` ASC) ,
-  CONSTRAINT `fk_rd_expenditures_rd_finance_info1`
-    FOREIGN KEY (`rd_finance_info_id` )
-    REFERENCES `sstig_contact_us_arjintas`.`rd_finance_info` (`id` )
+  INDEX `fk_rd_expenditures_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
+  CONSTRAINT `fk_rd_expenditures_rd_applicant_info1`
+    FOREIGN KEY (`rd_applicant_info_id` )
+    REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -239,12 +216,12 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_stock_bonds` (
   `title_name` VARCHAR(45) NULL ,
   `quantity` VARCHAR(45) NULL ,
   `value` VARCHAR(45) NULL ,
-  `rd_finance_info_id` INT NOT NULL ,
+  `rd_applicant_info_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_rd_stock_bonds_rd_finance_info1_idx` (`rd_finance_info_id` ASC) ,
-  CONSTRAINT `fk_rd_stock_bonds_rd_finance_info1`
-    FOREIGN KEY (`rd_finance_info_id` )
-    REFERENCES `sstig_contact_us_arjintas`.`rd_finance_info` (`id` )
+  INDEX `fk_rd_stock_bonds_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
+  CONSTRAINT `fk_rd_stock_bonds_rd_applicant_info1`
+    FOREIGN KEY (`rd_applicant_info_id` )
+    REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -333,6 +310,29 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_personal_refrence` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_rd_personal_refrence_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
   CONSTRAINT `fk_rd_personal_refrence_rd_applicant_info1`
+    FOREIGN KEY (`rd_applicant_info_id` )
+    REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sstig_contact_us_arjintas`.`rd_credit_ref`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sstig_contact_us_arjintas`.`rd_credit_ref` ;
+
+CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_credit_ref` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `credit_ref` VARCHAR(100) NULL ,
+  `address` VARCHAR(100) NULL ,
+  `phone` VARCHAR(100) NULL ,
+  `account` VARCHAR(100) NULL ,
+  `amount` VARCHAR(100) NULL ,
+  `rd_applicant_info_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_rd_credit_ref_rd_applicant_info1_idx` (`rd_applicant_info_id` ASC) ,
+  CONSTRAINT `fk_rd_credit_ref_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
     ON DELETE NO ACTION

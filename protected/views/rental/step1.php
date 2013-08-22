@@ -262,7 +262,7 @@
                                             <td width="2%">:</td>
                                             <td width="63%">
                                                 <?php 
-                                                    echo CHtml::textField("ApplicationInformation[venue]", Yii::app()->session['step1']['venue'], array('style'=>'width:75%px'));
+                                                    echo CHtml::textField("ApplicationInformation[venue]", isset(Yii::app()->session['step1']['venue']) ? Yii::app()->session['step1']['venue'] : "", array('style'=>'width:75%px'));
                                                 ?>
                                             </td>
                                             </tr>
@@ -275,7 +275,7 @@
                                                 <td width="2%">:</td>
                                                 <td width="63%">
                                                     <?php
-                                                        echo CHtml::textField("ApplicationInformation[agent_name]", Yii::app()->session['step1']['agent_name'], array('style'=>'width:75%px'));
+                                                        echo CHtml::textField("ApplicationInformation[agent_name]", isset(Yii::app()->session['step1']['agent_name']) ? Yii::app()->session['step1']['agent_name'] : "", array('style'=>'width:75%px'));
                                                     ?>
                                                 </td>
                                             </tr>
@@ -284,7 +284,7 @@
                                                 <td>:</td>
                                                 <td>
                                                     <?php 
-                                                        echo CHtml::textField("ApplicationInformation[agent_phone]", Yii::app()->session['step1']['agent_phone'], array('maxlength'=>13, 'size'=>27, 'class'=>'phone'));
+                                                        echo CHtml::textField("ApplicationInformation[agent_phone]", isset(Yii::app()->session['step1']['agent_phone']) ? Yii::app()->session['step1']['agent_phone'] : "", array('maxlength'=>13, 'size'=>27, 'class'=>'phone'));
                                                     ?>
                                                 </td>
                                             </tr>
@@ -297,7 +297,7 @@
                                                 <td width="2%">:</td>
                                                 <td width="63%">
                                                     <?php 
-                                                        echo CHtml::textField("ApplicationInformation[tenant_name]", Yii::app()->session['step1']['tenant_name'], array('style'=>'width:75%px'));
+                                                        echo CHtml::textField("ApplicationInformation[tenant_name]", isset(Yii::app()->session['step1']['tenant_name']) ? Yii::app()->session['step1']['tenant_name'] : "", array('style'=>'width:75%px'));
                                                     ?>
                                                 </td>
                                             </tr>
@@ -306,7 +306,7 @@
                                                 <td>:</td>
                                                 <td>
                                                     <?php 
-                                                        echo CHtml::dropdownList("ApplicationInformation[is_existing_tenant]", Yii::app()->session['step1']['is_existing_tenant'], array('1'=>'Yes', '0'=>'No'));
+                                                        echo CHtml::dropdownList("ApplicationInformation[is_existing_tenant]", isset(Yii::app()->session['step1']['is_existing_tenant']) ? Yii::app()->session['step1']['is_existing_tenant'] : "", array('1'=>'Yes', '0'=>'No'));
                                                     ?>
                                                 </td>
                                             </tr>
@@ -319,7 +319,7 @@
                                                 <td width="2%">:</td>
                                                 <td width="63%">
                                                     <?php 
-                                                        echo CHtml::textField("ApplicationInformation[other_val]", Yii::app()->session['step1']['other_val'], array('style'=>'width:75%px'));
+                                                        echo CHtml::textField("ApplicationInformation[other_val]", isset(Yii::app()->session['step1']['other_val']) ? Yii::app()->session['step1']['other_val'] : "", array('style'=>'width:75%px'));
                                                     ?>
                                                 </td>
                                             </tr>
