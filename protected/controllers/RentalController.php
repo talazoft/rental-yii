@@ -5,7 +5,7 @@ class RentalController extends Controller
     
     public $layout = "//layouts/rental-column";
 
-//    function init(){
+    function init(){
 //        
 //        /*Yii::app()->clientScript->registerCoreScript(Yii::app()->request->baseUrl.'/js/jquery-1.10.2.min.js', CClientScript::POS_HEAD);
 //        Yii::app()->clientScript->registerCoreScript(Yii::app()->request->baseUrl.'/js/jquery-ui-1.9.0.custom.min.js', CClientScript::POS_HEAD);
@@ -22,8 +22,11 @@ class RentalController extends Controller
 //            $(".ssn").mask("999-99-9999");
 //            $(".currency").autoNumeric();
 //            $(".zip").mask("99999");', CClientScript::POS_READY);*/
-//        parent::init();
-//    }
+        parent::init();
+        
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
+    }
     
     public function actionIndex(){  
 
@@ -43,8 +46,8 @@ class RentalController extends Controller
         /*Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-1.10.2.min.js', CClientScript::POS_HEAD);
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-ui-1.9.0.custom.min.js', CClientScript::POS_HEAD);
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.ui.touch-punch.min.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js', CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/facescroll.js', CClientScript::POS_HEAD);
         Yii::app()->clientScript->registerScript('scroll', '
             $(".right-container").alternateScroll();
@@ -131,7 +134,7 @@ class RentalController extends Controller
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
-                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true);
+                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
             }
         }
     }
