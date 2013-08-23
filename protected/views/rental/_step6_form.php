@@ -5,6 +5,13 @@
     });
 </script>
 <form class="step6-form" method="post" name="creditfinance-<?php echo $cnt ?>" id="creditfinance-<?php echo $cnt ?>">
+    <table>
+        <tbody>
+            <tr>
+                <td>Credit & Financial Condition of <?php echo Utils::fullname($cnt); ?></td>
+            </tr>
+        </tbody>
+    </table>
     <table width="100%">
         <tbody>
             <?php 

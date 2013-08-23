@@ -239,6 +239,80 @@ span.required{
 .clear{
 	clear:both;
 }
+#saveform2{
+	width:142px;
+	height:35px;
+	background: url("../images/savex.png") no-repeat;
+	cursor: pointer;
+	float:left;
+}
+
+#saveform2:hover{
+	width:142px;
+	height:35px;
+	background: url("../img/savex_hover.png") no-repeat;
+	cursor: pointer;
+	float:left;
+}
+
+#btnshowhtml{
+	width:292px;
+	height:41px;
+	background: url("../images/finish.jpg") no-repeat;
+	cursor: pointer;
+	margin-top:-3px;
+        float: left; 
+        margin-left: 22px;
+}
+
+#btnshowhtml:hover{
+	width:292px;
+	height:41px;
+	background: url("../img/finish_hover.png") no-repeat;
+	cursor: pointer;
+	margin-top:-3px;
+        float: left; 
+        margin-left: 22px;
+}
+
+#showhtml{
+	/*position: absolute; */
+	/*bottom: 79px; */ 
+	/*left: 485px;*/
+	height: 43px; 
+	/*top: 2044px;*/ 
+	width: 297px;
+	float:right;
+        margin-left: 0px; 
+        margin-right: 58px; 
+        margin-top: -33px;
+        display: none;
+}
+
+#printpdf{
+	width:132px;
+	height:27px;
+	background: url("../images/print_pdf.png") no-repeat;
+}
+
+#printpdf:hover{
+	width:132px;
+	height:27px;
+	background: url("../img/print_pdf_hover.png") no-repeat;
+}
+
+#sendemailpdf{
+	width:132px;
+	height:27px;
+	background: url("../images/send_email.png") no-repeat;
+}
+
+#sendemailpdf:hover{
+	width:132px;
+	height:27px;
+	background: url("../img/send_email_hover.png") no-repeat;
+}
+
 .star{
 	background: url("../img/star.png") no-repeat scroll 0 0 transparent;
 	width:10px;

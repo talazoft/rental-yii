@@ -54,7 +54,7 @@
                             <tr>
                                 <td>
                                     <b>
-                                        <div id="firstnamepr1">Personal Reference</div>
+                                        <div id="firstnamepr1">Personal Reference of <?php echo Utils::fullname($cnt); ?></div>
                                     </b> 
                                 </td>
                             </tr>
@@ -75,17 +75,22 @@
                             <?php 
                                 if(!isset(Yii::app()->session['step5']["prcnt2$cnt"])){
                                     for($i=1;$i<=3;$i++){
-                                        echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                        echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i, 'required' => true), true, true);
                                     }
                                 } else {
                                     if(Yii::app()->session['step5']["prcnt2$cnt"] > 3){
                                         $t = Yii::app()->session['step5']["prcnt2$cnt"];
                                         for($i=1;$i<=$t;$i++){
-                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                            if($i > 3){
+                                                $required = false;
+                                            } else {
+                                                $required = true;
+                                            }
+                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i, 'required' => $required), true, true);
                                         }
                                     } else {
                                         for($i=1;$i<=3;$i++){
-                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
+                                            echo $this->renderPartial("_personal_ref_row", array('cnt' => $cnt, 'cnt2' => $i, 'required' => true), true, true);
                                         }
                                     }
                                 }

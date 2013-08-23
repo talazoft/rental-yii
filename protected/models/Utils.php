@@ -23,7 +23,16 @@ class Utils {
         return $str;
     }
     
-    function convert_number_to_words($number) {
+    public static function fullname($cnt){
+        if(isset(Yii::app()->session['step2']['ApplicantInfo']["firstname$cnt"]) && isset(Yii::app()->session['step2']['ApplicantInfo']["lastname$cnt"])){
+            $fullname = Yii::app()->session['step2']['ApplicantInfo']["firstname$cnt"]." ".Yii::app()->session['step2']['ApplicantInfo']["middlename$cnt"]." ".Yii::app()->session['step2']['ApplicantInfo']["lastname$cnt"];
+        } else {
+            $fullname = "";
+        }
+        return $fullname; 
+    }
+            
+    public static function convert_number_to_words($number) {
 
         $hyphen      = '-';
         $conjunction = ' and ';

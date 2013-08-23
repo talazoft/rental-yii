@@ -117,19 +117,52 @@
             $("#plusminuseiiempl<?php echo $cnt; ?>").show();
             $("#plusminuseiiself<?php echo $cnt; ?>").show();
         }
+        
+        $("#chk-empinfo-2").change(function(){
+            skipstatusaction();     
+        });
+        
+        skipstatusaction();     
+        
+        function skipstatusaction(){
+            for(var i=2;i<=<?php echo $cnt ?>;i++){
+                var form = $("#empinfo-"+i);
+                if($("#chk-empinfo-2").is(":checked")){
+                    form.find(":required").each(function(){
+                        $(this).removeAttr("required");
+                        $(this).attr("notrequired","notrequired");
+                    });
+                } else {
+                    $('input[notrequired="notrequired"]').each(function(){
+                        $(this).removeAttr("notrequired");
+                        $(this).attr('required', 'required');
+                    });
+                }
+            }
+        }
     });
 </script>
 <form method="POST" class="step4-form" id="empinfo-<?php echo $cnt; ?>">
     <table width="100%" border="0">
         <tbody>
+            <?php if($cnt == 2){ ?>
+            <tr>
+                <td valign="top" colspan="8">
+                <?php echo CHtml::checkbox("chk-empinfo-2", isset(Yii::app()->session['step4']['chk-empinfo-2']) ? true : false, array('class'=>'skipstep4'))." skip to continue"; ?>
+                </td>
+            </tr> <?php
+                }
+            ?> 
             <tr>
                 <td colspan="6">
                     <table border="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <b> <div id="name<?php echo $cnt; ?>">Employment Status of </div></b> 
+                                    <b> <div id="name<?php echo $cnt; ?>">Employment Status of <?php echo Utils::fullname($cnt); ?></div></b> 
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <select id="employment_type<?php echo $cnt ?>" name="employment_type<?php echo $cnt ?>">
                                         <option value="fulltime">Full Time</option>

@@ -44,6 +44,29 @@
         if(rescnt == 2){
             $("#minusri<?php echo $cnt; ?>").hide();
         }
+        
+        $("#chk-resident-2").change(function(){
+            skipstatusaction();     
+        });
+        
+        skipstatusaction();     
+        
+        function skipstatusaction(){
+            for(var i=2;i<=<?php echo $cnt ?>;i++){
+                var form = $("#resident-"+i);
+                if($("#chk-resident-2").is(":checked")){
+                    form.find(":required").each(function(){
+                        $(this).removeAttr("required");
+                        $(this).attr("notrequired","notrequired");
+                    });
+                } else {
+                    $('input[notrequired="notrequired"]').each(function(){
+                        $(this).removeAttr("notrequired");
+                        $(this).attr('required', 'required');
+                    });
+                }
+            }
+        }
     });
 </script>
 <form class="step3-form" id="resident-<?php echo isset($cnt) ? $cnt : "" ?>" method="POST">

@@ -1,3 +1,21 @@
+<script>
+    $(function(){
+       $("#payment_type").unbind('change').change(function(event){
+           var selected = $("#payment_type option:selected").val();
+           
+           if(selected == "cash"){
+               $("#cash").show('slow');
+               $("#credit").hide();
+           } else if(selected == "credit"){
+               $("#cash").hide();
+               $("#credit").show('slow');
+           } else {
+               $("#cash").hide();
+               $("#credit").hide();
+           }
+       }); 
+    });
+</script>
 <table width="100%" border="0">
     <tbody>
         <tr>
@@ -7,8 +25,8 @@
         <tr>
             <td>
                 <h3>Total Credit Check Fee :&gt;&gt; Pay with
-                <select style="width:25%" name="selection3" id="selection3">
-                    <option value="">Select </option>
+                <select style="width:25%" name="payment_type" id="payment_type" required="required">
+                    <option value="">Select</option>
                     <option value="cash">Paypal</option>
                     <option value="credit">Credit</option>
                 </select>
@@ -19,7 +37,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <div id="cash"><!-- <script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script> -->
+                <div id="cash" style="display: none;"><!-- <script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script> -->
                     <script src="scripts/jquery.popupWindow.js" type="text/javascript"></script>
 
                     <table width="100%" border="0">
@@ -77,7 +95,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Receive Form</td>
-                                                <td>fdf23</td>
+                                                <td><?php echo Yii::app()->session['ApplicantInfo']['firstname1']; ?></td>
                                                 <td>
                                                     <?php echo $total_fee; ?>
                                                 </td>
@@ -128,7 +146,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="credit">
+                <div id="credit" style="display: none;">
                     <table width="100%" border="1" bgcolor="#FFFFFF" style="border-collapse:collapse">
                         <tbody>
                             <tr>
@@ -154,7 +172,7 @@
                                             <tr>
                                                 <td>Payment Information</td>
                                                 <td></td>
-                                                <td><h3>Total : $ 30</h3></td>
+                                                <td><h3>Total : $ <?php echo $total_fee; ?></h3></td>
                                             </tr>
                                             <tr>
                                                 <td></td>

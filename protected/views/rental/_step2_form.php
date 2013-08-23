@@ -88,11 +88,28 @@
             $("#minusrhveh<?php echo $cnt; ?>").hide();
         }
         
-        $("#chk-applicant-<?php echo $cnt ?>").unbind('change').change(function(){
-            if($("#chk-applicant-<?php echo $cnt ?>").is(":checked")){
-                
-            }
+        $("#chk-applicant-2").change(function(){
+            skipstatusaction();     
         });
+        
+        skipstatusaction();     
+        
+        function skipstatusaction(){
+            for(var i=2;i<=<?php echo $cnt ?>;i++){
+                var form = $("#applicant-"+i);
+                if($("#chk-applicant-2").is(":checked")){
+                    form.find(":required").each(function(){
+                        $(this).removeAttr("required");
+                        $(this).attr("notrequired","notrequired");
+                    });
+                } else {
+                    $('input[notrequired="notrequired"]').each(function(){
+                        $(this).removeAttr("notrequired");
+                        $(this).attr('required', 'required');
+                    });
+                }
+            }
+        }
     });
 </script>
 <form class="step2-form" method="POST" id="applicant<?php echo isset($cnt) ? "-".$cnt:"" ?>">
@@ -107,8 +124,8 @@
             <tr>
                 <td valign="top" colspan="8">
                     <?php
-                        if($cnt>1){
-                            echo CHtml::checkbox("chk-applicant-$cnt", "")." Skip this to continue";
+                        if($cnt == 2){
+                            echo CHtml::checkbox("chk-applicant-2", isset(Yii::app()->session['step2']['chk-applicant-2']) ? true : false, array('class'=>'skipstep2'))." skip to continue";
                         }
                     ?>  
                 </td>

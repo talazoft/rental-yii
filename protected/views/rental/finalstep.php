@@ -2,7 +2,7 @@
     <div class="titlestep">Agreements</div>
     <div id="final" class="show"></div>
 </div>
-<div class="step_content_final step_content" style="height: 565px;">
+<div class="step_content_final step_content" style="height: 606px;">
     <div id="agreements">
     </div>
 </div>

@@ -79,9 +79,8 @@
                                                     $("#rh").html(dt.step3);
                                                     $("#eii").html(dt.step4);
                                                     $("#pr").html(dt.step5);
-                                                    $("#bi").html(dt.step6);
-                                                    $("#cf").html(dt.step7);
-                                                    $("#agreements").html(dt.step8);
+                                                    $("#cfi").html(dt.step6);
+                                                    $("#gi").html(dt.step7);
                                                  }'
                                             ),
                                         )

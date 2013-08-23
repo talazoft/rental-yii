@@ -49,13 +49,14 @@ class ResidentalHistory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('address, city, state, zip, year_month_moved_in, agent_landlord_type, rent, leave_reason, rd_applicant_info_id', 'required'),
+			array('rd_applicant_info_id', 'required'),
 			array('rd_applicant_info_id', 'numerical', 'integerOnly'=>true),
 			array('address, year_month_moved_in, agent_landlord_name', 'length', 'max'=>150),
 			array('city, state, agent_landlord_type, unit', 'length', 'max'=>45),
 			array('zip', 'length', 'max'=>10),
 			array('agent_landlord_phone', 'length', 'max'=>25),
 			array('rent', 'length', 'max'=>50),
+			array('leave_reason', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, address, city, state, zip, year_month_moved_in, agent_landlord_type, agent_landlord_name, agent_landlord_phone, unit, rent, leave_reason, rd_applicant_info_id', 'safe', 'on'=>'search'),

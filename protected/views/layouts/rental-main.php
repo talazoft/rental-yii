@@ -5,9 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 
-        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/style.css" rel="stylesheet" />
-        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
-        
+        <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/style.css" rel="stylesheet" />        
         
         <?php /*<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.10.2.min.js" ></script>
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui-1.9.0.custom.min.js" ></script>
@@ -348,12 +346,16 @@
 </head>
 
 <body>
+    <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/auto-numeric.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/additional-methods.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.compiled.js"></script>	
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/base64.js"></script>	
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/canvas2image.js"></script>
     <script type="text/javascript">
     $(function () { 
         $(".right-container").alternateScroll();
@@ -382,22 +384,32 @@
             var step=$(this).attr('id');
             $("#step1-form :required").each(function(){
                 var element = $(this);
-                element.css("border", "");
+                element.css({border:"", color:""});
+                element.removeAttr("placeholder");
             });
             
             $(".step2-form :required").each(function(){
                 var element = $(this);
-                element.css("border", "");
+                element.css({border:"", color:""});
+                element.removeAttr("placeholder");
             });
 
             $(".step3-form :required").each(function(){
                 var element = $(this);
-                element.css("border", "");
+                element.css({border:"", color:""});
+                element.removeAttr("placeholder");
             });
             
             $(".step4-form :required").each(function(){
                 var element = $(this);
-                element.css("border", "");
+                element.css({border:"", color:""});
+                element.removeAttr("placeholder");
+            });
+            
+            $(".step5-form :required").each(function(){
+                var element = $(this);
+                element.css({border:"", color:""});
+                element.removeAttr("placeholder");
             });
 
             if(step == 1){
@@ -409,7 +421,8 @@
                 $("#step1-form :required").each(function(){
                     var element = $(this);
                     if(element.val() == ""){
-                        element.css("border", "2px solid red");
+                        element.css({border:"2px solid red", color:"red"});
+                        element.attr("placeholder", "this field is required");
                         test1--;
                     } else {
                         test1++;
@@ -440,7 +453,8 @@
                 $(".step2-form :required").each(function(){
                     var element = $(this);
                     if(element.val() == ""){
-                        element.css("border", "2px solid red");
+                        element.css({border:"2px solid red", color:"red"});
+                        element.attr("placeholder", "this field is required");
                         test1--;
                     } else {
                         test1++;
@@ -469,7 +483,8 @@
                 $(".step3-form :required").each(function(){
                     var element = $(this);
                     if(element.val() == ""){
-                        element.css("border", "2px solid red");
+                        element.css({border:"2px solid red", color:"red"});
+                        element.attr("placeholder", "this field is required");
                         test1--;
                     } else {
                         test1++;
@@ -499,7 +514,8 @@
                 $(".step4-form :required").each(function(){
                     var element = $(this);
                     if(element.val() == ""){
-                        element.css("border", "2px solid red");
+                        element.css({border:"2px solid red", color:"red"});
+                        element.attr("placeholder", "this field is required");
                         test1--;
                     } else {
                         test1++;
@@ -525,20 +541,38 @@
                 }
             } else if(step == 6){
                 
-                $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
-                    $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>");
+                var test1 = 0;
+                var test2 = 0;
+                $(".step5-form :required").each(function(){
+                    var element = $(this);
+                    if(element.val() == ""){
+                        element.css({border:"2px solid red", color:"red"});
+                        element.attr("placeholder", "this field is required");
+                        test1--;
+                    } else {
+                        test1++;
+                        test2++;
+                    }
                 });
                 
-                $(".step_content_"+step).slideToggle(350);
-                
-                if($(this).attr('class')=='hide'){
-                    $(this).attr('class','show');	
+                if(test1 == test2){
+                    $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
+                        $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>");
+                    });
+
+                    $(".step_content_"+step).slideToggle(350);
+
+                    if($(this).attr('class')=='hide'){
+                        $(this).attr('class','show');	
+                    } else {
+                        $(this).attr('class','hide');			
+                    }
                 } else {
-                    $(this).attr('class','hide');			
+                    $("#box5").show();
                 }
             } else if(step == 7){
                 $.post("<?php echo Yii::app()->createUrl('/rental/step6tosession') ?>", $(".step6-form").serialize(), function(response){
-                    $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>");
+                    $("#gi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>");
                 });
                 
                 $(".step_content_"+step).slideToggle(350);
@@ -550,6 +584,22 @@
                 }
             } else if(step == 8){
             
+                var formdata = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                $.post("<?php echo Yii::app()->createUrl('/rental/step7tosession') ?>", formdata, function(response){
+                    $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>");
+                });
+                
+                $(".step_content_"+step).slideToggle(350);
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
+            } else if(step == "final"){
+                $("#agreements").load("<?php echo Yii::app()->createUrl('/rental/showfinalstep') ?>");
+                //$(".step_content_"+step).slideToggle(350);
+                $(".step_content_final").slideToggle(350);
             }
 
         });

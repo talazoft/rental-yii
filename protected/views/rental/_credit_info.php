@@ -82,7 +82,7 @@
             <img src="images/minus.png">
         </a>
         <?php 
-            echo CHtml::hiddenField("CreditInfo[cricnt2$cnt]", isset(Yii::app()->session['step6']['CreditInfo']["cricnt2$cnt"]) ? Yii::app()->session['step4']['CreditInfo']["cricnt2$cnt"] : "", array('id'=>"CreditInfo_cricnt2$cnt"));
+            echo CHtml::hiddenField("CreditInfo[cricnt2$cnt]", isset(Yii::app()->session['step6']['CreditInfo']["cricnt2$cnt"]) ? Yii::app()->session['step6']['CreditInfo']["cricnt2$cnt"] : "", array('id'=>"CreditInfo_cricnt2$cnt"));
         ?>
     </td>
 </tr>

@@ -62,7 +62,7 @@ class ApplicantInfo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstname, lastname, birthday, ssn, rd_application_information_id', 'required'),
+			array('rd_application_information_id', 'required'),
 			array('pet_num, rd_application_information_id', 'numerical', 'integerOnly'=>true),
 			array('firstname, middlename, lastname, email', 'length', 'max'=>50),
 			array('birthday', 'length', 'max'=>20),
