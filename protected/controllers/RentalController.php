@@ -291,7 +291,7 @@ class RentalController extends Controller
     }
     
     public function actionSaveAll(){
-        
+        print_r($_POST);
     }
 
     protected function performAjaxValidation($model)
