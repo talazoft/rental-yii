@@ -84,7 +84,7 @@ $(function(){
     ?>
         
     $("#saveform2").unbind('click').click(function(){
-        
+        var saveurl = "";
     });
     
     $("#btnshowhtml").unbind('click').click(function(){
