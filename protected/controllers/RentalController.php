@@ -289,6 +289,10 @@ class RentalController extends Controller
             echo $newrow;
         }
     }
+    
+    public function actionSaveAll(){
+        
+    }
 
     protected function performAjaxValidation($model)
     {

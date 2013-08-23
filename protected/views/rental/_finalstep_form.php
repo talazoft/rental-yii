@@ -84,7 +84,7 @@ $(function(){
     ?>
         
     $("#saveform2").unbind('click').click(function(){
-        var saveurl = "";
+        var saveurl = "<?php echo Yii::app()->createUrl("rental/saveall"); ?>";
     });
     
     $("#btnshowhtml").unbind('click').click(function(){
