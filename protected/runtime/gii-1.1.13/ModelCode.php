@@ -2,7 +2,7 @@
 return array (
   'template' => 'default',
   'connectionId' => 'db',
-  'tablePrefix' => 'rd_',
+  'tablePrefix' => '',
   'modelPath' => 'application.models',
   'baseClass' => 'CActiveRecord',
   'buildRelations' => '1',

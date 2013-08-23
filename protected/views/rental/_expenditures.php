@@ -17,7 +17,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[prop_tax_asses$cnt]", isset(Yii::app()->session['step6']['Expenditures']["prop_tax_asses$cnt"]) ? Yii::app()->session['step6']['Expenditures']["prop_tax_asses$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][prop_tax_asses]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["prop_tax_asses"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["prop_tax_asses"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -28,7 +28,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[fed_state_income_tax$cnt]", isset(Yii::app()->session['step6']['Expenditures']["fed_state_income_tax$cnt"]) ? Yii::app()->session['step6']['Expenditures']["fed_state_income_tax$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][fed_state_income_tax]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["fed_state_income_tax"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["fed_state_income_tax"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +39,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[realestate_loan_payment$cnt]", isset(Yii::app()->session['step6']['Expenditures']["realestate_loan_payment$cnt"]) ? Yii::app()->session['step6']['Expenditures']["realestate_loan_payment$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][realestate_loan_payment]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["realestate_loan_payment"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["realestate_loan_payment"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -50,7 +50,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[payment_contract$cnt]", isset(Yii::app()->session['step6']['Expenditures']["payment_contract$cnt"]) ? Yii::app()->session['step6']['Expenditures']["payment_contract$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][payment_contract]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["payment_contract"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["payment_contract"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -61,7 +61,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[living_expenses$cnt]", isset(Yii::app()->session['step6']['Expenditures']["living_expenses$cnt"]) ? Yii::app()->session['step6']['Expenditures']["living_expenses$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][living_expenses]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["living_expenses"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["living_expenses"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -72,7 +72,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("Expenditures[other$cnt]", isset(Yii::app()->session['step6']['Expenditures']["other$cnt"]) ? Yii::app()->session['step6']['Expenditures']["other$cnt"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("Expenditures[$cnt][other]", isset(Yii::app()->session['step6']['Expenditures'][$cnt]["other"]) ? Yii::app()->session['step6']['Expenditures'][$cnt]["other"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
                             </td>
                         </tr>
                     </tbody>

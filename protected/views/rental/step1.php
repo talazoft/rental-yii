@@ -49,7 +49,7 @@
             <p align="justify" class="padding"> It is understood that this Application is not a Rental Agreement/Lease and that Applicant has no rights to said property until a written or oral Rental Agreement/Lease is duly executed after the approval of this Application. Applicant is aware of and agrees to all the covenants and conditions in the proposed Rental Agreement/Lease and agrees to timely execute said Rental Agreement/Lease after notification of the acceptance of this Application and Offer. Time is of the essence. </p>
         </div>
         <hr class="dashed"/>
-        <form method="POST" id="step1-form">
+        <form method="POST" id="step1-form" class="step1-form" postable>
             <div id="hrr">
                 <table class="codetype"  width="100%" border=0 cellpadding="0" cellspacing="0" >
                     <tr>

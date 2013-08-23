@@ -45,7 +45,7 @@
 </tr>
 <tr>
     <td>
-        <table id="tblcrf<?php echo $cnt; ?>" border="1" style="border-collapse:collapse; border-color:#bebebe">
+        <table id="tblcrf<?php echo $cnt; ?>" border="1" style="border-collapse:collapse; border-color:#bebebe" width="100%">
             <tbody id="crfbody<?php echo $cnt; ?>">
                 <tr class="crfrow<?php echo $cnt; ?>">
                     <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">

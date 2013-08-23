@@ -82,9 +82,63 @@ $(function(){
     <?php
     }
     ?>
-        
+      
+    function validate(name){
+
+        $("."+name+" :required").each(function(){
+            var element = $(this);
+            element.css({border:"", color:""});
+            element.removeAttr("placeholder");
+        });
+
+        var test1 = 0;
+        var test2 = 0;
+        $("."+name+" :required").each(function(){
+            var element = $(this);
+            if(element.val() == ""){
+                element.css({border:"2px solid red", color:"red"});
+                element.attr("placeholder", "this field is required");
+                test1--;
+            } else {
+                test1++;
+                test2++;
+            }
+        });
+
+        if(test1 == test2){
+            return true;
+        } else {
+            return false;
+        }
+    }
     $("#saveform2").unbind('click').click(function(){
         var saveurl = "<?php echo Yii::app()->createUrl("rental/saveall"); ?>";
+        
+        var cnt = <?php echo $cnt; ?>;
+        
+        /*var data1 = $("#step1-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+        var data2 = $(".step2-form").serialize();
+        var data3 = $(".step3-form").serialize();
+        var data4 = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+        var data5 = $(".step5-form").serialize();
+        var data6 = $(".step6-form").serialize();
+        var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+        var data8 = $("#signJson").val();
+        
+        var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
+        
+        $.post(saveurl, alldata, function(response){
+            
+        });*/
+    
+        if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
+            $('form').each(function(){
+                var forms = $(this);
+                var payload = $(forms).serialize();
+                
+                $.post(saveurl, payload);
+            });
+        }
     });
     
     $("#btnshowhtml").unbind('click').click(function(){

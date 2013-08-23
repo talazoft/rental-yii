@@ -1,27 +1,27 @@
 <tr class="crirow<?php echo $cnt; ?>">
     <td height="36" align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[bank_name$cnt$cnt2]", isset(Yii::app()->session['step6']["CreditInfo"]["bank_name$cnt$cnt2"]) ? Yii::app()->session['step6']["CreditInfo"]["bank_name$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][bank_name]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["bank_name"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["bank_name"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[branch$cnt$cnt2]", isset(Yii::app()->session['step6']["CreditInfo"]["branch$cnt$cnt2"]) ? Yii::app()->session['step6']["CreditInfo"]["branch$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][branch]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["branch"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["branch"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[phone$cnt$cnt2]", isset(Yii::app()->session['step6']["CreditInfo"]["phone$cnt$cnt2"]) ? Yii::app()->session['step6']["CreditInfo"]["phone$cnt$cnt2"] : "", array('style'=>'width:70%','class'=>'phone'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][phone]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone"] : "", array('style'=>'width:70%','class'=>'phone'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[account$cnt$cnt2]", isset(Yii::app()->session['step6']["CreditInfo"]["account$cnt$cnt2"]) ? Yii::app()->session['step6']["CreditInfo"]["account$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][account]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[balance$cnt$cnt2]", isset(Yii::app()->session['step6']["CreditInfo"]["balance$cnt$cnt2"]) ? Yii::app()->session['step6']["CreditInfo"]["balance$cnt$cnt2"] : "", array('style'=>'width:70%','class'=>'currency'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][balance]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["balance"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["balance"] : "", array('style'=>'width:70%','class'=>'currency'));
         ?>
     </td>
 </tr>

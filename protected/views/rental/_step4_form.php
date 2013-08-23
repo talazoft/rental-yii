@@ -118,7 +118,7 @@
             $("#plusminuseiiself<?php echo $cnt; ?>").show();
         }
         
-        $("#chk-empinfo-2").change(function(){
+        $("#skip-empinfo").change(function(){
             skipstatusaction();     
         });
         
@@ -127,7 +127,7 @@
         function skipstatusaction(){
             for(var i=2;i<=<?php echo $cnt ?>;i++){
                 var form = $("#empinfo-"+i);
-                if($("#chk-empinfo-2").is(":checked")){
+                if($("#skip-empinfo").is(":checked")){
                     form.find(":required").each(function(){
                         $(this).removeAttr("required");
                         $(this).attr("notrequired","notrequired");
@@ -142,13 +142,13 @@
         }
     });
 </script>
-<form method="POST" class="step4-form" id="empinfo-<?php echo $cnt; ?>">
+<form method="POST" class="step4-form" id="empinfo-<?php echo $cnt; ?>" postable>
     <table width="100%" border="0">
         <tbody>
             <?php if($cnt == 2){ ?>
             <tr>
                 <td valign="top" colspan="8">
-                <?php echo CHtml::checkbox("chk-empinfo-2", isset(Yii::app()->session['step4']['chk-empinfo-2']) ? true : false, array('class'=>'skipstep4'))." skip to continue"; ?>
+                <?php echo CHtml::checkbox("skip-empinfo", isset(Yii::app()->session['step4']['skip-empinfo']) ? true : false, array('id'=>'skip-empinfo'))." skip to continue"; ?>
                 </td>
             </tr> <?php
                 }
@@ -164,12 +164,17 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select id="employment_type<?php echo $cnt ?>" name="employment_type<?php echo $cnt ?>">
-                                        <option value="fulltime">Full Time</option>
-                                        <option value="parttime">Part Time</option>
-                                        <option value="selfemployed">Self Employed</option>
-                                        <option value="unemployed">Unemployed</option>
-                                    </select>						  
+                                    <?php 
+                                    $empType = array("" => "Choose one", 
+                                        "fulltime" => "Full Time",
+                                        "parttime" => "Part Time",
+                                        "selfemployed" => "Self Employed",
+                                        "unemployed" => "Unemployed",
+                                    );
+                                    
+                                    echo CHtml::dropdownList("EmploymentInfo[$cnt][employment_type]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt]['employment_type']) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt]['employment_type'] : "", $empType, array('id'=>"employment_type$cnt"));
+                                    ?>
+                                    <?php echo CHtml::image('images/star.png', 'required'); ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -180,110 +185,14 @@
                 <td colspan="6">
                     <div id="subeii1">
                         <div id="employed<?php echo $cnt; ?>" style="display: none">
-                            <table width="791px" border="1" style="border-collapse:collapse; border-color:#bebebe" id='tbl-employed<?php echo $cnt; ?>' style="width:790px">
-                                <tbody>
-                                    <tr>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Employer</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Address</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Phone</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Department</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Position/Title</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Length of Employment</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Salary</th>
-                                        <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Supervisor's Name</th>
-                                    </tr>
-                                    <?php 
-                                    if(!isset(Yii::app()->session['step4']["eiiempl$cnt"])){
-                                        echo $this->renderPartial("_employed_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
-                                    } else {
-                                        if(Yii::app()->session['step4']["eiiempl$cnt"] > 1){
-                                            $t = Yii::app()->session['step4']["eiiempl$cnt"];
-                                            for($i=1;$i<=$t;$i++){
-                                                echo $this->renderPartial("_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
-                                            }
-                                        } else {
-                                            echo $this->renderPartial("_employed_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
-                                        }
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                            <?php $this->renderPartial("_employed_form", array('cnt'=>$cnt), false, true); ?>
                         </div>
                         <div id="selfemployed<?php echo $cnt; ?>" style="display: none">
-                            <table width="791px" border=1 style="border-collapse:collapse; border-color:#bebebe" id='tbl-selfemployed<?php echo $cnt; ?>' style="width:790px; display: none">
-                                <tr>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Business Name</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Business Type</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Years in Business</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Address</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Phone</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Stay Length</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Landlord Name</th>
-                                    <th height="36" bgcolor="#dddddd" style="border-collapse:collapse; border-color:#bebebe">Phone</th>
-                                </tr>
-                                <?php 
-                                    if(!isset(Yii::app()->session['step4']["eiiself$cnt"])){
-                                        echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
-                                    } else {
-                                        if(Yii::app()->session['step4']["eiiself$cnt"] > 1){
-                                            $t = Yii::app()->session['step4']["eiiself$cnt"];
-                                            for($i=1;$i<=$t;$i++){
-                                                echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
-                                            }
-                                        } else {
-                                            echo $this->renderPartial("_self_employed_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
-                                        }
-                                    }
-                                ?>
-                            </table>
+                            <?php $this->renderPartial("_self_employed_form", array('cnt'=>$cnt), false, true); ?>
                         </div>
                     </div>			  
                 </td>
             </tr>
         </tbody>
     </table> 
-    <div id="plusminuseiiempl<?php echo $cnt; ?>" style="display:none">
-        <table width="100%">
-            <tbody>
-                <tr>
-                    <td align="center" colspan="6"> 
-                        <a id="pluseiiempl<?php echo $cnt; ?>"> 
-                            <img border="0" src="images/plus.png"> 
-                        </a>
-                        <a id="minuseiiempl<?php echo $cnt; ?>">
-                            <img src="images/minus.png">
-                        </a>
-                    </td>
-                    <?php 
-                        echo CHtml::hiddenField("eiiempl$cnt", isset(Yii::app()->session['step4']["eiiempl$cnt"]) ? Yii::app()->session['step4']["eiiempl$cnt"] : "", array('id'=>"eiiempl$cnt"));
-                    ?>
-                </tr>
-                <tr>
-                    <td align="center" colspan="6"> <hr class="dashed"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div id="plusminuseiiself<?php echo $cnt; ?>" style="display: none">
-        <table width="100%">
-            <tbody>
-                <tr>
-                    <td align="center" colspan="6"> 
-                        <a id="pluseiiself<?php echo $cnt; ?>"> 
-                            <img border="0" src="images/plus.png"> 
-                        </a>
-                        <a id="minuseiiself<?php echo $cnt; ?>">
-                            <img src="images/minus.png">
-                        </a>
-                    </td>
-                    <?php 
-                        echo CHtml::hiddenField("eiiself$cnt", isset(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"] : "", array('id'=>"eiiself$cnt"));
-                    ?>
-                </tr>
-                <tr>
-                    <td align="center" colspan="6"> <hr class="dashed"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </form>

@@ -1,4 +1,4 @@
-<form class="step7-form" id="other-<?php echo $cnt ?>">
+<form class="step7-form" id="other-<?php echo $cnt ?>" postable>
     <table width="100%" border="0" style="margin: 0px; display: table;" class="tbl-bi" id="bi-<?php echo $cnt ?>">
         <tbody>
             <tr>
@@ -13,7 +13,7 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::radioButtonList("bankrupt$cnt", isset(Yii::app()->session['step7']["bankrupt$cnt"]) ? Yii::app()->session['step7']["bankrupt$cnt"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][bankrupt]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupt"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupt"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
                     ?>
                 </td>
                 <td>
@@ -21,7 +21,7 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::textField("bankrupted_at$cnt", isset(Yii::app()->session['step7']["bankrupted_at$cnt"]) ? Yii::app()->session['step7']["bankrupted_at$cnt"] : "");
+                        echo CHtml::textField("GeneralInfo[$cnt][bankrupted_at]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"] : "");
                     ?>
                 </td>
                 <td>
@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::radioButtonList("is_questioned$cnt", isset(Yii::app()->session['step7']["is_questioned$cnt"]) ? Yii::app()->session['step7']["is_questioned$cnt"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_questioned]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
                     ?>
                 </td>
                 <td>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::textField("questioned_at$cnt", isset(Yii::app()->session['step7']["questioned_at$cnt"]) ? Yii::app()->session['step7']["questioned_at$cnt"] : "");
+                        echo CHtml::textField("GeneralInfo[$cnt][questioned_at]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["questioned_at"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["questioned_at"] : "");
                     ?>
                 </td>
                 <td>
@@ -61,7 +61,7 @@
                 </td>
                 <td colspan="2">
                     <?php 
-                        echo CHtml::radioButtonList("is_evicted$cnt", isset(Yii::app()->session['step7']["is_evicted$cnt"]) ? Yii::app()->session['step7']["is_evicted$cnt"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_evicted]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ")); 
                     ?>
                 </td>
                 <td>
@@ -77,7 +77,7 @@
                 </td>
                 <td colspan="3">
                     <?php 
-                        echo CHtml::textArea("explanation$cnt", isset(Yii::app()->session['step7']["explanation$cnt"]) ? Yii::app()->session['step7']["explanation$cnt"] : "", array('rows'=>4, 'cols'=>100, 'style'=>'width: 340px')); 
+                        echo CHtml::textArea("GeneralInfo[$cnt][explanation]", isset(Yii::app()->session['step7']['GeneralInfo'][$cnt]["explanation"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["explanation"] : "", array('rows'=>4, 'cols'=>100, 'style'=>'width: 340px')); 
                     ?>
                 </td>
                 <td>&nbsp;</td>

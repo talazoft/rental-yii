@@ -4,14 +4,14 @@
         $(".currency").autoNumeric();
         $(".zip").mask("99999");
         
-        var rescnt = <?php echo Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"] : 2 ?>;
+        var rescnt = <?php echo Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"] ? Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"] : 2 ?>;
         $("#plusri<?php echo $cnt; ?>").unbind("click").click(function(event){
             var resnewrowurl = "<?php echo Yii::app()->createUrl('/rental/resnewrow'); ?>";
             $.post(resnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:rescnt}, function(response){
                 $("#restbl-body<?php echo $cnt; ?>").append(response);
             });
 
-            $("#rescnt2<?php echo $cnt; ?>").val(rescnt);
+            $("#ResidentalHistory_rescnt2<?php echo $cnt; ?>").val(rescnt);
             
             rescnt++;
             
@@ -30,7 +30,7 @@
 
             rescnt--;
             
-            $("#rescnt2<?php echo $cnt; ?>").val(rescnt);
+            $("#ResidentalHistory_rescnt2<?php echo $cnt; ?>").val(rescnt);
             
             if(rescnt == 2){
                 $(this).hide();
@@ -45,7 +45,7 @@
             $("#minusri<?php echo $cnt; ?>").hide();
         }
         
-        $("#chk-resident-2").change(function(){
+        $("#skip-resident").change(function(){
             skipstatusaction();     
         });
         
@@ -54,7 +54,7 @@
         function skipstatusaction(){
             for(var i=2;i<=<?php echo $cnt ?>;i++){
                 var form = $("#resident-"+i);
-                if($("#chk-resident-2").is(":checked")){
+                if($("#skip-resident").is(":checked")){
                     form.find(":required").each(function(){
                         $(this).removeAttr("required");
                         $(this).attr("notrequired","notrequired");
@@ -69,15 +69,15 @@
         }
     });
 </script>
-<form class="step3-form" id="resident-<?php echo isset($cnt) ? $cnt : "" ?>" method="POST">
+<form class="step3-form" id="resident-<?php echo isset($cnt) ? $cnt : "" ?>" method="POST" postable>
     <table id="restbl<?php echo $cnt; ?>">
         <tbody id="restbl-body<?php echo $cnt; ?>">
         <?php 
-        if(!isset(Yii::app()->session['step3']["rescnt2$cnt"])){
+        if(!isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"])){
             echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => 1), true, true);
         } else {
-            if(Yii::app()->session['step3']["rescnt2$cnt"] > 1){
-                $t = Yii::app()->session['step3']["rescnt2$cnt"];
+            if(Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"] > 1){
+                $t = Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"];
                 for($i=1;$i<=$t;$i++){
                     echo $this->renderPartial("_residental_row", array('cnt' => $cnt, 'cnt2' => $i), true, true);
                 }
@@ -99,7 +99,7 @@
                         <img src="images/minus.png">
                     </a>
                     <?php
-                        echo CHtml::hiddenField("rescnt2$cnt", Yii::app()->session['step3']["rescnt2$cnt"] ? Yii::app()->session['step3']["rescnt2$cnt"] : "", array('id'=>"rescnt2$cnt"));
+                        echo CHtml::hiddenField("ResidentalHistory[$cnt][rescnt2]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"] : "", array('id'=>"ResidentalHistory_rescnt2$cnt"));
                     ?>
                 </td>
             </tr>

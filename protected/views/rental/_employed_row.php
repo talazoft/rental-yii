@@ -1,42 +1,42 @@
 <tr>
     <td align="center" height="36" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("employer$cnt$cnt2", isset(Yii::app()->session['step4']["employer$cnt$cnt2"]) ? Yii::app()->session['step4']["employer$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][employer]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer"] : "", array("style"=>"width:70%"));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("address$cnt$cnt2", isset(Yii::app()->session['step4']["address$cnt$cnt2"]) ? Yii::app()->session['step4']["address$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][address]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["address"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["address"] : "", array("style"=>"width:70%"));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("phone$cnt$cnt2", isset(Yii::app()->session['step4']["phone$cnt$cnt2"]) ? Yii::app()->session['step4']["phone$cnt$cnt2"] : "", array("style"=>"width:70%", 'class'=>'phone'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][phone]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["phone"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["phone"] : "", array("style"=>"width:70%", 'class'=>'phone'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("department$cnt$cnt2", isset(Yii::app()->session['step4']["department$cnt$cnt2"]) ? Yii::app()->session['step4']["department$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][department]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["department"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["department"] : "", array("style"=>"width:70%"));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("position$cnt$cnt2", isset(Yii::app()->session['step4']["position$cnt$cnt2"]) ? Yii::app()->session['step4']["department$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][position]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["position"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["department"] : "", array("style"=>"width:70%"));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("employment_length$cnt$cnt2", isset(Yii::app()->session['step4']["employment_length$cnt$cnt2"]) ? Yii::app()->session['step4']["employment_length$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][employment_length]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employment_length"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employment_length"] : "", array("style"=>"width:70%"));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("salary$cnt$cnt2", isset(Yii::app()->session['step4']["salary$cnt$cnt2"]) ? Yii::app()->session['step4']["salary$cnt$cnt2"] : "", array("style"=>"width:70%", 'class'=>'currency'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][salary]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["salary"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["salary"] : "", array("style"=>"width:70%", 'class'=>'currency'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("supervisor_name$cnt$cnt2", isset(Yii::app()->session['step4']["supervisor_name$cnt$cnt2"]) ? Yii::app()->session['step4']["supervisor_name$cnt$cnt2"] : "", array("style"=>"width:70%"));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][supervisor_name]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["supervisor_name"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["supervisor_name"] : "", array("style"=>"width:70%"));
         ?>
     </td>
 </tr>

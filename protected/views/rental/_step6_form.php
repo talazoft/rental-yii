@@ -4,7 +4,7 @@
         $(".currency").autoNumeric();  
     });
 </script>
-<form class="step6-form" method="post" name="creditfinance-<?php echo $cnt ?>" id="creditfinance-<?php echo $cnt ?>">
+<form class="step6-form" method="post" name="creditfinance-<?php echo $cnt ?>" id="creditfinance-<?php echo $cnt ?>" postable>
     <table>
         <tbody>
             <tr>

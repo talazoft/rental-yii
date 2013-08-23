@@ -54,6 +54,20 @@ class RentalController extends Controller
             $(".ssn").mask("999-99-9999");
         ', CClientScript::POS_READY);*/
         
+        $tempModel = Temp::model()->findByPk(1);
+        if(isset($tempModel) && count($tempModel)> 0){
+            Yii::app()->session['step1']['ApplicationInformation']['address'] = $tempModel->address;
+            Yii::app()->session['step1']['ApplicationInformation']['city'] = $tempModel->city;
+            Yii::app()->session['step1']['ApplicationInformation']['anticipated_date'] = $tempModel->anticipated_date;
+            Yii::app()->session['step1']['ApplicationInformation']['save_deposit'] = $tempModel->deposit;
+            Yii::app()->session['step1']['ApplicationInformation']['selection'] = $tempModel->selection1;
+            Yii::app()->session['step1']['ApplicationInformation']['sub_selection'] = $tempModel->selection2;
+            Yii::app()->session['step1']['ApplicationInformation']['state'] = $tempModel->state;
+            Yii::app()->session['step1']['ApplicationInformation']['zipcode'] = $tempModel->zipcode;
+            Yii::app()->session['step1']['ApplicationInformation']['monthly_rent'] = $tempModel->monthlyrent;
+            $tempModel->truncateTable();
+        }
+        
         $model = new ApplicationInformation;
         
         Yii::app()->clientScript->scriptMap=array(
@@ -74,9 +88,9 @@ class RentalController extends Controller
         
         if($_POST['num_of_applicant']){
             $cnt = $_POST['num_of_applicant'];
-
+            
             if($cnt > 0){
-
+                Yii::app()->session['step1']['num_of_applicant'] = $cnt;
                 //$u = 0;
                 for($i = 1; $i<=$cnt;$i++){
                     //if(isset(Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i])){
@@ -99,6 +113,8 @@ class RentalController extends Controller
                 $response['step7'] = $this->renderPartial('_step7_form', array('cnt' => $i, 'cnt2' => 1), true, true);
                 //$response['step8'] = $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true, true);
                 //$response['finalstep'] = $this->renderPartial('_finalstep_form', '', true, true);
+                
+                
                 echo CJSON::encode($response);
             }
         }
@@ -176,6 +192,7 @@ class RentalController extends Controller
             unset(Yii::app()->session['step5']);
             Yii::app()->session['step5'] = $_POST;
         }
+        
     }
     
     public function actionShowstep6(){
@@ -226,7 +243,10 @@ class RentalController extends Controller
     }
     
     public function actionShowfinalstep(){
-        echo $this->renderPartial('_finalstep_form', '', true, true);
+        if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
+            $cnt = Yii::app()->session['step1']['num_of_applicant'];
+            echo $this->renderPartial('_finalstep_form', array('cnt'=>$cnt), true, true);
+        }
     }
 
     public function actionDepnewrow(){
@@ -291,7 +311,51 @@ class RentalController extends Controller
     }
     
     public function actionSaveAll(){
-        print_r($_POST);
+        
+//        print_r($_POST);
+//        die();
+        if(!isset(Yii::app()->session['applicationInfoId'])){
+            if(isset($_POST['ApplicationInformation'])){
+                $applicationModel = new ApplicationInformation();
+                $applicationModel->attributes = $_POST['ApplicationInformation'];
+                //$applicationModel->save();
+                //Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
+            } else if(isset($_POST['ApplicantInfo'])){
+                foreach($_POST['ApplicantInfo'] as $applicantInfo){
+                    $applicantModel = new ApplicantInfo();
+                    $applicantModel->attributes = $applicantInfo;
+                    //$applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
+                    //$applicantModel->save();
+                    //Yii::app()->session['applicatID'] = Yii::app()->db->getLastInsertID();
+                    
+                    foreach($_POST['DependantInfo'] as $dependants){
+                        foreach($dependants as $dependant){
+                            $dependantModel = new DependantInfo();
+                            $dependantModel->attributes = $dependant;
+                            //$dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
+                            print_r($dependantModel->attributes);
+                            print_r("<hr/>");
+                        }
+                    }
+                    
+                    foreach($_POST['VehicleInfo'] as $vehicles){
+                        foreach($vehicles as $vehicle){
+                            $vehicleModel = new VehicleInfo();
+                            $vehicleModel->attributes = $vehicle;
+                            //$dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
+                            print_r($vehicleModel->attributes);
+                            print_r("<hr/>");
+                        }
+                    }
+                }
+                
+
+            } else if($_POST['ResidentalHistory']){
+
+            }
+        } else {
+            print_r($_POST);
+        }
     }
 
     protected function performAjaxValidation($model)

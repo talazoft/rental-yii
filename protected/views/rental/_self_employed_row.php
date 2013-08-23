@@ -1,42 +1,42 @@
 <tr>
     <td height="36" align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("bussiness_name$cnt$cnt2", isset(Yii::app()->session['step4']["bussiness_name$cnt$cnt2"]) ? Yii::app()->session['step4']["bussiness_name$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][bussiness_name]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["bussiness_name"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["bussiness_name"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("bussiness_type$cnt$cnt2", isset(Yii::app()->session['step4']["bussiness_type$cnt$cnt2"]) ? Yii::app()->session['step4']["bussiness_type$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][bussiness_type]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["bussiness_type"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["bussiness_type"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("years_in_bussiness$cnt$cnt2", isset(Yii::app()->session['step4']["years_in_bussiness$cnt$cnt2"]) ? Yii::app()->session['step4']["years_in_bussiness$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][years_in_bussiness]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["years_in_bussiness"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["years_in_bussiness"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("employer_address$cnt$cnt2", isset(Yii::app()->session['step4']["employer_address$cnt$cnt2"]) ? Yii::app()->session['step4']["employer_address$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][employer_address]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer_address"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer_address"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("phone$cnt$cnt2", isset(Yii::app()->session['step4']["phone$cnt$cnt2"]) ? Yii::app()->session['step4']["phone$cnt$cnt2"] : "", array('class'=>'phone', 'style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][phone]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["phone"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["phone"] : "", array('class'=>'phone', 'style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("stay_length$cnt$cnt2", isset(Yii::app()->session['step4']["stay_length$cnt$cnt2"]) ? Yii::app()->session['step4']["stay_length$cnt$cnt2"] : "", array('style'=>'width:70%', 'style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][stay_length]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["stay_length"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["stay_length"] : "", array('style'=>'width:70%', 'style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("landlord_name$cnt$cnt2", isset(Yii::app()->session['step4']["landlord_name$cnt$cnt2"]) ? Yii::app()->session['step4']["landlord_name$cnt$cnt2"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][landlord_name]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["landlord_name"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["landlord_name"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("landlord_phone$cnt$cnt2", isset(Yii::app()->session['step4']["landlord_phone$cnt$cnt2"]) ? Yii::app()->session['step4']["landlord_phone$cnt$cnt2"] : "", array('class'=>'phone', 'style'=>'width:70%'));
+            echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][landlord_phone]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["landlord_phone"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["landlord_phone"] : "", array('class'=>'phone', 'style'=>'width:70%'));
         ?>
     </td>
 </tr>
