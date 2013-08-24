@@ -13,7 +13,7 @@
  * @property string $state
  * @property string $zipcode
  * @property string $anticipated_date
- * @property integer $refered_lead
+ * @property string $refered_lead
  * @property string $venue
  * @property string $agent_name
  * @property string $agent_phone
@@ -61,9 +61,9 @@ class ApplicationInformation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_of_applicant, refered_lead, is_existing_tenant', 'numerical', 'integerOnly'=>true),
+			array('num_of_applicant, is_existing_tenant', 'numerical', 'integerOnly'=>true),
 			array('selection, sub_selection, address, agent_name, tenant_name, prime_applic_email', 'length', 'max'=>150),
-			array('city, venue', 'length', 'max'=>50),
+			array('city, venue, refered_lead', 'length', 'max'=>50),
 			array('state, zipcode, save_deposit, unit, monthly_rent', 'length', 'max'=>45),
 			array('anticipated_date', 'length', 'max'=>11),
 			array('agent_phone, prime_applic_cellphone, prime_applic_homephone', 'length', 'max'=>25),

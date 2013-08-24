@@ -2,6 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+CREATE SCHEMA IF NOT EXISTS `sstig_contact_us_arjintas` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `sstig_contact_us_arjintas` ;
 
 -- -----------------------------------------------------
@@ -19,7 +20,7 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_application_informat
   `state` VARCHAR(45) NULL ,
   `zipcode` VARCHAR(45) NULL ,
   `anticipated_date` VARCHAR(11) NULL ,
-  `refered_lead` TINYINT(1) NULL ,
+  `refered_lead` VARCHAR(50) NULL ,
   `venue` VARCHAR(50) NULL ,
   `agent_name` VARCHAR(150) NULL ,
   `agent_phone` VARCHAR(25) NULL ,
@@ -94,8 +95,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_residental_history` 
   CONSTRAINT `fk_rd_residental_history_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -127,8 +128,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_employment_info` (
   CONSTRAINT `fk_rd_employment_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -150,8 +151,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_credit_info` (
   CONSTRAINT `fk_rd_credit_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -173,8 +174,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_monthly_income` (
   CONSTRAINT `fk_rd_monthly_income_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -197,8 +198,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_expenditures` (
   CONSTRAINT `fk_rd_expenditures_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -221,8 +222,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_stock_bonds` (
   CONSTRAINT `fk_rd_stock_bonds_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -245,8 +246,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_general_info` (
   CONSTRAINT `fk_rd_general_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -267,8 +268,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_dependant_info` (
   CONSTRAINT `fk_rd_dependant_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -289,8 +290,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_vehicle_info` (
   CONSTRAINT `fk_rd_vehicle_info_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -311,8 +312,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_personal_refrence` (
   CONSTRAINT `fk_rd_personal_refrence_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -334,8 +335,8 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_credit_ref` (
   CONSTRAINT `fk_rd_credit_ref_rd_applicant_info1`
     FOREIGN KEY (`rd_applicant_info_id` )
     REFERENCES `sstig_contact_us_arjintas`.`rd_applicant_info` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 USE `sstig_contact_us_arjintas` ;

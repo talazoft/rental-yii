@@ -26,6 +26,12 @@ class RentalController extends Controller
         
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
+        
+        
+    }
+    
+    public function actions(){
+
     }
     
     public function actionIndex(){  
@@ -73,10 +79,12 @@ class RentalController extends Controller
         
         $model = new ApplicationInformation;
         
-        Yii::app()->clientScript->scriptMap=array(
-            'jquery'=>false,
-            'jquery.ui'=>false,
-        ); 
+        /*Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); */
         
         $this->render("index", array('model' => $model));
     }
@@ -87,6 +95,8 @@ class RentalController extends Controller
         Yii::app()->clientScript->scriptMap=array(
             'jquery.js'=>false,
             'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
         ); 
         
         if($_POST['num_of_applicant']){
@@ -131,6 +141,14 @@ class RentalController extends Controller
     }
 
     public function actionShowstep2(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -147,6 +165,14 @@ class RentalController extends Controller
     }
 
     public function actionShowstep3(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -163,6 +189,13 @@ class RentalController extends Controller
     }
 
     public function actionShowstep4(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
         
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
@@ -182,6 +215,14 @@ class RentalController extends Controller
     }
 
     public function actionShowstep5(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -199,6 +240,14 @@ class RentalController extends Controller
     }
     
     public function actionShowstep6(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -208,6 +257,7 @@ class RentalController extends Controller
     }
     
     public function actionStep6tosession(){
+        
         if(isset($_POST)){
             unset(Yii::app()->session['step6']);
             Yii::app()->session['step6'] = $_POST;
@@ -215,6 +265,14 @@ class RentalController extends Controller
     }
     
     public function actionShowStep7(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
@@ -231,6 +289,7 @@ class RentalController extends Controller
     }
     
     public function actionShowstep8(){
+       
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             $total_fee = 30*$cnt;
@@ -246,6 +305,14 @@ class RentalController extends Controller
     }
     
     public function actionShowfinalstep(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             echo $this->renderPartial('_finalstep_form', array('cnt'=>$cnt), true, true);
@@ -253,27 +320,59 @@ class RentalController extends Controller
     }
 
     public function actionDepnewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_dependant_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_dependant_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
 
     public function actionVehnewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_vehicle_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_vehicle_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
 
-    public function actionResnewrow(){           
+    public function actionResnewrow(){     
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        ); 
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_residental_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_residental_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
 
     public function actionEiinewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2']) && isset($_POST['type'])){
             if($_POST['type'] == "fulltime" || $_POST['type'] == "parttime"){
                 $newrow = $this->renderPartial("_employed_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
@@ -286,76 +385,152 @@ class RentalController extends Controller
     }
     
     public function actionPrnewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_personal_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2'], 'required'=>false), true);
+            $newrow = $this->renderPartial("_personal_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2'], 'required'=>false), true, true);
             echo $newrow;
         }
     }
     
     public function actionCrinewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_credit_info_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_credit_info_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
     
     public function actionCrfnewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_credit_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_credit_ref_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
     
     public function actionStocknewrow(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
         if(isset($_POST['cnt']) && isset($_POST['cnt2'])){
-            $newrow = $this->renderPartial("_stock_bonds_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true);
+            $newrow = $this->renderPartial("_stock_bonds_row", array('cnt' => $_POST['cnt'], 'cnt2' => $_POST['cnt2']), true, true);
             echo $newrow;
         }
     }
     
     public function actionSaveAll(){
         
-//        print_r($_POST);
-//        die();
-        if(!isset(Yii::app()->session['applicationInfoId'])){
+        /*if(!isset(Yii::app()->session['applicationID'])){
             if(isset($_POST['ApplicationInformation'])){
                 $applicationModel = new ApplicationInformation();
                 $applicationModel->attributes = $_POST['ApplicationInformation'];
-                //$applicationModel->save();
-                //Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
-            } else if(isset($_POST['ApplicantInfo'])){
+                $applicationModel->save();
+                Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
+            }
+        } else {
+            if(isset($_POST['ApplicantInfo'])){
                 foreach($_POST['ApplicantInfo'] as $applicantInfo){
                     $applicantModel = new ApplicantInfo();
                     $applicantModel->attributes = $applicantInfo;
-                    //$applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
-                    //$applicantModel->save();
-                    //Yii::app()->session['applicatID'] = Yii::app()->db->getLastInsertID();
-                    
+                    $applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
+                    $applicantModel->save();
+                    Yii::app()->session['applicatID'] = Yii::app()->db->getLastInsertID();
+
                     foreach($_POST['DependantInfo'] as $dependants){
                         foreach($dependants as $dependant){
                             $dependantModel = new DependantInfo();
                             $dependantModel->attributes = $dependant;
-                            //$dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
-                            print_r($dependantModel->attributes);
-                            print_r("<hr/>");
+                            $dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
+                            $dependantModel->save();
                         }
                     }
-                    
+
                     foreach($_POST['VehicleInfo'] as $vehicles){
                         foreach($vehicles as $vehicle){
                             $vehicleModel = new VehicleInfo();
                             $vehicleModel->attributes = $vehicle;
-                            //$dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
-                            print_r($vehicleModel->attributes);
-                            print_r("<hr/>");
+                            $dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
+                            $vehicleModel->save();
                         }
                     }
                 }
-                
-
-            } else if($_POST['ResidentalHistory']){
-
             }
+        }*/
+        
+    }
+    
+    public function actionSaveapplicantioninfo(){
+        $model = ApplicationInformation::model()->findByPk(Yii::app()->session['applicationID']);
+        if(isset($_POST['ApplicationInformation'])){
+                        
+            if(!isset($model) || count($model) <= 0){
+                $model = new ApplicationInformation();
+            }
+            
+            $model->attributes = $_POST['ApplicationInformation'];
+            if($model->save()){
+                Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
+                print_r(Yii::app()->session['applicationID']);
+                die();
+            } else {
+                print_r($model->getErrors());
+                die();
+            }
+        } else {
+            print_r($_POST);
+            die();
+        }
+    }
+    
+    public function actionSaveapplicantinfo(){
+        
+        $serializedData = $_POST['data2'];
+        $unserializedData = array();
+        parse_str($serializedData, $unserializedData);
+        print_r($unserializedData);
+        die();
+        
+        ApplicantInfo::model()->deleteAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
+        if(isset($_POST['ApplicantInfo']) && isset($_POST['DependantInfo']) && isset($_POST['VehicleInfo'])){
+            
+            foreach($_POST['ApplicantInfo'] as $applicant){
+                $applicantModel = new ApplicantInfo();
+                $applicantModel->attributes = $applicant;
+                $applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
+                if($applicantModel->save()){
+                    Yii::app()->session['applicantID'][] = Yii::app()->db->getLastInsertID();
+                } else {
+                    echo $applicantModel->getErrors();
+                    die();
+                }
+            }
+            print_r(Yii::app()->session['applicantID']);
         } else {
             print_r($_POST);
         }

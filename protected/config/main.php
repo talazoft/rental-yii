@@ -58,13 +58,11 @@ return array(
                         ),
                         'masked-input'=>array(
                             'baseUrl'=>'js/',
-                            'js'=>array('jquery.maskedinput.min.js'),
-                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                            'js'=>array('jquery.maskedinput.min.js')
                         ),
                         'auto-numeric'=>array(
                             'baseUrl'=>'js/',
-                            'js'=>array('auto-numeric.js'),
-                            'coreScriptPosition'=>CClientScript::POS_HEAD
+                            'js'=>array('auto-numeric.js')
                         )
                     ),
                 ),

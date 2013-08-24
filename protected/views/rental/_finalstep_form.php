@@ -112,11 +112,10 @@ $(function(){
         }
     }
     $("#saveform2").unbind('click').click(function(){
-        var saveurl = "<?php echo Yii::app()->createUrl("rental/saveall"); ?>";
-        
+        var savapplicationurl = "<?php echo Yii::app()->createUrl("rental/saveapplicantioninfo"); ?>";
+        var saveapplicanturl = "<?php echo Yii::app()->createUrl("rental/saveapplicantinfo"); ?>";
         var cnt = <?php echo $cnt; ?>;
         
-        /*var data1 = $("#step1-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
         var data2 = $(".step2-form").serialize();
         var data3 = $(".step3-form").serialize();
         var data4 = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
@@ -125,19 +124,24 @@ $(function(){
         var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
         var data8 = $("#signJson").val();
         
-        var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
+        var alldata = {data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
         
-        $.post(saveurl, alldata, function(response){
+        /*$.post(saveurl, alldata, function(response){
             
         });*/
     
+        
+    
         if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
-            $('form').each(function(){
-                var forms = $(this);
-                var payload = $(forms).serialize();
+            ///$('form').each(function(){
+                //var forms = $(".step1-form");
+                //var payload = $(forms).serialize();
                 
-                $.post(saveurl, payload);
-            });
+                //$.post(saveurl, payload);
+            //});
+            
+            //$.post(savapplicationurl, $(".step1-form").serialize());
+            $.post(saveapplicanturl, alldata);
         }
     });
     

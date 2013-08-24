@@ -3,7 +3,7 @@
         $(".phone").mask("(999) 999-9999");
         $(".currency").autoNumeric();  
         
-        var prcnt2 = <?php echo isset(Yii::app()->session['step5']["prcnt2$cnt"]) ? Yii::app()->session['step5']["prcnt2$cnt"] : 4 ?>;
+        var prcnt2 = <?php echo isset(Yii::app()->session['step5']["prcnt2$cnt"]) && !empty(Yii::app()->session['step5']["prcnt2$cnt"]) ? Yii::app()->session['step5']["prcnt2$cnt"] : 4 ?>;
         $("#pluspr<?php echo $cnt; ?>").unbind("click").click(function(event){
             var prnewrowurl = "<?php echo Yii::app()->createUrl('/rental/prnewrow'); ?>";
             $.post(prnewrowurl, {cnt:<?php echo $cnt; ?>, cnt2:prcnt2}, function(response){
