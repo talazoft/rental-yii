@@ -444,72 +444,21 @@ class RentalController extends Controller
         }
     }
     
-    public function actionSaveAll(){
-        
-        /*if(!isset(Yii::app()->session['applicationID'])){
-            if(isset($_POST['ApplicationInformation'])){
-                $applicationModel = new ApplicationInformation();
-                $applicationModel->attributes = $_POST['ApplicationInformation'];
-                $applicationModel->save();
-                Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
-            }
-        } else {
-            if(isset($_POST['ApplicantInfo'])){
-                foreach($_POST['ApplicantInfo'] as $applicantInfo){
-                    $applicantModel = new ApplicantInfo();
-                    $applicantModel->attributes = $applicantInfo;
-                    $applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
-                    $applicantModel->save();
-                    Yii::app()->session['applicatID'] = Yii::app()->db->getLastInsertID();
-
-                    foreach($_POST['DependantInfo'] as $dependants){
-                        foreach($dependants as $dependant){
-                            $dependantModel = new DependantInfo();
-                            $dependantModel->attributes = $dependant;
-                            $dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
-                            $dependantModel->save();
-                        }
-                    }
-
-                    foreach($_POST['VehicleInfo'] as $vehicles){
-                        foreach($vehicles as $vehicle){
-                            $vehicleModel = new VehicleInfo();
-                            $vehicleModel->attributes = $vehicle;
-                            $dependantModel->rd_applicant_info_id = Yii::app()->session['applicatID'];
-                            $vehicleModel->save();
-                        }
-                    }
-                }
-            }
-        }*/
-        
-    }
+//    public function actionSaveapplicantioninfo(){
+//               
+//        if(isset($_POST['ApplicationInformation'])){   
+//            $model = new ApplicationInformation();
+//            $model->attributes = $_POST['ApplicationInformation'];
+//            $model->save();
+//            Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
+//            Yii::app()->session['step1'] = $_POST['ApplicationInformation'];
+//        }
+//
+//    }
     
-    public function actionSaveapplicantioninfo(){
-        $model = ApplicationInformation::model()->findByPk(Yii::app()->session['applicationID']);
-        if(isset($_POST['ApplicationInformation'])){
-                        
-            if(!isset($model) || count($model) <= 0){
-                $model = new ApplicationInformation();
-            }
-            
-            $model->attributes = $_POST['ApplicationInformation'];
-            if($model->save()){
-                Yii::app()->session['applicationID'] = Yii::app()->db->getLastInsertID();
-                print_r(Yii::app()->session['applicationID']);
-                die();
-            } else {
-                print_r($model->getErrors());
-                die();
-            }
-        } else {
-            print_r($_POST);
-            die();
-        }
-    }
-    
-    public function actionSaveapplicantinfo(){
-        
+    public function actionSaveall(){
+        $serializeData1 = $_POST['data1'];
+        $data1 = array();
         $serializeData2 = $_POST['data2'];
         $data2 = array();
         $serializeData3 = $_POST['data3'];
@@ -522,33 +471,181 @@ class RentalController extends Controller
         $data6 = array();
         $serializeData7 = $_POST['data7'];
         $data7 = array();
+        parse_str($serializeData1, $data1);
         parse_str($serializeData2, $data2);
         parse_str($serializeData3, $data3);
         parse_str($serializeData4, $data4);
         parse_str($serializeData5, $data5);
         parse_str($serializeData6, $data6);
         parse_str($serializeData7, $data7);
-
-        print_r($unserializedData);
-        die();
         
-        ApplicantInfo::model()->deleteAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
-        if(isset($_POST['ApplicantInfo']) && isset($_POST['DependantInfo']) && isset($_POST['VehicleInfo'])){
-            
-            foreach($_POST['ApplicantInfo'] as $applicant){
-                $applicantModel = new ApplicantInfo();
-                $applicantModel->attributes = $applicant;
-                $applicantModel->rd_application_information_id = Yii::app()->session['applicationID'];
-                if($applicantModel->save()){
-                    Yii::app()->session['applicantID'][] = Yii::app()->db->getLastInsertID();
-                } else {
-                    echo $applicantModel->getErrors();
-                    die();
+        if(!isset(Yii::app()->session['applicationID'])){
+            $applicationModel = new ApplicationInformation();
+            $applicationModel->attributes = $data1['ApplicationInformation'];
+            if($applicationModel->save()){
+                $applicationID = Yii::app()->db->getLastInsertID();
+                
+                $i = 1;
+                foreach($data2['ApplicantInfo'] as $appKey => $applicant){
+                    $applicantModel = new ApplicantInfo();
+                    $applicantModel->attributes = $applicant;
+                    $applicantModel->rd_application_information_id = $applicationID;
+                    if($applicantModel->save()){
+                        $applicantID = Yii::app()->db->getLastInsertID();
+                        if($appKey == 1){
+                            $appModel = ApplicationInformation::model()->findByPk($applicationID);
+                            $appModel->prime_appic_signature = $_POST['data8'];
+                            $appModel->prime_applic_cellphone  = $applicantModel->cellphone;
+                            $appModel->prime_applic_homephone  = $applicantModel->homephone;
+                            $appModel->prime_applic_email  = $applicantModel->email;
+                            $appModel->save();
+                        }
+
+                        foreach($data2['DependantInfo'][$i] as $key => $dependant){
+                            if(is_numeric($key)){
+                                $dependantModel = new DependantInfo();
+                                $dependantModel->attributes = $dependant;
+                                $dependantModel->rd_applicant_info_id = $applicantID;
+                                $dependantModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        foreach($data2['VehicleInfo'][$i] as $key => $vehicle){
+                            if(is_numeric($key)){
+                                $vehicleModel = new VehicleInfo();
+                                $vehicleModel->attributes = $vehicle;
+                                $vehicleModel->rd_applicant_info_id = $applicantID;
+                                $vehicleModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        foreach($data3['ResidentalHistory'][$i] as $key => $resHistory){
+                            if(is_numeric($key)){
+                                $residentalModel = new ResidentalHistory();
+                                $residentalModel->attributes = $resHistory;
+                                $residentalModel->rd_applicant_info_id = $applicantID;
+                                $residentalModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        foreach($data4['EmploymentInfo'][$i] as $key => $empHistory){
+                            $empModel = new EmploymentInfo();
+                            $empModel->rd_applicant_info_id = $applicantID;
+                            $empModel->employment_type = $data4['EmploymentInfo'][$i]['employment_type']; 
+                            if(is_numeric($key)){
+                                $empModel->attributes = $empHistory;
+                                $empModel->save();
+                            } else {
+                                if($data4['EmploymentInfo'][$i]['employment_type'] == "unemployed"){ 
+                                    $empModel->save();
+                                }
+                            }
+                        }
+
+                        foreach($data5['PersonalRefrence'][$i] as $key => $personalRef){
+                            if(is_numeric($key)){
+                                $personalRefModel = new PersonalRefrence();
+                                $personalRefModel->attributes = $personalRef;
+                                $personalRefModel->rd_applicant_info_id = $applicantID;
+                                $personalRefModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+
+                        foreach($data6['CreditInfo'][$i] as $key => $crinfo){
+                            if(is_numeric($key)){
+                                $crModel = new CreditInfo();
+                                $crModel->attributes = $crinfo;
+                                $crModel->rd_applicant_info_id = $applicantID;
+                                $crModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        foreach($data6['CreditRef'][$i] as $key => $crref){
+                            if(is_numeric($key)){
+                                $crrefModel = new CreditRef();
+                                $crrefModel->attributes = $crref;
+                                $crrefModel->rd_applicant_info_id = $applicantID;
+                                $crrefModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $incomeModel = new MonthlyIncome();
+                        $incomeModel->attributes = $data6['MonthlyIncome'][$i];
+                        $incomeModel->rd_applicant_info_id = $applicantID;
+                        $incomeModel->save();
+
+                        $expenseModel = new Expenditures();
+                        $expenseModel->attributes = $data6['Expenditures'][$i];
+                        $expenseModel->rd_applicant_info_id = $applicantID;
+                        $expenseModel->save();
+
+                        foreach($data6['StockBonds'][$i] as $key => $bonds){
+                            if(is_numeric($key)){
+                                $sbModel = new StockBonds();
+                                $sbModel->attributes = $bonds;
+                                $sbModel->rd_applicant_info_id = $applicantID;
+                                $sbModel->save();
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $genInfo = new GeneralInfo();
+                        $genInfo->attributes = $data7['GeneralInfo'][$i];
+                        $genInfo->rd_applicant_info_id = $applicantID;
+                        $genInfo->save();
+                        
+                        
+                    } else {
+                        print_r($applicationModel->getErrors());
+                        die();
+                    }
+                    $i++;
+                }
+                
+                Yii::app()->session['applicationID'] = $applicationID;
+            } else {
+                print_r($applicationModel->getErrors());
+                die();
+            }
+        } else {
+            $applicationModel = ApplicationInformation::model()->findByPk(Yii::app()->session['applicationID']);
+            if(!isset($applicationModel) || count($applicationModel) <= 0){
+                $message = array('error_type' => 'session_exists_no_data', 'message' => 'Session exist but no data found on server. Please close your browser first');
+            } else {
+                $applicationModel->attributes = $data1['ApplicationInformation'];
+                if($applicationModel->save()){
+                    $applicantID = $applicationModel->id;
+                    $applicantModel = ApplicantInfo::model()->findAll("rd_applicant_info_id = $applicantID");
+                    
+                    if(isset($applicantModel) || count($applicantModel)>0){
+                        $i = 0;
+                        foreach($applicantModel as $k => $applicantVal){
+                            
+                        }
+                    }
+                    //foreach()
+                    $i = 1;
+                    foreach($data2['ApplicantInfo'] as $appKey => $applicant){
+                        
+                    }
                 }
             }
-            print_r(Yii::app()->session['applicantID']);
-        } else {
-            print_r($_POST);
+            
+            echo json_encode($message);
         }
     }
 
@@ -559,31 +656,4 @@ class RentalController extends Controller
             Yii::app()->end();
         }
     }
-
-    // Uncomment the following methods and override them if needed
-    /*
-    public function filters()
-    {
-            // return the filter configuration for this controller, e.g.:
-            return array(
-                    'inlineFilterName',
-                    array(
-                            'class'=>'path.to.FilterClass',
-                            'propertyName'=>'propertyValue',
-                    ),
-            );
-    }
-
-    public function actions()
-    {
-            // return external action classes, e.g.:
-            return array(
-                    'action1'=>'path.to.ActionClass',
-                    'action2'=>array(
-                            'class'=>'path.to.AnotherActionClass',
-                            'propertyName'=>'propertyValue',
-                    ),
-            );
-    }
-    */
 }

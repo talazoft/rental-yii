@@ -190,7 +190,13 @@
                         <div id="selfemployed<?php echo $cnt; ?>" style="display: none">
                             <?php $this->renderPartial("_self_employed_form", array('cnt'=>$cnt), false, true); ?>
                         </div>
-                    </div>			  
+                    </div>
+                    <?php 
+                        echo CHtml::hiddenField("eiiempl$cnt", isset(Yii::app()->session['step4']["eiiempl$cnt"]) ? Yii::app()->session['step4']["eiiempl$cnt"] : "", array('id'=>"eiiempl$cnt"));
+                    ?>
+                    <?php 
+                        echo CHtml::hiddenField("eiiself$cnt", isset(Yii::app()->session['step4']["eiiself$cnt"]) ? Yii::app()->session['step4']["eiiself$cnt"] : "", array('id'=>"eiiself$cnt"));
+                    ?>
                 </td>
             </tr>
         </tbody>

@@ -21,7 +21,7 @@
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditRef[$cnt][$cnt2][amount]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["amount"]) ? Yii::app()->session['step6']["CreditRef"][$cnt][$cnt2]["amount"] : "", array('style'=>'width:70%','class'=>'currency'));
+            echo CHtml::textField("CreditRef[$cnt][$cnt2][amount]", isset(Yii::app()->session['step6']["CreditRef"][$cnt][$cnt2]["amount"]) ? Yii::app()->session['step6']["CreditRef"][$cnt][$cnt2]["amount"] : "", array('style'=>'width:70%','class'=>'currency'));
         ?>
     </td>
 </tr>

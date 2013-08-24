@@ -353,9 +353,6 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/auto-numeric.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/additional-methods.min.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.compiled.js"></script>	
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/base64.js"></script>	
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/canvas2image.js"></script>
     <script type="text/javascript">
     $(function () { 
         $(".right-container").alternateScroll();

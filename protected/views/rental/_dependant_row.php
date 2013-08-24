@@ -16,7 +16,7 @@
         </td>
         <td align="center" style="width:20%">
             <?php 
-                echo CHtml::dropdownList("DependantInfo[$cnt][$cnt2][stay_in]", isset(Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["stay_in"]) ? Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["stay_in"] : "", array('1' => 'Yes', '0' => 'No'), array("style"=>"width:50%", 'id' => "DependantInfo_stay_in$cnt$cnt2"));
+                echo CHtml::dropdownList("DependantInfo[$cnt][$cnt2][stay_in]", isset(Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["stay_in"]) ? Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["stay_in"] : "", array('1' => 'Yes', '0' => 'No'), array("style"=>"width:50%", 'id' => "DependantInfo_stay_in$cnt$cnt2", 'empty'=>'Choose one'));
             ?>
         </td>
         <?php /*

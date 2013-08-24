@@ -46,9 +46,6 @@
                                         <img src="images/minus.png">
                                     </a>
                                 </td>
-                                <?php 
-                                    echo CHtml::hiddenField("eiiempl$cnt", isset(Yii::app()->session['step4']["eiiempl$cnt"]) ? Yii::app()->session['step4']["eiiempl$cnt"] : "", array('id'=>"eiiempl$cnt"));
-                                ?>
                             </tr>
                             <tr>
                                 <td align="center" colspan="6"> <hr class="dashed"></td>

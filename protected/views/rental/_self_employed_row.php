@@ -1,3 +1,9 @@
+<script>
+    $(function(){
+        $(".phone").mask("(999) 999-9999");
+        $(".currency").autoNumeric();
+    });
+</script>
 <tr>
     <td height="36" align="center" style="border-right-color:#dddddd">
         <?php 

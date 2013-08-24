@@ -1,3 +1,9 @@
+<script>
+    $(function(){
+        $(".phone").mask("(999) 999-9999");
+        $(".currency").autoNumeric();
+    });
+</script>
 <tr class="restblrow">
     <td>
         <table width="100%" border="0" id="tblresident<?php echo isset($cnt) && isset($cnt2) ? $cnt.$cnt2 : "" ?>">

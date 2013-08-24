@@ -11,17 +11,17 @@
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[$cnt][$cnt2][phone]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone"] : "", array('style'=>'width:70%','class'=>'phone'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][phone_no]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone_no"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["phone_no"] : "", array('style'=>'width:70%','class'=>'phone'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[$cnt][$cnt2][account]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account"] : "", array('style'=>'width:70%'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][account_type]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account_type"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["account_type"] : "", array('style'=>'width:70%'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
         <?php 
-            echo CHtml::textField("CreditInfo[$cnt][$cnt2][balance]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["balance"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["balance"] : "", array('style'=>'width:70%','class'=>'currency'));
+            echo CHtml::textField("CreditInfo[$cnt][$cnt2][approx_balance]", isset(Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["approx_balance"]) ? Yii::app()->session['step6']["CreditInfo"][$cnt][$cnt2]["approx_balance"] : "", array('style'=>'width:70%','class'=>'currency'));
         ?>
     </td>
 </tr>

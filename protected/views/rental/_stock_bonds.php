@@ -74,7 +74,7 @@
                             </th>
                         </tr>
                         <?php
-                            $this->renderPartial('_stock_bonds_row', array('cnt'=>1, 'cnt2'=>1));
+                            $this->renderPartial('_stock_bonds_row', array('cnt'=>$cnt, 'cnt2'=>$cnt2));
                         ?>
                     </tbody>
                 </table>

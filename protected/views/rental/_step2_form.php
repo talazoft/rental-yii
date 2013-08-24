@@ -269,6 +269,15 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
+
+                <td><label>Home Phone</label></td>
+                <td>:</td>
+                <td>
+                    <?php 
+                    echo CHtml::textField("ApplicantInfo[$cnt][homephone]", isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"] : "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_homephone$cnt", 'class'=>'phone', 'required'=>'required'));
+                    ?>
+                </td>
+                <td>&nbsp;</td>
                 <td>
                     <label>
                         <?php 
@@ -316,17 +325,6 @@
                             $htmlOptions
                         ); 
                     ?>
-                </td>
-                <td>&nbsp;</td>
-
-                <td><!--<label>Pet Deposit</label>--></td>
-                <td><!--:--></td>
-                <td><!--<input type="text" id="depositpet1" name="depositpet1" size="27" style="width:75%"  disabled="disabled" onblur="this.value=formatCurrency(this.value)"> -->
-                <!--<select  id="depositpet1" name="depositpet1" disabled="disabled" >
-                <option >1 - $600</option>
-                <option>2 - $800</option>
-                <option>3 - $1000</option>
-                </select>-->
                 </td>
                 <td>&nbsp;</td>
             </tr>

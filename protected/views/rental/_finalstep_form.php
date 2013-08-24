@@ -1,5 +1,9 @@
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.signature.min.js"></script>
 <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/excanvas.js"></script>	
+<![endif]-->
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.signature.min.js"></script>
 <p class="padding" align="justify">Applicant represents all information on this Application to be true and accurate and understands that owner / manager will rely upon said information when accepting this Application whether an independent investigation has been performed or not. Applicant hereby authorizes owner/manager and his/her/its employees and agents to verify said information and make independent investigations in person, by mail, phone, fax, or otherwise, to determine Applicant's rental, credit, financial and character standing. Applicant hereby releases owner/manager, his/her/its employees and agents, Vantage Asset Management, Ltd., its employees and agents and any and all other firms or persons investigating or supplying information, from any liability whatsoever concerning the release and/or use of said information and further, will hold them all harmless from any suit or reprisal whatsoever. All holders, public and private, of any such information are hereby authorized to release, without limitation, any and all such information they have concerning Applicant and in so doing, will be acting on Applicant's behalf at Applicant's request and will be held blameless and without any liability whatsoever. A copy or other reproduction of this Authorization shall be as effective as the original. </p>
 <p class="padding" align="justify">I / we, the undersigned, authorize Vantage Asset Management. Ltd., Landlord and its agents to obtain an investigative consumer credit report including but not limited to credit history, OFAC search, landlord/tenant court record search, criminal record search and registered sex offender search. I authorize the release of information from previous or current landlords, employers, and bank representatives. This investigation is for resident screening purposes only, and is strictly confidential. This report contains information compiled from sources believed to be reliable, but the accuracy of which cannot be guaranteed. I hereby hold Vantage Asset Management. Ltd., Landlord and its agents free and harmless of any liability for any damages arising out of any improper use of this information. Important information about your rights under the Fair Credit reporting Act: </p>
 <ul style="left:auto" type="disc">
@@ -64,21 +68,28 @@ $(function(){
     
     $("#reset-signature").click(function(){
         $("#signature").signature('clear');
+        $("#signed").attr('width','167');
+        $("#signed").attr('height','50');
     });
     <?php
     
-    if (isset(Yii::app()->session['step1']['prime_applic_signature'])){ 
-        $signJson = Yii::app()->session['step1']['prime_applic_signature'];
+    if (isset(Yii::app()->session['step1']['ApplicationInformation']['prime_applic_signature'])){ 
+        $signJson = Yii::app()->session['step1']['ApplicationInformation']['prime_applic_signature'];
         ?>
         var json = <?php echo $signJson; ?>;
         $("#signature").signature({
             id:'signed',
             draw: json,
             syncField: '#signJson'
-        });	
+        });
+        
+        $("#signed").attr('width','167');
+        $("#signed").attr('height','50');
     <?php 
     } else { ?>
         $("#signature").signature({id:'signed', syncField:'#signJson'});
+        $("#signed").attr('width','167');
+        $("#signed").attr('height','50');
     <?php
     }
     ?>
@@ -114,8 +125,10 @@ $(function(){
     $("#saveform2").unbind('click').click(function(){
         var savapplicationurl = "<?php echo Yii::app()->createUrl("rental/saveapplicantioninfo"); ?>";
         var saveapplicanturl = "<?php echo Yii::app()->createUrl("rental/saveapplicantinfo"); ?>";
+        var saveallurl = "<?php echo Yii::app()->createUrl("rental/saveall"); ?>";
         var cnt = <?php echo $cnt; ?>;
         
+        var data1 = $(".step1-form").serialize();
         var data2 = $(".step2-form").serialize();
         var data3 = $(".step3-form").serialize();
         var data4 = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
@@ -124,14 +137,8 @@ $(function(){
         var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
         var data8 = $("#signJson").val();
         
-        var alldata = {data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
+        var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
         
-        /*$.post(saveurl, alldata, function(response){
-            
-        });*/
-    
-        
-    
         if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
             ///$('form').each(function(){
                 //var forms = $(".step1-form");
@@ -140,8 +147,9 @@ $(function(){
                 //$.post(saveurl, payload);
             //});
             
-            //$.post(savapplicationurl, $(".step1-form").serialize());
-            $.post(saveapplicanturl, alldata);
+//            $.post(savapplicationurl, $(".step1-form").serialize());
+//            $.post(saveapplicanturl, alldata);
+            $.post(saveallurl, alldata);
         }
     });
     

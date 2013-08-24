@@ -65,7 +65,7 @@
                     </th>
                 </tr>
                 <?php
-                    $this->renderPartial('_credit_ref_row', array('cnt'=>$cnt2, 'cnt2'=>$cnt2));
+                    $this->renderPartial('_credit_ref_row', array('cnt'=>$cnt, 'cnt2'=>$cnt2));
                 ?>
             </tbody>
         </table>
