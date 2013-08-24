@@ -510,9 +510,25 @@ class RentalController extends Controller
     
     public function actionSaveapplicantinfo(){
         
-        $serializedData = $_POST['data2'];
-        $unserializedData = array();
-        parse_str($serializedData, $unserializedData);
+        $serializeData2 = $_POST['data2'];
+        $data2 = array();
+        $serializeData3 = $_POST['data3'];
+        $data3 = array();
+        $serializeData4 = $_POST['data4'];
+        $data4 = array();
+        $serializeData5 = $_POST['data5'];
+        $data5 = array();
+        $serializeData6 = $_POST['data6'];
+        $data6 = array();
+        $serializeData7 = $_POST['data7'];
+        $data7 = array();
+        parse_str($serializeData2, $data2);
+        parse_str($serializeData3, $data3);
+        parse_str($serializeData4, $data4);
+        parse_str($serializeData5, $data5);
+        parse_str($serializeData6, $data6);
+        parse_str($serializeData7, $data7);
+
         print_r($unserializedData);
         die();
         
