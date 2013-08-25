@@ -601,7 +601,8 @@
     <div id="box3">
         <div id="form3">
             <?php 
-            echo $this->renderPartial("//rental/open_saved_form", '', true);
+            include "/../rental/open_saved_form.php";
+            //echo $this->renderPartial("//rental/open_saved_form", '', true);
             ?>
         </div>
     </div>

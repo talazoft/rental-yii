@@ -2,67 +2,17 @@
 
 class RentalController extends Controller
 {
-    
     public $layout = "//layouts/rental-column";
 
     function init(){
-//        
-//        /*Yii::app()->clientScript->registerCoreScript(Yii::app()->request->baseUrl.'/js/jquery-1.10.2.min.js', CClientScript::POS_HEAD);
-//        Yii::app()->clientScript->registerCoreScript(Yii::app()->request->baseUrl.'/js/jquery-ui-1.9.0.custom.min.js', CClientScript::POS_HEAD);
-//        Yii::app()->clientScript->registerCoreScript(Yii::app()->request->baseUrl.'/js/jquery.ui.touch-punch.min.js', CClientScript::POS_HEAD);
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/facescroll.js', CClientScript::POS_HEAD);
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/excanvas.compiled.js');	
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.signature.min.js');
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/base64.js');
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/canvas2image.js');         
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js', CClientScript::POS_HEAD);
-//        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js', CClientScript::POS_HEAD); 
-//        Yii::app()->clientScript->registerScript('globaljs', '
-//            $(".phone").mask("(999) 999-9999");
-//            $(".ssn").mask("999-99-9999");
-//            $(".currency").autoNumeric();
-//            $(".zip").mask("99999");', CClientScript::POS_READY);*/
         parent::init();
         
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
         
-        
     }
     
-    public function actions(){
-
-    }
-    
-    public function actionIndex(){  
-
-        /*$rentalModel = new MsRentalInformation();
-        $applicantModel = new MsApplicationInformation();
-
-        //ajax validation
-        $this->performAjaxValidation(array($rentalModel, $applicantModel));
-
-        $this->render('index', 
-                array('random_user'     => Utils::rand_string(6),
-                      'random_pass'     => Utils::rand_string(6),
-                      'rentalModel'     => $rentalModel,
-                      //'applicantModel'  => $applicantModel,
-                ));*/
-
-        /*Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-1.10.2.min.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery-ui-1.9.0.custom.min.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.ui.touch-punch.min.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
-        Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/facescroll.js', CClientScript::POS_HEAD);
-        Yii::app()->clientScript->registerScript('scroll', '
-            $(".right-container").alternateScroll();
-            $(".phone").mask("(999) 999-9999");
-            $(".currency").autoNumeric();
-            $(".zip").mask("99999");
-            $(".ssn").mask("999-99-9999");
-        ', CClientScript::POS_READY);*/
-        
+    public function actionIndex(){          
         $tempModel = Temp::model()->findByPk(1);
         if(isset($tempModel) && count($tempModel)> 0){
             Yii::app()->session['step1']['ApplicationInformation']['address'] = $tempModel->address;
@@ -78,14 +28,7 @@ class RentalController extends Controller
         }
         
         $model = new ApplicationInformation;
-        
-        /*Yii::app()->clientScript->scriptMap=array(
-            'jquery.js'=>false,
-            'jquery-ui.min.js'=>false,
-            'jquery.maskedinput.min.js'=>false,
-            'auto-numeric.js'=>false,
-        ); */
-        
+
         $this->render("index", array('model' => $model));
     }
     
@@ -104,11 +47,8 @@ class RentalController extends Controller
             
             if($cnt > 0){
                 Yii::app()->session['step1']['num_of_applicant'] = $cnt;
-                //$u = 0;
+                $u = 0;
                 for($i = 1; $i<=$cnt;$i++){
-                    //if(isset(Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i])){
-                    //    $step2_cnt2 = Yii::app()->session['step2']['DependantInfo']['depcnt2'.$i];
-                    //}
                     $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
                     $response['step3'][] = $this->renderPartial('_step3_form', array('cnt' => $i, 'cnt2' => 1), true, true);
@@ -119,15 +59,14 @@ class RentalController extends Controller
 
                     $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
-                    //$u++;
+                    $u++;
                 }
 
-                //$total_fee = 30*$u;
+                $total_fee = 30*$u;
                 $response['step7'] = $this->renderPartial('_step7_form', array('cnt' => $i, 'cnt2' => 1), true, true);
-                //$response['step8'] = $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true, true);
+                $response['step8'] = $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true, true);
                 //$response['finalstep'] = $this->renderPartial('_finalstep_form', '', true, true);
-                
-                
+ 
                 echo CJSON::encode($response);
             }
         }
@@ -152,7 +91,7 @@ class RentalController extends Controller
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
-                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => isset(Yii::app()->session['step2']['ApplicantInfo']['cnt2']) ? Yii::app()->session['step2']['ApplicantInfo']['cnt2'] : 1), true, true);
+                echo $this->renderPartial('_step2_form', array('cnt' => $i), true, true);
             }
         }
     }
@@ -210,8 +149,6 @@ class RentalController extends Controller
             unset(Yii::app()->session['step4']);
             Yii::app()->session['step4'] = $_POST;
         }
-        
-        print_r(Yii::app()->session['step4']);
     }
 
     public function actionShowstep5(){
@@ -236,7 +173,6 @@ class RentalController extends Controller
             unset(Yii::app()->session['step5']);
             Yii::app()->session['step5'] = $_POST;
         }
-        
     }
     
     public function actionShowstep6(){
@@ -446,21 +382,136 @@ class RentalController extends Controller
     
     public function actionOpenall(){
         $applicationModel = ApplicationInformation::model()
-                ->with('applicantInfos')
                 ->find("code = :code and pass = :pass", array('code'=>$_POST['code'], 'pass'=>md5($_POST['pass'])));
         
-        unset(Yii::app()->session['step1']);
         foreach($applicationModel as $appKey => $appVal){
             $appArr[$appKey] = $appVal;
         }
-       
-        //$step1 = array('ApplicationInformation'=> $appArr);
-        Yii::app()->session['step1'] = $appArr;
+             
+        $applicantsModel = ApplicantInfo::model()
+                ->findAll("rd_application_information_id = ".$applicationModel->id);
         
-        $applicantsModel = $applicationModel->applicantInfos;
-        //Yii::app()->session['step2']['ApplicantInfo']['cnt2'] = count($applicantsModel);
+        $applicantsData = array();
+        $i = 1;
+        foreach($applicantsModel as $applicant){
+            foreach($applicant as $k => $val){
+                $applicantsData['ApplicantInfo'][$i][$k] = $val;
+            }
+
+            $dependantsModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($dependantsModel as $kv => $dependant){
+                foreach($dependant as $key => $val){
+                    $ddata[$i][$kv+1][$key] = $val;
+                }
+            }
+            $ddata[$i]['depcnt2'] = count($dependantsModel);
+            $dependantsData = array('DependantInfo'=>$ddata);
+            
+            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($vehicleModel as $kv => $vehicle){
+                foreach($vehicle as $key => $val){
+                    $vdata[$i][$kv+1][$key] = $val;
+                }
+            }
+            $vdata[$i]['vehcnt2'] = count($vehicleModel);
+            $vehiclesData = array('VehicleInfo'=>$vdata);
+            
+            $resHistoryModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($resHistoryModel as $rsv => $reshis){
+                foreach($reshis as $key => $val){
+                    $resdata[$i][$rsv+1][$key] = $val;
+                }
+            }
+            $resdata[$i]['rescnt2'] = count($resHistoryModel);
+            $resHisData = array('ResidentalHistory'=>$resdata);
+            
+            $empModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($empModel as $emp => $employment){
+                foreach($employment as $key => $val){
+                    $empdata[$i][$emp+1][$key] = $val;
+                }
+            }
+            $empdata[$i]['employment_type'] = $empModel[$i-1]->employment_type;
+            $employmentData = array("EmploymentInfo" => $empdata);
+            
+            $prModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($prModel as $pr => $personalref){
+                foreach($personalref as $key => $val){
+                    $prdata[$i][$pr+1][$key] = $val;
+                }
+            }
+            $prdata["prcnt2$i"] = count($prModel);
+            $personalRefrenceData = array("PersonalRefrence" => $prdata);
+            
+            $criModel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($criModel as $cri => $creditinfo){
+                foreach($creditinfo as $key => $val){
+                    $cridata[$i][$cri+1][$key] = $val;
+                }
+                
+            }
+            $cridata["cricnt2$i"] = count($criModel);
+            $creditInfoData = array("CreditInfo" => $cridata);
+            
+            $crrModel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($crrModel as $crr => $creditref){
+                foreach($creditref as $key => $val){
+                    $crrdata[$i][$crr+1][$key]=$val;
+                }
+            }
+            $crrdata["crfcnt2$i"] = count($crrModel);
+            $creditRefData = array("CreditRef"=>$crrdata);
+            
+            $sbModel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+            foreach($sbModel as $sb => $stock){
+                foreach($stock as $key => $val){
+                    $sbdata[$i][$sb+1][$key] = $val;
+                }
+            }
+            $sbdata["stockcnt2$i"] = count($sbModel);
+            $stockBondsData = array("StockBonds"=>$sbdata);
+            
+            $expModel = Expenditures::model()->find("rd_applicant_info_id = ".$applicant->id);
+            foreach($expModel as $exk => $exp){
+                $exdata[$i][$exk] = $exp;
+            }
+            $expendData = array("Expenditures"=>$exdata);
+            
+            $incModel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicant->id);
+            foreach($incModel as $eky => $income){
+                $incdata[$i][$eky] = $income;
+            }
+            $incomeData = array("MonthlyIncome"=>$incdata);
+            
+            $otherModel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicant->id);
+            foreach($otherModel as $gke => $generalinfo){
+                $geninfdata[$i][$gke] = $generalinfo;
+            }
+            $generalInfoData = array("GeneralInfo"=>$geninfdata);
+
+            $i++;
+        }
         
-        print_r(count($applicantsModel));
+        $step6arr1 = array_merge_recursive($creditInfoData, $creditRefData);
+        $step6arr2 = array_merge_recursive($stockBondsData, $expendData);
+        $step6arr3 = array_merge_recursive($step6arr1, $step6arr2);
+        $step6arr4 = array_merge_recursive($step6arr3, $incomeData);
+        
+        $step1 = $appArr;
+        $step2 = array_merge_recursive(array_merge_recursive($applicantsData, $dependantsData), $vehiclesData);
+        $step3 = $resHisData;
+        $step4 = $employmentData;
+        $step5 = $personalRefrenceData;
+        $step6 = $step6arr4;
+        $step7 = $generalInfoData;
+              
+        Yii::app()->session['step1'] = $step1;
+        Yii::app()->session['step2'] = $step2;
+        Yii::app()->session['step3'] = $step3;
+        Yii::app()->session['step4'] = $step4;
+        Yii::app()->session['step5'] = $step5;
+        Yii::app()->session['step6'] = $step6;
+        Yii::app()->session['step7'] = $step7;
     }
     
     public function actionShowstep1(){
@@ -493,14 +544,6 @@ class RentalController extends Controller
         $data1['ApplicationInformation']['prime_appic_signature'] = $_POST['data8']['sign'];
         $data1['ApplicationInformation']['payment_type'] = $_POST['data8']['payment_type'];
         
-        Yii::app()->session['step1'] = $data1['ApplicationInformation'];
-        Yii::app()->session['step2'] = $data2;
-        Yii::app()->session['step3'] = $data3;
-        Yii::app()->session['step4'] = $data4;
-        Yii::app()->session['step5'] = $data5;
-        Yii::app()->session['step6'] = $data6;
-        Yii::app()->session['step7'] = $data7;
-       
         if(!isset(Yii::app()->session['applicationID'])){
             $applicationModel = new ApplicationInformation();
             $applicationModel->attributes = $data1['ApplicationInformation'];
@@ -738,7 +781,6 @@ class RentalController extends Controller
                                 }
                             }
 
-
                             foreach($data6['CreditInfo'][$i] as $key => $crinfo){
                                 if(is_numeric($key)){
                                     $crModel = new CreditInfo();
@@ -799,7 +841,18 @@ class RentalController extends Controller
             }
             
             echo json_encode($message);
-        }    
+        }  
+        
+        $data1['ApplicationInformation']['prime_appic_signature'] = $_POST['data8']['sign'];
+        $data1['ApplicationInformation']['payment_type'] = $_POST['data8']['payment_type'];
+        
+        Yii::app()->session['step1'] = $data1['ApplicationInformation'];
+        Yii::app()->session['step2'] = $data2;
+        Yii::app()->session['step3'] = $data3;
+        Yii::app()->session['step4'] = $data4;
+        Yii::app()->session['step5'] = $data5;
+        Yii::app()->session['step6'] = $data6;
+        Yii::app()->session['step7'] = $data7;
     }
 
     protected function performAjaxValidation($model)

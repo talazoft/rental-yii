@@ -274,7 +274,9 @@
                 <td>:</td>
                 <td>
                     <?php 
-                    echo CHtml::textField("ApplicantInfo[$cnt][homephone]", isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"] : "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_homephone$cnt", 'class'=>'phone', 'required'=>'required'));
+                    echo CHtml::textField("ApplicantInfo[$cnt][homephone]", 
+                            isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"] : "", 
+                            array('style'=>'width:75%', 'id'=>"ApplicantInfo_homephone$cnt", 'class'=>'phone', 'required'=>'required'));
                     ?>
                 </td>
                 <td>&nbsp;</td>
@@ -357,6 +359,7 @@
                                                 <!-- <th bgcolor="#dddddd" height="36" style="border-collapse:collapse; border-color:#bebebe">Stay duration</th> -->
                                             </tr>
                                             <?php 
+                                            
                                             if(!isset(Yii::app()->session['step2']['DependantInfo'][$cnt]["depcnt2"])) { 
                                                 echo $this->renderPartial("_dependant_row", array('cnt'=>$cnt, 'cnt2' => 1), true);
                                             } else {

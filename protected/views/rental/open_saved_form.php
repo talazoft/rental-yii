@@ -4,9 +4,31 @@
             var openurl = "<?php echo Yii::app()->createUrl("rental/openall"); ?>";
             var data = {code:$("#txtcode").val(), pass:$("#txtpassword").val()}
             $.post(openurl, data, function(response){              
-                var step1url = "<?php echo Yii::app()->createUrl("rental/showstep1"); ?>";
-                $("#ri").load(step1url);
-                
+                $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
+                $("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
+                    $(".step_content_2").slideToggle(350);
+                });
+                $("#rh").load("<?php echo Yii::app()->createUrl("rental/showstep3"); ?>", '', function(){
+                    $(".step_content_3").slideToggle(350);
+                });
+                $("#eii").load("<?php echo Yii::app()->createUrl("rental/showstep4"); ?>", '', function(){
+                    $(".step_content_4").slideToggle(350);
+                });
+                $("#pr").load("<?php echo Yii::app()->createUrl("rental/showstep5"); ?>", '', function(){
+                    $(".step_content_5").slideToggle(350);
+                });
+                $("#cfi").load("<?php echo Yii::app()->createUrl("rental/showstep6"); ?>", '', function(){
+                    $(".step_content_6").slideToggle(350);
+                });
+                $("#gi").load("<?php echo Yii::app()->createUrl("rental/showstep7"); ?>", '', function(){
+                    $(".step_content_7").slideToggle(350);
+                });
+                $("#cf").load("<?php echo Yii::app()->createUrl("rental/showstep8"); ?>", '', function(){
+                    $(".step_content_8").slideToggle(350);
+                });
+                $("#agreements").load("<?php echo Yii::app()->createUrl("rental/showfinalstep"); ?>", '', function(){
+                    $(".step_content_final").slideToggle(350);
+                });
             });
         });
     });

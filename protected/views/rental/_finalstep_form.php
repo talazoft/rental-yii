@@ -62,7 +62,7 @@
         Click here to reset
     </a>
 </div>
-<input name="prime_applic_signature" id="signJson" type="hidden" value="">
+<input name="prime_applic_signature" id="signJson" type="hidden" value='<?php echo isset(Yii::app()->session['step1']['prime_appic_signature']) ? Yii::app()->session['step1']['prime_appic_signature'] : "" ?>' >
 <script>
 $(function(){
     
@@ -72,19 +72,15 @@ $(function(){
         $("#signed").attr('height','50');
     });
     <?php
-
-    if (isset(Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature'])){ 
-        
-        print_r(Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature']);
-        
-        $signJson = Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature'];
+    // try to use this http://thomasjbradley.ca/lab/signature-pad/accept/
+    if (isset(Yii::app()->session['step1']['prime_appic_signature'])){ 
         ?>
-        var json = "<?php echo $signJson; ?>";
-        $("#signJson").val(json);
+        var json = $("#signJson").val();
+
         $("#signature").signature({
             id:'signed',
             draw: json,
-            syncField: '#signJson'
+            syncField: '#signJson',
         });
         
         $("#signed").attr('width','167');
