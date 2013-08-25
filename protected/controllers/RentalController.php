@@ -152,7 +152,7 @@ class RentalController extends Controller
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             for($i = 1; $i<=$cnt;$i++){
-                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+                echo $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => isset(Yii::app()->session['step2']['ApplicantInfo']['cnt2']) ? Yii::app()->session['step2']['ApplicantInfo']['cnt2'] : 1), true, true);
             }
         }
     }
@@ -453,14 +453,19 @@ class RentalController extends Controller
         foreach($applicationModel as $appKey => $appVal){
             $appArr[$appKey] = $appVal;
         }
+       
         //$step1 = array('ApplicationInformation'=> $appArr);
         Yii::app()->session['step1'] = $appArr;
+        
+        $applicantsModel = $applicationModel->applicantInfos;
+        //Yii::app()->session['step2']['ApplicantInfo']['cnt2'] = count($applicantsModel);
+        
+        print_r(count($applicantsModel));
     }
     
     public function actionShowstep1(){
         echo $this->renderPartial("_step1_form", '', true);
     }
-    
     
     public function actionSaveall(){
         $serializeData1 = $_POST['data1'];
