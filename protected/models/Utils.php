@@ -10,19 +10,7 @@
  *
  * @author rizka
  */
-class Utils {
-    public static function rand_string($length) {
-        $str="";
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
-
-        $size = strlen( $chars );
-        for( $i = 0; $i < $length; $i++ ) {
-            $str .= $chars[rand( 0, $size - 1 )];
-        }
-
-        return $str;
-    }
-    
+class Utils {    
     public static function fullname($cnt){
         if(isset(Yii::app()->session['step2']['ApplicantInfo']["firstname$cnt"]) && isset(Yii::app()->session['step2']['ApplicantInfo']["lastname$cnt"])){
             $fullname = Yii::app()->session['step2']['ApplicantInfo']["firstname$cnt"]." ".Yii::app()->session['step2']['ApplicantInfo']["middlename$cnt"]." ".Yii::app()->session['step2']['ApplicantInfo']["lastname$cnt"];
@@ -30,6 +18,18 @@ class Utils {
             $fullname = "";
         }
         return $fullname; 
+    }
+    
+    public static function rand_string($length) {
+        $str="";
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
+
+        $size = strlen( $chars );
+        for( $i = 0; $i < $length; $i++ ) {
+            $str .= $chars[ rand( 0, $size - 1 ) ];
+        }
+
+        return $str;
     }
             
     public static function convert_number_to_words($number) {

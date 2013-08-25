@@ -25,11 +25,9 @@
         <tr>
             <td>
                 <h3>Total Credit Check Fee :&gt;&gt; Pay with
-                <select style="width:25%" name="payment_type" id="payment_type" required="required">
-                    <option value="">Select</option>
-                    <option value="cash">Paypal</option>
-                    <option value="credit">Credit</option>
-                </select>
+                    <?php 
+                        echo CHtml::dropdownList('payment_type', isset(Yii::app()->session['step1']['ApplicationInformation']['payment_type']) ? Yii::app()->session['step1']['ApplicationInformation']['payment_type'] : "", array('cash'=>'Paypal', 'credit'=>'Credit'), array("style"=>"width:25%", "required"=>"required", 'id'=>"payment_type", 'empty'=>'Choose one'));
+                    ?>
                 </h3> 
             </td>
             <td align="right">

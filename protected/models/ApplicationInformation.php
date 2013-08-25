@@ -29,6 +29,8 @@
  * @property string $unit
  * @property string $monthly_rent
  * @property string $payment_type
+ * @property string $code
+ * @property string $pass
  *
  * The followings are the available model relations:
  * @property ApplicantInfo[] $applicantInfos
@@ -62,16 +64,17 @@ class ApplicationInformation extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('num_of_applicant, is_existing_tenant', 'numerical', 'integerOnly'=>true),
-			array('selection, sub_selection, address, agent_name, tenant_name, prime_applic_email', 'length', 'max'=>150),
+                        array('pass', 'length', 'max'=>255),
+			array('selection, sub_selection, address, agent_name, tenant_name, prime_applic_email, code', 'length', 'max'=>150),
 			array('city, venue, refered_lead', 'length', 'max'=>50),
 			array('state, zipcode, save_deposit, unit, monthly_rent', 'length', 'max'=>45),
 			array('anticipated_date', 'length', 'max'=>11),
 			array('agent_phone, prime_applic_cellphone, prime_applic_homephone', 'length', 'max'=>25),
 			array('payment_type', 'length', 'max'=>10),
-			array('other_val, created_date, prime_appic_signature', 'safe'),
+			array('other_val, created_date, prime_appic_signature, code, pass', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, num_of_applicant, selection, sub_selection, address, city, state, zipcode, anticipated_date, refered_lead, venue, agent_name, agent_phone, tenant_name, is_existing_tenant, other_val, created_date, prime_applic_cellphone, prime_applic_homephone, prime_applic_email, prime_appic_signature, save_deposit, unit, monthly_rent, payment_type', 'safe', 'on'=>'search'),
+			array('id, num_of_applicant, selection, sub_selection, address, city, state, zipcode, anticipated_date, refered_lead, venue, agent_name, agent_phone, tenant_name, is_existing_tenant, other_val, created_date, prime_applic_cellphone, prime_applic_homephone, prime_applic_email, prime_appic_signature, save_deposit, unit, monthly_rent, payment_type, code, pass', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -118,6 +121,8 @@ class ApplicationInformation extends CActiveRecord
 			'unit' => 'Unit',
 			'monthly_rent' => 'Monthly Rent of $',
 			'payment_type' => 'Payment Type',
+                        'code' => 'Form Code',
+                        'pass' => 'Form Password'
 		);
 	}
 
@@ -157,6 +162,8 @@ class ApplicationInformation extends CActiveRecord
 		$criteria->compare('unit',$this->unit,true);
 		$criteria->compare('monthly_rent',$this->monthly_rent,true);
 		$criteria->compare('payment_type',$this->payment_type,true);
+                $criteria->compare('code',$this->code,true);
+                $criteria->compare('pass',$this->code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -62,7 +62,7 @@
         Click here to reset
     </a>
 </div>
-<input name="prime_applic_signature" id="signJson" type="hidden">
+<input name="prime_applic_signature" id="signJson" type="hidden" value="">
 <script>
 $(function(){
     
@@ -72,11 +72,15 @@ $(function(){
         $("#signed").attr('height','50');
     });
     <?php
-    
-    if (isset(Yii::app()->session['step1']['ApplicationInformation']['prime_applic_signature'])){ 
-        $signJson = Yii::app()->session['step1']['ApplicationInformation']['prime_applic_signature'];
+
+    if (isset(Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature'])){ 
+        
+        print_r(Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature']);
+        
+        $signJson = Yii::app()->session['step1']['ApplicationInformation']['prime_appic_signature'];
         ?>
-        var json = <?php echo $signJson; ?>;
+        var json = "<?php echo $signJson; ?>";
+        $("#signJson").val(json);
         $("#signature").signature({
             id:'signed',
             draw: json,
@@ -123,10 +127,7 @@ $(function(){
         }
     }
     $("#saveform2").unbind('click').click(function(){
-        var savapplicationurl = "<?php echo Yii::app()->createUrl("rental/saveapplicantioninfo"); ?>";
-        var saveapplicanturl = "<?php echo Yii::app()->createUrl("rental/saveapplicantinfo"); ?>";
         var saveallurl = "<?php echo Yii::app()->createUrl("rental/saveall"); ?>";
-        var cnt = <?php echo $cnt; ?>;
         
         var data1 = $(".step1-form").serialize();
         var data2 = $(".step2-form").serialize();
@@ -135,20 +136,11 @@ $(function(){
         var data5 = $(".step5-form").serialize();
         var data6 = $(".step6-form").serialize();
         var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-        var data8 = $("#signJson").val();
+        var data8 = {sign:$("#signJson").val(), payment_type:$("#payment_type option:selected").val()};
         
         var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
         
         if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
-            ///$('form').each(function(){
-                //var forms = $(".step1-form");
-                //var payload = $(forms).serialize();
-                
-                //$.post(saveurl, payload);
-            //});
-            
-//            $.post(savapplicationurl, $(".step1-form").serialize());
-//            $.post(saveapplicanturl, alldata);
             $.post(saveallurl, alldata);
         }
     });

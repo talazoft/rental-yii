@@ -1,11 +1,11 @@
-<script>
-    $(function(){
-        $(".phone").mask("(999) 999-9999");
-        $(".currency").autoNumeric();
-    });
-</script>
 <tr>
     <td align="center" height="36" style="border-right-color:#dddddd">
+        <script>
+            $(function(){
+                $(".phone").mask("(999) 999-9999");
+                $(".currency").autoNumeric();
+            });
+        </script>
         <?php 
             echo CHtml::textField("EmploymentInfo[$cnt][$cnt2][employer]", isset(Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer"]) ? Yii::app()->session['step4']['EmploymentInfo'][$cnt][$cnt2]["employer"] : "", array("style"=>"width:70%"));
         ?>

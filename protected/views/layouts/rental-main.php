@@ -323,6 +323,42 @@
 //            });
         </script> */ ?> 
         <style>
+            #box2
+            {
+                position: absolute;
+                top:111px;
+                left:176px;
+                width: 271px;
+                height: auto;
+                text-align: center;
+                display: none;
+                background-color:transparent;
+                z-index: 1000;
+            }
+
+            #form2{
+                background-color:transparent;
+                width: 271px;
+                height: auto;
+            }
+            #box3
+            {
+                position: absolute;
+                top:111px;
+                left:176px;
+                width: 278px;
+                height: auto;
+                text-align: center;
+                display: none;
+                background-color:transparent;
+                z-index: 1000;
+            }
+            #form3{
+                background-color:transparent;
+                width: 278px;
+                height: auto;
+                margin: 0 auto;
+            }
             #box5{
                 background-color: transparent;
                 display: none;
@@ -345,7 +381,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body id="mainbody">
     <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script>
@@ -538,12 +574,43 @@
             }
 
         });
+        
+        $("#saved").unbind('click').click(function(){
+            $("#box3").show("slow");
+            $("#box2").hide("slow");
+        });
+        
+        $("#show").unbind('click').click(function(){
+            $("#box2").show("slow");
+            $("#box3").hide("slow");
+        });
+        
+        $(".right").unbind('click').click(function(){
+            $("#box2").hide("slow");
+            $("#box3").hide("slow");
+        });
     });
     </script>
-    <div id="box2"><div id="form2"></div></div>
-    <div id="box3"><div id="form3"></div></div>
+    <div id="box2">
+        <div id="form2">
+            <?php 
+            echo $this->renderPartial("//rental/send_to_email_form", '', true);
+            ?>
+        </div>
+    </div>
+    <div id="box3">
+        <div id="form3">
+            <?php 
+            echo $this->renderPartial("//rental/open_saved_form", '', true);
+            ?>
+        </div>
+    </div>
     <div id="box4"><div id="form4"></div></div>
-    <div id="box5"><div id="form5"><?php echo $this->renderPartial("//rental/empty_field", array('message' => "Please fill the form above")); ?></div></div>
+    <div id="box5">
+        <div id="form5">
+            <?php echo $this->renderPartial("//rental/empty_field", array('message' => "Please fill the form above")); ?>
+        </div>
+    </div>
     <div class="overlay"><img style="border:none" src="img/modal.png"></div> 
     <div class="top">
             <div class="logo"></div>

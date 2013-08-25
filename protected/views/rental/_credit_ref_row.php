@@ -1,5 +1,11 @@
 <tr class="crfrow<?php echo $cnt; ?>">
     <td height="36" align="center" style="border-right-color:#dddddd">
+        <script>
+            $(function(){
+                $(".phone").mask("(999) 999-9999");
+                $(".currency").autoNumeric();
+            });
+        </script>
         <?php 
             echo CHtml::textField("CreditRef[$cnt][$cnt2][credit_ref]", isset(Yii::app()->session['step6']["CreditRef"][$cnt][$cnt2]["credit_ref"]) ? Yii::app()->session['step6']["CreditRef"][$cnt][$cnt2]["credit_ref"] : "", array('style'=>'width:70%'));
         ?>

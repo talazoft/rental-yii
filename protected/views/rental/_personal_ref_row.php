@@ -1,5 +1,11 @@
 <tr>
     <td align="center" height="36" style="width:20%">
+        <script>
+            $(function(){
+                $(".phone").mask("(999) 999-9999");
+                $(".currency").autoNumeric();
+            });
+        </script>
         <?php 
             if($required){
                 $htmlOptions = array("style"=>"width:70%", 'required' => 'required');
