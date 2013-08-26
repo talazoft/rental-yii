@@ -13,7 +13,7 @@
                     </label>
                     <?php 
 
-                        for($i = 1; $i<=10; $i++){
+                        for($i = 1; $i<=8; $i++){
                             $data[$i] = $i;
                         }
 
@@ -28,13 +28,18 @@
                                         'url'=>CController::createUrl('rental/applicantchanged'), //url to call.
                                         'data'=>array('num_of_applicant' => 'js:this.value'),
                                         'success'=>'js:function(data){
-                                            var dt = jQuery.parseJSON(data);
-                                            $("#ai").html(dt.step2);
-                                            $("#rh").html(dt.step3);
-                                            $("#eii").html(dt.step4);
-                                            $("#pr").html(dt.step5);
-                                            $("#cfi").html(dt.step6);
-                                            $("#gi").html(dt.step7);
+                                            try{
+                                                var dt = jQuery.parseJSON(data);
+
+                                                $("#ai").html(dt.step2);
+                                                $("#rh").html(dt.step3);
+                                                $("#eii").html(dt.step4);
+                                                $("#pr").html(dt.step5);
+                                                $("#cfi").html(dt.step6);
+                                                $("#gi").html(dt.step7);
+                                            } catch (e){
+                                                alert(e);
+                                            }
                                          }'
                                     ),
                                 )
@@ -95,7 +100,7 @@
                                     'options'=>array(
                                         'changeMonth' => 'true',
                                         'changeYear' => 'true',
-                                        'dateFormat'=>'yy/mm/dd',
+                                        'dateFormat'=>'yy-mm-dd',
                                         'timeFormat' => 'hh:mm:ss',
                                         'mode'=>'date',
                                     ), // jquery plugin options
@@ -112,7 +117,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Deposit of $</label></td>
+                        <td><label>Security deposit $</label></td>
                         <td>:</td>
                         <td>
                             <?php 
@@ -138,8 +143,8 @@
                                     </td>
                                     <td>
                                         <?php 
-                                            echo CHtml::textField("ApplicationInformation[selection]", Yii::app()->session['step1']['selection'], array('style'=>'width:133px', 'required'=>'required'));
-                                            echo CHtml::textField("ApplicationInformation[sub_selection]", Yii::app()->session['step1']['sub_selection'], array('style'=>'width:127px; margin-left:9px', 'required'=>'required'));
+                                            echo CHtml::textField("ApplicationInformation[selection]", isset(Yii::app()->session['step1']['selection']) ? Yii::app()->session['step1']['selection'] : "", array('style'=>'width:133px', 'required'=>'required'));
+                                            echo CHtml::textField("ApplicationInformation[sub_selection]", isset(Yii::app()->session['step1']['sub_selection']) ? Yii::app()->session['step1']['sub_selection'] : "", array('style'=>'width:127px; margin-left:9px', 'required'=>'required'));
                                         ?>
                                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                                     </td>

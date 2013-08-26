@@ -9,7 +9,6 @@ class RentalController extends Controller
         
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/jquery.maskedinput.min.js');
         Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/auto-numeric.js');
-        
     }
     
     public function actionIndex(){          
@@ -27,7 +26,7 @@ class RentalController extends Controller
                 'monthly_rent' => $tempModel->monthlyrent,
             );
             Yii::app()->session['step1'] = $data;
-            $tempModel->truncateTable();
+            Yii::app()->db->createCommand()->truncateTable(Temp::model()->tableName());
         }
         
         $model = new ApplicationInformation;
@@ -49,7 +48,7 @@ class RentalController extends Controller
             $cnt = $_POST['num_of_applicant'];
             
             if($cnt > 0){
-                Yii::app()->session['step1']['num_of_applicant'] = $cnt;
+                //Yii::app()->session['step1'] = array('num_of_applicant'=> $cnt);
                 $u = 0;
                 for($i = 1; $i<=$cnt;$i++){
                     $response['step2'][] = $this->renderPartial('_step2_form', array('cnt' => $i, 'cnt2' => 1), true, true);
@@ -59,18 +58,21 @@ class RentalController extends Controller
                     $response['step4'][] = $this->renderPartial('_step4_form', array('cnt' => $i, 'cnt2' => 1), true, true);
 
                     $response['step5'][] = $this->renderPartial('_step5_form', array('cnt' => $i, 'cnt2' => 1), true, true);
-
-                    $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i, 'cnt2' => 1), true, true);
-
+                    if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
+                        $response['step6'][] = $this->renderPartial('_step6_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+                    }
                     $u++;
                 }
 
                 $total_fee = 30*$u;
-                $response['step7'] = $this->renderPartial('_step7_form', array('cnt' => $i, 'cnt2' => 1), true, true);
-                $response['step8'] = $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true, true);
+                if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
+                    $response['step7'] = $this->renderPartial('_step7_form', array('cnt' => $i, 'cnt2' => 1), true, true);
+                }
+                $response['step8'] = $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true);
                 //$response['finalstep'] = $this->renderPartial('_finalstep_form', '', true, true);
  
-                echo CJSON::encode($response);
+                
+                echo json_encode($response);
             }
         }
     }
@@ -232,7 +234,7 @@ class RentalController extends Controller
         if(isset(Yii::app()->session['step1']['num_of_applicant']) && !empty(Yii::app()->session['step1']['num_of_applicant']) && Yii::app()->session['step1']['num_of_applicant'] > 0){
             $cnt = Yii::app()->session['step1']['num_of_applicant'];
             $total_fee = 30*$cnt;
-            echo $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true, true);
+            echo $this->renderPartial('_step8_form', array('total_fee' => $total_fee), true);
         }
     }
     
@@ -448,74 +450,94 @@ class RentalController extends Controller
                 $personalRefrenceData = array("PersonalRefrence" => $prdata);
 
                 $criModel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
-                foreach($criModel as $cri => $creditinfo){
-                    foreach($creditinfo as $key => $val){
-                        $cridata[$i][$cri+1][$key] = $val;
-                    }
+                if(isset($criModel) && count($criModel) > 0){
+                    foreach($criModel as $cri => $creditinfo){
+                        foreach($creditinfo as $key => $val){
+                            $cridata[$i][$cri+1][$key] = $val;
+                        }
 
+                    }
+                    $cridata["cricnt2$i"] = count($criModel);
+                    $creditInfoData = array("CreditInfo" => $cridata);
                 }
-                $cridata["cricnt2$i"] = count($criModel);
-                $creditInfoData = array("CreditInfo" => $cridata);
 
                 $crrModel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicant->id);
-                foreach($crrModel as $crr => $creditref){
-                    foreach($creditref as $key => $val){
-                        $crrdata[$i][$crr+1][$key]=$val;
+                if(isset($crrModel) && count($crrModel) > 0){
+                    foreach($crrModel as $crr => $creditref){
+                        foreach($creditref as $key => $val){
+                            $crrdata[$i][$crr+1][$key]=$val;
+                        }
                     }
+                    $crrdata["crfcnt2$i"] = count($crrModel);
+                    $creditRefData = array("CreditRef"=>$crrdata);
                 }
-                $crrdata["crfcnt2$i"] = count($crrModel);
-                $creditRefData = array("CreditRef"=>$crrdata);
 
                 $sbModel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicant->id);
-                foreach($sbModel as $sb => $stock){
-                    foreach($stock as $key => $val){
-                        $sbdata[$i][$sb+1][$key] = $val;
+                if(isset($sbModel) && count($sbModel) > 0){
+                    foreach($sbModel as $sb => $stock){
+                        foreach($stock as $key => $val){
+                            $sbdata[$i][$sb+1][$key] = $val;
+                        }
                     }
+                    $sbdata["stockcnt2$i"] = count($sbModel);
+                    $stockBondsData = array("StockBonds"=>$sbdata);
                 }
-                $sbdata["stockcnt2$i"] = count($sbModel);
-                $stockBondsData = array("StockBonds"=>$sbdata);
 
                 $expModel = Expenditures::model()->find("rd_applicant_info_id = ".$applicant->id);
-                foreach($expModel as $exk => $exp){
-                    $exdata[$i][$exk] = $exp;
+                if(isset($expModel) && count($expModel) > 0){
+                    foreach($expModel as $exk => $exp){
+                        $exdata[$i][$exk] = $exp;
+                    }
+                    $expendData = array("Expenditures"=>$exdata);
                 }
-                $expendData = array("Expenditures"=>$exdata);
 
                 $incModel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicant->id);
-                foreach($incModel as $eky => $income){
-                    $incdata[$i][$eky] = $income;
+                if(isset($incModel) && count($incModel) > 0){
+                    foreach($incModel as $eky => $income){
+                        $incdata[$i][$eky] = $income;
+                    }
+                    $incomeData = array("MonthlyIncome"=>$incdata);
                 }
-                $incomeData = array("MonthlyIncome"=>$incdata);
 
                 $otherModel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicant->id);
-                foreach($otherModel as $gke => $generalinfo){
-                    $geninfdata[$i][$gke] = $generalinfo;
+                if(isset($otherModel) && count($otherModel) > 0){
+                    foreach($otherModel as $gke => $generalinfo){
+                        $geninfdata[$i][$gke] = $generalinfo;
+                    }
+                    $generalInfoData = array("GeneralInfo"=>$geninfdata);
                 }
-                $generalInfoData = array("GeneralInfo"=>$geninfdata);
 
                 $i++;
             }
 
-            $step6arr1 = array_merge_recursive($creditInfoData, $creditRefData);
-            $step6arr2 = array_merge_recursive($stockBondsData, $expendData);
-            $step6arr3 = array_merge_recursive($step6arr1, $step6arr2);
-            $step6arr4 = array_merge_recursive($step6arr3, $incomeData);
+            if(isset($creditInfoData) && isset($creditRefData) && isset($stockBondsData) && isset($expendData) && isset($incomeData)){
+                $step6arr1 = array_merge_recursive($creditInfoData, $creditRefData);
+                $step6arr2 = array_merge_recursive($stockBondsData, $expendData);
+                $step6arr3 = array_merge_recursive($step6arr1, $step6arr2);
+                $step6arr4 = array_merge_recursive($step6arr3, $incomeData);
+            }
 
             $step1 = $appArr;
             $step2 = array_merge_recursive(array_merge_recursive($applicantsData, $dependantsData), $vehiclesData);
             $step3 = $resHisData;
             $step4 = $employmentData;
             $step5 = $personalRefrenceData;
-            $step6 = $step6arr4;
-            $step7 = $generalInfoData;
+            
+            if(isset($step6arr4) && isset($generalInfoData)){
+                $step6 = $step6arr4;
+                $step7 = $generalInfoData;
+            }
 
             Yii::app()->session['step1'] = $step1;
             Yii::app()->session['step2'] = $step2;
             Yii::app()->session['step3'] = $step3;
             Yii::app()->session['step4'] = $step4;
             Yii::app()->session['step5'] = $step5;
-            Yii::app()->session['step6'] = $step6;
-            Yii::app()->session['step7'] = $step7;
+
+            if(isset($step6) && isset($step7)){
+                Yii::app()->session['step6'] = $step6;
+                Yii::app()->session['step7'] = $step7;
+            }
         } else {
             echo 0;
         }
@@ -636,55 +658,63 @@ class RentalController extends Controller
                             }
                         }
 
-
-                        foreach($data6['CreditInfo'][$i] as $key => $crinfo){
-                            if(is_numeric($key)){
-                                $crModel = new CreditInfo();
-                                $crModel->attributes = $crinfo;
-                                $crModel->rd_applicant_info_id = $applicantID;
-                                $crModel->save();
-                            } else {
-                                break;
+                        if(isset($data6['CreditInfo'])){
+                            foreach($data6['CreditInfo'][$i] as $key => $crinfo){
+                                if(is_numeric($key)){
+                                    $crModel = new CreditInfo();
+                                    $crModel->attributes = $crinfo;
+                                    $crModel->rd_applicant_info_id = $applicantID;
+                                    $crModel->save();
+                                } else {
+                                    break;
+                                }
                             }
                         }
 
-                        foreach($data6['CreditRef'][$i] as $key => $crref){
-                            if(is_numeric($key)){
-                                $crrefModel = new CreditRef();
-                                $crrefModel->attributes = $crref;
-                                $crrefModel->rd_applicant_info_id = $applicantID;
-                                $crrefModel->save();
-                            } else {
-                                break;
+                        if(isset($data6['CreditRef'])){
+                            foreach($data6['CreditRef'][$i] as $key => $crref){
+                                if(is_numeric($key)){
+                                    $crrefModel = new CreditRef();
+                                    $crrefModel->attributes = $crref;
+                                    $crrefModel->rd_applicant_info_id = $applicantID;
+                                    $crrefModel->save();
+                                } else {
+                                    break;
+                                }
                             }
                         }
 
-                        $incomeModel = new MonthlyIncome();
-                        $incomeModel->attributes = $data6['MonthlyIncome'][$i];
-                        $incomeModel->rd_applicant_info_id = $applicantID;
-                        $incomeModel->save();
+                        if(isset($data6['MonthlyIncome']) && isset($data6['Expenditures'])){
+                            $incomeModel = new MonthlyIncome();
+                            $incomeModel->attributes = $data6['MonthlyIncome'][$i];
+                            $incomeModel->rd_applicant_info_id = $applicantID;
+                            $incomeModel->save();
 
-                        $expenseModel = new Expenditures();
-                        $expenseModel->attributes = $data6['Expenditures'][$i];
-                        $expenseModel->rd_applicant_info_id = $applicantID;
-                        $expenseModel->save();
+                            $expenseModel = new Expenditures();
+                            $expenseModel->attributes = $data6['Expenditures'][$i];
+                            $expenseModel->rd_applicant_info_id = $applicantID;
+                            $expenseModel->save();
+                        }
 
-                        foreach($data6['StockBonds'][$i] as $key => $bonds){
-                            if(is_numeric($key)){
-                                $sbModel = new StockBonds();
-                                $sbModel->attributes = $bonds;
-                                $sbModel->rd_applicant_info_id = $applicantID;
-                                $sbModel->save();
-                            } else {
-                                break;
+                        if(isset($data6['StockBonds'])){
+                            foreach($data6['StockBonds'][$i] as $key => $bonds){
+                                if(is_numeric($key)){
+                                    $sbModel = new StockBonds();
+                                    $sbModel->attributes = $bonds;
+                                    $sbModel->rd_applicant_info_id = $applicantID;
+                                    $sbModel->save();
+                                } else {
+                                    break;
+                                }
                             }
                         }
 
-                        $genInfo = new GeneralInfo();
-                        $genInfo->attributes = $data7['GeneralInfo'][$i];
-                        $genInfo->rd_applicant_info_id = $applicantID;
-                        $genInfo->save();
-                        
+                        if(isset($data7['GeneralInfo'])){
+                            $genInfo = new GeneralInfo();
+                            $genInfo->attributes = $data7['GeneralInfo'][$i];
+                            $genInfo->rd_applicant_info_id = $applicantID;
+                            $genInfo->save();
+                        }
                         
                     } else {
                         print_r($applicationModel->getErrors());

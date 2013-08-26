@@ -180,7 +180,7 @@
                             'options'=>array(
                                 'changeMonth' => 'true',
                                 'changeYear' => 'true',
-                                'dateFormat'=>'yy/mm/dd',
+                                'dateFormat'=>'yy-mm-dd',
                                 'timeFormat' => 'hh:mm:ss',
                                 'yearRange' => "-100:-18",
                                 'mode'=>'date',

@@ -71,8 +71,12 @@ $this->renderPartial('step2');
 $this->renderPartial('step3');
 $this->renderPartial('step4');
 $this->renderPartial('step5');
-$this->renderPartial('step6');
-$this->renderPartial('step7');
+if(isset(Yii::app()->session['step1']['selection'])){
+    if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
+        $this->renderPartial('step6');
+        $this->renderPartial('step7');
+    }
+}
 $this->renderPartial('step8');
 $this->renderPartial('finalstep');
 ?>

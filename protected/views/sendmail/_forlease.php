@@ -128,7 +128,7 @@
                 <div class="formulir">
                     <table width="100%">
                         <tr>
-                            <td width="35%"> Today's Date :<div style="width: 49%; height:3px; border-bottom: 2px; border-bottom-color: black; border-bottom-style: solid"></div></td>
+                            <td width="35%"> Today's Date :____________</td>
                             <td width="40%"> Property Name :_______________</td>
                             <td width="25%"> Unit #   :____________</td>
                         </tr>

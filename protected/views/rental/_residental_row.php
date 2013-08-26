@@ -11,7 +11,7 @@
                 <td valign="top" colspan="8">
                     <?php
                         if($cnt == 2){
-                            echo CHtml::checkbox("ResidentalHistory[skip-resident]", isset(Yii::app()->session['step3']['ResidentalHistory']['skip-resident']) ? true : false, array('class'=>'skip-resident'))." skip to continue";
+                            echo CHtml::checkbox("skip-resident", isset(Yii::app()->session['step3']['skip-resident']) ? true : false, array('class'=>'skip-resident'))." skip to continue";
                         }
                     ?>  
                 </td>
@@ -141,9 +141,8 @@
                     </td>
                     <td valign="top" rowspan="2" colspan="4">
                         <?php 
-                            echo CHtml::textArea("ResidentalHistory[$cnt][$cnt2][leave_reason]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["leave_reason"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["leave_reason"] : "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt$cnt2", 'rows'=>"2", 'cols'=>"46", 'required'=>'required')); 
+                            echo CHtml::textArea("ResidentalHistory[$cnt][$cnt2][leave_reason]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["leave_reason"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["leave_reason"] : "", array('style'=>'width:78%; height:70%', 'id'=>"leave_reason$cnt$cnt2", 'rows'=>"2", 'cols'=>"46")); 
                         ?>
-                        <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
                 </tr>
 

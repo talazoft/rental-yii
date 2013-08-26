@@ -5,22 +5,20 @@ class GenpdfController extends Controller
 	public function actionEmptypdf()
 	{
             Yii::import('ext.pdf.Pdf');
-            if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
-                $pdfhtml = $this->renderPartial('_forlease', array(), true, true);
-                $pdf = new Pdf();
-                $pdf->render($pdfhtml, "rental_information", 1);
-            } else if(strtolower(Yii::app()->session['step1']['selection']) == "apartment"){
-                echo $this->renderPartial('_forsale', '', true);
-                die();
-            }
+            //if(isset(Yii::app()->session['step1']['selection'])){
+            //    if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
+                    $pdfhtml = $this->renderPartial('_forsale', array(), true, true);
+                    $pdf = new Pdf();
+                    $pdf->render($pdfhtml, "rental_information", 0);
+//                } else {
+//                    echo $this->renderPartial('_forsale', '', true);
+//                    die();
+//                }
+//            }
 	}
         
-        public function sendemail(){
-
-        }
-        
         public function actionShowplainhtml(){
-             echo $this->renderPartial('_forlease', array(), true, true);
+             echo $this->renderPartial('_forsale', array(), true, true);
         }
 
 	public function actionGeneratepdf()

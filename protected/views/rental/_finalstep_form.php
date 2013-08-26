@@ -26,41 +26,43 @@
 <div style="float:left; margin-left:32px">
     <input id="cekagree" name="cekagree" type="checkbox"> I agree to the Terms of Use
 </div>
-<div style="clear: both"></div>
-<div id="divbutton" style="float: right; width: 517px; margin-top: 15px;">
-    <div id="saveform2" style="float: left"></div>
-    <div id="btnshowhtml" style="float: left"></div>
-</div>
-<div id="showhtml">
-    <table width="100%" border="0">
-        <tbody>
-            <tr>
-                <td><!-- 
-                    <a href="#" onclick="openCenteredWindow2('index.php/pdf_isi')">
-                    <img border=0 src="images/print_pdf.png">
-                    </a> -->
-                    <div id="printpdf"></div>
-                </td>
-                <td align="right">
-                    <!-- <a href="#" id="sendemailpdf">
-                    <img border=0 src="images/send_email.png">
-                    </a> -->
-                    <div id="sendemailpdf"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="kbw-signature" id="signature" style="margin-top: 7px; margin-left: 37px;">
-</div>
-<div style="margin-left: 36px; margin-top: 10px">
-    <div id="signature-label" style="margin-left: 15px;">
-        Primary applicant sign
-        <img src="images/star.png">
+<div id="hide" style="display:none">
+    <div style="clear: both"></div>
+    <div id="divbutton" style="float: right; width: 517px; margin-top: 15px;">
+        <div id="saveform2" style="float: left"></div>
+        <div id="btnshowhtml" style="float: left"></div>
     </div>
-    <a href="#" id="reset-signature" style="margin-left: 29px;">
-        Click here to reset
-    </a>
+    <div id="showhtml">
+        <table width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td><!-- 
+                        <a href="#" onclick="openCenteredWindow2('index.php/pdf_isi')">
+                        <img border=0 src="images/print_pdf.png">
+                        </a> -->
+                        <div id="printpdf"></div>
+                    </td>
+                    <td align="right">
+                        <!-- <a href="#" id="sendemailpdf">
+                        <img border=0 src="images/send_email.png">
+                        </a> -->
+                        <div id="sendemailpdf"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="kbw-signature" id="signature" style="margin-top: 7px; margin-left: 37px;">
+    </div>
+    <div style="margin-left: 36px; margin-top: 10px">
+        <div id="signature-label" style="margin-left: 15px;">
+            Primary applicant sign
+            <img src="images/star.png">
+        </div>
+        <a href="#" id="reset-signature" style="margin-left: 29px;">
+            Click here to reset
+        </a>
+    </div>
 </div>
 <input name="prime_applic_signature" id="signJson" type="hidden" value='<?php echo isset(Yii::app()->session['step1']['prime_appic_signature']) ? Yii::app()->session['step1']['prime_appic_signature'] : "" ?>' >
 <script>
@@ -154,7 +156,17 @@ $(function(){
     });
     
     $("#sendemailpdf").unbind('click').click(function(){
-        
+        var sendemailurl = "<?php echo Yii::app()->createUrl("sendmail"); ?>";
+        $.post(sendemailurl);
+    });
+    
+    $("#cekagree").unbind('change').change(function(){
+        var check = $(this).is(":checked");
+        if(check){
+            $("#hide").show("slow");
+        } else {
+            $("#hide").hide();
+        }
     });
 });
 </script>
