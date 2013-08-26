@@ -18,7 +18,7 @@
                         }
 
                         echo CHtml::dropdownList("ApplicationInformation[num_of_applicant]", 
-                                Yii::app()->session['step1']['num_of_applicant'], $data,
+                                isset(Yii::app()->session['step1']['num_of_applicant']) ? Yii::app()->session['step1']['num_of_applicant'] : "",  $data,
                                 array(
                                     'empty'=>'Choose one', 
                                     'style'=>'width:50%',
@@ -152,7 +152,9 @@
                         <td>:</td>
                         <td>
                             <?php 
-                                echo CHtml::textField("ApplicationInformation[unit]", Yii::app()->session['step1']['unit'], array('style'=>'width:221px', 'width'=>'80%'));
+                                echo CHtml::textField("ApplicationInformation[unit]", 
+                                        isset(Yii::app()->session['step1']['unit']) ? Yii::app()->session['step1']['unit'] : "", 
+                                        array('style'=>'width:221px', 'width'=>'80%'));
                             ?>             
                         </td>
                     </tr>
@@ -163,12 +165,12 @@
                         <td>:</td>
                         <td>
                             <?php 
-                                echo CHtml::textField("ApplicationInformation[state]", Yii::app()->session['step1']['state'], array('width'=>'31%', 'size'=>7, 'style'=>'width:33%', 'required'=>'required'));
+                                echo CHtml::textField("ApplicationInformation[state]", isset(Yii::app()->session['step1']['state']) ? Yii::app()->session['step1']['state'] : "", array('width'=>'31%', 'size'=>7, 'style'=>'width:33%', 'required'=>'required'));
                             ?>
                             <label>Zip Code</label>
                             :
                             <?php 
-                                echo CHtml::textField("ApplicationInformation[zipcode]", Yii::app()->session['step1']['zipcode'], array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px', 'class'=>'zip', 'required'=>'required'));
+                                echo CHtml::textField("ApplicationInformation[zipcode]", isset(Yii::app()->session['step1']['zipcode']) ? Yii::app()->session['step1']['zipcode'] : "", array('width'=>'25%', 'size'=>5, 'maxlength'=>5, 'style'=>'width:69px', 'class'=>'zip', 'required'=>'required'));
                             ?>
                             <?php echo CHtml::image('images/star.png', 'required'); ?>              
                         </td>
@@ -178,7 +180,7 @@
                         <td>:</td>
                         <td>
                             <?php 
-                                echo CHtml::textField("ApplicationInformation[monthly_rent]", Yii::app()->session['step1']['monthly_rent'], array('style'=>'width:221px', 'class'=>'currency'));
+                                echo CHtml::textField("ApplicationInformation[monthly_rent]", isset(Yii::app()->session['step1']['monthly_rent']) ? Yii::app()->session['step1']['monthly_rent'] : "", array('style'=>'width:221px', 'class'=>'currency'));
                             ?>               
                         </td>
                     </tr>
@@ -193,7 +195,7 @@
                                                 "Tenant"=>"Tenant",
                                                 "Other"=>"Other");
 
-                                echo CHtml::dropdownList("ApplicationInformation[refered_lead]", Yii::app()->session['step1']['refered_lead'], $ref_data, array('empty'=>'Choose One', 'style'=>'width:80%', 'id' => 'ApplicationInformation_refered_lead','required'=>'required'));
+                                echo CHtml::dropdownList("ApplicationInformation[refered_lead]", isset(Yii::app()->session['step1']['refered_lead']) ? Yii::app()->session['step1']['refered_lead'] : "", $ref_data, array('empty'=>'Choose One', 'style'=>'width:80%', 'id' => 'ApplicationInformation_refered_lead','required'=>'required'));
                             ?>
                             <?php echo CHtml::image('images/star.png', 'required'); ?>
                         </td>

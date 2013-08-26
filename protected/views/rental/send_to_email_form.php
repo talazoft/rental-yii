@@ -26,9 +26,14 @@
                         </tr>
                         <tr>
                             <td colspan=2>
-                                <a href="index.php/save_form/pdfkosong" target="_blank"  id="btndownload">
+                                <?php 
+                                    $img = CHtml::image(Yii::app()->baseUrl."/images/download.png", 'download');
+                                    $url = Yii::app()->createUrl('/genpdf/emptypdf');
+                                    echo CHtml::link($img, $url, array('target'=>'_blank', 'id'=>'btndownload'));
+                                ?><!-- 
+                                <a href="index.php/save_form/pdfkosong" target="_blank" id="btndownload">
                                     <img src="images/download.png" >
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                     </table>

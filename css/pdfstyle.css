@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+.judul_luar
+{
+    font:normal 30px Arial, Helvetica, sans-serif; 
+    margin:10px 100px 10px 1px;
+    font-style:italic;
+}
+table
+{
+    padding:5px;
+}
+.judul_luar2
+{
+    font:normal 20px Arial, Helvetica, sans-serif;
+
+}
+.judul_alamat
+{
+    font:normal 12px Arial, Helvetica, sans-serif;		
+    margin:10px 10px 10px 150px;
+    font-style:italic;
+}
+.judul_dalam
+{
+    font:normal 20px Arial, Helvetica, sans-serif; 
+    text-align:center;
+    padding:20px;
+
+}
+.judul_tabel
+{
+    font:normal 17px Arial, Helvetica, sans-serif; 
+    font-weight:bold;
+    text-align:center;
+}
+body 
+{
+    margin: 30px 30px 30px 30px;
+    width:80%;
+	
+}
+.name
+{
+    float:none;
+    text-align:center;
+}
+input[type="text"]
+{
+    width:45%;
+    border:none;
+    border-bottom:solid;
+    border-bottom-width:2px;
+    margin-left:5px;
+    margin-right:15px;
+    float:right;
+}
+.formulir2 input[type="text"]
+{
+    width:55%;
+    border:none;
+    border-bottom:solid;
+    border-bottom-width:2px;
+    margin-left:5px;
+    margin-right:15px;
+    float:none;
+}
+.panjang input[type="text"]
+{
+    width:75%;
+    border:none;
+    border-bottom:solid;
+    border-bottom-width:2px;
+    margin-left:5px;
+    margin-right:15px;
+    float:none;
+}
+.panjang2 input[type="text"]
+{
+    width:85%;
+    border:none;
+    border-bottom:solid;
+    border-bottom-width:2px;
+    margin-left:5px;
+    margin-right:15px;
+    float:right;
+}
+.nofloat input[type="text"]
+{
+    float:none;
+}
+select
+{
+    width:200px;
+}
+.terms input[type="text"] 
+{
+    float:right;
+}
