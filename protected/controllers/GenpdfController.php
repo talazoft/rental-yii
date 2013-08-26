@@ -53,6 +53,7 @@ class GenpdfController extends Controller
             $mail->MsgHTML($message);
             $mail->AddAttachment(Yii::app()->baseUrl, "rental_information.pdf");
             $mail->AddAddress('arruuhul.jadid@gmail.com');
+            $mail->Send();
         }
         
         public function actionShowplainhtml(){
