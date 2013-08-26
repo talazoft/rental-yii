@@ -27,7 +27,7 @@ class RentalController extends Controller
                 'monthly_rent' => $tempModel->monthlyrent,
             );
             Yii::app()->session['step1'] = $data;
-            //$tempModel->truncateTable();
+            $tempModel->truncateTable();
         }
         
         $model = new ApplicationInformation;
