@@ -551,6 +551,7 @@ class RentalController extends Controller
         $data1['ApplicationInformation']['prime_appic_signature'] = $_POST['data8']['sign'];
         $data1['ApplicationInformation']['payment_type'] = $_POST['data8']['payment_type'];
         
+        $pass = Utils::rand_string(4);
         if(!isset(Yii::app()->session['applicationID'])){
             $applicationModel = new ApplicationInformation();
             $applicationModel->attributes = $data1['ApplicationInformation'];
@@ -564,7 +565,7 @@ class RentalController extends Controller
                     $applicantModel->rd_application_information_id = $applicationID;
                     if($applicantModel->save()){
                         $applicantID = Yii::app()->db->getLastInsertID();
-                        $pass = Utils::rand_string(4);
+                        
                         if($appKey == 1){
                             $appModel = ApplicationInformation::model()->findByPk($applicationID);
                             $appModel->prime_appic_signature = $_POST['data8']['sign'];
@@ -693,6 +694,8 @@ class RentalController extends Controller
                 }
                 
                 Yii::app()->session['applicationID'] = $applicationID;
+                
+                echo json_encode(array("c"=>$appModel->code,'y'=>$pass));
             } else {
                 print_r($applicationModel->getErrors());
                 die();
@@ -847,7 +850,7 @@ class RentalController extends Controller
                 }
             }
             
-            echo json_encode($message);
+            //echo json_encode($message);
         }  
         
         $data1['ApplicationInformation']['prime_appic_signature'] = $_POST['data8']['sign'];

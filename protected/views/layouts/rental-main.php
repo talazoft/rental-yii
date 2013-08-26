@@ -359,6 +359,24 @@
                 height: auto;
                 margin: 0 auto;
             }
+            #box4
+            {
+                position: absolute;
+                top:111px;
+                right:50%;
+                width: 278px;
+                height: auto;
+                text-align: center;
+                display: none;
+                background-color:transparent;
+                z-index: 1000;
+            }
+            #form4{
+                background-color:transparent;
+                width: 278px;
+                height: auto;
+                margin: 0 auto;
+            }
             #box5{
                 background-color: transparent;
                 display: none;
@@ -588,6 +606,10 @@
         $(".right").unbind('click').click(function(){
             $("#box2").hide("slow");
             $("#box3").hide("slow");
+            $("#box4").hide("slow");
+        });
+        $("#box4").unbind('click').click(function(){
+            $(this).hide("slow");
         });
     });
     </script>

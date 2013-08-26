@@ -137,13 +137,24 @@ $(function(){
         var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
         
         if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
-            $.post(saveallurl, alldata);
+            $.post(saveallurl, alldata, function(response){
+                //$("#form4").html(response);
+                var data = jQuery.parseJSON(response);
+                var u = "<?php echo Yii::app()->createUrl("save"); ?>";
+                $("#box4").load(u, {c:data.c, y:data.y}, function(){
+                    $(this).show("slow");
+                });
+            });
         }
     });
     
     $("#btnshowhtml").unbind('click').click(function(){
         $(this).hide();
         $("#showhtml").show();
+    });
+    
+    $("#sendemailpdf").unbind('click').click(function(){
+        
     });
 });
 </script>
