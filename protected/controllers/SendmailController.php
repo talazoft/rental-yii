@@ -14,7 +14,7 @@ class SendmailController extends Controller
         if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
             $pdfhtml = $this->renderPartial('_forlease', array(), true, true);
             $pdf = new Pdf();
-            $pdf->for_email($pdfhtml, "rental_information");
+            $pdf->for_email($pdfhtml, "rental_information", 'letter');
         } else if(strtolower(Yii::app()->session['step1']['selection']) == "apartment"){
             echo $this->renderPartial('_forsale', '', true);
             die();

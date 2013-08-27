@@ -42,7 +42,6 @@
             {
                 margin: 2px;
                 width:100%;
-
             }
             .name
             {
@@ -102,7 +101,7 @@
             {
                 float:right;
             }
-            html { margin-left: 30px; margin-right: 0px; margin-top: 20px; margin-bottom: 20px}
+            html {margin-left: 20px; margin-right: 0px; margin-top: 20px; margin-bottom: 20px}
         </style>
         <title></title>
     </head>
@@ -128,49 +127,77 @@
                 </div>
             </div><!---jjudul end---->
 
+            <?php 
+                $applicationModel = ApplicationInformation::model()->findByPk(Yii::app()->session['applicationID']);
+            ?>
             <div class="formulir">
                 <table width="100%">
                     <tr>
-                        <td width="25%"><div style="float:left;">Today's Date :</div><div style="float:right; width: 49%; height:20px; border-bottom: 2px; border-bottom-color: black; border-bottom-style: solid"></div><!--<input type="text" name="todaydate" >--></td>
-                        <td width="40%"> Property Name :<input type="text" name="propertyname"></td>
-                        <td width="35%"> Unit #   :<input type="text" name="unit"></td>
+                        <td width="25%"> Today's Date :<?php /*<input type="text" name="todaydate" value="test" >*/ echo date("M d, Y"); ?> </td>
+                        <td width="40%"> Property Name :<?php /*<input type="text" name="propertyname">*/  echo $applicationModel->city.", ".$applicationModel->address; ?></td>
+                        <td width="35%"> Unit #   :<?php /*<input type="text" name="unit">*/ echo $applicationModel->unit; ?></td>
                     </tr>
                     <tr>
-                        <td colspan="2"> Applicant's Work Number :<input type="text" name="apwn"></td>
-                        <td width="35%"> Applicant's Home Number :<input type="text" name="aphn"></td>            
+                        <td colspan="2"> Applicant's Work Number :<?php /*<input type="text" name="apwn">*/ ?></td>
+                        <td width="35%"> Applicant's Home Number :<?php /*<input type="text" name="aphn">*/ echo $applicationModel->prime_applic_homephone; ?></td>            
                     </tr>
                     <tr>
-                        <td colspan="2"> Applicant's Cellphone Number :<input type="text" name="apcn"></td>
-                        <td width="35%"> Applicant's Email Address :<input type="text" name="apea"></td>            
+                        <td colspan="2"> Applicant's Cellphone Number :<?php /*<input type="text" name="apcn">*/ echo $applicationModel->prime_applic_cellphone; ?></td>
+                        <td width="35%"> Applicant's Email Address :<?php /*<input type="text" name="apea">*/ echo $applicationModel->prime_applic_email; ?></td>            
                     </tr>
                 </table>
             </div>
-            <div class="judul_dalam">APPLICANT'S PERSONAL INFORMATION</div>           	         
-            <div class="formulir1">
-                <table width="100%" >
-                    <tr>
-                        <td width="33%"> First Name :<input type="text" name="fname"></td>
-                        <td width="33%"> Middle :<input type="text" name="middle"></td>     
-                        <td width="34%"> Last :<input type="text" name="last"></td>        
-                    </tr>
-                    <tr>
-                        <td> Date of Birth :<input type="text" name="dob"></td>
-                        <td> Driver Lisence No :<input type="text" name="lisence"></td>     
-                        <td> S.S.No :<input type="text" name="ssno"></td>        
-                    </tr>
-                </table>
-            </div>
+            
+            <?php 
+            $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
+            
+            $i=1;
+            foreach($applicantModel as $applic){ ?>      
+                <div class="judul_dalam">APPLICANT'S PERSONAL INFORMATION #<?php echo $i; ?></div>           	         
+                <div class="formulir1">
+                    <table width="100%" >
+                        <tr>
+                            <td width="33%"> First Name :<?php /*<input type="text" name="fname">*/ echo $applic->firstname; ?> </td>
+                            <td width="33%"> Middle :<?php /*<input type="text" name="middle">*/ echo $applic->middlename; ?></td>     
+                            <td width="34%"> Last :<?php /*<input type="text" name="last">*/ echo $applic->lastname; ?></td>        
+                        </tr>
+                        <tr>
+                            <td> Date of Birth :<?php /*<input type="text" name="dob">*/ echo $applic->birthday; ?></td>
+                            <td> <?php /*Driver Lisence No :<input type="text" name="lisence">*/ echo $applic->idtype." No : ".$applic->firstname; ?></td>     
+                            <td> S.S.No :<?php /*<input type="text" name="ssno">*/ echo $applic->ssn; ?></td>        
+                        </tr>
+                    </table>
+                </div>
+            <?php 
+            $i++;
+            } ?>
+                        
             <div class="formulir2">
                 <table width="100%" >
                     <tr>
                         <td colspan="4"> <i>List of Dependants</i> </td> 
                     </tr>
                     <tr>
-                        <th width="25%" align="center"> Name</th>
-                        <th width="25%" align="center"> Relation</th>
-                        <th width="25%"align="center"> Age</th>
+                        <th width="25%" align="center">Name</th>
+                        <th width="25%" align="center">Relation</th>
+                        <th width="25%"align="center">Age</th>
                         <th width="25%" align="center">Stay In Yes/No</th>        
                     </tr>
+                    <?php 
+                    $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach ($dependantModel as $dep){ ?>
+                    
+                    <tr>
+                        <td width="25%" align="center"><?php echo isset($dep->name) ? $dep->name : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->relation) ? $dep->relation : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->age) ? $dep->age : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->stay_in) && $dep->stay_in == 1 ? "Yes" : "No"; ?></td>        
+                    </tr>
+                    
+                    <?php 
+                    }
+                    /*
+                    ?>
                     <tr>
                         <td width="25%" align="center"><input type="text" name="name[]"></td>
                         <td width="25%" align="center"><input type="text" name="name[]"></td>
@@ -189,6 +216,7 @@
                         <td width="25%" align="center"><input type="text" name="name[]"></td>
                         <td width="25%" align="center"><input type="text" name="name[]"></td>        
                     </tr>
+                    */ ?>
                     <tr>
                         <td width="25%">How long you will live here?</td>
                         <td width="25%">One years ? <input type="text" name="1"></td>   
@@ -204,6 +232,19 @@
                         <th> Year</th>
                         <th>Color</th>        
                     </tr>
+                    <?php 
+                    $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($vehicleModel as $veh){ ?>
+                    <tr>
+                        <td width="25%" align="center"><?php echo isset($dep->license_plate) ? $dep->license_plate : "" ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->make_model) ? $dep->make_model : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->year) ? $dep->year : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($dep->color) ? $dep->color : ""; ?></td>        
+                    </tr>
+                    <?php
+                    }
+                    /*
+                    ?>
                     <tr>
                         <td width="25%" align="center"><input type="text"></td>
                         <td width="25%" align="center"><input type="text"></td>
@@ -215,14 +256,43 @@
                         <td width="25%" align="center"><input type="text"></td>
                         <td width="25%" align="center"><input type="text"></td>
                         <td width="25%" align="center"><input type="text"></td>        
-                    </tr>
+                    </tr> */ ?>
                 </table>
             </div>
             <br/>
             <br/>
+            
             <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
             <div class="formulir3">
-                <table width="100%">	         
+                <?php 
+                $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                foreach($residentModel as $res){ ?>
+                <table width="100%">	
+                    <tr>
+                        <td>Current Address :<?php echo $res->address; ?></td>
+                        <td>City :<?php echo $res->city; ?></td> 
+                        <td>State :<?php echo $res->state; ?></td> 
+                        <td>Zip :<?php echo $res->zip; ?></td>   
+                    </tr>
+                    <tr>
+                        <td>
+                            Length of Stay :
+                                <?php  
+                                $start = $res->year_month_moved_in."-01";
+                                
+                                $end = date("Y-m")."-01";
+                                $diff = Utils::monthsDif($start, $end);
+                                echo $start." ".$end;
+                                echo floor($diff/12)." ".$diff%12;
+                                ?>
+                        </td>
+                        <td>Land Lord's Name :<input type="text"></td> 
+                        <td>Phone No. :<input type="text"></td> 
+                    </tr>
+                </table> <?php
+                }
+                ?>
+                <table width="100%">	
                     <tr>
                         <td>Current Address :<input type="text"></td>
                         <td>City :<input type="text"></td> 
@@ -234,6 +304,8 @@
                         <td>Land Lord's Name :<input type="text"></td> 
                         <td>Phone No. :<input type="text"></td> 
                     </tr>
+                </table>
+                <table>
                     <tr>
                         <td colspan="4"><div class="panjang">Reason for Moving :<input type="text"></div></td>
                     </tr>

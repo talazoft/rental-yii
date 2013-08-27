@@ -1,11 +1,11 @@
 <script>
     $(function(){
         $("#open").unbind('click').click(function(){
-            var openurl = "<?php echo Yii::app()->createUrl("rental/openall"); ?>";
+            var openurl = "<?php echo Yii::app()->createUrl("openform"); ?>";
             var data = {code:$("#txtcode").val(), pass:$("#txtpassword").val()}
             $.post(openurl, data, function(response){              
                 $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
-                $("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
+                /*$("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
                     $(".step_content_2").slideToggle(350);
                 });
                 $("#rh").load("<?php echo Yii::app()->createUrl("rental/showstep3"); ?>", '', function(){
@@ -28,7 +28,7 @@
                 });
                 $("#agreements").load("<?php echo Yii::app()->createUrl("rental/showfinalstep"); ?>", '', function(){
                     $(".step_content_final").slideToggle(350);
-                });
+                });*/
             });
         });
     });
@@ -64,7 +64,6 @@
                         </td>
                     </tr>
                 </table>
-
             </td>
         </tr>
     </table>

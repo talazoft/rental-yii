@@ -31,6 +31,31 @@ class Utils {
 
         return $str;
     }
+    
+    /**
+     * 
+     * @param type $start use YYYY-mm-dd
+     * @param type $end use YYYY-mm-dd
+     * @return int|boolean
+     */
+    public static function monthsDif($start, $end)
+    {
+        $retval = "";
+
+        // Assume YYYY-mm-dd - as is common MYSQL format
+        $splitStart = explode('-', $start);
+        $splitEnd = explode('-', $end);
+
+        if (is_array($splitStart) && is_array($splitEnd)) {
+            $difYears = $splitEnd[0] - $splitStart[0];
+            $difMonths = $splitEnd[1] - $splitStart[1];
+            $difDays = $splitEnd[2] - $splitStart[2];
+
+            $retval = ($difDays > 0) ? $difMonths : $difMonths - 1;
+            $retval += $difYears * 12;
+        }
+        return $retval;
+    }
             
     public static function convert_number_to_words($number) {
 
