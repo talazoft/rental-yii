@@ -204,7 +204,7 @@
                                 <th> Color</th>        
                             </tr>
                             <?php 
-                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
                             foreach($vehicleModel as $veh){ ?>
                             <tr>
                                 <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
