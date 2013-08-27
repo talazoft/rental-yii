@@ -71,6 +71,7 @@ $this->renderPartial('step2');
 $this->renderPartial('step3');
 $this->renderPartial('step4');
 $this->renderPartial('step5');
+
 if(isset(Yii::app()->session['step1']['selection'])){
     if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
         $this->renderPartial('step6');

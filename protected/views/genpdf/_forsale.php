@@ -1,6 +1,5 @@
 <html>
     <head>
-        <!--<link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/css/pdfstyle.css" />-->
         <style>
             @charset "utf-8";
             /* CSS Document */
@@ -110,7 +109,7 @@
 
         <div class="head_content">
             <div class="logo-info">
-                <img src="<?php echo Yii::app()->baseUrl; ?>/img/logo.png" />
+                <img src="http://localhost/rental-yii/img/logo.png" />
             </div>
         </div><!---head_content end---->
 
@@ -171,7 +170,8 @@
             <?php 
             $i++;
             } ?>
-                        
+            <br/>
+            <br/>
             <div class="formulir2">
                 <table width="100%" >
                     <tr>
@@ -195,33 +195,10 @@
                     </tr>
                     
                     <?php 
-                    }
-                    /*
-                    ?>
+                    } ?>
                     <tr>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>        
-                    </tr>
-                    <tr>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>        
-                    </tr>
-                    <tr>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>
-                        <td width="25%" align="center"><input type="text" name="name[]"></td>        
-                    </tr>
-                    */ ?>
-                    <tr>
-                        <td width="25%">How long you will live here?</td>
-                        <td width="25%">One years ? <input type="text" name="1"></td>   
-                        <td width="25%">Two years ? <input type="text" name="2"> </td>
-                        <td width="25%">Three years ?<input type="text" name="3"> </td> 
+                        <td width="60%" colspan="2">How long you will live here?</td>
+                        <td width="40%"><?php echo $applicantModel[0]->years_live_planned ?> years</td> 
                     </tr>
                     <tr>
                         <td colspan="4"> <i>Vehicle information : </i> </td> 
@@ -230,33 +207,19 @@
                         <th> License Plate</th>
                         <th> Make/Model</th>
                         <th> Year</th>
-                        <th>Color</th>        
+                        <th> Color</th>        
                     </tr>
                     <?php 
                     $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
                     foreach($vehicleModel as $veh){ ?>
                     <tr>
-                        <td width="25%" align="center"><?php echo isset($dep->license_plate) ? $dep->license_plate : "" ?></td>
-                        <td width="25%" align="center"><?php echo isset($dep->make_model) ? $dep->make_model : ""; ?></td>
-                        <td width="25%" align="center"><?php echo isset($dep->year) ? $dep->year : ""; ?></td>
-                        <td width="25%" align="center"><?php echo isset($dep->color) ? $dep->color : ""; ?></td>        
+                        <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
+                        <td width="25%" align="center"><?php echo isset($veh->maker_model) ? $veh->maker_model : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($veh->year) ? $veh->year : ""; ?></td>
+                        <td width="25%" align="center"><?php echo isset($veh->color) ? $veh->color : ""; ?></td>        
                     </tr>
                     <?php
-                    }
-                    /*
-                    ?>
-                    <tr>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>        
-                    </tr>
-                    <tr>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>
-                        <td width="25%" align="center"><input type="text"></td>        
-                    </tr> */ ?>
+                    } ?>
                 </table>
             </div>
             <br/>
@@ -275,131 +238,82 @@
                         <td>Zip :<?php echo $res->zip; ?></td>   
                     </tr>
                     <tr>
-                        <td>
-                            Length of Stay :
-                                <?php  
-                                $start = $res->year_month_moved_in."-01";
-                                
-                                $end = date("Y-m")."-01";
-                                $diff = Utils::monthsDif($start, $end);
-                                echo $start." ".$end;
-                                echo floor($diff/12)." ".$diff%12;
-                                ?>
-                        </td>
-                        <td>Land Lord's Name :<input type="text"></td> 
-                        <td>Phone No. :<input type="text"></td> 
+                        <td>Month/Year Moved in :<?php echo $res->year_month_moved_in; n?></td>
+                        <td>Land Lord's Name :<?php echo $res->agent_landlord_name; ?></td> 
+                        <td>Phone No. :<?php $res->agent_landlord_phone ?></td> 
+                    </tr>
+                    <tr>
+                        <td colspan="3"><div class="panjang">Reason for Moving :<?php $res->leave_reason; ?></div></td>
                     </tr>
                 </table> <?php
                 }
                 ?>
-                <table width="100%">	
-                    <tr>
-                        <td>Current Address :<input type="text"></td>
-                        <td>City :<input type="text"></td> 
-                        <td>State :<input type="text"></td> 
-                        <td>Zip :<input type="text"></td>   
-                    </tr>
-                    <tr>
-                        <td>Length of Stay :<input type="text"></td>
-                        <td>Land Lord's Name :<input type="text"></td> 
-                        <td>Phone No. :<input type="text"></td> 
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td colspan="4"><div class="panjang">Reason for Moving :<input type="text"></div></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"> <i>Give previous address if less than 5 years </i> </td> 
-                    </tr>
-                    <tr>
-                        <td>Previous Address :<input type="text"></td>
-                        <td>City :<input type="text"></td> 
-                        <td>State :<input type="text"></td> 
-                        <td>Zip :<input type="text"></td>   
-                    </tr>
-                    <tr>
-                        <td>Length of Stay :<input type="text"></td>
-                        <td>Land Lord's Name :<input type="text"></td> 
-                        <td>Phone No. :<input type="text"></td> 
-                    </tr>
-                    <tr>
-                        <td colspan="4"><div class="panjang"><i>Reason for Moving</i> :<input type="text"></div></td>
-                    </tr>
-                </table>
             </div>
             <br>
             <br>
             <div class="judul_dalam">WORK OR BUSINESS ENTITY INFORMATION</div>    
             <table width="100%">
-                <tr>
-                    <td>Employed by : <input type="text"></td>
-                    <td colspan="2"><div class="panjang">Address : <input type="text"></div></td> 
-                </tr>
-                <tr>
-                    <td width="45%">Phone No : <input type="text"></td>
-                    <td width="25%">Department : <input type="text"></td> 
-                    <td width="35%">Position / Title : <input type="text"></td> 
-                </tr>
-                <tr>
-                    <td>Length of Employment : <input type="text"></td>
-                    <td>Salary : <input type="text"></td> 
-                    <td>Supervisor's Name : <input type="text"></td> 
-                </tr>
-                <tr>
-                    <td colspan="3"> <i>Spouse's Employment Information </i> </td> 
-                </tr>
-                <tr>
-                    <td>Employed by : <input type="text"></td>
-                    <td colspan="2"><div class="panjang">Address : <input type="text"></div></td> 
-                </tr>
-                <tr>
-                    <td>Phone No : <input type="text"></td>
-                    <td>Department : <input type="text"></td> 
-                    <td>Position / Title : <input type="text"></td> 
-                </tr>
-                <tr>
-                    <td>Length of Employment : <input type="text"></td>
-                    <td>Salary : <input type="text"></td> 
-                    <td>Supervisor's Name : <input type="text"></td> 
-                </tr>
-                <tr>
-                    <td colspan="3"><i>If Self-employed please fill the following</i></td>
-                </tr>
-                <tr>
-                    <td>Business Name : <input type="text"></td>
-                    <td>Type of Business : <input type="text"></td> 
-                    <td>Years in Business : <input type="text"></td> 
-                </tr>
-                <tr>
-                    <td colspan="2"><div class="panjang">Address : <input type="text"></div></td>
-                    <td>Phone No : <input type="text"></td>               
-                </tr>
-                <tr>
-                    <td>Length of Stay in Current Location : <input type="text"></td> 
-                    <td>LandLord : <input type="text"></td> 
-                    <td>Phone No : <input type="text"></td>               
-                </tr>
+                <?php 
+                
+                $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                foreach($emplModel as $emp){
+                    if($emp->employment_type == 'fulltime' || $emp->employment_type == 'parttime'){ ?>
+                        <tr>
+                            <td>Employed by : <?php echo $emp->employer; ?></td>
+                            <td colspan="2"><div class="panjang">Address : <?php echo $emp->address; ?></div></td> 
+                        </tr>
+                        <tr>
+                            <td width="45%">Phone No : <?php echo $emp->phone; ?></td>
+                            <td width="25%">Department : <?php echo $emp->department; ?></td> 
+                            <td width="35%">Position / Title : <?php echo $emp->position; ?></td> 
+                        </tr>
+                        <tr>
+                            <td>Length of Employment : <?php echo $emp->employment_length; ?></td>
+                            <td>Salary : <?php echo $emp->salary; ?></td> 
+                            <td>Supervisor's Name : <?php echo $emp->supervisor_name; ?></td> 
+                        </tr> <?php
+                    } else if($emp->employment_type == 'selfemployed'){ ?>
+                        <tr>
+                            <td>Business Name : <?php echo $emp->bussiness_name; ?></td>
+                            <td>Type of Business : <?php echo $emp->bussiness_type; ?></td> 
+                            <td>Years in Business : <?php echo $emp->years_in_bussiness; ?></td> 
+                        </tr>
+                        <tr>
+                            <td colspan="2"><div class="panjang">Address : <?php echo $emp->employer_address; ?></div></td>
+                            <td>Phone No : <?php echo $emp->phone; ?></td>               
+                        </tr>
+                        <tr>
+                            <td>Length of Stay in Current Location : <?php echo $emp->stay_length; ?></td> 
+                            <td>LandLord : <?php echo $emp->landlord_name; ?></td> 
+                            <td>Phone No : <?php echo $emp->landlord_phone; ?></td>               
+                        </tr> <?php 
+                    } else { ?>
+                        <tr>
+                            <td colspan="3">
+                                Employment Status: <?php echo $emp->employment_type; ?>
+                            </td>
+                        </tr> <?php
+                    }
+                }
+                ?>
+
             </table>
             <br>
             <br>
             <div class="judul_dalam">OTHER CONTACT INFORMATION</div>    
             <table width="100%">
-                <tr>
-                    <td width="33%"><div class="nofloat">Name : <input type="text"></div></td> 
-                    <td width="33%"><div class="nofloat">Relation : <input type="text"></div></td> 
-                    <td width="34%"><div class="nofloat">Phone No : <input type="text"></div></td>               
-                </tr>
-                <tr>
-                    <td><div class="nofloat">Name : <input type="text"></div></td> 
-                    <td><div class="nofloat">Relation : <input type="text"></div></td> 
-                    <td><div class="nofloat">Phone No : <input type="text"></div></td>               
-                </tr>
-                <tr>
-                    <td><div class="nofloat">Name : <input type="text"></div></td> 
-                    <td><div class="nofloat">Relation : <input type="text"></div></td> 
-                    <td><div class="nofloat">Phone No : <input type="text"></div></td>               
-                </tr>
+                <?php 
+                $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                
+                foreach($personalrefModel as $ref){ ?>
+                    <tr>
+                        <td width="33%"><div class="nofloat">Name : <?php echo $ref->name; ?></div></td> 
+                        <td width="33%"><div class="nofloat">Relation : <?php echo $ref->relation; ?></div></td> 
+                        <td width="34%"><div class="nofloat">Address : <?php echo $ref->address; ?></div></td> 
+                        <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?></div></td>
+                    </tr> <?php
+                }
+                ?>
             </table>
             <table>
             <tr>
@@ -423,6 +337,31 @@
             </table>
             <br />
             <br />
+            <table>
+                <tr>
+                    <td>
+                        Primary applicant sign: 
+                    </td>
+                    <td>
+                        <img src="http://localhost/rental-yii/signed/signimg.png" /><br>
+                        _________________________
+                    </td>
+                    <td>
+                        Date:
+                    </td>
+                    <td>
+                        <?php echo date('M d, Y'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Name: <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?>
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </table>
         </div><!---content end---->
         </div><!---maincontent_info end---->
     </body>

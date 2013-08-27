@@ -144,6 +144,10 @@ $(function(){
                     }
                 }
             });
+            
+            var signurl = "<?php echo Yii::app()->createUrl("save/savesign"); ?>";
+            
+            savesign(signurl);
         }
     });
     
@@ -165,5 +169,17 @@ $(function(){
             $("#hide").hide();
         }
     });
+    
 });
+
+function savesign(url){
+    var parent = document.getElementById("signature");
+    var canvas = parent.getElementsByTagName("canvas")[0];
+    var signImg = canvas.toDataURL("image/png");
+    
+    var ajax = new XMLHttpRequest();
+    ajax.open("POST", url, false);
+    ajax.setRequestHeader('Content-Type', 'application/upload');
+    ajax.send(signImg);
+}
 </script>

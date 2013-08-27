@@ -125,80 +125,79 @@
                     </div>
                 </div><!---jjudul end---->
 
+                <?php 
+                    $applicationModel = ApplicationInformation::model()->findByPk(Yii::app()->session['applicationID']);
+                ?>
                 <div class="formulir">
                     <table width="100%">
                         <tr>
-                            <td width="35%"> Today's Date :<div style="width: 49%; height:3px; border-bottom: 2px; border-bottom-color: black; border-bottom-style: solid"></div></td>
-                            <td width="40%"> Property Name :_______________</td>
-                            <td width="25%"> Unit #   :____________</td>
+                            <td width="25%"> Today's Date :<?php /*<input type="text" name="todaydate" value="test" >*/ echo date("M d, Y"); ?> </td>
+                            <td width="40%"> Property Name :<?php /*<input type="text" name="propertyname">*/  echo $applicationModel->city.", ".$applicationModel->address; ?></td>
+                            <td width="35%"> Unit #   :<?php /*<input type="text" name="unit">*/ echo $applicationModel->unit; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="2"> Applicant's Work Number :____________</td>
-                            <td width="50%"> Applicant's Home Number :____________</td>            
+                            <td colspan="2"> Applicant's Work Number :<?php /*<input type="text" name="apwn">*/ ?></td>
+                            <td width="35%"> Applicant's Home Number :<?php /*<input type="text" name="aphn">*/ echo $applicationModel->prime_applic_homephone; ?></td>            
                         </tr>
                         <tr>
-                            <td colspan="2"> Applicant's Cellphone Number :____________</td>
-                            <td width="50%"> Applicant's Email Address :____________</td>            
+                            <td colspan="2"> Applicant's Cellphone Number :<?php /*<input type="text" name="apcn">*/ echo $applicationModel->prime_applic_cellphone; ?></td>
+                            <td width="35%"> Applicant's Email Address :<?php /*<input type="text" name="apea">*/ echo $applicationModel->prime_applic_email; ?></td>            
                         </tr>
                     </table>
                 </div>
-                <div class="judul_dalam">APPLICANT'S PERSONAL INFORMATION</div>           	         
-                <div class="formulir1">
-                    <table width="100%" >
-                        <tr>
-                            <td width="33%"> First Name :____________</td>
-                            <td width="33%"> Middle :____________</td>     
-                            <td width="34%"> Last :____________</td>        
-                        </tr>
-                        <tr>
-                            <td> Date of Birth :____________</td>
-                            <td> Driver Lisence No :____________</td>     
-                            <td> S.S.No :____________</td>        
-                        </tr>
-                    </table>
-                </div>
+                
+                <?php 
+                $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
+
+                $i=1;
+                foreach($applicantModel as $applic){ ?>      
+                    <div class="judul_dalam">APPLICANT'S PERSONAL INFORMATION #<?php echo $i; ?></div>           	         
+                    <div class="formulir1">
+                        <table width="100%" >
+                            <tr>
+                                <td width="33%"> First Name :<?php /*<input type="text" name="fname">*/ echo $applic->firstname; ?> </td>
+                                <td width="33%"> Middle :<?php /*<input type="text" name="middle">*/ echo $applic->middlename; ?></td>     
+                                <td width="34%"> Last :<?php /*<input type="text" name="last">*/ echo $applic->lastname; ?></td>        
+                            </tr>
+                            <tr>
+                                <td> Date of Birth :<?php /*<input type="text" name="dob">*/ echo $applic->birthday; ?></td>
+                                <td> <?php /*Driver Lisence No :<input type="text" name="lisence">*/ echo $applic->idtype." No : ".$applic->firstname; ?></td>     
+                                <td> S.S.No :<?php /*<input type="text" name="ssno">*/ echo $applic->ssn; ?></td>        
+                            </tr>
+                        </table>
+                    </div>
+                <?php 
+                $i++;
+                } ?>
+                <br/>
+                <br/>
                 <div class="formulir2">
                     <table width="100%" >
                         <tr>
                             <td colspan="4"> <i>List of Dependants</i> </td> 
                         </tr>
                         <tr>
-                            <th width="25%" align="center"> 
-                                Name
-                            </th>
-                            <th width="25%" align="center"> 
-                                Relation
-                            </th>
-                            <th width="25%"align="center"> 
-                                Age
-                            </th>
-                            <th width="25%" align="center">
-                                Stay In Yes/No
-                            </th>        
+                            <th width="25%" align="center">Name</th>
+                            <th width="25%" align="center">Relation</th>
+                            <th width="25%"align="center">Age</th>
+                            <th width="25%" align="center">Stay In Yes/No</th>        
                         </tr>
+                        <?php 
+                        $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                        foreach ($dependantModel as $dep){ ?>
+
                         <tr>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>        
+                            <td width="25%" align="center"><?php echo isset($dep->name) ? $dep->name : ""; ?></td>
+                            <td width="25%" align="center"><?php echo isset($dep->relation) ? $dep->relation : ""; ?></td>
+                            <td width="25%" align="center"><?php echo isset($dep->age) ? $dep->age : ""; ?></td>
+                            <td width="25%" align="center"><?php echo isset($dep->stay_in) && $dep->stay_in == 1 ? "Yes" : "No"; ?></td>        
                         </tr>
+
+                        <?php 
+                        } ?>
                         <tr>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>        
-                        </tr>
-                        <tr>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>        
-                        </tr>
-                        <tr>
-                            <td width="25%">How long you will live here?</td>
-                            <td width="25%">One years ? ____________</td>   
-                            <td width="25%">Two years ? ____________ </td>
-                            <td width="25%">Three years ?____________ </td> 
+                            <td width="60%" colspan="2">How long you will live here?</td>
+                            <td width="40%"><?php echo $applicantModel[0]->years_live_planned ?> years</td> 
                         </tr>
                         <tr>
                             <td colspan="4"> <i>Vehicle information : </i> </td> 
@@ -207,149 +206,114 @@
                             <th> License Plate</th>
                             <th> Make/Model</th>
                             <th> Year</th>
-                            <th>Color</th>        
+                            <th> Color</th>        
                         </tr>
+                        <?php 
+                        $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                        foreach($vehicleModel as $veh){ ?>
                         <tr>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>        
+                            <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
+                            <td width="25%" align="center"><?php echo isset($veh->maker_model) ? $veh->maker_model : ""; ?></td>
+                            <td width="25%" align="center"><?php echo isset($veh->year) ? $veh->year : ""; ?></td>
+                            <td width="25%" align="center"><?php echo isset($veh->color) ? $veh->color : ""; ?></td>        
                         </tr>
-                        <tr>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>
-                            <td width="25%" align="center">____________</td>        
-                        </tr>
-                    </table>
-                </div>
-                <div class="formulir3">  
-                    <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
-                    <table width="100%">
-                        <tr>
-                            <td>Current Address :________</td>
-                            <td>City :________</td> 
-                            <td>State :________</td> 
-                            <td>Zip :________</td>   
-                        </tr>
-                        <tr>
-                            <td>Length of Stay :________</td>
-                            <td>Land Lord's Name :________</td> 
-                            <td>Phone No. :________</td> 
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <div class="panjang">
-                                    Reason for Moving :____________
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"> <i>Give previous address if less than 5 years </i> </td> 
-                        </tr>
-                        <tr>
-                            <td>Previous Address :________</td>
-                            <td>City :________</td> 
-                            <td>State :________</td> 
-                            <td>Zip :________</td>   
-                        </tr>
-                        <tr>
-                            <td>Length of Stay :_________</td>
-                            <td>Land Lord's Name :_________</td> 
-                            <td>Phone No. :_________</td> 
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <div class="panjang">
-                                    <i>Reason for Moving</i> :____________
-                                </div>
-                            </td>
-                        </tr>
+                        <?php
+                        } ?>
                     </table>
                 </div>
                 <br/>
+                <br/>
+                <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
+                <div class="formulir3">
+                    <?php 
+                    $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($residentModel as $res){ ?>
+                    <table width="100%">	
+                        <tr>
+                            <td>Current Address :<?php echo $res->address; ?></td>
+                            <td>City :<?php echo $res->city; ?></td> 
+                            <td>State :<?php echo $res->state; ?></td> 
+                            <td>Zip :<?php echo $res->zip; ?></td>   
+                        </tr>
+                        <tr>
+                            <td>Month/Year Moved in :<?php echo $res->year_month_moved_in; n?></td>
+                            <td>Land Lord's Name :<?php echo $res->agent_landlord_name; ?></td> 
+                            <td>Phone No. :<?php $res->agent_landlord_phone ?></td> 
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div class="panjang">Reason for Moving :<?php $res->leave_reason; ?></div></td>
+                        </tr>
+                    </table> <?php
+                    }
+                    ?>
+                </div>
+                <br>
+                <br>
                 <div class="judul_dalam">OTHER CONTACT INFORMATION</div>    
                 <table width="100%">
-                    <tr>
-                        <td width="33%">
-                            <div class="nofloat">
-                                Name : ____________
-                            </div>
-                        </td> 
-                        <td width="33%">
-                            <div class="nofloat">
-                                Relation : ____________
-                            </div>
-                        </td> 
-                        <td width="34%">
-                            <div class="nofloat">
-                                Phone No : ____________
-                            </div>
-                        </td>               
-                    </tr>
-                    <tr>
-                        <td><div class="nofloat">Name : ____________</div></td> 
-                        <td><div class="nofloat">Relation : ____________</div></td> 
-                        <td><div class="nofloat">Phone No : ____________</div></td>               
-                    </tr>
-                    <tr>
-                        <td><div class="nofloat">Name : ____________</div></td> 
-                        <td><div class="nofloat">Relation : ____________</div></td> 
-                        <td><div class="nofloat">Phone No : ____________</div></td>               
-                    </tr>
+                    <?php 
+                    $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+
+                    foreach($personalrefModel as $ref){ ?>
+                        <tr>
+                            <td width="33%"><div class="nofloat">Name : <?php echo $ref->name; ?></div></td> 
+                            <td width="33%"><div class="nofloat">Relation : <?php echo $ref->relation; ?></div></td> 
+                            <td width="34%"><div class="nofloat">Address : <?php echo $ref->address; ?></div></td> 
+                            <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?></div></td>
+                        </tr> <?php
+                    }
+                    ?>
                 </table>
                 <br>
-                <div class="judul_dalam">WORK OR BUSINESS ENTITY INFORMATION</div>
+                <br>
+                <div class="judul_dalam">WORK OR BUSINESS ENTITY INFORMATION</div>    
                 <table width="100%">
-                    <tr>
-                        <td>Employed by : ____________</td>
-                        <td colspan="2"><div class="panjang">Address : ____________</div></td> 
-                    </tr>
-                    <tr>
-                        <td width="45%">Phone No : ____________</td>
-                        <td width="25%">Department : ____________</td> 
-                        <td width="35%">Position / Title : ____________</td> 
-                    </tr>
-                    <tr>
-                        <td>Length of Employment : ________</td>
-                        <td>Salary : ________</td> 
-                        <td>Supervisor's Name : ________</td> 
-                    </tr>
-                    <tr>
-                        <td colspan="3"> <i>Spouse's Employment Information </i> </td> 
-                    </tr>
-                    <tr>
-                        <td>Employed by : ________</td>
-                        <td colspan="2"><div class="panjang">Address : ________</div></td> 
-                    </tr>
-                    <tr>
-                        <td>Phone No : ________</td>
-                        <td>Department : ________</td> 
-                        <td>Position / Title : ________</td> 
-                    </tr>
-                    <tr>
-                        <td>Length of Employment : ________</td>
-                        <td>Salary : ________</td> 
-                        <td>Supervisor's Name : ________</td> 
-                    </tr>
-                    <tr>
-                        <td colspan="3"><i>If Self-employed please fill the following</i></td>
-                    </tr>
-                    <tr>
-                        <td>Business Name : ________</td>
-                        <td>Type of Business : ____</td> 
-                        <td>Years in Business : ________</td> 
-                    </tr>
-                    <tr>
-                        <td colspan="2"><div class="panjang">Address : ________</div></td>
-                        <td>Phone No : ________</td>               
-                    </tr>
-                    <tr>
-                        <td>Length of Stay in Current Location : ________</td> 
-                        <td>LandLord : ________</td> 
-                        <td>Phone No : ________</td>               
-                    </tr>
+                    <?php 
+
+                    $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($emplModel as $emp){
+                        if($emp->employment_type == 'fulltime' || $emp->employment_type == 'parttime'){ ?>
+                            <tr>
+                                <td>Employed by : <?php echo $emp->employer; ?></td>
+                                <td colspan="2"><div class="panjang">Address : <?php echo $emp->employer_address; ?></div></td> 
+                            </tr>
+                            <tr>
+                                <td width="45%">Phone No : <?php echo $emp->phone; ?></td>
+                                <td width="25%">Department : <?php echo $emp->department; ?></td> 
+                                <td width="35%">Position / Title : <?php echo $emp->position; ?></td> 
+                            </tr>
+                            <tr>
+                                <td>Length of Employment : <?php echo $emp->employment_length; ?></td>
+                                <td>Salary : <?php echo $emp->salary; ?></td> 
+                                <td>Supervisor's Name : <?php echo $emp->supervisor_name; ?></td> 
+                            </tr> <?php
+                        } else if($emp->employment_type == 'selfemployed'){ ?>
+                            <tr>
+                                <td>Business Name : <?php echo $emp->bussiness_name; ?></td>
+                                <td>Type of Business : <?php echo $emp->bussiness_type; ?></td> 
+                                <td>Years in Business : <?php echo $emp->years_in_bussiness; ?></td> 
+                            </tr>
+                            <tr>
+                                <td colspan="2"><div class="panjang">Address : <?php echo $emp->employer_address; ?></div></td>
+                                <td>Phone No : <?php echo $emp->phone; ?></td>               
+                            </tr>
+                            <tr>
+                                <td>Length of Stay in Current Location : <?php echo $emp->stay_length; ?></td> 
+                                <td>LandLord : <?php echo $emp->landlord_name; ?></td> 
+                                <td>Phone No : <?php echo $emp->landlord_phone; ?></td>               
+                            </tr> <?php 
+                        } else { ?>
+                            <tr>
+                                <td colspan="3">
+                                    Employment Status: <?php echo $emp->employment_type; ?>
+                                </td>
+                            </tr> <?php
+                        }
+                    }
+                    ?>
+
                 </table>
+                <br>
                 <br>
                 <div class="judul_dalam">CREDIT INFORMATION</div>  
                 <table width="100%"> 
@@ -360,27 +324,18 @@
                         <th>Account #</th>
                         <th>Approx.Balance</th>
                     </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
+                    <?php 
+                    $crimodel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($crimodel as $cri){ ?>
+                        <tr>
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $cri->bank_name ?></div></td> 
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $cri->branch ?></div></td> 
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $cri->phone_no ?></div></td>   
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $cri->account_type ?></div></td>              
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $cri->approx_balance ?></div></td>                          
+                        </tr> <?php
+                    }
+                    ?>
                 </table>
                 <br>
                 <table width="100%">
@@ -391,37 +346,100 @@
                         <th>Account #</th>
                         <th>Credit Amount</th>
                     </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
-                    <tr>
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td> 
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>   
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>              
-                        <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
+                    <?php 
+                    $crfmodel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($crfmodel as $crf){ ?>
+                        <tr>
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $crf->credit_ref; ?></div></td> 
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $crf->address; ?></div></td> 
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $crf->phone; ?></div></td>   
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $crf->account; ?></div></td>              
+                            <td width="20%" align="center"><div class="nofloat"><?php echo $crf->amount; ?></div></td>                          
+                        </tr> <?php
+                    }
+                    ?>
                 </table>
                 <br>
                 <div class="judul_dalam">FINANCIAL CONDITION</div>  
+                <?php 
+                $incomemodel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
+                $expendmodel = Expenditures::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
+                ?>
                 <table width="100%">
-                        
+                    <tr>
+                        <td width="50%" align="center"><div class="judul_garis">Monthly Income</div></td> 
+                        <td width="50%" align="center"><div class="judul_garis">Expenditures</div></td>                          
+                    </tr>   
+                    <tr>
+                        <td>Salary or Wage : <?php echo $incomemodel->salary_or_wage ?></td> 
+                        <td>Property Taxes & Assessment : <?php echo $expendmodel->prop_tax_asses ?></td>                          
+                    </tr>  
+                    <tr>
+                        <td>Dividends : <?php echo $incomemodel->devidends ?></td> 
+                        <td>Federal & State Income Taxes : <?php echo $expendmodel->fed_state_income_tax ?></td>                          
+                    </tr>   
+                    <tr>
+                        <td>Rental : <?php echo $incomemodel->rental ?></td> 
+                        <td>Real Estate Loan Payment : <?php echo $expendmodel->realestate_loan_payment ?></td>                          
+                    </tr>   
+                    <tr>
+                        <td>Business or Professional Income : <?php echo $incomemodel->bussiness_income ?> (net)</td> 
+                        <td>Payment on Contract/Note : <?php echo $expendmodel->payment_contract ?></td>                          
+                    </tr>   
+                    <tr>
+                        <td>Other (alimony,child support, etc.) : <?php echo $incomemodel->other ?></td> 
+                        <td>Estimate Living Expenses : <?php echo $expendmodel->living_expenses ?></td>                          
+                    </tr>    
+                    <tr>
+                        <td>&nbsp;</td> 
+                        <td>Other (alimony,child support, etc.) : <?php echo $expendmodel->other ?></td>   
+                    </tr>      
+                </table>
+                <br>
+                <i>Stock & bonds</i>
+                <table width="100%">
+                    <tr>
+                        <th>Stock & Bonds</th>
+                        <th>Where Quote</th>
+                        <th>Cost or Market</th>
+                        <th>Title in Name of</th>
+                        <th>Quantity</th>
+                        <th>Value</th>
+                    </tr>
+                    <?php 
+                    $stockmodel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    foreach($stockmodel as $stock){ ?>
+                        <tr>
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->stock_bonds ?></div></td> 
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->where_quote ?></div></td> 
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->market_cost ?></div></td> 
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->title_name ?></div></td>     
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->quantity ?></div></td> 
+                            <td width="17%" align="center"><div class="panjang"><?php echo $stock->value ?></div></td>                        
+                        </tr> <?php
+                    }
+                    ?>
                 </table>
                 <br>
                 <div class="judul_dalam">GENERAL INFORMATION</div>     
-                <table width="100%">
-                     
+                <table width="100%">  
+                    <?php 
+                    $genmodel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    ?>
+                    <tr>
+                        <td width="75%">1. Have you ever filed any petition under the Bankcruptcy Act? <?php echo $genmodel->bankrupt == 1 ? "Yes" : "No" ?></td> 
+                        <td width="25%">If so, When ? <?php echo $genmodel->bankrupted_at ?></td>
+                    </tr>
+                    <tr>
+                        <td width="75%">2. Has your income tax return ever been questioned by the IRS? <?php echo $genmodel->is_questioned == 1 ? "Yes" : "No" ?></td> 
+                        <td width="25%">If so, When ? <?php echo $genmodel->questioned_at ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">3. Have you ever been evicted for nonpayment of rent or any other reason? <?php echo $genmodel->is_evicted == 1 ? "Yes" : "No" ?></td> 
+                    </tr>
+                    <tr>
+                        <td colspan="2">Please explain any "yes" answers to General information:<?php echo $genmodel->explanation ?></div></td> 
+                    </tr>
                 </table>
                 <br>
                 <div class="judul_dalam">ADDITIONAL INFORMATION</div>  
@@ -472,6 +490,33 @@
                                 </font>
                             </p>
                         </td>             
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <table>
+                    <tr>
+                        <td>
+                            Primary applicant sign: 
+                        </td>
+                        <td>
+                            <img src="http://localhost/rental-yii/signed/signimg.png" /><br>
+                            _________________________
+                        </td>
+                        <td>
+                            Date:
+                        </td>
+                        <td>
+                            <?php echo date('M d, Y'); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Name: <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?>
+                        </td>
+                        <td>
+
+                        </td>
                     </tr>
                 </table>
                 <br />
