@@ -2,9 +2,47 @@
     $(function(){
         $(".phone").mask("(999) 999-9999");
         $(".currency").autoNumeric();  
+        
+        $("#skip-cfi").change(function(){
+            skipcfi();     
+        });
+        
+        skipcfi();     
+        
+        function skipcfi(){
+            for(var i=2;i<=<?php echo $cnt ?>;i++){
+                var form = $("#creditfinance-"+i);
+                if($("#skip-cfi").is(":checked")){
+                    form.find("input[required='required']").each(function(){
+                         var elem = $(this);
+                         if(elem.hasAttr('required')){
+                             elem.removeAttr("required");
+                             elem.attr("notrequired","notrequired");
+                         }
+                    });
+                } else {
+                    form.find("input[required='required']").each(function(){
+                        var elem = $(this);
+                        if(elem.hasAttr('notrequired')){
+                            elem.removeAttr("notrequired");
+                            elem.attr('required', 'required');
+                        }
+                    });
+                }
+            }
+        }
     });
 </script>
 <form class="step6-form" method="post" name="creditfinance-<?php echo $cnt ?>" id="creditfinance-<?php echo $cnt ?>" postable>
+    <?php if($cnt == 2){ ?>
+    <table>
+        <tbody>
+            <tr>
+                <td><?php echo CHtml::checkbox("skip-cfi", isset(Yii::app()->session['step6']['skip-cfi']) ? true : false, array('id'=>'skip-cfi'))." skip to continue"; ?></td>
+            </tr>
+        </tbody>
+    </table><?php 
+    } ?>
     <table>
         <tbody>
             <tr>

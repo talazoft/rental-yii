@@ -50,7 +50,7 @@
                                 :
                             </td>
                             <td>
-                                $ <?php echo CHtml::textField("MonthlyIncome[$cnt][bussiness_income]", isset(Yii::app()->session['step6']['MonthlyIncome'][$cnt]["bussiness_income"]) ? Yii::app()->session['step6']['MonthlyIncome'][$cnt]["bussiness_income"] : "", array('style'=>'width:70%', 'class'=>'currency')); ?>
+                                $ <?php echo CHtml::textField("MonthlyIncome[$cnt][bussiness_income]", isset(Yii::app()->session['step6']['MonthlyIncome'][$cnt]["bussiness_income"]) ? Yii::app()->session['step6']['MonthlyIncome'][$cnt]["bussiness_income"] : "", array('style'=>'width:70%', 'class'=>'currency', 'required'=>'required')); ?>
                             </td>
                         </tr>
                         <tr>

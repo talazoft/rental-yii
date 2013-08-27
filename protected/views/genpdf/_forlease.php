@@ -109,17 +109,11 @@
         <div class="maincontent_info">
             <div class="head_content">
                 <div class="logo-info">
-                    <img src="http://localhost/rental-yii/img/logo.png" />
+                    <img src="http://vamproperty.com/build/rdrental/img/logo.png" />
                 </div>
             </div>
             <div class="content">
                 <div>
-                    <div class="judul">
-                        <div class="judul_luar">VANTAGE  ASSET MANAGEMENT LTD.</div>
-                    </div>
-                    <div class="judul_alamat">
-                        713 west duarte road suite #G-167, arcadia, ca 91007-7564 (626)5747900 fax 382-5572
-                    </div>
                     <div class="judul_dalam">
                         APPLICATION TO LEASE COMMERCIAL SPACE
                     </div>
@@ -164,65 +158,73 @@
                                 <td> <?php /*Driver Lisence No :<input type="text" name="lisence">*/ echo $applic->idtype." No : ".$applic->firstname; ?></td>     
                                 <td> S.S.No :<?php /*<input type="text" name="ssno">*/ echo $applic->ssn; ?></td>        
                             </tr>
+                            <tr>
+                                <td> Has pet : <?php echo isset($applic->has_pet) && $applic->has_pet == 1 ? "Yes" : "No"  ?></td>
+                                <td colspan="2"> Number of pet(s) : <?php echo isset($applic->pet_num) ? $applic->pet_num : "" ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="formulir2">
+                        <table width="100%" >
+                            <tr>
+                                <td colspan="4"> <i>List of Dependants</i> </td> 
+                            </tr>
+                            <tr>
+                                <th width="25%" align="center">Name</th>
+                                <th width="25%" align="center">Relation</th>
+                                <th width="25%"align="center">Age</th>
+                                <th width="25%" align="center">Stay In Yes/No</th>        
+                            </tr>
+                        <?php 
+                        
+                        if($i == 1){
+                            $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
+                            foreach ($dependantModel as $dep){ ?>
+
+                            <tr>
+                                <td width="25%" align="center"><?php echo isset($dep->name) ? $dep->name : ""; ?></td>
+                                <td width="25%" align="center"><?php echo isset($dep->relation) ? $dep->relation : ""; ?></td>
+                                <td width="25%" align="center"><?php echo isset($dep->age) ? $dep->age : ""; ?></td>
+                                <td width="25%" align="center"><?php echo isset($dep->stay_in) && $dep->stay_in == 1 ? "Yes" : "No"; ?></td>        
+                            </tr>
+
+                            <?php 
+                            } ?>
+                            <tr>
+                                <td width="60%" colspan="2">How long you will live here?</td>
+                                <td width="40%"><?php echo $applic->years_live_planned ?> years</td> 
+                            </tr>
+                            <tr>
+                                <td colspan="4"> <i>Vehicle information : </i> </td> 
+                            </tr>
+                            <tr>
+                                <th> License Plate</th>
+                                <th> Make/Model</th>
+                                <th> Year</th>
+                                <th> Color</th>        
+                            </tr>
+                            <?php 
+                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                            foreach($vehicleModel as $veh){ ?>
+                            <tr>
+                                <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
+                                <td width="25%" align="center"><?php echo isset($veh->maker_model) ? $veh->maker_model : ""; ?></td>
+                                <td width="25%" align="center"><?php echo isset($veh->year) ? $veh->year : ""; ?></td>
+                                <td width="25%" align="center"><?php echo isset($veh->color) ? $veh->color : ""; ?></td>        
+                            </tr>
+                            <?php
+                            } 
+                        }
+                        $i++;
+                        ?>
                         </table>
                     </div>
                 <?php 
-                $i++;
+                
                 } ?>
                 <br/>
                 <br/>
-                <div class="formulir2">
-                    <table width="100%" >
-                        <tr>
-                            <td colspan="4"> <i>List of Dependants</i> </td> 
-                        </tr>
-                        <tr>
-                            <th width="25%" align="center">Name</th>
-                            <th width="25%" align="center">Relation</th>
-                            <th width="25%"align="center">Age</th>
-                            <th width="25%" align="center">Stay In Yes/No</th>        
-                        </tr>
-                        <?php 
-                        $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
-                        foreach ($dependantModel as $dep){ ?>
 
-                        <tr>
-                            <td width="25%" align="center"><?php echo isset($dep->name) ? $dep->name : ""; ?></td>
-                            <td width="25%" align="center"><?php echo isset($dep->relation) ? $dep->relation : ""; ?></td>
-                            <td width="25%" align="center"><?php echo isset($dep->age) ? $dep->age : ""; ?></td>
-                            <td width="25%" align="center"><?php echo isset($dep->stay_in) && $dep->stay_in == 1 ? "Yes" : "No"; ?></td>        
-                        </tr>
-
-                        <?php 
-                        } ?>
-                        <tr>
-                            <td width="60%" colspan="2">How long you will live here?</td>
-                            <td width="40%"><?php echo $applicantModel[0]->years_live_planned ?> years</td> 
-                        </tr>
-                        <tr>
-                            <td colspan="4"> <i>Vehicle information : </i> </td> 
-                        </tr>
-                        <tr>
-                            <th> License Plate</th>
-                            <th> Make/Model</th>
-                            <th> Year</th>
-                            <th> Color</th>        
-                        </tr>
-                        <?php 
-                        $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
-                        foreach($vehicleModel as $veh){ ?>
-                        <tr>
-                            <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
-                            <td width="25%" align="center"><?php echo isset($veh->maker_model) ? $veh->maker_model : ""; ?></td>
-                            <td width="25%" align="center"><?php echo isset($veh->year) ? $veh->year : ""; ?></td>
-                            <td width="25%" align="center"><?php echo isset($veh->color) ? $veh->color : ""; ?></td>        
-                        </tr>
-                        <?php
-                        } ?>
-                    </table>
-                </div>
-                <br/>
-                <br/>
                 <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
                 <div class="formulir3">
                     <?php 
@@ -236,9 +238,9 @@
                             <td>Zip :<?php echo $res->zip; ?></td>   
                         </tr>
                         <tr>
-                            <td>Month/Year Moved in :<?php echo $res->year_month_moved_in; n?></td>
-                            <td>Land Lord's Name :<?php echo $res->agent_landlord_name; ?></td> 
-                            <td>Phone No. :<?php $res->agent_landlord_phone ?></td> 
+                            <td>Length of Stay : <?php echo $res->year_month_moved_in; n?></td>
+                            <td>Land Lord's Name : <?php echo $res->agent_landlord_name; ?></td> 
+                            <td>Phone No. : <?php $res->agent_landlord_phone ?></td> 
                         </tr>
                         <tr>
                             <td colspan="3"><div class="panjang">Reason for Moving :<?php $res->leave_reason; ?></div></td>
@@ -500,7 +502,7 @@
                             Primary applicant sign: 
                         </td>
                         <td>
-                            <img src="http://localhost/rental-yii/signed/signimg.png" /><br>
+                            <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" /><br>
                             _________________________
                         </td>
                         <td>

@@ -2,7 +2,7 @@
     <!-- Save for Web Slices (Untitled-4) -->
     <table width="352" height="294">
         <tr>
-            <td background="images/Untitled-6.png" align=center><br><br>
+            <td background="<?php echo $code != "update" ? "images/Untitled-4.png" : "images/Untitled-6.png" ?>" align=center><br><br>
                 <?php 
                 if($code !="update"){
                 ?>

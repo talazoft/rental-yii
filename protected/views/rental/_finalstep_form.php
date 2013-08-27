@@ -34,13 +34,17 @@
                         <a href="#" onclick="openCenteredWindow2('index.php/pdf_isi')">
                         <img border=0 src="images/print_pdf.png">
                         </a> -->
-                        <div id="printpdf"></div>
+                        <div id="printpdf">     
+                        </div>
+                        
                     </td>
                     <td align="right">
                         <!-- <a href="#" id="sendemailpdf">
                         <img border=0 src="images/send_email.png">
                         </a> -->
-                        <div id="sendemailpdf"></div>
+                        <div id="sendemailpdf">
+                            
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -72,7 +76,7 @@
 </style>
 <script>
 $(function(){ 
-    
+    $("#signJson").val($("#loadedjson").val());
     $("#signature").signature();
     try{
         $("#signature").signature('draw', $("#signJson").val());
@@ -158,7 +162,12 @@ $(function(){
     
     $("#sendemailpdf").unbind('click').click(function(){
         var sendemailurl = "<?php echo Yii::app()->createUrl("sendmail"); ?>";
-        $.post(sendemailurl);
+        $.post(sendemailurl, {fill:"1"}, function(response){
+            /*$("#box4").load(response, null, function(){
+                $(this).show();
+            });*/
+            alert("Email has been sent.");
+        });
     });
     
     $("#cekagree").change(function(){
@@ -170,6 +179,12 @@ $(function(){
         }
     });
     
+    $("#printpdf").unbind('click').click(function(event){
+        var printpdf = "<?php echo Yii::app()->createUrl("genpdf/generatepdf"); ?>";
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(printpdf, '_blank');
+    });
 });
 
 function savesign(url){

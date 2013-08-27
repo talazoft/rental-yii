@@ -12,6 +12,9 @@
                         How many <?php echo Yii::app()->session['selection'] == "Commercial" ? "companies" : "applicant(s)"; ?>
                     </label>
                     <?php 
+                        echo CHtml::hiddenField('ApplicationInformation[prime_applic_signature]', isset(Yii::app()->session['step1']['prime_appic_signature']) ? Yii::app()->session['step1']['prime_appic_signature'] : "", array('id'=>'loadedjson'));
+                    ?>
+                    <?php 
 
                         for($i = 1; $i<=8; $i++){
                             $data[$i] = $i;
@@ -200,7 +203,12 @@
                                                 "Tenant"=>"Tenant",
                                                 "Other"=>"Other");
 
-                                echo CHtml::dropdownList("ApplicationInformation[refered_lead]", isset(Yii::app()->session['step1']['refered_lead']) ? Yii::app()->session['step1']['refered_lead'] : "", $ref_data, array('empty'=>'Choose One', 'style'=>'width:80%', 'id' => 'ApplicationInformation_refered_lead','required'=>'required'));
+                                echo CHtml::dropdownList("ApplicationInformation[refered_lead]", 
+                                        isset(Yii::app()->session['step1']['refered_lead']) ? Yii::app()->session['step1']['refered_lead'] : "", 
+                                        $ref_data, array('empty'=>'Choose One', 
+                                            'style'=>'width:80%', 
+                                            'id' => 'ApplicationInformation_refered_lead',
+                                            'required'=>'required'));
                             ?>
                             <?php echo CHtml::image('images/star.png', 'required'); ?>
                         </td>

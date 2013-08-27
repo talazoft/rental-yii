@@ -46,23 +46,29 @@
         }
         
         $("#skip-resident").change(function(){
-            skipstatusaction();     
+            skipresident();     
         });
         
-        skipstatusaction();     
+        skipresident();     
         
-        function skipstatusaction(){
+        function skipresident(){
             for(var i=2;i<=<?php echo $cnt ?>;i++){
                 var form = $("#resident-"+i);
                 if($("#skip-resident").is(":checked")){
-                    form.find(":required").each(function(){
-                        $(this).removeAttr("required");
-                        $(this).attr("notrequired","notrequired");
+                    form.find("input[required='required']").each(function(){
+                         var elem = $(this);
+                         if(elem.hasAttr('required')){
+                             elem.removeAttr("required");
+                             elem.attr("notrequired","notrequired");
+                         }
                     });
                 } else {
-                    $('input[notrequired="notrequired"]').each(function(){
-                        $(this).removeAttr("notrequired");
-                        $(this).attr('required', 'required');
+                    form.find("input[notrequired='notrequired']").each(function(){
+                        var elem = $(this);
+                        if(elem.hasAttr('notrequired')){
+                            elem.removeAttr("notrequired");
+                            elem.attr('required', 'required');
+                        }
                     });
                 }
             }
@@ -90,6 +96,11 @@
     </table>
     <table width="100%" border="0">
         <tbody>
+            <tr>
+                <td>
+                    give previous address if less than 5 years (click + button)
+                </td>
+            </tr>
             <tr>
                 <td align="center" colspan="8"> 
                     <a name="plusri<?php echo $cnt; ?>" id="plusri<?php echo $cnt; ?>">

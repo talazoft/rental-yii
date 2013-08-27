@@ -9,15 +9,24 @@ class SendmailController extends Controller
         } else {
             $subjc = "Rent Apartment Form";
         }
-
+        
+        if(isset($_POST['fill'])){
+            $template = '//genpdf/_forlease';
+        } else {
+            $template = '_forlease';
+        }
+        
         Yii::import('ext.pdf.Pdf');
         if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
-            $pdfhtml = $this->renderPartial('_forlease', array(), true, true);
+            $pdfhtml = $this->renderPartial($template, array(), true, true);
             $pdf = new Pdf();
             $pdf->for_email($pdfhtml, "rental_information", 'letter');
+            
         } else if(strtolower(Yii::app()->session['step1']['selection']) == "apartment"){
-            echo $this->renderPartial('_forsale', '', true);
-            die();
+            $pdfhtml = $this->renderPartial($template, array(), true, true);
+            $pdf = new Pdf();
+            $pdf->for_email($pdfhtml, "rental_information", 'letter');
+
         }
             
         $message ='
@@ -52,12 +61,11 @@ class SendmailController extends Controller
         
         $mail->AddAddress(Yii::app()->session['step2']['ApplicantInfo'][1]['email']/*, "info@vamproperty.com"*/);
         if($mail->Send()){
-            $status = "Mail sent";
+            $status = $this->renderPartial('mail_sent', '', true);
         } else {
             $status = "Message was not sent <p>";
             $status .= "Mailer Error: " . $mail->ErrorInfo;
         }
-        
         echo $status;
     }
 }

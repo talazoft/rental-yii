@@ -4,8 +4,5 @@
 </div>
 <div class="step_content_6 step_content">
     <div id="cfi">
-        <?php 
-            $this->renderPartial("_step6_form", array('cnt'=>1, 'cnt2'=>1));
-        ?>
     </div>
 </div>

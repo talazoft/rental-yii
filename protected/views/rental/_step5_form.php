@@ -44,23 +44,29 @@
         }
         
         $("#skip-personalref").change(function(){
-            skipstatusaction();     
+            skipsref();     
         });
         
-        skipstatusaction();     
+        skipsref();     
         
-        function skipstatusaction(){
+        function skipsref(){
             for(var i=2;i<=<?php echo $cnt ?>;i++){
                 var form = $("#personalref-"+i);
                 if($("#skip-personalref").is(":checked")){
-                    form.find(":required").each(function(){
-                        $(this).removeAttr("required");
-                        $(this).attr("notrequired","notrequired");
+                    form.find("input[required='required']").each(function(){
+                         var elem = $(this);
+                         if(elem.hasAttr('required')){
+                             elem.removeAttr("required");
+                             elem.attr("notrequired","notrequired");
+                         }
                     });
                 } else {
-                    $('input[notrequired="notrequired"]').each(function(){
-                        $(this).removeAttr("notrequired");
-                        $(this).attr('required', 'required');
+                    form.find("input[notrequired='notrequired']").each(function(){
+                        var elem = $(this);
+                        if(elem.hasAttr('notrequired')){
+                            elem.removeAttr("notrequired");
+                            elem.attr('required', 'required');
+                        }
                     });
                 }
             }

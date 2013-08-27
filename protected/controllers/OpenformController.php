@@ -24,6 +24,8 @@ class OpenformController extends Controller{
             foreach($applicationModel as $appKey => $appVal){
                 $appArr[$appKey] = $appVal;
             }
+            
+            print_r($appArr);
 
             $applicantsModel = ApplicantInfo::model()
                     ->findAll("rd_application_information_id = ".$applicationModel->id);
@@ -169,6 +171,8 @@ class OpenformController extends Controller{
                 Yii::app()->session['step6'] = $step6;
                 Yii::app()->session['step7'] = $step7;
             }
+            
+            print_r(Yii::app()->session['step1']);
         } else {
             echo 0;
         }

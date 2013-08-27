@@ -88,7 +88,7 @@
             $("#minusrhveh<?php echo $cnt; ?>").hide();
         }
         
-        $("#chk-applicant-2").change(function(){
+        $("#chk-applicant").change(function(){
             skipstatusaction();     
         });
         
@@ -97,15 +97,21 @@
         function skipstatusaction(){
             for(var i=2;i<=<?php echo $cnt ?>;i++){
                 var form = $("#applicant-"+i);
-                if($("#chk-applicant-2").is(":checked")){
-                    form.find(":required").each(function(){
-                        $(this).removeAttr("required");
-                        $(this).attr("notrequired","notrequired");
+                if($("#chk-applicant").is(":checked")){
+                    form.find("input[required='required']").each(function(){
+                         var elem = $(this);
+                         if(elem.hasAttr('required')){
+                             elem.removeAttr("required");
+                             elem.attr("notrequired","notrequired");
+                         }
                     });
                 } else {
-                    $('input[notrequired="notrequired"]').each(function(){
-                        $(this).removeAttr("notrequired");
-                        $(this).attr('required', 'required');
+                    form.find("input[notrequired='notrequired']").each(function(){
+                        var elem = $(this);
+                        if(elem.hasAttr('notrequired')){
+                            elem.removeAttr("notrequired");
+                            elem.attr('required', 'required');
+                        }
                     });
                 }
             }
@@ -125,7 +131,7 @@
                 <td valign="top" colspan="8">
                     <?php
                         if($cnt == 2){
-                            echo CHtml::checkbox("chk-applicant-2", isset(Yii::app()->session['step2']['chk-applicant-2']) ? true : false, array('class'=>'skipstep2'))." skip to continue";
+                            echo CHtml::checkbox("chk-applicant", isset(Yii::app()->session['step2']['chk-applicant']) ? true : false, array('class'=>'skipstep2'))." skip to continue";
                         }
                     ?>  
                 </td>
@@ -276,7 +282,7 @@
                     <?php 
                     echo CHtml::textField("ApplicantInfo[$cnt][homephone]", 
                             isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["homephone"] : "", 
-                            array('style'=>'width:75%', 'id'=>"ApplicantInfo_homephone$cnt", 'class'=>'phone', 'required'=>'required'));
+                            array('style'=>'width:75%', 'id'=>"ApplicantInfo_homephone$cnt", 'class'=>'phone'));
                     ?>
                 </td>
                 <td>&nbsp;</td>

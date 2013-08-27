@@ -79,11 +79,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Month / Year Moved In</label></td>
+                    <td><label>Length of stay</label></td>
                     <td>:</td>
                     <td>
                         <?php 
-                            $months = array(
+                            /*$months = array(
                                 "January" => "January",
                                 "February" => "February",
                                 "March" => "March",
@@ -104,7 +104,8 @@
                             }
 
                             echo CHtml::dropDownList("ResidentalHistory[$cnt][$cnt2][month]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["month"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["month"] : "", $months, array('style'=>"width:41%", 'required'=>'required'))
-                                    ." / ".CHtml::dropDownList("ResidentalHistory[$cnt][$cnt2][year]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["year"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["year"] : "", $years, array('style'=>"width:30%", 'required'=>'required'));
+                                    ." / ".CHtml::dropDownList("ResidentalHistory[$cnt][$cnt2][year]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["year"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["year"] : "", $years, array('style'=>"width:30%", 'required'=>'required'));*/
+                            echo CHtml::textField("ResidentalHistory[$cnt][$cnt2][year_month_moved_in]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]['year_month_moved_in']) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]['year_month_moved_in'] : "", array('style'=>'width:75%','required'=>'required','id'=>"year_month_moved_in$cnt$cnt2"))
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>
