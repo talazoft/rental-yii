@@ -29,9 +29,9 @@ class SaveController extends Controller
 
             $data1['ApplicationInformation']['prime_appic_signature'] = $_POST['data8']['sign'];
             $data1['ApplicationInformation']['payment_type'] = $_POST['data8']['payment_type'];
-
+            
             $pass = Utils::rand_string(4);
-            if(!isset(Yii::app()->session['applicationID'])){
+            if(!isset(Yii::app()->session['applicationID'])){            
                 $applicationModel = new ApplicationInformation();
                 $applicationModel->attributes = $data1['ApplicationInformation'];
                 if($applicationModel->save()){
@@ -39,6 +39,7 @@ class SaveController extends Controller
 
                     $i = 1;
                     foreach($data2['ApplicantInfo'] as $appKey => $applicant){
+                        
                         $applicantModel = new ApplicantInfo();
                         $applicantModel->attributes = $applicant;
                         $applicantModel->rd_application_information_id = $applicationID;
@@ -63,8 +64,6 @@ class SaveController extends Controller
                                     $dependantModel->attributes = $dependant;
                                     $dependantModel->rd_applicant_info_id = $applicantID;
                                     $dependantModel->save();
-                                } else {
-                                    break;
                                 }
                             }
 
@@ -74,8 +73,6 @@ class SaveController extends Controller
                                     $vehicleModel->attributes = $vehicle;
                                     $vehicleModel->rd_applicant_info_id = $applicantID;
                                     $vehicleModel->save();
-                                } else {
-                                    break;
                                 }
                             }
 
@@ -83,11 +80,8 @@ class SaveController extends Controller
                                 if(is_numeric($key)){
                                     $residentalModel = new ResidentalHistory();
                                     $residentalModel->attributes = $resHistory;
-                                    $residentalModel->year_month_moved_in = $resHistory['year']."-".$resHistory['month'];
                                     $residentalModel->rd_applicant_info_id = $applicantID;
                                     $residentalModel->save();
-                                } else {
-                                    break;
                                 }
                             }
 
@@ -111,8 +105,6 @@ class SaveController extends Controller
                                     $personalRefModel->attributes = $personalRef;
                                     $personalRefModel->rd_applicant_info_id = $applicantID;
                                     $personalRefModel->save();
-                                } else {
-                                    break;
                                 }
                             }
 
@@ -123,8 +115,6 @@ class SaveController extends Controller
                                         $crModel->attributes = $crinfo;
                                         $crModel->rd_applicant_info_id = $applicantID;
                                         $crModel->save();
-                                    } else {
-                                        break;
                                     }
                                 }
                             }
@@ -136,8 +126,6 @@ class SaveController extends Controller
                                         $crrefModel->attributes = $crref;
                                         $crrefModel->rd_applicant_info_id = $applicantID;
                                         $crrefModel->save();
-                                    } else {
-                                        break;
                                     }
                                 }
                             }
@@ -161,8 +149,6 @@ class SaveController extends Controller
                                         $sbModel->attributes = $bonds;
                                         $sbModel->rd_applicant_info_id = $applicantID;
                                         $sbModel->save();
-                                    } else {
-                                        break;
                                     }
                                 }
                             }
@@ -200,149 +186,137 @@ class SaveController extends Controller
                         $query = "DELETE FROM rd_applicant_info where rd_application_information_id = $applicationID";
                         Yii::app()->db->createCommand($query)->execute();
 
-                        $i = 1;
-                        foreach($data2['ApplicantInfo'] as $appKey => $applicant){
-                            $applicantModel = new ApplicantInfo();
-                            $applicantModel->attributes = $applicant;
-                            $applicantModel->rd_application_information_id = $applicationID;
+                        if(isset($data2['ApplicantInfo'])){
+                            $i = 1;
+                            foreach($data2['ApplicantInfo'] as $appKey => $applicant){
+                                $applicantModel = new ApplicantInfo();
+                                $applicantModel->attributes = $applicant;
+                                $applicantModel->rd_application_information_id = $applicationID;
 
-                            if($applicantModel->save()){
-                                $applicantID = Yii::app()->db->getLastInsertID();
-                                if($appKey == 1){
-                                    $appModel = ApplicationInformation::model()->findByPk($applicationID);
-                                    $appModel->prime_appic_signature = $_POST['data8']['sign'];
-                                    $appModel->prime_applic_cellphone  = $applicantModel->cellphone;
-                                    $appModel->prime_applic_homephone  = $applicantModel->homephone;
-                                    $appModel->prime_applic_email  = $applicantModel->email;
-                                    $appModel->payment_type = $_POST['data8']['payment_type'];
-                                    if(!$appModel->save()){
-                                        print_r($appModel->getErrors());
-                                        die();
+                                if($applicantModel->save()){
+                                    $applicantID = Yii::app()->db->getLastInsertID();
+                                    if($appKey == 1){
+                                        $appModel = ApplicationInformation::model()->findByPk($applicationID);
+                                        $appModel->prime_appic_signature = $_POST['data8']['sign'];
+                                        $appModel->prime_applic_cellphone  = $applicantModel->cellphone;
+                                        $appModel->prime_applic_homephone  = $applicantModel->homephone;
+                                        $appModel->prime_applic_email  = $applicantModel->email;
+                                        $appModel->payment_type = $_POST['data8']['payment_type'];
+                                        if(!$appModel->save()){
+                                            print_r($appModel->getErrors());
+                                            die();
+                                        }
                                     }
-                                }
 
-                                foreach($data2['DependantInfo'][$i] as $key => $dependant){
-                                    if(is_numeric($key)){
-                                        $dependantModel = new DependantInfo();
-                                        $dependantModel->attributes = $dependant;
-                                        $dependantModel->rd_applicant_info_id = $applicantID;
-                                        $dependantModel->save();
-                                    } else {
-                                        break;
+                                    foreach($data2['DependantInfo'][$i] as $key => $dependant){
+                                        if(is_numeric($key)){
+                                            $dependantModel = new DependantInfo();
+                                            $dependantModel->attributes = $dependant;
+                                            $dependantModel->rd_applicant_info_id = $applicantID;
+                                            $dependantModel->save();
+                                        }
                                     }
-                                }
 
-                                foreach($data2['VehicleInfo'][$i] as $key => $vehicle){
-                                    if(is_numeric($key)){
-                                        $vehicleModel = new VehicleInfo();
-                                        $vehicleModel->attributes = $vehicle;
-                                        $vehicleModel->rd_applicant_info_id = $applicantID;
-                                        $vehicleModel->save();
-                                    } else {
-                                        break;
+                                    foreach($data2['VehicleInfo'][$i] as $key => $vehicle){
+                                        if(is_numeric($key)){
+                                            $vehicleModel = new VehicleInfo();
+                                            $vehicleModel->attributes = $vehicle;
+                                            $vehicleModel->rd_applicant_info_id = $applicantID;
+                                            $vehicleModel->save();
+                                        }
                                     }
-                                }
 
-                                foreach($data3['ResidentalHistory'][$i] as $key => $resHistory){
-                                    if(is_numeric($key)){
-                                        $residentalModel = new ResidentalHistory();
-                                        $residentalModel->attributes = $resHistory;
-                                        $residentalModel->rd_applicant_info_id = $applicantID;
-                                        $residentalModel->save();
-                                    } else {
-                                        break;
+                                    foreach($data3['ResidentalHistory'][$i] as $key => $resHistory){
+                                        if(is_numeric($key)){
+                                            $residentalModel = new ResidentalHistory();
+                                            $residentalModel->attributes = $resHistory;
+                                            $residentalModel->rd_applicant_info_id = $applicantID;
+                                            $residentalModel->save();
+                                        }
                                     }
-                                }
 
-                                foreach($data4['EmploymentInfo'][$i] as $key => $empHistory){
-                                    $empModel = new EmploymentInfo();
-                                    $empModel->rd_applicant_info_id = $applicantID;
-                                    $empModel->employment_type = $data4['EmploymentInfo'][$i]['employment_type']; 
-                                    if(is_numeric($key)){
-                                        $empModel->attributes = $empHistory;
-                                        $empModel->save();
-                                    } else {
-                                        if($data4['EmploymentInfo'][$i]['employment_type'] == "unemployed"){ 
+                                    foreach($data4['EmploymentInfo'][$i] as $key => $empHistory){
+                                        $empModel = new EmploymentInfo();
+                                        $empModel->rd_applicant_info_id = $applicantID;
+                                        $empModel->employment_type = $data4['EmploymentInfo'][$i]['employment_type']; 
+                                        if(is_numeric($key)){
+                                            $empModel->attributes = $empHistory;
                                             $empModel->save();
-                                        }
-                                    }
-                                }
-
-                                foreach($data5['PersonalRefrence'][$i] as $key => $personalRef){
-                                    if(is_numeric($key)){
-                                        $personalRefModel = new PersonalRefrence();
-                                        $personalRefModel->attributes = $personalRef;
-                                        $personalRefModel->rd_applicant_info_id = $applicantID;
-                                        $personalRefModel->save();
-                                    } else {
-                                        break;
-                                    }
-                                }
-                                
-                                if(isset($data6['CreditInfo'])){
-                                    foreach($data6['CreditInfo'][$i] as $key => $crinfo){
-                                        if(is_numeric($key)){
-                                            $crModel = new CreditInfo();
-                                            $crModel->attributes = $crinfo;
-                                            $crModel->rd_applicant_info_id = $applicantID;
-                                            $crModel->save();
                                         } else {
-                                            break;
+                                            if($data4['EmploymentInfo'][$i]['employment_type'] == "unemployed"){ 
+                                                $empModel->save();
+                                            }
                                         }
                                     }
-                                }
 
-                                if(isset($data6['CreditRef'])){
-                                    foreach($data6['CreditRef'][$i] as $key => $crref){
+                                    foreach($data5['PersonalRefrence'][$i] as $key => $personalRef){
                                         if(is_numeric($key)){
-                                            $crrefModel = new CreditRef();
-                                            $crrefModel->attributes = $crref;
-                                            $crrefModel->rd_applicant_info_id = $applicantID;
-                                            $crrefModel->save();
-                                        } else {
-                                            break;
+                                            $personalRefModel = new PersonalRefrence();
+                                            $personalRefModel->attributes = $personalRef;
+                                            $personalRefModel->rd_applicant_info_id = $applicantID;
+                                            $personalRefModel->save();
                                         }
                                     }
-                                }
 
-                                if(isset($data6['MonthlyIncome']) && isset($data6['Expenditures'])){
-                                    $incomeModel = new MonthlyIncome();
-                                    $incomeModel->attributes = $data6['MonthlyIncome'][$i];
-                                    $incomeModel->rd_applicant_info_id = $applicantID;
-                                    $incomeModel->save();
-
-                                    $expenseModel = new Expenditures();
-                                    $expenseModel->attributes = $data6['Expenditures'][$i];
-                                    $expenseModel->rd_applicant_info_id = $applicantID;
-                                    $expenseModel->save();
-                                }
-
-                                if(isset($data6['StockBonds'])){
-                                    foreach($data6['StockBonds'][$i] as $key => $bonds){
-                                        if(is_numeric($key)){
-                                            $sbModel = new StockBonds();
-                                            $sbModel->attributes = $bonds;
-                                            $sbModel->rd_applicant_info_id = $applicantID;
-                                            $sbModel->save();
-                                        } else {
-                                            break;
+                                    if(isset($data6['CreditInfo'])){
+                                        foreach($data6['CreditInfo'][$i] as $key => $crinfo){
+                                            if(is_numeric($key)){
+                                                $crModel = new CreditInfo();
+                                                $crModel->attributes = $crinfo;
+                                                $crModel->rd_applicant_info_id = $applicantID;
+                                                $crModel->save();
+                                            }
                                         }
                                     }
-                                }
 
-                                if(isset($data7['GeneralInfo'])){
-                                    $genInfo = new GeneralInfo();
-                                    $genInfo->attributes = $data7['GeneralInfo'][$i];
-                                    $genInfo->rd_applicant_info_id = $applicantID;
-                                    $genInfo->save();
-                                }
+                                    if(isset($data6['CreditRef'])){
+                                        foreach($data6['CreditRef'][$i] as $key => $crref){
+                                            if(is_numeric($key)){
+                                                $crrefModel = new CreditRef();
+                                                $crrefModel->attributes = $crref;
+                                                $crrefModel->rd_applicant_info_id = $applicantID;
+                                                $crrefModel->save();
+                                            }
+                                        }
+                                    }
 
-                            } else {
-                                print_r("jdkfjkjfsdjfskdjf");
-                                print_r($applicantModel->getErrors());
-                                die();
+                                    if(isset($data6['MonthlyIncome']) && isset($data6['Expenditures'])){
+                                        $incomeModel = new MonthlyIncome();
+                                        $incomeModel->attributes = $data6['MonthlyIncome'][$i];
+                                        $incomeModel->rd_applicant_info_id = $applicantID;
+                                        $incomeModel->save();
+
+                                        $expenseModel = new Expenditures();
+                                        $expenseModel->attributes = $data6['Expenditures'][$i];
+                                        $expenseModel->rd_applicant_info_id = $applicantID;
+                                        $expenseModel->save();
+                                    }
+
+                                    if(isset($data6['StockBonds'])){
+                                        foreach($data6['StockBonds'][$i] as $key => $bonds){
+                                            if(is_numeric($key)){
+                                                $sbModel = new StockBonds();
+                                                $sbModel->attributes = $bonds;
+                                                $sbModel->rd_applicant_info_id = $applicantID;
+                                                $sbModel->save();
+                                            }
+                                        }
+                                    }
+
+                                    if(isset($data7['GeneralInfo'])){
+                                        $genInfo = new GeneralInfo();
+                                        $genInfo->attributes = $data7['GeneralInfo'][$i];
+                                        $genInfo->rd_applicant_info_id = $applicantID;
+                                        $genInfo->save();
+                                    }
+
+                                } else {
+                                    print_r("jdkfjkjfsdjfskdjf");
+                                    print_r($applicantModel->getErrors());
+                                    die();
+                                }
+                                $i++;
                             }
-                            $i++;
                         }
                     } else {
                         echo $applicationModel->getErrors();

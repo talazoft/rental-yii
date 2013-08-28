@@ -310,7 +310,8 @@
                         <td width="33%"><div class="nofloat">Name : <?php echo $ref->name; ?></div></td> 
                         <td width="33%"><div class="nofloat">Relation : <?php echo $ref->relation; ?></div></td> 
                         <td width="34%"><div class="nofloat">Address : <?php echo $ref->address; ?></div></td> 
-                        <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?></div></td>
+                        <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?><br>
+                            <hr></div></td>
                     </tr> <?php
                 }
                 ?>
@@ -338,29 +339,35 @@
             <br />
             <br />
             <table>
-                <tr>
-                    <td>
-                        Primary applicant sign: 
-                    </td>
-                    <td>
-                        <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" /><br>
-                        _________________________
-                    </td>
-                    <td>
-                        Date:
-                    </td>
-                    <td>
-                        <?php echo date('M d, Y'); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Name: <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?>
-                    </td>
-                    <td>
-                        
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            Primary applicant sign 
+                        </td>
+                        <td>:</td>
+                        <td>
+                            <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" />
+                            <br>
+                            <hr>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            Date
+                        </td>
+                        <td>:</td>
+                        <td><?php echo date("M d, Y") ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?> <br>
+                            <hr>
+                        </td>
+                    </tr>
             </table>
         </div><!---content end---->
         </div><!---maincontent_info end---->

@@ -388,6 +388,24 @@ class RentalController extends Controller
     public function actionShowstep1(){
         echo $this->renderPartial("_step1_form", '', true);
     }
+    
+    public function actionShowsteps(){
+        
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>true,
+            'jquery-ui.min.js'=>true,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        
+        if(isset($_POST['res'])){
+            if($_POST['res'] == 1){
+                echo $this->renderPartial("_index_commercial", '', true, true);
+            } else {
+                echo $this->renderPartial("_index_apartment", '', true, true);
+            }
+        }
+    }
 
     protected function performAjaxValidation($model)
     {

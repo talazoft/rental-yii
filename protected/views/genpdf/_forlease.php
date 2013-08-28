@@ -499,220 +499,35 @@
                 <table>
                     <tr>
                         <td>
-                            Primary applicant sign: 
+                            Primary applicant sign 
                         </td>
+                        <td>:</td>
                         <td>
                             <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" /><br>
-                            _________________________
+                            <hr>
                         </td>
+                        <td>&nbsp;</td>
                         <td>
-                            Date:
+                            Date
                         </td>
-                        <td>
-                            <?php echo date('M d, Y'); ?>
-                        </td>
+                        <td>:</td>
+                        <td><?php echo date("M d, Y") ?></td>
                     </tr>
                     <tr>
                         <td>
-                            Name: <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?>
+                            Name
                         </td>
                         <td>
-
+                            :
+                        </td>
+                        <td>
+                            <?php echo $applicantModel[0]->firstname." ".$applicantModel[0]->middlename." ".$applicantModel[0]->lastname; ?> <br>
+                            <hr>
                         </td>
                     </tr>
                 </table>
                 <br />
-                <br /> <?php /*
-                <div class="judul_dalam">APPLICATION CHECKLIST</div>          
-                *** All resident managers must verify the following items prior to calling in the office for all credit
-                checks.
-                <table border="1px"   style=" border:thin ; border-width:medium; border-spacing:0px;"  width="90%">
-                    <tr>
-                        <td width="50%">&nbsp;                </td>
-                        <td width="25%"><div class="judul_tabel"> Manager</div></td>
-                        <td width="25%"> <div class="judul_tabel">Supervisor</div></td>
-                    </tr>
-                    <tr>
-                        <td>Application filled out completely</td>
-                        <td align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select> 
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Copies of picture I/D for all adult members</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Copies of Social Security cards for all adult members</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Current rent receipt</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Current utility statements (gas, electric or phone)</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Current income verified</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Current bank verified (if needed)</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Landlord references verified (5 years)</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Employment verified</td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                        <td  align="center">
-                            <select>
-                                <option value="Approve">Approve</option>
-                                <option value="Denied">Denied</option>                
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-
-                * Income Requirements: (e.g. $800 rent x 3 = $2400.00 (Applicant should earn at least $2400 to
-                qualify)
-            </div>
-            <div class="judul_dalam">
-                <hr>LEASE TERMS
-            </div>
-            <div class="terms">
-                <table width="100%">
-                    <tr>
-                        <td colspan="2"><div class="panjang2">Name on lease  : ________</div></td>     
-                    </tr>
-                    <tr>
-                        <td colspan="2"><div class="panjang2">________</td>
-                    </tr>
-                    <tr>
-                        <td width="30%">Lease term : ________</td>
-                        <td width="30%">Startind date : ________</td>
-                    </tr>
-                    <tr>
-                        <td>Monthly rent : ________</td>
-                        <td>Security deposit : ________</td>
-                    </tr>
-                    <tr>
-                        <td>Increase rate : ________</td>
-                        <td>Renew option : ________</td>
-                    </tr>
-                    <tr>
-                        <td>Free rent : ________</td>
-                        <td>Utilities : ________</td>
-                    </tr>
-                    <tr>
-                        <td>Addition fee : ________</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><div class="panjang2">Aditional info  : <input type="text"></div></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><div class="panjang2"><input type="text"></div></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><div class="panjang2"><input type="text"></div></td>
-                    </tr>
-                </table>
-            </div> */ ?>
+                <br /> 
         </div>
     </body>
 </html>

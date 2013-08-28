@@ -29,7 +29,9 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		//$this->render('index');
+                Yii::app()->session->destroy();
+                $this->redirect(Yii::app()->homeUrl);
 	}
 
 	/**
@@ -49,7 +51,7 @@ class SiteController extends Controller
 	/**
 	 * Displays the contact page
 	 */
-	public function actionContact()
+	/*public function actionContact()
 	{
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
@@ -70,12 +72,12 @@ class SiteController extends Controller
 			}
 		}
 		$this->render('contact',array('model'=>$model));
-	}
+	}*/
 
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin()
+	/*public function actionLogin()
 	{
 		$model=new LoginForm;
 
@@ -96,18 +98,19 @@ class SiteController extends Controller
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
-	}
+	}*/
         
         public function actionResetsession(){
             Yii::app()->session->destroy();
+            $this->redirect(Yii::app()->homeUrl);
         }
 
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
-	public function actionLogout()
+	/*public function actionLogout()
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
-	}
+	}*/
 }

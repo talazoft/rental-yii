@@ -363,7 +363,7 @@
             {
                 position: absolute;
                 top:111px;
-                right:50%;
+                right:46%;
                 width: 278px;
                 height: auto;
                 text-align: center;
@@ -401,12 +401,13 @@
 
 <body id="mainbody">
     <link type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css2/jquery.signature.css" rel="stylesheet" />
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/facescroll.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/facescroll.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/auto-numeric.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/additional-methods.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js2/jquery.cookie.js"></script>
     <script type="text/javascript">
         
     $.fn.hasAttr = function(name) {  
@@ -463,168 +464,13 @@
                 return false;
             }
         }
-
+        
         $(".show").unbind("click").click(function () {
    
             var step=$(this).attr('id');
             if(step == 1){
                 $(".step_content_"+step).slideToggle(350);
-            } else if(step == 2){
-                if(validate("step1-form")){
-                //if(test1 == test2){
-                    var step1frm = $("#step1-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step1tosession') ?>", step1frm, function(response){
-                        $("#ai").load("<?php echo Yii::app()->createUrl('/rental/showstep2') ?>");
-                    });
-                    
-                    $(".step_content_"+step).slideToggle(350);
-                    
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 3){
-            
-                if(validate("step1-form") && validate("step2-form")){
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step2tosession') ?>", $(".step2-form").serialize(), function(response){
-                        $("#rh").load("<?php echo Yii::app()->createUrl('/rental/showstep3') ?>");
-                    });
-                    
-                    $(".step_content_"+step).slideToggle(350);
-                    
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 4){
-                if(validate("step1-form") && validate("step2-form") && validate("step3-form")){
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step3tosession') ?>", $(".step3-form").serialize(), function(response){
-                        $("#eii").load("<?php echo Yii::app()->createUrl('/rental/showstep4') ?>")
-                    });
-                    
-                    $(".step_content_"+step).slideToggle(350);
-                    
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 5){
-                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form")){
-                    var formdata = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step4tosession') ?>", formdata, function(response){
-                        $("#pr").load("<?php echo Yii::app()->createUrl('/rental/showstep5') ?>")
-                    });
-                    
-                    $(".step_content_"+step).slideToggle(350);
-                    
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 6){
-                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form")){
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
-                        $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>");
-                    });
-
-                    $(".step_content_"+step).slideToggle(350);
-
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 7){
-            
-                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form")){
-                    $.post("<?php echo Yii::app()->createUrl('/rental/step6tosession') ?>", $(".step6-form").serialize(), function(response){
-                        $("#gi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>");
-                    });
-
-                    $(".step_content_"+step).slideToggle(350);
-
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
-            } else if(step == 8){
-                var t = $("#ApplicationInformation_selection").val();
-                if(t == "Apartment"){               
-                    if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validate("step7-form")){
-                        
-                        $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
-                            $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>");
-                        });
-                        
-                        $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
-                    } else {
-                        $("#box5").show();
-                    }
-                } else {
-                    if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validate("step7-form")){
-                        var formdata = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-                        $.post("<?php echo Yii::app()->createUrl('/rental/step7tosession') ?>", formdata, function(response){
-                            $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>");
-                        });
-
-                        $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
-                    } else {
-                        $("#box5").show();
-                    }
-                }
-                
-            } else if(step == "final"){
-            
-                if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
-                    $("#agreements").load("<?php echo Yii::app()->createUrl('/rental/showfinalstep') ?>");
-                    //$(".step_content_"+step).slideToggle(350);
-                    $(".step_content_final").slideToggle(350);
-                    
-                    if($(this).attr('class')=='hide'){
-                        $(this).attr('class','show');	
-                    } else {
-                        $(this).attr('class','hide');			
-                    }
-                } else {
-                    $("#box5").show();
-                }
             }
-
         });
         
         $("#saved").unbind('click').click(function(){
@@ -642,9 +488,77 @@
             $("#box3").hide("slow");
             $("#box4").hide("slow");
         });
+        
         $("#box4").unbind('click').click(function(){
             $(this).hide("slow");
         });
+        
+        $(".all").unbind('click').click(function(){
+            for(var z=2;z<=8;z++){            
+                if($(".step_content_"+z).is(':visible') == false){
+                    var step_content = $(".step_content_"+z);
+                    var child = step_content.children();
+                    if(child.contents().length > 0){
+                        $(".step_content_"+z).slideDown(350);
+                        $(".step_"+z+" .show").attr('class', 'hide');
+                    }
+                }
+            }
+        });
+        
+        $(".next").click(function () {
+            var options = { path: '/', expires: 10000000000000 };
+            var co=0;
+            if ($.cookie('step')==null) {
+                // jika tdk ada
+                $.cookie('step', co, options);
+            }
+            if (jQuery.cookie('step')) {
+                // jika ada
+                var y=parseInt($.cookie('step'));
+                var step=y + 1;
+                if(y>0 && y<9){
+                    $.cookie('step', step, options);
+                }else{
+                    $.cookie('step', 1, options);
+                }
+            }
+
+            if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
+                var stepminus=parseInt($.cookie('step'))-1;
+            }else{
+                var stepminus=8;
+            }
+            //alert(stepminus);
+            $(".step_content_"+$.cookie('step')).show();
+            $(".step_content_"+stepminus).hide();
+        });
+        $(".prev").click(function () {
+            var options = { path: '/', expires: 10000000000000 };
+            var co=0;
+            if ($.cookie('step')==null) {
+                // jika tdk ada
+                $.cookie('step', co, options);
+            }
+            if (jQuery.cookie('step')) {
+                // jika ada
+                var y=parseInt($.cookie('step'));
+                var step=y - 1;
+                if(y>0 && y<9){
+                    $.cookie('step', step, options);
+                }else{
+                    $.cookie('step', 1, options);
+                }
+            }
+            if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
+                var steppos=parseInt($.cookie('step'))+1;
+            }else{
+                var steppos=8;
+            }
+
+            $(".step_content_"+$.cookie('step')).show();
+            $(".step_content_"+steppos).hide();
+        }); 
     });
     </script>
     <div id="box2">
@@ -657,7 +571,6 @@
     <div id="box3">
         <div id="form3">
             <?php 
-            //include "/../rental/open_saved_form.php";
             echo $this->renderPartial("//rental/open_saved_form", '', true);
             ?>
         </div>

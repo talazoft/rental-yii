@@ -24,8 +24,6 @@ class OpenformController extends Controller{
             foreach($applicationModel as $appKey => $appVal){
                 $appArr[$appKey] = $appVal;
             }
-            
-            print_r($appArr);
 
             $applicantsModel = ApplicantInfo::model()
                     ->findAll("rd_application_information_id = ".$applicationModel->id);
@@ -150,6 +148,7 @@ class OpenformController extends Controller{
                 $step6arr4 = array_merge_recursive($step6arr3, $incomeData);
             }
 
+            
             $step1 = $appArr;
             $step2 = array_merge_recursive(array_merge_recursive($applicantsData, $dependantsData), $vehiclesData);
             $step3 = $resHisData;
@@ -172,7 +171,11 @@ class OpenformController extends Controller{
                 Yii::app()->session['step7'] = $step7;
             }
             
-            print_r(Yii::app()->session['step1']);
+            if(strtolower($applicationModel->selection) == "commercial"){
+                echo 1;
+            } else {
+                echo 2;
+            }
         } else {
             echo 0;
         }

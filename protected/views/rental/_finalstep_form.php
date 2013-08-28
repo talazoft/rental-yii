@@ -118,41 +118,63 @@ $(function(){
             return false;
         }
     }
-    $("#saveform2").unbind('click').click(function(){
-        var saveallurl = "<?php echo Yii::app()->createUrl("save"); ?>";
-        
-        var data1 = $(".step1-form").serialize();
-        var data2 = $(".step2-form").serialize();
-        var data3 = $(".step3-form").serialize();
-        var data4 = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-        var data5 = $(".step5-form").serialize();
-        var data6 = $(".step6-form").serialize();
-        var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
-        var data8 = {sign:$("#signJson").val(), payment_type:$("#payment_type option:selected").val()};
-        
-        var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
-        
-        if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
-            $.post(saveallurl, alldata, function(response){
-                if(response != null || response != ""){
-                    var data = jQuery.parseJSON(response);
-                    if(data !== null){
-                        var u = "<?php echo Yii::app()->createUrl("save/showmessage"); ?>";
-                        if(data.c == 'update' && data.y == 'success'){
-                            alert("Updated");
-                        } else {
-                            $("#box4").load(u, {c:data.c, y:data.y}, function(){
-                                $(this).show("slow");
-                            });
+    
+    function checksign(){
+        var sign = $("#signJson").val();
+        if(sign.length <=0 || sign == '{"lines":[]}'){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    function save(showresponse){
+        if(checksign() == false){
+            $("#signature").css({border:"2px solid red", color:"red"});
+            $("#box5").show();
+        } else {
+            $("#signature").css({border:"2px solid red", color:"red"});
+            var saveallurl = "<?php echo Yii::app()->createUrl("save"); ?>";
+
+            var data1 = $(".step1-form").serialize();
+            var data2 = $(".step2-form").serialize();
+            var data3 = $(".step3-form").serialize();
+            var data4 = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+            var data5 = $(".step5-form").serialize();
+            var data6 = $(".step6-form").serialize();
+            var data7 = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+            var data8 = {sign:$("#signJson").val(), payment_type:$("#payment_type option:selected").val()};
+
+            var alldata = {data1:data1, data2:data2, data3:data3, data4:data4, data5:data5, data6:data6, data7:data7, data8:data8};
+
+            if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")){
+                $.post(saveallurl, alldata, function(response){
+                    if(showresponse){
+                        if(response != null || response != ""){
+                            var data = jQuery.parseJSON(response);
+                            if(data !== null){
+                                var u = "<?php echo Yii::app()->createUrl("save/showmessage"); ?>";
+                                if(data.c == 'update' && data.y == 'success'){
+                                    alert("Updated");
+                                } else {
+                                    $("#box4").load(u, {c:data.c, y:data.y}, function(){
+                                        $(this).show("slow");
+                                    });
+                                }
+                            }
                         }
                     }
-                }
-            });
-            
-            var signurl = "<?php echo Yii::app()->createUrl("save/savesign"); ?>";
-            
-            savesign(signurl);
+                    
+                    var signurl = "<?php echo Yii::app()->createUrl("save/savesign"); ?>";
+
+                    savesign(signurl);
+                });
+            }
         }
+    }
+    
+    $("#saveform2").unbind('click').click(function(){
+        save(true);
     });
     
     $("#btnshowhtml").unbind('click').click(function(){
@@ -161,12 +183,16 @@ $(function(){
     });
     
     $("#sendemailpdf").unbind('click').click(function(){
+        save(false);
         var sendemailurl = "<?php echo Yii::app()->createUrl("sendmail"); ?>";
         $.post(sendemailurl, {fill:"1"}, function(response){
-            /*$("#box4").load(response, null, function(){
-                $(this).show();
-            });*/
-            alert("Email has been sent.");
+            var jsonmessage = jQuery.parseJSON(response);
+            if(jsonmessage.status == 'success'){
+                $("#box4").html(jsonmessage.message);
+                $("#box4").show();
+            } else {
+                alert(jsonmessage.message);
+            }
         });
     });
     
@@ -180,6 +206,7 @@ $(function(){
     });
     
     $("#printpdf").unbind('click').click(function(event){
+        save(false)
         var printpdf = "<?php echo Yii::app()->createUrl("genpdf/generatepdf"); ?>";
         event.preventDefault();
         event.stopPropagation();

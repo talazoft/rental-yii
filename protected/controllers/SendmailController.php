@@ -10,11 +10,17 @@ class SendmailController extends Controller
             $subjc = "Rent Apartment Form";
         }
         
-        if(isset($_POST['fill'])){
+        $destination = Yii::app()->session['step2']['ApplicantInfo'][1]['email'];
+        
+        if(isset($_POST['fill']) && $_POST['fill'] == 1){
             $template = '//genpdf/_forlease';
         } else {
-            $template = '_forlease';
+            if(isset($_POST['dest'])){
+                $template = '_forlease';
+                $destination = $_POST['dest'];
+            }
         }
+        
         
         Yii::import('ext.pdf.Pdf');
         if(strtolower(Yii::app()->session['step1']['selection']) == "commercial"){
@@ -55,17 +61,16 @@ class SendmailController extends Controller
         $mail->Password = "VAMmail123";
         $mail->SetFrom("info@vamproperty.com", "Vamproperty");
         $mail->Subject = "Vamproperty - $subjc";
-        $mail->SMTPDebug = 1;
+        //$mail->SMTPDebug = 1;
         $mail->MsgHTML($message);
         $mail->AddAttachment("printedforms/rental_information.pdf");
         
-        $mail->AddAddress(Yii::app()->session['step2']['ApplicantInfo'][1]['email']/*, "info@vamproperty.com"*/);
+        $mail->AddAddress($destination/*, "info@vamproperty.com"*/);
         if($mail->Send()){
-            $status = $this->renderPartial('mail_sent', '', true);
+            $status = array('status' => 'success', 'message' => $this->renderPartial('mail_sent', '', true));
         } else {
-            $status = "Message was not sent <p>";
-            $status .= "Mailer Error: " . $mail->ErrorInfo;
+            $status = array('status' => 'fail', 'message' => "Mail was not sent <p> Mailer Error: " . $mail->ErrorInfo);
         }
-        echo $status;
+        echo json_encode($status);
     }
 }

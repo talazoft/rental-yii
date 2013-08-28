@@ -3,8 +3,20 @@
         $("#open").unbind('click').click(function(){
             var openurl = "<?php echo Yii::app()->createUrl("openform"); ?>";
             var data = {code:$("#txtcode").val(), pass:$("#txtpassword").val()}
-            $.post(openurl, data, function(response){              
-                $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
+            $.post(openurl, data, function(response){ 
+                
+                if(response == 0){
+                    alert("Form with given code and password does not found in database");
+                } else {
+                    
+                    var stepsurl = "<?php echo Yii::app()->createUrl("rental/showsteps"); ?>";
+                    $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
+                    /*$.post(stepsurl, {res:response}, function(res){
+                        $(".right").append(res);
+                    });*/
+                    $("#nextsteps").load(stepsurl, {res:response});
+                }
+                /*$("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
                 /*$("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
                     $(".step_content_2").slideToggle(350);
                 });

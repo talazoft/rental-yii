@@ -13,7 +13,7 @@
  * @property string $idtype
  * @property string $idnum
  * @property string $has_pet
- * @property integer $pet_num
+ * @property string $pet_num
  * @property integer $rd_application_information_id
  * @property string $years_live_planned
  * @property string $cellphone
@@ -63,9 +63,10 @@ class ApplicantInfo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('rd_application_information_id', 'required'),
-			array('pet_num, rd_application_information_id', 'numerical', 'integerOnly'=>true),
+			array('rd_application_information_id', 'numerical', 'integerOnly'=>true),
 			array('firstname, middlename, lastname, email', 'length', 'max'=>50),
-			array('birthday', 'length', 'max'=>20),
+			array('birthday, pet_num', 'length', 'max'=>20),
+                        array('has_pet', 'length', 'max'=>10),
 			array('ssn, idtype, idnum, has_pet, years_live_planned', 'length', 'max'=>45),
 			array('cellphone, homephone', 'length', 'max'=>25),
 			// The following rule is used by search().
