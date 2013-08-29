@@ -18,10 +18,6 @@ class GenpdfController extends Controller
                 }
             }
 	}
-        
-        public function actionShowplainhtml(){
-             echo $this->renderPartial('_forsale', array(), true, true);
-        }
 
 	public function actionGeneratepdf()
 	{
@@ -39,11 +35,6 @@ class GenpdfController extends Controller
                     die();
                 }
             }
-	}
-
-	public function actionIndex()
-	{
-		$this->render('index');
 	}
 
 	// Uncomment the following methods and override them if needed

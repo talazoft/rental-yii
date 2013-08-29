@@ -292,7 +292,7 @@
                     </tr>
                     <tr>
                         <td>Phone No : </td>
-                        <td>Department : ></td> 
+                        <td>Department : </td> 
                         <td>Position / Title : </td> 
                     </tr>
                     <tr>
@@ -305,7 +305,7 @@
                     </tr>
                     <tr>
                         <td>Business Name : </td>
-                        <td>Type of Business : ></td> 
+                        <td>Type of Business : </td> 
                         <td>Years in Business : </td> 
                     </tr>
                     <tr>
@@ -372,7 +372,7 @@
                         </td>
                         <td>:</td>
                         <td>
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <br>
                             <hr>
                         </td>
@@ -381,7 +381,7 @@
                             Date
                         </td>
                         <td>:</td>
-                        <td>&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                     <tr>
                         <td>

@@ -1,6 +1,7 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <style>
+        <style type="text/css">
             @charset "utf-8";
             /* CSS Document */
             .judul_luar
@@ -109,7 +110,7 @@
         <div class="maincontent_info">
             <div class="head_content">
                 <div class="logo-info">
-                    <img src="http://vamproperty.com/build/rdrental/img/logo.png" />
+                    <img src="http://vamproperty.com/build/rdrental/img/logo.png" alt="vamlogo"/>
                 </div>
             </div>
             <div class="content">
@@ -117,7 +118,7 @@
                     <div class="judul_dalam">
                         APPLICATION TO LEASE COMMERCIAL SPACE
                     </div>
-                </div><!---jjudul end---->
+                </div><!-- judul end -->
 
                 <div class="formulir">
                     <table width="100%">
@@ -292,7 +293,7 @@
                         <td><div class="nofloat">Phone No : ____________</div></td>               
                     </tr>
                 </table>
-                <br>
+                <br/>
                 <div class="judul_dalam">WORK OR BUSINESS ENTITY INFORMATION</div>
                 <table width="100%">
                     <tr>
@@ -344,10 +345,11 @@
                         <td>Phone No : ________</td>               
                     </tr>
                 </table>
-                <br>
-                <div class="judul_dalam">CREDIT INFORMATION</div>  
-                <table width="100%"> 
-                    <tr>
+                <br/>
+                <br/>
+                <div class="judul_nogaris">CREDIT INFORMATION : </div>
+                <table width="100%">
+                    <tr>            	         
                         <th>Name of Bank</th>
                         <th>Branch</th>
                         <th>Phone #</th>
@@ -375,9 +377,6 @@
                         <td width="20%" align="center"><div class="nofloat">________</div></td>              
                         <td width="20%" align="center"><div class="nofloat">________</div></td>                          
                     </tr>
-                </table>
-                <br>
-                <table width="100%">
                     <tr>
                         <th>Cerdit Refrence</th>
                         <th>Address</th>
@@ -405,153 +404,91 @@
                         <td width="20%" align="center"><div class="nofloat">________</div></td>   
                         <td width="20%" align="center"><div class="nofloat">________</div></td>              
                         <td width="20%" align="center"><div class="nofloat">________</div></td>                          
-                    </tr>
+                    </tr>   
                 </table>
-                <br>
-              <table width="100%">
-			<div class="judul_nogaris">CREDIT INFORMATION : </div>               	         
-         		<th>Name of Bank</th>
-                <th>Branch</th>
-                <th>Phone #</th>
-                <th>Account #</th>
-                 <th>Approx.Balance</th>
-              <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-              <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-               <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center" ><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-             <br>
-             <th>Cerdit Refrence</th>
-                <th>Address</th>
-                <th>Phone #</th>
-                <th>Account #</th>
-                 <th>Credit Amount</th>
-                  <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center" ><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-              <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center" ><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-              <tr>
-            	 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center" ><div class="nofloat"><input type="text"></div></td> 
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>   
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>              
-                 <td width="20%" align="center"><div class="nofloat"><input type="text"></div></td>                          
-             </tr>
-            
-             </table>
-                <br><br>
+                
+                <br/><br/>
                 <div class="judul_nogaris">FINANCIAL CONDITION : </div>
-               <table width="100%">
-			  
-            	  <tr>
-            	 <td width="50%" align="center"><div class="judul_garis">Monthly Income</div></td> 
-                 <td width="50%" align="center"><div class="judul_garis">Expenditures</div></td>                          
-            	 </tr>   
-                  <tr>
-            	 <td>Salary or Wage : <input type="text"></td> 
-                 <td>Property Taxes & Assessment : <input type="text"></td>                          
-            	 </tr>  
-                   <tr>
-            	 <td>Dividends : <input type="text"></td> 
-                 <td>Federal & State Income Taxes : <input type="text"></td>                          
-            	 </tr>   
-                  <tr>
-            	 <td>Rental : <input type="text"></td> 
-                 <td>Real Estate Loan Payment : <input type="text"></td>                          
-            	 </tr>   
-                 <tr>
-            	 <td>Business or Professional Income : <input type="text"> (net)</td> 
-                 <td>Payment on Contract/Note : <input type="text"></td>                          
-            	 </tr>   
-                  <tr>
-            	 <td>Other (alimony,child support, etc.) : <input type="text"></td> 
-                 <td>Estimate Living Expenses : <input type="text"></td>                          
-            	 </tr>    
-                 <tr>
-            	 <td>&nbsp;</td> 
-                 <td>Other (alimony,child support, etc.) : <input type="text"></td>   
-            	 </tr>      
-            </table>
-            <br>
-            <table width="100%">          
+                <table width="100%">
+                    <tr>
+                        <td width="50%" align="center"><div class="judul_garis">Monthly Income</div></td> 
+                        <td width="50%" align="center"><div class="judul_garis">Expenditures</div></td>                          
+                    </tr>   
+                    <tr>
+                        <td>Salary or Wage : ________</td> 
+                        <td>Property Taxes & Assessment : ________</td>                          
+                    </tr>  
+                    <tr>
+                        <td>Dividends : ________</td> 
+                        <td>Federal & State Income Taxes : ________</td>                          
+                    </tr>   
+                    <tr>
+                        <td>Rental : ________</td> 
+                        <td>Real Estate Loan Payment : ________</td>                          
+                    </tr>   
+                    <tr>
+                        <td>Business or Professional Income : ________(net)</td> 
+                        <td>Payment on Contract/Note : ________</td>                          
+                    </tr>   
+                    <tr>
+                        <td>Other (alimony,child support, etc.) :  ________</td> 
+                        <td>Estimate Living Expenses :  ________</td>                          
+                    </tr>    
+                    <tr>
+                        <td>&nbsp;</td> 
+                        <td>Other (alimony,child support, etc.) :  ________</td>   
+                    </tr>      
+                </table>
+            <br/>
+            <br/>
+            <div class="judul_nogaris">STOCK & BONDS : </div>
+            <table width="100%"> 
+                <tr>
              	<th>Stock & Bonds</th>
                 <th>Where Quote</th>
                 <th>Cost or Market</th>
                 <th>Title in Name of</th>
                  <th>Quantity</th>
                  <th>Value</th>
-                  <tr>
-            	 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>     
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>                        
+                </tr>
+                 <tr>
+            	 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td>     
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td>                    
              	</tr>
                  <tr>
-            	 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>     
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>                    
-             	</tr>
-                 <tr>
-            	<td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>     
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td> 
-                 <td width="17%" align="center"><div class="panjang"><input type="text"></div></td>           
+            	<td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td>     
+                 <td width="17%" align="center"><div class="panjang">________</div></td> 
+                 <td width="17%" align="center"><div class="panjang">________</div></td>           
              	</tr>
             </table>
-            <br>
-            <br>
+            <br/>
+            <br/>
             <div class="judul_nogaris">GENERAL INFORMATION : </div> 
               <table width="100%">
 			     
              <tr>
-            	<td width="75%">1. Have you ever filed any petition under the Bankcruptcy Act? <input type="text"></td> 
-                <td width="25%">If so, When ? <input type="text"></td>
+            	<td width="75%">1. Have you ever filed any petition under the Bankcruptcy Act?  ________</td> 
+                <td width="25%">If so, When ?  ________</td>
              </tr>
              <tr>
-            	<td width="75%">2. Has your income tax return ever been questioned by the IRS? <input type="text"></td> 
-                <td width="25%">If so, When ? <input type="text"></td>
+            	<td width="75%">2. Has your income tax return ever been questioned by the IRS?  ________</td> 
+                <td width="25%">If so, When ?  ________</td>
              </tr>
               <tr>
-            	<td colspan="2">3. Have you ever been evicted for nonpayment of rent or any other reason? <input type="text"></td> 
+            	<td colspan="2">3. Have you ever been evicted for nonpayment of rent or any other reason?  ________</td> 
              </tr>
              <tr>
-            	<td colspan="2">Please explain any "yes" answers to General information:<input type="text"></div></td> 
+            	<td colspan="2">Please explain any "yes" answers to General information:________________________________</td> 
              </tr>
             </table>
-                <br>
+                <br/>
                 <div class="judul_dalam">ADDITIONAL INFORMATION</div>  
                 <table width="100%">
                     <tr>
@@ -611,16 +548,16 @@
                             </td>
                             <td>:</td>
                             <td>
-                                &nbsp;
-                                <br>
-                                <hr>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br/>
+                                <hr/>
                             </td>
                             <td>&nbsp;</td>
                             <td>
                                 Date
                             </td>
                             <td>:</td>
-                            <td>&nbsp;<br><hr></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/><hr/></td>
                         </tr>
                         <tr>
                             <td>
@@ -630,12 +567,13 @@
                                 :
                             </td>
                             <td>
-                                &nbsp;
-                                <br>
-                                <hr>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br/>
+                                <hr/>
                             </td>
                         </tr>
                 </table>
+            </div>
         </div>
     </body>
 </html>
