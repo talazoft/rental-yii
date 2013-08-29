@@ -10,8 +10,13 @@
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">
+        <script>
+            $(function(){
+                $('.year').mask('?9999');
+            });
+        </script>
         <?php 
-            echo CHtml::textField("VehicleInfo[$cnt][$cnt2][year]", isset(Yii::app()->session['step2']['VehicleInfo'][$cnt][$cnt2]["year"]) ? Yii::app()->session['step2']['VehicleInfo'][$cnt][$cnt2]["year"] : "", array("style"=>"width:70%", 'id' => "VehicleInfo_year$cnt$cnt2"));
+            echo CHtml::textField("VehicleInfo[$cnt][$cnt2][year]", isset(Yii::app()->session['step2']['VehicleInfo'][$cnt][$cnt2]["year"]) ? Yii::app()->session['step2']['VehicleInfo'][$cnt][$cnt2]["year"] : "", array("style"=>"width:70%", 'id' => "VehicleInfo_year$cnt$cnt2", 'class'=>'year'));
         ?>
     </td>
     <td align="center" style="border-right-color:#dddddd">

@@ -73,7 +73,13 @@
                     <td>:</td>
                     <td>
                         <?php 
-                            echo CHtml::textField("ResidentalHistory[$cnt][$cnt2][state]", isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["state"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["state"] : "", array('style'=>'width:84px', 'id'=>"state$cnt$cnt2", 'required'=>'required'))." Zip Code : ".CHtml::textField("ResidentalHistory[$cnt][$cnt2][zip]", Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["zip"] ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["zip"] : "", array('style'=>'width:94px', 'id'=>"zip$cnt$cnt2", 'maxlength'=>"5", 'size'=>"5", 'class'=>'zip', 'required'=>'required')); 
+                            echo CHtml::textField("ResidentalHistory[$cnt][$cnt2][state]", 
+                                    isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["state"]) ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["state"] : "", 
+                                    array('style'=>'width:84px', 'id'=>"state$cnt$cnt2", 'required'=>'required'))." Zip Code : ".
+                                    CHtml::textField("ResidentalHistory[$cnt][$cnt2][zip]", 
+                                            Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["zip"] ? Yii::app()->session['step3']['ResidentalHistory'][$cnt][$cnt2]["zip"] : "", 
+                                            array('style'=>'width:94px', 'id'=>"zip$cnt$cnt2", 'maxlength'=>"5", 'size'=>"5", 'class'=>'zip', 
+                                                'required'=>'required')); 
                         ?>
                         <?php echo CHtml::image('images/star.png', 'required'); ?>
                     </td>

@@ -141,7 +141,7 @@
                 </div>
                 
                 <?php 
-                $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
+                $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']." order by id asc");
 
                 $i=1;
                 foreach($applicantModel as $applic){ ?>      
@@ -178,7 +178,7 @@
                         <?php 
                         
                         if($i == 1){
-                            $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
+                            $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applic->id." order by id asc");
                             foreach ($dependantModel as $dep){ ?>
 
                             <tr>
@@ -204,7 +204,7 @@
                                 <th> Color</th>        
                             </tr>
                             <?php 
-                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
+                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applic->id." order by id asc");
                             foreach($vehicleModel as $veh){ ?>
                             <tr>
                                 <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
@@ -228,7 +228,7 @@
                 <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
                 <div class="formulir3">
                     <?php 
-                    $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     foreach($residentModel as $res){ ?>
                     <table width="100%">	
                         <tr>
@@ -254,7 +254,7 @@
                 <div class="judul_dalam">OTHER CONTACT INFORMATION</div>    
                 <table width="100%">
                     <?php 
-                    $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
 
                     foreach($personalrefModel as $ref){ ?>
                         <tr>
@@ -272,7 +272,7 @@
                 <table width="100%">
                     <?php 
 
-                    $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     foreach($emplModel as $emp){
                         if($emp->employment_type == 'fulltime' || $emp->employment_type == 'parttime'){ ?>
                             <tr>
@@ -327,7 +327,7 @@
                         <th>Approx.Balance</th>
                     </tr>
                     <?php 
-                    $crimodel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $crimodel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     foreach($crimodel as $cri){ ?>
                         <tr>
                             <td width="20%" align="center"><div class="nofloat"><?php echo $cri->bank_name ?></div></td> 
@@ -349,7 +349,7 @@
                         <th>Credit Amount</th>
                     </tr>
                     <?php 
-                    $crfmodel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $crfmodel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     foreach($crfmodel as $crf){ ?>
                         <tr>
                             <td width="20%" align="center"><div class="nofloat"><?php echo $crf->credit_ref; ?></div></td> 
@@ -364,8 +364,8 @@
                 <br>
                 <div class="judul_dalam">FINANCIAL CONDITION</div>  
                 <?php 
-                $incomemodel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
-                $expendmodel = Expenditures::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
+                $incomemodel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
+                $expendmodel = Expenditures::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                 ?>
                 <table width="100%">
                     <tr>
@@ -409,7 +409,7 @@
                         <th>Value</th>
                     </tr>
                     <?php 
-                    $stockmodel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $stockmodel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     foreach($stockmodel as $stock){ ?>
                         <tr>
                             <td width="17%" align="center"><div class="panjang"><?php echo $stock->stock_bonds ?></div></td> 
@@ -426,7 +426,7 @@
                 <div class="judul_dalam">GENERAL INFORMATION</div>     
                 <table width="100%">  
                     <?php 
-                    $genmodel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id);
+                    $genmodel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                     ?>
                     <tr>
                         <td width="75%">1. Have you ever filed any petition under the Bankcruptcy Act? <?php echo $genmodel->bankrupt == 1 ? "Yes" : "No" ?></td> 

@@ -142,7 +142,7 @@
             </div>
             
             <?php 
-            $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']);
+            $applicantModel = ApplicantInfo::model()->findAll("rd_application_information_id = ".Yii::app()->session['applicationID']." order by id asc");
             
             $i=1;
             foreach($applicantModel as $applic){ ?>      
@@ -179,7 +179,7 @@
                         <?php 
                         
                         if($i == 1){
-                            $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
+                            $dependantModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applic->id." order by id asc");
                             foreach ($dependantModel as $dep){ ?>
 
                             <tr>
@@ -205,7 +205,7 @@
                                 <th> Color</th>        
                             </tr>
                             <?php 
-                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applic->id);
+                            $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applic->id." order by id asc");
                             foreach($vehicleModel as $veh){ ?>
                             <tr>
                                 <td width="25%" align="center"><?php echo isset($veh->license_plate) ? $veh->license_plate : "" ?></td>
@@ -228,7 +228,7 @@
             <div class="judul_dalam">APPLICANT'S RESIDENCY INFORMATION</div>
             <div class="formulir3">
                 <?php 
-                $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                $residentModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                 foreach($residentModel as $res){ ?>
                 <table width="100%">	
                     <tr>
@@ -255,7 +255,7 @@
             <table width="100%">
                 <?php 
                 
-                $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                $emplModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                 foreach($emplModel as $emp){
                     if($emp->employment_type == 'fulltime' || $emp->employment_type == 'parttime'){ ?>
                         <tr>
@@ -303,15 +303,14 @@
             <div class="judul_dalam">OTHER CONTACT INFORMATION</div>    
             <table width="100%">
                 <?php 
-                $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id);
+                $personalrefModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicantModel[0]->id." order by id asc");
                 
                 foreach($personalrefModel as $ref){ ?>
                     <tr>
                         <td width="33%"><div class="nofloat">Name : <?php echo $ref->name; ?></div></td> 
                         <td width="33%"><div class="nofloat">Relation : <?php echo $ref->relation; ?></div></td> 
                         <td width="34%"><div class="nofloat">Address : <?php echo $ref->address; ?></div></td> 
-                        <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?><br>
-                            <hr></div></td>
+                        <td width="34%"><div class="nofloat">Phone No : <?php echo $ref->phone; ?></div></td>
                     </tr> <?php
                 }
                 ?>

@@ -14,7 +14,7 @@
             }
         });
         
-        var depcnt = <?php echo isset(Yii::app()->session['step2']['DependantInfo']["depcnt2$cnt"]) ? Yii::app()->session['step2']['DependantInfo']["depcnt2$cnt"] : 2 ?>;
+        var depcnt = <?php echo isset(Yii::app()->session['step2']['DependantInfo'][$cnt]["depcnt2"]) ? Yii::app()->session['step2']['DependantInfo'][$cnt]["depcnt2"] : 2 ?>;
         $("#plusrhdep<?php echo $cnt ?>").unbind("click").click(function(){           
             var depnewrowurl = "<?php echo Yii::app()->createUrl('/rental/depnewrow') ?>";
             $.post(depnewrowurl, {cnt: <?php echo $cnt; ?>, cnt2:depcnt}, function(response){
@@ -48,7 +48,7 @@
         }
         
         
-        var vehcnt = <?php echo isset(Yii::app()->session['step2']['VehicleInfo']["vehcnt2$cnt"]) ? Yii::app()->session['step2']['VehicleInfo']["vehcnt2$cnt"]+1 : 2 ?>;
+        var vehcnt = <?php echo isset(Yii::app()->session['step2']['VehicleInfo'][$cnt]["vehcnt2"]) ? Yii::app()->session['step2']['VehicleInfo'][$cnt]["vehcnt2"] : 2 ?>;
         $("#plusrhveh<?php echo $cnt; ?>").unbind("click").click(function(event){
             var vehnewrow = "<?php echo Yii::app()->createUrl('/rental/vehnewrow') ?>";
             

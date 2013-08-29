@@ -26,16 +26,16 @@ class OpenformController extends Controller{
             }
 
             $applicantsModel = ApplicantInfo::model()
-                    ->findAll("rd_application_information_id = ".$applicationModel->id);
+                    ->findAll("rd_application_information_id = ".$applicationModel->id." order by id asc");
 
             $applicantsData = array();
-            $i = 1;
-            foreach($applicantsModel as $applicant){
+            foreach($applicantsModel as $h => $applicant){
+                $i=$h+1;
                 foreach($applicant as $k => $val){
                     $applicantsData['ApplicantInfo'][$i][$k] = $val;
                 }
 
-                $dependantsModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $dependantsModel = DependantInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 foreach($dependantsModel as $kv => $dependant){
                     foreach($dependant as $key => $val){
                         $ddata[$i][$kv+1][$key] = $val;
@@ -44,7 +44,7 @@ class OpenformController extends Controller{
                 $ddata[$i]['depcnt2'] = count($dependantsModel);
                 $dependantsData = array('DependantInfo'=>$ddata);
 
-                $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $vehicleModel = VehicleInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 foreach($vehicleModel as $kv => $vehicle){
                     foreach($vehicle as $key => $val){
                         $vdata[$i][$kv+1][$key] = $val;
@@ -53,7 +53,7 @@ class OpenformController extends Controller{
                 $vdata[$i]['vehcnt2'] = count($vehicleModel);
                 $vehiclesData = array('VehicleInfo'=>$vdata);
 
-                $resHistoryModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $resHistoryModel = ResidentalHistory::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 foreach($resHistoryModel as $rsv => $reshis){
                     foreach($reshis as $key => $val){
                         $resdata[$i][$rsv+1][$key] = $val;
@@ -62,7 +62,7 @@ class OpenformController extends Controller{
                 $resdata[$i]['rescnt2'] = count($resHistoryModel);
                 $resHisData = array('ResidentalHistory'=>$resdata);
 
-                $empModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $empModel = EmploymentInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 foreach($empModel as $emp => $employment){
                     foreach($employment as $key => $val){
                         $empdata[$i][$emp+1][$key] = $val;
@@ -71,7 +71,7 @@ class OpenformController extends Controller{
                 $empdata[$i]['employment_type'] = $empModel[$i-1]->employment_type;
                 $employmentData = array("EmploymentInfo" => $empdata);
 
-                $prModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $prModel = PersonalRefrence::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 foreach($prModel as $pr => $personalref){
                     foreach($personalref as $key => $val){
                         $prdata[$i][$pr+1][$key] = $val;
@@ -80,7 +80,7 @@ class OpenformController extends Controller{
                 $prdata["prcnt2$i"] = count($prModel);
                 $personalRefrenceData = array("PersonalRefrence" => $prdata);
 
-                $criModel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $criModel = CreditInfo::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($criModel) && count($criModel) > 0){
                     foreach($criModel as $cri => $creditinfo){
                         foreach($creditinfo as $key => $val){
@@ -92,7 +92,7 @@ class OpenformController extends Controller{
                     $creditInfoData = array("CreditInfo" => $cridata);
                 }
 
-                $crrModel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $crrModel = CreditRef::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($crrModel) && count($crrModel) > 0){
                     foreach($crrModel as $crr => $creditref){
                         foreach($creditref as $key => $val){
@@ -103,7 +103,7 @@ class OpenformController extends Controller{
                     $creditRefData = array("CreditRef"=>$crrdata);
                 }
 
-                $sbModel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicant->id);
+                $sbModel = StockBonds::model()->findAll("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($sbModel) && count($sbModel) > 0){
                     foreach($sbModel as $sb => $stock){
                         foreach($stock as $key => $val){
@@ -114,7 +114,7 @@ class OpenformController extends Controller{
                     $stockBondsData = array("StockBonds"=>$sbdata);
                 }
 
-                $expModel = Expenditures::model()->find("rd_applicant_info_id = ".$applicant->id);
+                $expModel = Expenditures::model()->find("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($expModel) && count($expModel) > 0){
                     foreach($expModel as $exk => $exp){
                         $exdata[$i][$exk] = $exp;
@@ -122,7 +122,7 @@ class OpenformController extends Controller{
                     $expendData = array("Expenditures"=>$exdata);
                 }
 
-                $incModel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicant->id);
+                $incModel = MonthlyIncome::model()->find("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($incModel) && count($incModel) > 0){
                     foreach($incModel as $eky => $income){
                         $incdata[$i][$eky] = $income;
@@ -130,15 +130,13 @@ class OpenformController extends Controller{
                     $incomeData = array("MonthlyIncome"=>$incdata);
                 }
 
-                $otherModel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicant->id);
+                $otherModel = GeneralInfo::model()->find("rd_applicant_info_id = ".$applicant->id." order by id asc");
                 if(isset($otherModel) && count($otherModel) > 0){
                     foreach($otherModel as $gke => $generalinfo){
                         $geninfdata[$i][$gke] = $generalinfo;
                     }
                     $generalInfoData = array("GeneralInfo"=>$geninfdata);
                 }
-
-                $i++;
             }
 
             if(isset($creditInfoData) && isset($creditRefData) && isset($stockBondsData) && isset($expendData) && isset($incomeData)){
@@ -160,6 +158,12 @@ class OpenformController extends Controller{
                 $step7 = $generalInfoData;
             }
 
+            unset(Yii::app()->session['step1']);
+            unset(Yii::app()->session['step2']);
+            unset(Yii::app()->session['step3']);
+            unset(Yii::app()->session['step4']);
+            unset(Yii::app()->session['step5']);
+            
             Yii::app()->session['step1'] = $step1;
             Yii::app()->session['step2'] = $step2;
             Yii::app()->session['step3'] = $step3;
@@ -167,6 +171,8 @@ class OpenformController extends Controller{
             Yii::app()->session['step5'] = $step5;
 
             if(isset($step6) && isset($step7)){
+                unset(Yii::app()->session['step6']);
+                unset(Yii::app()->session['step7']);
                 Yii::app()->session['step6'] = $step6;
                 Yii::app()->session['step7'] = $step7;
             }

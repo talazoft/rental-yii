@@ -421,6 +421,8 @@
         $(".currency").autoNumeric();
         $(".zip").mask("99999");
         $(".ssn").mask("999-99-9999");
+        $(".age").mask("?999");
+        $(".year").mask("?9999");
         
         $(".step_content_1").slideToggle(350);
         $(".step_1 div.show").attr('class', 'hide')

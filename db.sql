@@ -20,7 +20,7 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_application_informat
   `state` VARCHAR(45) NULL ,
   `zipcode` VARCHAR(45) NULL ,
   `anticipated_date` VARCHAR(11) NULL ,
-  `refered_lead` VARCHAR(15) NULL ,
+  `refered_lead` VARCHAR(30) NULL ,
   `venue` VARCHAR(50) NULL ,
   `agent_name` VARCHAR(150) NULL ,
   `agent_phone` VARCHAR(25) NULL ,
@@ -342,6 +342,11 @@ CREATE  TABLE IF NOT EXISTS `sstig_contact_us_arjintas`.`rd_credit_ref` (
 ENGINE = InnoDB;
 
 USE `sstig_contact_us_arjintas` ;
+USE `sstig_contact_us_arjintas`;
+
+DELIMITER $$
+
+DELIMITER ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

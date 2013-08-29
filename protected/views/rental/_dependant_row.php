@@ -10,8 +10,13 @@
             ?>
         </td>
         <td align="center" style="border-right-color:#dddddd">
+            <script>
+            $(function(){
+                $(".age").mask("?999");
+            });
+            </script>
             <?php 
-                echo CHtml::textField("DependantInfo[$cnt][$cnt2][age]", isset(Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["age"]) ? Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["age"] : "", array("style"=>"width:70%", 'id' => "DependantInfo_age$cnt$cnt2"));
+                echo CHtml::textField("DependantInfo[$cnt][$cnt2][age]", isset(Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["age"]) ? Yii::app()->session['step2']['DependantInfo'][$cnt][$cnt2]["age"] : "", array("style"=>"width:70%", 'id' => "DependantInfo_age$cnt$cnt2", 'class'=>'age'));
             ?>
         </td>
         <td align="center" style="width:20%">
