@@ -57,6 +57,11 @@ class SaveController extends Controller
     }
     
     public function actionSavesign(){
+        
+        if(isset(Yii::app()->session['step2']['ApplicantInfo'][1]['firstname'])){
+            $name = Yii::app()->session['step2']['ApplicantInfo'][1]['firstname'];
+        }
+        
         if (isset($GLOBALS["HTTP_RAW_POST_DATA"]))
         {
             // Get the data
@@ -73,7 +78,14 @@ class SaveController extends Controller
 
             // Save file. This example uses a hard coded filename for testing,
             // but a real application can specify filename in POST variable
-            $fp = fopen( 'signed/signimg.png', 'wb' );
+            
+            if(isset($name)){
+                $filename = "sign_$name";
+            } else {
+                $filename = "signimg";
+            }
+            
+            $fp = fopen( "signed/$filename.png", 'wb' );
             fwrite( $fp, $unencodedData);
             fclose( $fp );
         }
@@ -325,7 +337,6 @@ class SaveController extends Controller
                 print_r($applicantModel->getErrors());
                 die();
             }
-
         }
     }
 }

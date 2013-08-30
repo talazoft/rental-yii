@@ -469,31 +469,6 @@
                         </td>
                     </tr>    
                 </table>
-                <table>
-                    <tr>
-                        <td>
-                            <p>
-                                <font size="-2">The undersigned Applicant hereby offers to rent/lease real property described as PROPERTY NAME
-                                It is understood that this Application is not a Rental Agreement/Lease and that Applicant has no rights to said property until a written or oral Rental Agreement/Lease is duly executed after the
-                                approval of this Application. Applicant is aware of and agrees to all the covenants and conditions in the proposed Rental Agreement/Lease and agrees to timely execute said Rental Agreement/Lease
-                                after notification of the acceptance of this Application and Offer. Time is of the essence.
-                                A credit check fee of $ 30.00 (per person) to process this Application is required. Money will be given by Applicant to the owner/manager when this Application is turned in for
-                                processing.
-                                Applicant represents all information on this Application to be true and accurate and understands that owner/manager will rely upon said information when accepting this Application whether an
-                                independent investigation has been performed or not. Applicant hereby authorizes owner/manager and his/her/its employees and agents to verify said information and make independent
-                                investigations in person, by mail, phone, fax, or otherwise, to determine Applicant's rental, credit, financial and character standing. Applicant hereby releases owner/manager, his/her/its employees
-                                and agents, Vantage Asset Management, Ltd., its employees and agents and any and all other firms or persons investigating or supplying information, from any liability whatsoever concerning the
-                                release and/or use of said information and further, will hold them all harmless from any suit or reprisal whatsoever. All holders, public and private, of any such information are hereby authorized to
-                                release, without limitation, any and all such information they have concerning Applicant and in so doing, will be acting on Applicant's behalf at Applicant's request and will be held blameless and
-                                without any liability whatsoever. A copy or other reproduction of this Authorization shall be as effective as the original.
-                                NOTICE: The rental for which you are applying may be reported to and monitored by various Consumer Credit Reporting Agencies. Your failure to satisfactorily perform your rental obligations
-                                may result in a derogatory entry in your rental and/or credit consumer file and could hamper your ability to obtain housing and/or credit in the future. In addition, owner/manager may report any and
-                                all information to other property owners/managers, credit grantors and/or public agencies
-                                </font>
-                            </p>
-                        </td>             
-                    </tr>
-                </table>
                 <br />
                 <br />
                 <table>
@@ -503,7 +478,10 @@
                         </td>
                         <td>:</td>
                         <td>
-                            <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" /><br>
+                            <?php 
+                                $imgname = "sign_".$applicantModel[0]->firstname;
+                            ?>
+                            <img src="http://vamproperty.com/build/rdrental/signed/<?php echo $imgname; ?>.png" /><br>
                             <hr>
                         </td>
                         <td>&nbsp;</td>

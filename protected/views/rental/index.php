@@ -1,6 +1,6 @@
 <?php 
 
-$this->renderPartial('step1');
+$this->renderPartial('step1', '', false);
 
 ?>
 <div id="nextsteps"> <?php

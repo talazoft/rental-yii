@@ -8,13 +8,13 @@
                 if(response == 0){
                     alert("Form with given code and password does not found in database");
                 } else {
-                    
                     var stepsurl = "<?php echo Yii::app()->createUrl("rental/showsteps"); ?>";
-                    $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
-                    /*$.post(stepsurl, {res:response}, function(res){
-                        $(".right").append(res);
-                    });*/
-                    $("#nextsteps").load(stepsurl, {res:response});
+                    $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>", null, function(){
+                        $.post(stepsurl, {res:response}, function(res){
+                            $(".right").append(res);
+                        });
+                    });
+                    //$("#nextsteps").load(stepsurl, {res:response});
                 }
                 /*$("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
                 /*$("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){

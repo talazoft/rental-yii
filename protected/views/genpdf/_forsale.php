@@ -344,7 +344,10 @@
                         </td>
                         <td>:</td>
                         <td>
-                            <img src="http://vamproperty.com/build/rdrental/signed/signimg.png" />
+                            <?php 
+                                $imgname = "sign_".$applicantModel[0]->firstname;
+                            ?>
+                            <img src="http://vamproperty.com/build/rdrental/signed/<?php echo $imgname; ?>.png" /><br>
                             <br>
                             <hr>
                         </td>

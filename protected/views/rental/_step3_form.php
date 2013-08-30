@@ -76,7 +76,7 @@
     });
 </script>
 <form class="step3-form" id="resident-<?php echo isset($cnt) ? $cnt : "" ?>" method="POST" postable>
-    <table id="restbl<?php echo $cnt; ?>">
+    <table id="restbl<?php echo $cnt; ?>" width="100%">
         <tbody id="restbl-body<?php echo $cnt; ?>">
         <?php 
         if(!isset(Yii::app()->session['step3']['ResidentalHistory'][$cnt]["rescnt2"])){

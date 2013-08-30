@@ -1,3 +1,119 @@
+<script>
+    $(function(){
+        $("#ApplicationInformation_refered_lead").change(function(){
+            var sel = $("#ApplicationInformation_refered_lead option:selected").val();
+            
+            if(sel == "Sign On Property"){
+                $("#vreference2").hide();
+                $("#venue").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference3").hide();
+                $("#agent_name").removeAttr('required');
+                $("#agent_phone").removeAttr('required');
+                $("#agent_name").val('');
+                $("#agent_phone").val('');
+                
+                $("#vreference4").hide();
+                $("#tenant_name").removeAttr('required');
+                $("#tenant_name").val('');
+                
+                $("#vreference5").hide();
+                $("#other_val").removeAttr('required');
+                $("#other_val").val('');
+                
+            } else if(sel == "Advertisement"){
+                $("#vreference2").show();
+                $("#venue").attr('required', 'required');
+                
+                $("#vreference3").hide();
+                $("#agent_name").removeAttr('required');
+                $("#agent_phone").removeAttr('required');
+                $("#agent_name").val('');
+                $("#agent_phone").val('');
+                
+                $("#vreference4").hide();
+                $("#tenant_name").removeAttr('required');
+                $("#tenant_name").val('');
+                
+                $("#vreference5").hide();
+                $("#other_val").removeAttr('required');
+                $("#other_val").val('');
+            } else if(sel == "Agents"){
+                $("#vreference2").hide();
+                $("#venue").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference3").show();
+                $("#agent_name").attr('required', 'required');
+                $("#agent_phone").attr('required', 'required');
+                
+                $("#vreference4").hide();
+                $("#tenant_name").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference5").hide();
+                $("#other_val").removeAttr('required');
+                $("#other_val").val('');
+                
+            } else if(sel == "Tenant"){
+                $("#vreference2").hide();
+                $("#venue").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference3").hide();
+                $("#agent_name").removeAttr('required');
+                $("#agent_phone").removeAttr('required');
+                $("#agent_name").val('');
+                $("#agent_phone").val('');
+                
+                $("#vreference4").show();
+                $("#tenant_name").attr('required', 'required');
+                
+                $("#vreference5").hide();
+                $("#other_val").removeAttr('required');
+                $("#other_val").val('');
+                
+            } else if(sel == "Other"){
+                $("#vreference2").hide();
+                $("#venue").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference3").hide();
+                $("#agent_name").removeAttr('required');
+                $("#agent_phone").removeAttr('required');
+                $("#agent_name").val('');
+                $("#agent_phone").val('');
+                
+                $("#vreference4").hide();
+                $("#tenant_name").removeAttr('required');
+                $("#tenant_name").val('');
+                
+                $("#vreference5").show();
+                $("#other_val").attr('required', 'required');
+                
+            } else {
+                $("#vreference2").hide();
+                $("#venue").removeAttr('required');
+                $("#venue").val('');
+                
+                $("#vreference3").hide();
+                $("#agent_name").removeAttr('required');
+                $("#agent_phone").removeAttr('required');
+                $("#agent_name").val('');
+                $("#agent_phone").val('');
+                
+                $("#vreference4").hide();
+                $("#tenant_name").removeAttr('required');
+                $("#tenant_name").val('');
+                
+                $("#vreference5").hide();
+                $("#other_val").removeAttr('required');
+                $("#other_val").val('');
+            }
+        });
+    });
+</script>
 <div id="test">
     <p align="justify" >Please take a few extra moments to review your application before submitting it for processing. Please check to make sure we have complete information and phone number so we may expedite you application quickly. Incomplete application will delay processing. Owner/Manager may require additional information. </p>
     <p align="justify" class="padding"> It is understood that this Application is not a Rental Agreement/Lease and that Applicant has no rights to said property until a written or oral Rental Agreement/Lease is duly executed after the approval of this Application. Applicant is aware of and agrees to all the covenants and conditions in the proposed Rental Agreement/Lease and agrees to timely execute said Rental Agreement/Lease after notification of the acceptance of this Application and Offer. Time is of the essence. </p>
@@ -16,7 +132,7 @@
                     ?>
                     <?php 
 
-                        for($i = 1; $i<=8; $i++){
+                        for($i = 1; $i<=10; $i++){
                             $data[$i] = $i;
                         }
 
@@ -53,7 +169,7 @@
 
                 </td>
                 <td width="50%" valign="top">
-                    <ul type="disc">
+                    <ul type="disc" style="padding-left: 0px;">
                         <li>
                             <label>Applicant #1 will be considered as the primary applicant.</label>
                         </li>
@@ -217,28 +333,52 @@
                         <td colspan=3>
                             <div id="vreference1">
                             </div>
-                            <div id="vreference2" style="display: none">
+                            
+                            <?php 
+                            if(isset(Yii::app()->session['step1']['venue']) && !empty(Yii::app()->session['step1']['venue'])){
+                                $vreference2display = "display: block;";
+                            } else {
+                                $vreference2display = "display: none;";
+                            }
+                            ?>
+                            <div id="vreference2" style="<?php echo $vreference2display; ?>">
                                 <table width="100%">
                                     <tr>
-                                    <td width="35%">Venue</td>
+                                    <td width="22%">Venue</td>
                                     <td width="2%">:</td>
                                     <td width="63%">
                                         <?php 
-                                            echo CHtml::textField("ApplicationInformation[venue]", isset(Yii::app()->session['step1']['venue']) ? Yii::app()->session['step1']['venue'] : "", array('style'=>'width:75%px'));
+                                            echo CHtml::textField("ApplicationInformation[venue]", 
+                                                    isset(Yii::app()->session['step1']['venue']) ? 
+                                                    Yii::app()->session['step1']['venue'] : "", 
+                                                    array('style'=>'width:75%px', 'id'=>'venue'));
                                         ?>
+                                        <?php echo CHtml::image('images/star.png', 'required'); ?>
                                     </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div id="vreference3" style="display: none">
+                            
+                            <?php 
+                            if(isset(Yii::app()->session['step1']['agent_name']) && !empty(Yii::app()->session['step1']['agent_name'])){
+                                $vreference3display = "display: block;";
+                            } else {
+                                $vreference3display = "display: none;";
+                            }
+                            ?>
+                            <div id="vreference3" style="<?php echo $vreference3display; ?>">
                                 <table width="100%">
                                     <tr>
-                                        <td width="35%">Name</td>
+                                        <td width="22%">Name</td>
                                         <td width="2%">:</td>
                                         <td width="63%">
                                             <?php
-                                                echo CHtml::textField("ApplicationInformation[agent_name]", isset(Yii::app()->session['step1']['agent_name']) ? Yii::app()->session['step1']['agent_name'] : "", array('style'=>'width:75%px'));
+                                                echo CHtml::textField("ApplicationInformation[agent_name]", 
+                                                        isset(Yii::app()->session['step1']['agent_name']) ? 
+                                                        Yii::app()->session['step1']['agent_name'] : "", 
+                                                        array('style'=>'width:75%px', 'id'=>'agent_name'));
                                             ?>
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -246,21 +386,36 @@
                                         <td>:</td>
                                         <td>
                                             <?php 
-                                                echo CHtml::textField("ApplicationInformation[agent_phone]", isset(Yii::app()->session['step1']['agent_phone']) ? Yii::app()->session['step1']['agent_phone'] : "", array('maxlength'=>13, 'size'=>27, 'class'=>'phone'));
+                                                echo CHtml::textField("ApplicationInformation[agent_phone]", 
+                                                        isset(Yii::app()->session['step1']['agent_phone']) ? 
+                                                        Yii::app()->session['step1']['agent_phone'] : "", 
+                                                        array('maxlength'=>13, 'size'=>27, 'class'=>'phone', 'id'=>'agent_phone'));
                                             ?>
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div id="vreference4" style="display: none">
+                            <?php 
+                            if(isset(Yii::app()->session['step1']['tenant_name']) && !empty(Yii::app()->session['step1']['tenant_name'])){
+                                $vreference4display = "display: block;";
+                            } else {
+                                $vreference4display = "display: none;";
+                            }
+                            ?>
+                            <div id="vreference4" style="<?php echo $vreference4display; ?>">
                                 <table width="100%">
                                     <tr>
-                                        <td width="35%">Name</td>
+                                        <td width="22%">Name</td>
                                         <td width="2%">:</td>
                                         <td width="63%">
                                             <?php 
-                                                echo CHtml::textField("ApplicationInformation[tenant_name]", isset(Yii::app()->session['step1']['tenant_name']) ? Yii::app()->session['step1']['tenant_name'] : "", array('style'=>'width:75%px'));
+                                                echo CHtml::textField("ApplicationInformation[tenant_name]", 
+                                                        isset(Yii::app()->session['step1']['tenant_name']) ? 
+                                                        Yii::app()->session['step1']['tenant_name'] : "", 
+                                                        array('style'=>'width:75%px', 'id'=>'tenant_name'));
                                             ?>
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -268,21 +423,36 @@
                                         <td>:</td>
                                         <td>
                                             <?php 
-                                                echo CHtml::dropdownList("ApplicationInformation[is_existing_tenant]", isset(Yii::app()->session['step1']['is_existing_tenant']) ? Yii::app()->session['step1']['is_existing_tenant'] : "", array('1'=>'Yes', '0'=>'No'));
+                                                echo CHtml::dropdownList("ApplicationInformation[is_existing_tenant]", 
+                                                        isset(Yii::app()->session['step1']['is_existing_tenant']) ? 
+                                                        Yii::app()->session['step1']['is_existing_tenant'] : "", 
+                                                        array('1'=>'Yes', '0'=>'No'));
                                             ?>
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div id="vreference5" style="display: none">
+                            <?php 
+                            if(isset(Yii::app()->session['step1']['other_val']) && !empty(Yii::app()->session['step1']['other_val'])){
+                                $vreference5display = "display: block;";
+                            } else {
+                                $vreference5display = "display: none;";
+                            }
+                            ?>
+                            <div id="vreference5" style="<?php echo $vreference5display; ?>">
                                 <table width="100%">
                                     <tr>
-                                        <td width="35%">Name</td>
+                                        <td width="22%">Name</td>
                                         <td width="2%">:</td>
                                         <td width="63%">
                                             <?php 
-                                                echo CHtml::textField("ApplicationInformation[other_val]", isset(Yii::app()->session['step1']['other_val']) ? Yii::app()->session['step1']['other_val'] : "", array('style'=>'width:75%px'));
+                                                echo CHtml::textField("ApplicationInformation[other_val]", 
+                                                        isset(Yii::app()->session['step1']['other_val']) ? 
+                                                        Yii::app()->session['step1']['other_val'] : "", 
+                                                        array('style'=>'width:75%px', 'id'=>'other_val'));
                                             ?>
+                                            <?php echo CHtml::image('images/star.png', 'required'); ?>
                                         </td>
                                     </tr>
                                 </table>

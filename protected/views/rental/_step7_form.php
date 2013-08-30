@@ -123,7 +123,13 @@
                 <td>
                     <div id="bankruptdiv<?php echo $cnt ?>" style="height: 23px;">
                     <?php 
-                        echo CHtml::radioButtonList("GeneralInfo[$cnt][bankrupt]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupt"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupt"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ", 'required'=>'required', 'class'=>"bankrupt$cnt")); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][bankrupt]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo'][$cnt]["bankrupt"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo'][$cnt]["bankrupt"] : "",
+                                array('1'=>'Yes','0'=>'No'), 
+                                array( 'separator' => "  ", 
+                                    'required'=>'required', 
+                                    'class'=>"bankrupt$cnt")); 
                     ?>
                     </div>
                 </td>
@@ -132,7 +138,10 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::textField("GeneralInfo[$cnt][bankrupted_at]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"] : "", array('id'=>"bankrupted_at$cnt"));
+                        echo CHtml::textField("GeneralInfo[$cnt][bankrupted_at]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo']["$cnt"]["bankrupted_at"] : "", 
+                                array('id'=>"bankrupted_at$cnt"));
                     ?>
                 </td>
                 <td>
@@ -149,7 +158,13 @@
                 <td>
                     <div id="questioneddiv<?php echo $cnt ?>"  style="height: 23px;">
                     <?php 
-                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_questioned]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ", 'required'=>'required', 'class'=>"is_questioned$cnt")); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_questioned]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_questioned"] : "",
+                                array('1'=>'Yes','0'=>'No'), 
+                                array( 'separator' => "  ", 
+                                    'required'=>'required', 
+                                    'class'=>"is_questioned$cnt")); 
                     ?>
                     </div>
                 </td>
@@ -158,7 +173,10 @@
                 </td>
                 <td>
                     <?php 
-                        echo CHtml::textField("GeneralInfo[$cnt][questioned_at]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["questioned_at"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["questioned_at"] : "", array('id'=>"questioned_at$cnt"));
+                        echo CHtml::textField("GeneralInfo[$cnt][questioned_at]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo'][$cnt]["questioned_at"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo']["$cnt"]["questioned_at"] : "", 
+                                array('id'=>"questioned_at$cnt"));
                     ?>
                 </td>
                 <td>
@@ -175,7 +193,11 @@
                 <td colspan="2">
                     <div id="is_evicted<?php echo $cnt ?>"  style="height: 23px;">
                     <?php 
-                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_evicted]", isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"] : "",array('1'=>'Yes','0'=>'No'), array( 'separator' => "  ", 'class'=>"is_evicted$cnt", 'required'=>'required')); 
+                        echo CHtml::radioButtonList("GeneralInfo[$cnt][is_evicted]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo']["$cnt"]["is_evicted"] : "",
+                                array('1'=>'Yes','0'=>'No'), 
+                                array( 'separator' => "  ", 'class'=>"is_evicted$cnt", 'required'=>'required')); 
                     ?>
                     </div>
                 </td>
@@ -192,7 +214,10 @@
                 </td>
                 <td colspan="3">
                     <?php 
-                        echo CHtml::textArea("GeneralInfo[$cnt][explanation]", isset(Yii::app()->session['step7']['GeneralInfo'][$cnt]["explanation"]) ? Yii::app()->session['step7']['GeneralInfo']["$cnt"]["explanation"] : "", array('rows'=>4, 'cols'=>100, 'style'=>'width: 340px', 'id'=>"explanation$cnt", 'required'=>'required')); 
+                        echo CHtml::textArea("GeneralInfo[$cnt][explanation]", 
+                                isset(Yii::app()->session['step7']['GeneralInfo'][$cnt]["explanation"]) ? 
+                                Yii::app()->session['step7']['GeneralInfo']["$cnt"]["explanation"] : "", 
+                                array('rows'=>4, 'cols'=>100, 'style'=>'width: 340px', 'id'=>"explanation$cnt", 'required'=>'required')); 
                     ?>
                 </td>
                 <td>&nbsp;</td>

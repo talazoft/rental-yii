@@ -386,7 +386,13 @@ class RentalController extends Controller
     }
     
     public function actionShowstep1(){
-        echo $this->renderPartial("_step1_form", '', true);
+        Yii::app()->clientScript->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery-ui.min.js'=>false,
+            'jquery.maskedinput.min.js'=>false,
+            'auto-numeric.js'=>false,
+        );
+        echo $this->renderPartial("_step1_form", '', true, true);
     }
     
     public function actionShowsteps(){

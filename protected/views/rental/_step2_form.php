@@ -249,7 +249,7 @@
                 <td>:</td>
                 <td>
                     <?php 
-                        echo CHtml::textField("ApplicantInfo[$cnt][verifyemail]", "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_verifyemail$cnt", 'required'=>'required'));
+                        echo CHtml::textField("ApplicantInfo[$cnt][verifyemail]", isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"] : "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_verifyemail$cnt", 'required'=>'required'));
                     ?>
                     <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>

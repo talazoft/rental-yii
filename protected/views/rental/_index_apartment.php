@@ -67,14 +67,13 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step1tosession') ?>", step1frm, function(response){
                     $("#ai").load("<?php echo Yii::app()->createUrl('/rental/showstep2') ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
             } else {
                 $("#box5").show();
             }
@@ -84,14 +83,14 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step2tosession') ?>", $(".step2-form").serialize(), function(response){
                     $("#rh").load("<?php echo Yii::app()->createUrl('/rental/showstep3') ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
 
             } else {
                 $("#box5").show();
@@ -101,14 +100,14 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step3tosession') ?>", $(".step3-form").serialize(), function(response){
                     $("#eii").load("<?php echo Yii::app()->createUrl('/rental/showstep4'); ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
 
             } else {
                 $("#box5").show();
@@ -119,14 +118,14 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step4tosession') ?>", formdata, function(response){
                     $("#pr").load("<?php echo Yii::app()->createUrl('/rental/showstep5'); ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
 
             } else {
                 $("#box5").show();
@@ -136,14 +135,14 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
                     $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
 
             } else {
                 $("#box5").show();
@@ -154,14 +153,14 @@ $(function () {
                 $.post("<?php echo Yii::app()->createUrl('/rental/step6tosession') ?>", $(".step6-form").serialize(), function(response){
                     $("#gi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>", null, function(){
                         $(".step_content_"+step).slideToggle(350);
-
-                        if($(this).attr('class')=='hide'){
-                            $(this).attr('class','show');	
-                        } else {
-                            $(this).attr('class','hide');			
-                        }
                     });
                 });
+                
+                if($(this).attr('class')=='hide'){
+                    $(this).attr('class','show');	
+                } else {
+                    $(this).attr('class','hide');			
+                }
 
             } else {
                 $("#box5").show();
@@ -174,14 +173,14 @@ $(function () {
                     $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
                         $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
                             $(".step_content_"+step).slideToggle(350);
-
-                            if($(this).attr('class')=='hide'){
-                                $(this).attr('class','show');	
-                            } else {
-                                $(this).attr('class','hide');			
-                            }
                         });
                     });
+                    
+                    if($(this).attr('class')=='hide'){
+                        $(this).attr('class','show');	
+                    } else {
+                        $(this).attr('class','hide');			
+                    }
 
                 } else {
                     $("#box5").show();
@@ -192,15 +191,14 @@ $(function () {
                     $.post("<?php echo Yii::app()->createUrl('/rental/step7tosession') ?>", formdata, function(response){
                         $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
                             $(".step_content_"+step).slideToggle(350);
-
-                            if($(this).attr('class')=='hide'){
-                                $(this).attr('class','show');	
-                            } else {
-                                $(this).attr('class','hide');			
-                            }
                         });
                     });
-
+                    
+                    if($(this).attr('class')=='hide'){
+                        $(this).attr('class','show');	
+                    } else {
+                        $(this).attr('class','hide');			
+                    }
 
                 } else {
                     $("#box5").show();
