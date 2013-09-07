@@ -125,14 +125,14 @@
             <tr>
                 <td width="50%" valign="top">  
                     <label class="required" for="MsRentalInformation_applicant">
-                        How many <?php echo Yii::app()->session['selection'] == "Commercial" ? "companies" : "applicant(s)"; ?>
+                        How many <?php echo Yii::app()->session['step1']['selection'] == "Commercial" ? "companies" : "applicant(s)"; ?>
                     </label>
                     <?php 
                         echo CHtml::hiddenField('ApplicationInformation[prime_applic_signature]', isset(Yii::app()->session['step1']['prime_appic_signature']) ? Yii::app()->session['step1']['prime_appic_signature'] : "", array('id'=>'loadedjson'));
                     ?>
                     <?php 
 
-                        for($i = 1; $i<=10; $i++){
+                        for($i = 1; $i<=8; $i++){
                             $data[$i] = $i;
                         }
 

@@ -240,7 +240,10 @@
                 <td>:</td>
                 <td>
                     <?php 
-                        echo CHtml::textField("ApplicantInfo[$cnt][email]", isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"] : "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_email$cnt", 'required'=>'required'));
+                        echo CHtml::textField("ApplicantInfo[$cnt][email]", 
+                                isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"]) ? 
+                                Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"] : "", 
+                                array('style'=>'width:75%', 'id'=>"ApplicantInfo_email$cnt", 'required'=>'required', 'email'=>'email'));
                     ?>
                     <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>
@@ -249,7 +252,11 @@
                 <td>:</td>
                 <td>
                     <?php 
-                        echo CHtml::textField("ApplicantInfo[$cnt][verifyemail]", isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"]) ? Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"] : "", array('style'=>'width:75%', 'id'=>"ApplicantInfo_verifyemail$cnt", 'required'=>'required'));
+                        echo CHtml::textField("ApplicantInfo[$cnt][verifyemail]", 
+                                isset(Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"]) ? 
+                                Yii::app()->session['step2']['ApplicantInfo'][$cnt]["email"] : "", 
+                                array('style'=>'width:75%', 'id'=>"ApplicantInfo_verifyemail$cnt", 
+                                    'required'=>'required', 'email'=>'email'));
                     ?>
                     <?php echo CHtml::image('images/star.png', 'required'); ?>
                 </td>

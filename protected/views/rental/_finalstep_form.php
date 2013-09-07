@@ -18,9 +18,9 @@
     </li>         
 </ul>
 <div style="float:left; margin-left:32px">
-    <input id="cekagree" name="cekagree" type="checkbox"> I agree to the Terms of Use
+    <input id="cekagree" name="cekagree" type="checkbox" > I agree to the Terms of Use
 </div>
-<div id="hide" style="display:none">
+<div id="hide" style="display:none;">
     <div style="clear: both"></div>
     <div id="divbutton" style="float: right; width: 517px; margin-top: 15px;">
         <div id="saveform2" style="float: left"></div>
@@ -76,7 +76,16 @@
 </style>
 <script>
 $(function(){ 
-    $("#signJson").val($("#loadedjson").val());
+    
+    var loadedjson = $("#loadedjson").val();
+    
+    if(loadedjson.length > 0){
+        $("#cekagree").attr('checked', 'checked');
+        $("#hide").show();
+        $("#btnshowhtml").hide();
+        $("#showhtml").show();
+    }
+    $("#signJson").val(loadedjson);
     $("#signature").signature();
     try{
         $("#signature").signature('draw', $("#signJson").val());

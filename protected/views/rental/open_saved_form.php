@@ -2,21 +2,59 @@
     $(function(){
         $("#open").unbind('click').click(function(){
             var openurl = "<?php echo Yii::app()->createUrl("openform"); ?>";
-            var data = {code:$("#txtcode").val(), pass:$("#txtpassword").val()}
+            var data = {code:$("#txtcode").val(), pass:$("#txtpassword").val()};
+            
             $.post(openurl, data, function(response){ 
                 
                 if(response == 0){
                     alert("Form with given code and password does not found in database");
                 } else {
                     var stepsurl = "<?php echo Yii::app()->createUrl("rental/showsteps"); ?>";
+                    $("#nextsteps").nextAll().remove();
+                    $("#nextsteps").remove();
                     $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>", null, function(){
                         $.post(stepsurl, {res:response}, function(res){
+                            //$(".right").append(res);
                             $(".right").append(res);
+                            
+                            $("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
+                                $(".step_content_2").slideToggle(350);
+                            });
+                            $("#rh").load("<?php echo Yii::app()->createUrl("rental/showstep3"); ?>", '', function(){
+                                $(".step_content_3").slideToggle(350);
+                            });
+                            $("#eii").load("<?php echo Yii::app()->createUrl("rental/showstep4"); ?>", '', function(){
+                                $(".step_content_4").slideToggle(350);
+                            });
+                            $("#pr").load("<?php echo Yii::app()->createUrl("rental/showstep5"); ?>", '', function(){
+                                $(".step_content_5").slideToggle(350);
+                            });
+                            
+                            //var t= "<?php echo strtolower(Yii::app()->session['step1']['selection']); ?>";
+                            //if(t == "commercial"){
+                                $("#cfi").load("<?php echo Yii::app()->createUrl("rental/showstep6"); ?>", '', function(){
+                                    $(".step_content_6").slideToggle(350);
+                                });
+                                $("#gi").load("<?php echo Yii::app()->createUrl("rental/showstep7"); ?>", '', function(){
+                                    $(".step_content_7").slideToggle(350);
+                                });
+                            //}
+                            $("#cf").load("<?php echo Yii::app()->createUrl("rental/showstep8"); ?>", '', function(){
+                                $(".step_content_8").slideToggle(350);
+                            });
+                            $("#agreements").load("<?php echo Yii::app()->createUrl("rental/showfinalstep"); ?>", '', function(){
+                                $(".step_content_final").slideToggle(350);
+                            });
+                            
+                            $(".all").hide();
+                            $(".collapse").show();
+                            
+                            $(".show").attr('class', 'hide');
                         });
                     });
                     //$("#nextsteps").load(stepsurl, {res:response});
                 }
-                /*$("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");
+                /*$("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>");*/
                 /*$("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
                     $(".step_content_2").slideToggle(350);
                 });
