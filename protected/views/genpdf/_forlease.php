@@ -155,7 +155,7 @@
                             </tr>
                             <tr>
                                 <td> Date of Birth :<?php /*<input type="text" name="dob">*/ echo $applic->birthday; ?></td>
-                                <td> <?php /*Driver Lisence No :<input type="text" name="lisence">*/ echo $applic->idtype." No : ".$applic->firstname; ?></td>     
+                                <td> <?php /*Driver Lisence No :<input type="text" name="lisence">*/ echo $applic->idtype." No : ".$applic->idnum; ?></td>     
                                 <td> S.S.No :<?php /*<input type="text" name="ssno">*/ echo $applic->ssn; ?></td>        
                             </tr>
                             <tr>
