@@ -11,5 +11,5 @@
 			<div class="collapse" style="display:none;"></div>
 			<div class="all"></div>
 			<div class="prev"></div>
-			<div class="next" id="0"></div>		
+			<div class="next"></div>		
 		</div>
