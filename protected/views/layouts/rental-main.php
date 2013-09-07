@@ -407,7 +407,8 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/auto-numeric.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/additional-methods.min.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js2/jquery.cookie.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl ?>/js/jquery.localscroll-1.2.7-min.js"></script>
     <script type="text/javascript">
         
     $.fn.hasAttr = function(name) {  
@@ -438,35 +439,6 @@
             $("div#box5").hide("slow");
         });
         
-        function validate(name){
-            
-            $("."+name+" :required").each(function(){
-                var element = $(this);
-                element.css({border:"", color:""});
-                element.removeAttr("placeholder");
-            });
-        
-            var test1 = 0;
-            var test2 = 0;
-            $("."+name+" :required").each(function(){
-                var element = $(this);
-                if(element.val() == ""){
-                    element.css({border:"2px solid red", color:"red"});
-                    element.attr("placeholder", "this field is required");
-                    test1--;
-                } else {
-                    test1++;
-                    test2++;
-                }
-            });
-            
-            if(test1 == test2){
-                return true;
-            } else {
-                return false;
-            }
-        }
-        
         $(".show").unbind("click").click(function () {
    
             var step=$(this).attr('id');
@@ -496,72 +468,643 @@
         });
         
         $(".all").unbind('click').click(function(){
-            for(var z=2;z<=8;z++){            
-                if($(".step_content_"+z).is(':visible') == false){
+            showAll();
+            $(this).hide();
+            $(".show").attr('class', 'hide');
+            $(".collapse").show();
+        });
+        
+        $(".collapse").unbind('click').click(function(){
+            for(var z=1;z<=8;z++){            
+                if($(".step_content_"+z).is(':visible') == true){
                     var step_content = $(".step_content_"+z);
                     var child = step_content.children();
                     if(child.contents().length > 0){
-                        $(".step_content_"+z).slideDown(350);
-                        $(".step_"+z+" .show").attr('class', 'hide');
+                        $(".step_content_"+z).slideUp(350);
                     }
                 }
             }
+            $(".step_content_final").slideUp(350);
+            $(".hide").attr('class', 'show');
+            $(this).hide();
+            $(".all").show();
         });
         
+        var stepvar = 1;
         $(".next").click(function () {
-            var options = { path: '/', expires: 10000000000000 };
-            var co=0;
-            if ($.cookie('step')==null) {
-                // jika tdk ada
-                $.cookie('step', co, options);
-            }
-            if (jQuery.cookie('step')) {
-                // jika ada
-                var y=parseInt($.cookie('step'));
-                var step=y + 1;
-                if(y>0 && y<9){
-                    $.cookie('step', step, options);
-                }else{
-                    $.cookie('step', 1, options);
+            /*var sess = <?php echo count(Yii::app()->session['step1']); ?>;
+            if(sess > 0){
+                var options = { path: '/', expires: 10000000000000 };
+                var co=0;
+                if ($.cookie('step')==null) {
+                    // jika tdk ada
+                    $.cookie('step', co, options);
                 }
-            }
+                if (jQuery.cookie('step')) {
+                    // jika ada
+                    var y=parseInt($.cookie('step'));
+                    //var step=y + 1;
+                    var step = co +
+                    if(y>0 && y<9){
+                        $.cookie('step', step, options);
+                    }else{
+                        $.cookie('step', 1, options);
+                    }
+                }
 
-            if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
-                var stepminus=parseInt($.cookie('step'))-1;
-            }else{
-                var stepminus=8;
+                if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
+                    var stepminus=parseInt($.cookie('step'))-1;
+                }else{
+                    var stepminus=8;
+                }
+                //alert(stepminus);
+                //$(".step_content_"+$.cookie('step')).show();
+                if(prevnextsteps($.cookie('step'))){
+                //$(".step_content_"+stepminus).hide();
+                //if($.cookie('step') > 0 && stepminus > 0){
+                    //$("#"+$.cookie('step')).attr('class', 'hide');
+                    $("#"+$.cookie('step')).attr('class', 'hide');
+                    //$("#"+stepminus).attr('class', 'show');
+                }
+                //}
+            }*/
+                
+            //$().localScroll({target:".right-container"});
+            if(prevnextsteps(stepvar)){
+                $("#"+stepvar).attr('class', 'hide');
             }
-            //alert(stepminus);
-            $(".step_content_"+$.cookie('step')).show();
-            $(".step_content_"+stepminus).hide();
+           
+            if(stepvar <= 8){
+                stepvar++;
+            } else {
+                stepvar = 1;
+            }
         });
+        
         $(".prev").click(function () {
-            var options = { path: '/', expires: 10000000000000 };
-            var co=0;
-            if ($.cookie('step')==null) {
-                // jika tdk ada
-                $.cookie('step', co, options);
-            }
-            if (jQuery.cookie('step')) {
-                // jika ada
-                var y=parseInt($.cookie('step'));
-                var step=y - 1;
-                if(y>0 && y<9){
-                    $.cookie('step', step, options);
-                }else{
-                    $.cookie('step', 1, options);
+            /*var sess = <?php echo count(Yii::app()->session['step1']); ?>;
+            if(sess > 0){
+                var options = { path: '/', expires: 10000000000000 };
+                var co=0;
+                if ($.cookie('step')==null) {
+                    // jika tdk ada
+                    $.cookie('step', co, options);
                 }
-            }
-            if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
-                var steppos=parseInt($.cookie('step'))+1;
-            }else{
-                var steppos=8;
-            }
+                if (jQuery.cookie('step')) {
+                    // jika ada
+                    var y=parseInt($.cookie('step'));
+                    var step=y - 1;
+                    if(y>0 && y<9){
+                        $.cookie('step', step, options);
+                    }else{
+                        $.cookie('step', 1, options);
+                    }
+                }
+                if(parseInt($.cookie('step'))>0 && parseInt($.cookie('step'))<9){
+                    var steppos=parseInt($.cookie('step'))+1;
+                }else{
+                    var steppos=8;
+                }
 
-            $(".step_content_"+$.cookie('step')).show();
-            $(".step_content_"+steppos).hide();
+                //$(".step_content_"+$.cookie('step')).show();
+                if(prevnextsteps($.cookie('step'))){
+                //$(".step_content_"+steppos).hide();
+
+                //if($.cookie('step') > 0 && steppos > 0){
+                    $("#"+$.cookie('step')).attr('class', 'hide');
+                    //$("#"+steppos).attr('class', 'show');
+                }
+                //}
+            }*/
+            if(prevnextsteps(stepvar)){
+                $("#"+stepvar).attr('class', 'hide');
+            }
+            
+            if(stepvar >= 1){
+                stepvar--;
+            } else {
+                stepvar = 8;
+            }
         }); 
     });
+    
+    function showAll(){
+        var stepsurl = "<?php echo Yii::app()->createUrl("rental/showsteps"); ?>";
+        $("#nextsteps").nextAll().remove();
+        $("#nextsteps").remove();
+        $.post(stepsurl, null, function(){
+            $("#ri").load("<?php echo Yii::app()->createUrl("rental/showstep1"); ?>", null, function(){
+                $(".step_content_1").slideDown(350);
+            });
+            $("#ai").load("<?php echo Yii::app()->createUrl("rental/showstep2"); ?>", '', function(){
+                $(".step_content_2").slideDown(350);
+            });
+            $("#rh").load("<?php echo Yii::app()->createUrl("rental/showstep3"); ?>", '', function(){
+                $(".step_content_3").slideDown(350);
+            });
+            $("#eii").load("<?php echo Yii::app()->createUrl("rental/showstep4"); ?>", '', function(){
+                $(".step_content_4").slideDown(350);
+            });
+            $("#pr").load("<?php echo Yii::app()->createUrl("rental/showstep5"); ?>", '', function(){
+                $(".step_content_5").slideDown(350);
+            });
+
+            //var t= "<?php echo strtolower(Yii::app()->session['step1']['selection']); ?>";
+            //if(t == "commercial"){
+                $("#cfi").load("<?php echo Yii::app()->createUrl("rental/showstep6"); ?>", '', function(){
+                    $(".step_content_6").slideDown(350);
+                });
+                $("#gi").load("<?php echo Yii::app()->createUrl("rental/showstep7"); ?>", '', function(){
+                    $(".step_content_7").slideDown(350);
+                });
+            //}
+            $("#cf").load("<?php echo Yii::app()->createUrl("rental/showstep8"); ?>", '', function(){
+                $(".step_content_8").slideDown(350);
+            });
+            $("#agreements").load("<?php echo Yii::app()->createUrl("rental/showfinalstep"); ?>", '', function(){
+                $(".step_content_final").slideDown(350);
+            });
+
+            $(".all").hide();
+            $(".collapse").show();
+        });
+    }
+    
+    function validate(name){
+
+        $("."+name+" :required").each(function(){
+            var element = $(this);
+            element.css({border:"", color:""});
+            element.removeAttr("placeholder");
+        });
+
+        var test1 = 0;
+        var test2 = 0;
+        $("."+name+" :required").each(function(){
+            var element = $(this);
+            if(element.val() == ""){
+                element.css({border:"2px solid red", color:"red"});
+                element.attr("placeholder", "this field is required");
+                test1--;
+            } else {
+                test1++;
+                test2++;
+            }
+        });
+
+        if(test1 == test2){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function validateEmail(name){
+        $("."+name+" input[email='email']").each(function(){
+            var element = $(this);
+            element.css({border:"", color:""});
+            element.removeAttr("placeholder");
+        });
+
+        var test1 = 0;
+        var test2 = 0;
+        $("."+name+" input[email='email']").each(function(){
+            var element = $(this);
+            if(!emailValidationExpression(element.val())){
+                element.css({border:"2px solid red", color:"red"});
+                element.val("");
+                element.attr("placeholder", "email not valid");
+                test1--;
+            } else {
+                test1++;
+                test2++;
+            }
+        });
+
+        if(test1 === test2){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    function validatestep7(){
+        
+        var test1 = 0;
+        var test2 = 0;
+        
+        $('.step7-form :required').each(function(){
+            var parentdiv  = $(this).parent().parent();
+            parentdiv.css({border:"", color:""});
+        });
+        
+        $('.step7-form :required').each(function(){
+            var classname = $(this).attr('class');
+            var parentdiv  = $(this).parent().parent();
+            
+            if(!$("."+classname).is(":checked")){
+                if($(this).is("input") && $(this).attr('type') == 'text'){
+                    if($(this).val() == ""){
+                        $(this).css({border:"2px solid red", color:"red"});
+                        test1--;
+                    } else {
+                        $(this).css({border:"", color:""});
+                        $(this).removeAttr("required");
+                    }
+                } else if($(this).is("textarea")){
+                    if($(this).val() == ""){
+                        $(this).css({border:"2px solid red", color:"red"});
+                        test1--;
+                    } else {
+                        $(this).css({border:"", color:""});
+                        $(this).removeAttr("required");
+                    }
+                } else {
+                    parentdiv.css({border:"2px solid red", color:"red"});
+                    test1--;
+                }
+                
+            } else {               
+                test1++;
+                test2++;
+            }
+        });
+        
+        if(test1 == test2){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    function prevnextsteps(step){
+        if(step == 1){
+            $(".step_content_"+step).slideDown(350);
+            return true;
+        } else if(step == 2){
+            if(validate("step1-form")){
+            //if(test1 == test2){
+                var step1frm = $("#step1-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                $.post("<?php echo Yii::app()->createUrl('/rental/step1tosession') ?>", step1frm, function(response){
+                    $("#ai").load("<?php echo Yii::app()->createUrl('/rental/showstep2') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 3){
+            
+            if(validate("step1-form") && validate("step2-form") && validateEmail("step2-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step2tosession') ?>", $(".step2-form").serialize(), function(response){
+                    $("#rh").load("<?php echo Yii::app()->createUrl('/rental/showstep3') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+                
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 4){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step3tosession') ?>", $(".step3-form").serialize(), function(response){
+                    $("#eii").load("<?php echo Yii::app()->createUrl('/rental/showstep4') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 5){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form")){
+                var formdata = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                $.post("<?php echo Yii::app()->createUrl('/rental/step4tosession') ?>", formdata, function(response){
+                    $("#pr").load("<?php echo Yii::app()->createUrl('/rental/showstep5') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 6){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
+                    $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 7){
+
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step6tosession') ?>", $(".step6-form").serialize(), function(response){
+                    $("#gi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>", null, function(){
+                        $(".step_content_"+step).slideDown(350);
+                    });
+                });
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 8){
+            var t = $("#ApplicationInformation_selection").val();
+            if(t == "Apartment"){               
+                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validate("step7-form")){
+
+                    $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
+                        $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
+                            $(".step_content_"+step).slideDown(350);
+                        });
+                    });
+
+//                    if(elem.attr('class')=='hide'){
+//                        elem.attr('class','show');	
+//                    } else {
+//                        elem.attr('class','hide');			
+//                    }
+                    return true;
+                } else {
+                    $("#box5").show();
+                    return false;
+                }
+            } else {
+            
+                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validatestep7()){
+                    var formdata = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                    $.post("<?php echo Yii::app()->createUrl('/rental/step7tosession') ?>", formdata, function(response){
+                        $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
+                            $(".step_content_"+step).slideDown(350);
+                        });
+                    });
+
+//                    if(elem.attr('class')=='hide'){
+//                        elem.attr('class','show');	
+//                    } else {
+//                        elem.attr('class','hide');			
+//                    }
+                    return true;
+                } else {
+                    $("#box5").show();
+                    return false;
+                }
+            }
+
+        } else if(step == "final"){
+
+            if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")&&validate("step6-form")){
+                $("#agreements").load("<?php echo Yii::app()->createUrl('/rental/showfinalstep') ?>");
+                //$(".step_content_"+step).slideToggle(350);
+                $(".step_content_final").slideDown(350);
+
+//                if(elem.attr('class')=='hide'){
+//                    elem.attr('class','show');	
+//                } else {
+//                    elem.attr('class','hide');			
+//                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        }
+    }
+
+    function steps(step, elem){
+        if(step == 1){
+            $(".step_content_"+step).slideToggle(350);
+            return true;
+        } else if(step == 2){
+            if(validate("step1-form")){
+            //if(test1 == test2){
+                var step1frm = $("#step1-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                $.post("<?php echo Yii::app()->createUrl('/rental/step1tosession') ?>", step1frm, function(response){
+                    $("#ai").load("<?php echo Yii::app()->createUrl('/rental/showstep2') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 3){
+            
+            if(validate("step1-form") && validate("step2-form") && validateEmail("step2-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step2tosession') ?>", $(".step2-form").serialize(), function(response){
+                    $("#rh").load("<?php echo Yii::app()->createUrl('/rental/showstep3') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+                
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 4){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step3tosession') ?>", $(".step3-form").serialize(), function(response){
+                    $("#eii").load("<?php echo Yii::app()->createUrl('/rental/showstep4') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 5){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form")){
+                var formdata = $(".step4-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                $.post("<?php echo Yii::app()->createUrl('/rental/step4tosession') ?>", formdata, function(response){
+                    $("#pr").load("<?php echo Yii::app()->createUrl('/rental/showstep5') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 6){
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
+                    $("#cfi").load("<?php echo Yii::app()->createUrl('/rental/showstep6') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 7){
+
+            if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form")){
+                $.post("<?php echo Yii::app()->createUrl('/rental/step6tosession') ?>", $(".step6-form").serialize(), function(response){
+                    $("#gi").load("<?php echo Yii::app()->createUrl('/rental/showstep7') ?>", null, function(){
+                        $(".step_content_"+step).slideToggle(350);
+                    });
+                });
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        } else if(step == 8){
+            var t = $("#ApplicationInformation_selection").val();
+            if(t == "Apartment"){               
+                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validate("step7-form")){
+
+                    $.post("<?php echo Yii::app()->createUrl('/rental/step5tosession') ?>", $(".step5-form").serialize(), function(response){
+                        $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
+                            $(".step_content_"+step).slideToggle(350);
+                        });
+                    });
+
+                    if(elem.attr('class')=='hide'){
+                        elem.attr('class','show');	
+                    } else {
+                        elem.attr('class','hide');			
+                    }
+                    return true;
+                } else {
+                    $("#box5").show();
+                    return false;
+                }
+            } else {
+            
+                if(validate("step1-form") && validate("step2-form") && validate("step3-form") && validate("step4-form") && validate("step5-form") && validate("step6-form") && validatestep7()){
+                    var formdata = $(".step7-form").find("input[type='hidden'], :input:not(:hidden)").serialize();
+                    $.post("<?php echo Yii::app()->createUrl('/rental/step7tosession') ?>", formdata, function(response){
+                        $("#cf").load("<?php echo Yii::app()->createUrl('/rental/showstep8') ?>", null, function(){
+                            $(".step_content_"+step).slideToggle(350);
+                        });
+                    });
+
+                    if(elem.attr('class')=='hide'){
+                        elem.attr('class','show');	
+                    } else {
+                        elem.attr('class','hide');			
+                    }
+                    return true;
+                } else {
+                    $("#box5").show();
+                    return false;
+                }
+            }
+
+        } else if(step == "final"){
+
+            if(validate("step1-form")&&validate("step2-form")&&validate("step3-form")&&validate("step4-form")&&validate("step5-form")&&validate("step6-form")){
+                $("#agreements").load("<?php echo Yii::app()->createUrl('/rental/showfinalstep') ?>");
+                //$(".step_content_"+step).slideToggle(350);
+                $(".step_content_final").slideToggle(350);
+
+                if(elem.attr('class')=='hide'){
+                    elem.attr('class','show');	
+                } else {
+                    elem.attr('class','hide');			
+                }
+                return true;
+            } else {
+                $("#box5").show();
+                return false;
+            }
+        }
+    }
+    
+    function emailValidationExpression($email) {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if( !emailReg.test( $email ) ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     </script>
     <div id="box2">
         <div id="form2">
