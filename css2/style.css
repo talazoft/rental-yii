@@ -137,9 +137,17 @@ span.required{
 
 .left div.showing div.collapse{
 	background: url("../img/button3.png") no-repeat scroll 0 0 transparent;
-	height: 40px;
+	height: 38px;
 	width: 100%;
         cursor: pointer;
+        margin-top: 2px;
+}
+.left div.showing div.collapse:hover{
+	background: url("../img/button3_hover.png") no-repeat scroll 0 0 transparent;
+	height: 38px;
+	width: 100%;
+        cursor: pointer;
+        margin-top: 2px;
 }
 .left div.showing div.prev{
 	background: url("../img/button.png") no-repeat scroll 0 -110px transparent;
